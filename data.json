@@ -1,0 +1,157 @@
+{
+  "name": "Sunayana Samavedam",
+  "title": "Researcher in Interpretable Computer Vision and Neural Style Transfer",
+  "affiliation": "CVIT, IIIT Hyderabad",
+  "advisor": "Prof. P. J. Narayanan",
+  "degree": "Masters in Science by Research",
+  "interests": [
+    "Neural Style Transfer",
+    "Controllability & Interpretability",
+    "Backdoor Defense",
+    "Computer Vision",
+    "Deep Learning"
+  ],
+  "bio": "I am a research scholar at the Center for Visual Information Technology (CVIT), IIIT Hyderabad, advised by Prof. P. J. Narayanan. My research focuses on making neural style transfer interpretable and controllable — enabling fine-grained manipulation of artistic style attributes like brushstrokes, color palettes, and composition. I am also interested in adversarial robustness, particularly prototype-guided defenses against backdoor attacks in deep networks.",
+  "links": {
+    "email": "sunayana1233@gmail.com",
+    "github": "https://github.com/sunayana-981",
+    "scholar": "#",
+    "cv": "#"
+  },
+  "publications": [
+    {
+      "title": "Interpretable and Controllable Style Transfer",
+      "status": "Under Review",
+      "venue": "CVIT, IIIT Hyderabad",
+      "year": "2024",
+      "summary": "A novel architecture enabling fine-grained, continuous control over individual style aspects (brushstrokes, colors, compositions) with an interpretable sliding mechanism.",
+      "tags": ["Style Transfer", "Interpretability", "Controllability"],
+      "links": {}
+    },
+    {
+      "title": "Prototype Guided Backdoor Defense (PGBD)",
+      "status": "Under Review",
+      "venue": "CVIT, IIIT Hyderabad",
+      "year": "2024",
+      "summary": "First successful defense against semantic trigger-based backdoor attacks using prototype-based geometric configurations. Includes a new benchmark dataset of occluded celebrity faces.",
+      "tags": ["Adversarial ML", "Backdoor Defense", "Security"],
+      "links": {}
+    }
+  ],
+  "preprints": [
+    {
+      "title": "Survey on Controllability in Style Transfer Concepts",
+      "status": "Coming Soon",
+      "venue": "CVIT, IIIT Hyderabad",
+      "year": "2024",
+      "summary": "Comprehensive survey analyzing controllability mechanisms in neural style transfer — spatial control, color preservation, content adherence — compiled into a structured framework for future research.",
+      "tags": ["Survey", "Style Transfer", "Controllability"],
+      "links": {}
+    }
+  ],
+  "projects": [
+    {
+      "title": "CLIP-Based Domain Adaptation",
+      "summary": "Supervised and unsupervised domain generalization pipelines using CLIP for domain-agnostic feature learning across PCAS and DomainNet datasets.",
+      "tags": ["CLIP", "Domain Adaptation", "Transfer Learning"],
+      "links": {}
+    },
+    {
+      "title": "Spoofing of NIR-Based Facial Recognition Systems",
+      "summary": "Tested robustness of NIR-based 3D face recognition against high-fidelity 3D-printed spoofing attempts using ARTEC scanning and Blender texture mapping.",
+      "tags": ["Face Recognition", "Security", "3D Scanning"],
+      "links": {}
+    },
+    {
+      "title": "3D Object Reconstruction Using ICP SLAM",
+      "summary": "Built a rotating platform with Arduino for systematic object imaging, processed with COLMAP to generate precise 3D models from point clouds.",
+      "tags": ["3D Reconstruction", "SLAM", "COLMAP"],
+      "links": {}
+    },
+    {
+      "title": "Sheet Music Reader via Template Matching",
+      "summary": "Automated interpretation and playback of printed sheet music using template-matching in OpenCV, optimized for real-time note detection.",
+      "tags": ["OpenCV", "Template Matching", "Audio"],
+      "links": {}
+    }
+  ],
+  "experience": [
+    {
+      "role": "Head Teaching Assistant",
+      "organization": "IIIT Hyderabad",
+      "period": "Aug 2024 – Dec 2024",
+      "context": "Digital Image Processing",
+      "bullets": [
+        "Led TAs for a 170+ student course; designed assignments on image filtering, feature detection, and enhancement."
+      ]
+    },
+    {
+      "role": "Deep Learning Mentor",
+      "organization": "TalentSprint",
+      "period": "Jun 2024 – Present",
+      "context": "",
+      "bullets": [
+        "Mentoring working professionals in deep learning through hands-on workshops on neural networks, computer vision, and frameworks."
+      ]
+    },
+    {
+      "role": "Research Intern",
+      "organization": "Dr. Kushal Shah",
+      "period": "Apr 2023 – May 2023",
+      "context": "NLP / Text Classification",
+      "bullets": [
+        "Developed a POS-tagging based text classifier achieving 97% fiction/non-fiction accuracy; improved classification accuracy by 15%."
+      ]
+    },
+    {
+      "role": "Research Assistant",
+      "organization": "Prof. Shital Thakkar",
+      "period": "Nov 2022 – Jun 2023",
+      "context": "Computer Vision",
+      "bullets": [
+        "Built CNN models for image classification (92% accuracy); evaluated face anti-spoofing algorithms with zero-shot and one-shot learning."
+      ]
+    },
+    {
+      "role": "Technical Intern",
+      "organization": "Implevista Pvt. Ltd.",
+      "period": "Jul 2022 – Dec 2022",
+      "context": "Deep Learning / Structural Inspection",
+      "bullets": [
+        "Developed a CNN-based crack detection system for concrete structures achieving 96% accuracy under varied lighting."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "IIIT Hyderabad",
+      "degree": "M.S. by Research, CVIT",
+      "period": "2023 – Present",
+      "gpa": "8.8 / 10.0"
+    },
+    {
+      "institution": "Dharamsinh Desai University",
+      "degree": "B.Tech, Electronics & Communication",
+      "period": "2017 – 2021",
+      "gpa": "7.87 / 10.0"
+    }
+  ],
+  "news": [
+    {
+      "date": "2025",
+      "text": "Appointed WiDS Ambassador — organizing the WiDS Hyderabad Conference."
+    },
+    {
+      "date": "2025",
+      "text": "Attended CASML workshop on Physics-Informed Neural Networks and NVIDIA Modulus."
+    },
+    {
+      "date": "2024",
+      "text": "Two papers under review at CVIT, IIIT Hyderabad."
+    },
+    {
+      "date": "2024",
+      "text": "Served as Head TA for Digital Image Processing (170+ students)."
+    }
+  ]
+}

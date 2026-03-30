@@ -1,6 +1,6 @@
 {
   "name": "Sunayana Samavedam",
-  "title": "Researcher in Interpretable Computer Vision and Neural Style Transfer",
+  "title": "Researcher in Mechanistic Interpretability and Explainable Computer Vision",
   "affiliation": "CVIT, IIIT Hyderabad",
   "advisor": "Prof. P. J. Narayanan",
   "degree": "Masters in Science by Research",
@@ -15,12 +15,19 @@
   "links": {
     "email": "sunayana1233@gmail.com",
     "github": "https://github.com/sunayana-981",
-    "scholar": "#",
+    "scholar": "https://scholar.google.com/citations?hl=en&user=qY32y7oAAAAJ",
     "cv": "#"
   },
   "publications": [
     {
       "title": "CAV Styler: Making Neural Style Transfer Interpretable and Controllable",
+      "authors": [
+        "Sunayana Samavedam",
+        "Venkat Adithya Amula",
+        "Saurabh Saini",
+        "Avani Gupta†",
+        "P. J. Narayanan"
+      ],
       "status": "Published",
       "venue": "ICVGIP",
       "year": "2025",
@@ -33,6 +40,13 @@
     },
     {
       "title": "Prototype Guided Backdoor Defense via Activation Space Manipulation (PGBD)",
+      "authors": [
+        "Venkat Adithya Amula",
+        "Sunayana Samavedam",
+        "Saurabh Saini",
+        "Avani Gupta†",
+        "P. J. Narayanan"
+      ],
       "status": "Published",
       "venue": "ICCV",
       "year": "2025",
@@ -45,17 +59,42 @@
       "image": "https://venkatadithya9.github.io/pgbd.github.io/static/images/Batch_diag-Teaser.png"
     }
   ],
-  "preprints": [
+  "under_review": [
     {
-      "title": "Survey on Controllability in Style Transfer Concepts",
-      "status": "Coming Soon",
+      "title": "Evaluating Sparse Autoencoders for Mechanistic Interpretability under Distribution Shift",
+      "authors": [
+        "Sunayana Samavedam",
+        "Deepika Vemuri",
+        "Venkat Adithya Amula",
+        "Shreyas Premkhede",
+        "P. J. Narayanan",
+        "Vineeth Balasubramanian"
+      ],
+      "status": "Under Review",
       "venue": "CVIT, IIIT Hyderabad",
-      "year": "2024",
-      "summary": "Comprehensive survey analyzing controllability mechanisms in neural style transfer — spatial control, color preservation, content adherence — compiled into a structured framework for future research.",
-      "tags": ["Survey", "Style Transfer", "Controllability"],
+      "summary": "We investigate how Sparse Autoencoder (SAE) feature quality degrades when CLIP ViT models are adapted to out-of-distribution domains (medical imaging, remote sensing) via parameter-efficient fine-tuning. We introduce a novel metric, Distribution-Aware Monosemanticity Score (DAMS), to characterize SAE feature quality under shifts that standard metrics often conflate. Experiments reveal a systematic tension between downstream classification accuracy and feature-level interpretability under distribution shift.",
+      "tags": [
+        "Mechanistic Interpretability",
+        "Sparse Autoencoders",
+        "Distribution Shift"
+      ],
+      "links": {}
+    },
+    {
+      "title": "Toward a Taxonomy of Spatiotemporal Reasoning in Vision-Language Models",
+      "authors": ["Sunayana Samavedam", "Adrian DeWynter"],
+      "status": "Under Review",
+      "venue": "CVIT, IIIT Hyderabad",
+      "summary": "We survey and systematically organize the landscape of spatiotemporal reasoning evaluation in vision-language models (VLMs), identifying critical gaps across five reasoning categories: perception, spatial relations, temporal, dynamic, and compositional. Building on mechanistic evidence that VLMs encode object locations via linearly bound spatial IDs, we argue that most benchmarks measure accuracy without probing internal representations, and that cognitively grounded tests from neuroscience (mental rotation, multiple object tracking, perspective-taking) remain largely unadapted for VLM evaluation. We propose a structured taxonomy mapping evaluated versus unexplored capabilities, highlighting compositional spatiotemporal reasoning and temporal causality as the most undercharacterized failure modes.",
+      "tags": [
+        "Mechanistic Interpretability",
+        "Spatio-Temporal Reasoning",
+        "Vision-Language Models"
+      ],
       "links": {}
     }
   ],
+
   "projects": [
     {
       "title": "CLIP-Based Domain Adaptation",
@@ -73,12 +112,6 @@
       "title": "3D Object Reconstruction Using ICP SLAM",
       "summary": "Built a rotating platform with Arduino for systematic object imaging, processed with COLMAP to generate precise 3D models from point clouds.",
       "tags": ["3D Reconstruction", "SLAM", "COLMAP"],
-      "links": {}
-    },
-    {
-      "title": "Sheet Music Reader via Template Matching",
-      "summary": "Automated interpretation and playback of printed sheet music using template-matching in OpenCV, optimized for real-time note detection.",
-      "tags": ["OpenCV", "Template Matching", "Audio"],
       "links": {}
     }
   ],

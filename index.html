@@ -6,7 +6,7 @@
     <title>Sunayana Samavedam</title>
     <meta
       name="description"
-      content="Researcher in Interpretable Computer Vision and Neural Style Transfer at CVIT, IIIT Hyderabad."
+      content="Researcher in Mechanistic Interpretability and Explainable Computer Vision at CVIT, IIIT Hyderabad."
     />
 
     <!-- Fonts -->
@@ -302,6 +302,18 @@
         font-style: italic;
       }
 
+      .research-entry .entry-authors {
+        font-size: 0.8rem;
+        color: var(--c-text-secondary);
+        margin-bottom: 0.45rem;
+        line-height: 1.55;
+      }
+
+      .research-entry .entry-authors strong {
+        color: var(--c-text-tertiary);
+        font-weight: 600;
+      }
+
       .research-entry .entry-summary {
         font-size: 0.88rem;
         color: var(--c-text-secondary);
@@ -570,7 +582,6 @@
           <span></span><span></span><span></span>
         </button>
         <ul class="nav-links">
-          <li><a href="#about">About</a></li>
           <li><a href="#research">Research</a></li>
           <li><a href="#experience">Experience</a></li>
           <li><a href="#projects">Projects</a></li>
@@ -584,7 +595,7 @@
       <header class="hero">
         <h1>Sunayana Samavedam</h1>
         <p class="tagline">
-          Interpretable Computer Vision &amp; Neural Style Transfer
+          Mechanistic Interpretability and Explainable Computer Vision
         </p>
         <p class="intro">
           Research scholar at <strong>CVIT, IIIT Hyderabad</strong>, advised by
@@ -626,7 +637,11 @@
             </svg>
             GitHub
           </a>
-          <a href="#">
+          <a
+            href="https://scholar.google.com/citations?hl=en&user=qY32y7oAAAAJ"
+            target="_blank"
+            rel="noopener"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -661,40 +676,6 @@
         </div>
       </header>
 
-      <!-- ── News ────────────────────────────────────── -->
-      <section id="about">
-        <h2 class="section-heading">Recent</h2>
-        <ul class="news-list">
-          <li class="news-item">
-            <span class="news-date">2025</span>
-            <span class="news-text"
-              >Appointed WiDS Ambassador — organizing the WiDS Hyderabad
-              Conference.</span
-            >
-          </li>
-          <li class="news-item">
-            <span class="news-date">2025</span>
-            <span class="news-text"
-              >Attended CASML workshop on Physics-Informed Neural Networks and
-              NVIDIA Modulus.</span
-            >
-          </li>
-          <li class="news-item">
-            <span class="news-date">2024</span>
-            <span class="news-text"
-              >Two papers under review at CVIT, IIIT Hyderabad.</span
-            >
-          </li>
-          <li class="news-item">
-            <span class="news-date">2024</span>
-            <span class="news-text"
-              >Served as Head TA for Digital Image Processing (170+
-              students).</span
-            >
-          </li>
-        </ul>
-      </section>
-
       <!-- ── Research ────────────────────────────────── -->
       <section id="research">
         <h2 class="section-heading">Research</h2>
@@ -708,6 +689,10 @@
           </div>
           <div class="entry-meta">
             Published at ICVGIP 2025 · CVIT, IIIT Hyderabad
+          </div>
+          <div class="entry-authors">
+            <strong>Authors:</strong> Sunayana Samavedam, Venkat Adithya
+            Amula, Saurabh Saini, Avani Gupta&dagger;, P. J. Narayanan
           </div>
           <div class="entry-summary">
             A concept-driven neural style transfer framework that maps
@@ -749,6 +734,10 @@
           <div class="entry-meta">
             Published at ICCV 2025 · CVIT, IIIT Hyderabad
           </div>
+          <div class="entry-authors">
+            <strong>Authors:</strong> Venkat Adithya Amula, Sunayana
+            Samavedam, Saurabh Saini, Avani Gupta&dagger;, P. J. Narayanan
+          </div>
           <div class="entry-summary">
             A robust post-hoc defense against backdoor attacks using activation
             space geometry, including semantic trigger settings with a new
@@ -778,6 +767,68 @@
             <span class="tag">Adversarial ML</span>
             <span class="tag">Backdoor Defense</span>
             <span class="tag">Security</span>
+          </div>
+        </div>
+
+        <p class="research-group-label">Under Review</p>
+
+        <div class="research-entry">
+          <div class="entry-title">
+            Evaluating Sparse Autoencoders for Mechanistic Interpretability
+            under Distribution Shift
+          </div>
+          <div class="entry-meta">Under Review · CVIT, IIIT Hyderabad</div>
+          <div class="entry-authors">
+            <strong>Authors:</strong> Sunayana Samavedam, Deepika Vemuri,
+            Venkat Adithya Amula, Shreyas Premkhede, P. J. Narayanan, and
+            Vineeth Balasubramanian
+          </div>
+          <div class="entry-summary">
+            We investigate how Sparse Autoencoder (SAE) feature quality degrades
+            when CLIP ViT models are adapted to out-of-distribution domains
+            (medical imaging, remote sensing) via parameter-efficient
+            fine-tuning. We introduce a novel metric, Distribution-Aware
+            Monosemanticity Score (DAMS), to characterize SAE feature quality
+            under shifts that standard metrics often conflate. Experiments
+            reveal a systematic tension between downstream classification
+            accuracy and feature-level interpretability under distribution
+            shift.
+          </div>
+          <div class="tag-row">
+            <span class="tag">Mechanistic Interpretability</span>
+            <span class="tag">Sparse Autoencoders</span>
+            <span class="tag">Distribution Shift</span>
+          </div>
+        </div>
+
+        <div class="research-entry">
+          <div class="entry-title">
+            Toward a Taxonomy of Spatiotemporal Reasoning in Vision-Language
+            Models
+          </div>
+          <div class="entry-meta">Under Review · CVIT, IIIT Hyderabad</div>
+          <div class="entry-authors">
+            <strong>Authors:</strong> Sunayana Samavedam and Adrian DeWynter
+          </div>
+          <div class="entry-summary">
+            We survey and systematically organize the landscape of
+            spatiotemporal reasoning evaluation in vision-language models
+            (VLMs), identifying critical gaps across five reasoning categories:
+            perception, spatial relations, temporal, dynamic, and compositional.
+            Building on mechanistic evidence that VLMs encode object locations
+            via linearly bound spatial IDs, we argue that most benchmarks
+            measure accuracy without probing internal representations, and that
+            cognitively grounded tests from neuroscience (mental rotation,
+            multiple object tracking, perspective-taking) remain largely
+            unadapted for VLM evaluation. We propose a structured taxonomy
+            mapping evaluated versus unexplored capabilities, highlighting
+            compositional spatiotemporal reasoning and temporal causality as the
+            most undercharacterized failure modes.
+          </div>
+          <div class="tag-row">
+            <span class="tag">Mechanistic Interpretability</span>
+            <span class="tag">Spatio-Temporal Reasoning</span>
+            <span class="tag">Vision-Language Models</span>
           </div>
         </div>
 
@@ -923,18 +974,6 @@
             <div class="tag-row">
               <span class="tag">3D Reconstruction</span>
               <span class="tag">SLAM</span>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="entry-title">Sheet Music Reader</div>
-            <div class="entry-summary">
-              Automated interpretation and playback of printed sheet music using
-              template-matching in OpenCV, optimized for real-time detection.
-            </div>
-            <div class="tag-row">
-              <span class="tag">OpenCV</span>
-              <span class="tag">Audio</span>
             </div>
           </div>
         </div>

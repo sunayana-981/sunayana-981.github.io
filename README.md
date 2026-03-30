@@ -13,7 +13,7 @@ site/
 README.md
 ```
 
-Site will live at `https://sunayana-981.github.io`
+Site lives at `https://sunayana-981.github.io`
 
 ## Customization
 

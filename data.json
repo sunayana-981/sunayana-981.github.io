@@ -20,22 +20,29 @@
   },
   "publications": [
     {
-      "title": "Interpretable and Controllable Style Transfer",
-      "status": "Under Review",
-      "venue": "CVIT, IIIT Hyderabad",
-      "year": "2024",
-      "summary": "A novel architecture enabling fine-grained, continuous control over individual style aspects (brushstrokes, colors, compositions) with an interpretable sliding mechanism.",
+      "title": "CAV Styler: Making Neural Style Transfer Interpretable and Controllable",
+      "status": "Published",
+      "venue": "ICVGIP",
+      "year": "2025",
+      "summary": "A concept-driven neural style transfer framework that maps human-interpretable attributes like texture, blur, and detail into explicit controllable directions for fine-grained stylization.",
       "tags": ["Style Transfer", "Interpretability", "Controllability"],
-      "links": {}
+      "links": {
+        "project": "https://sunayana-981.github.io/CAV_Styler/"
+      },
+      "image": "https://sunayana-981.github.io/CAV_Styler/static/images/block_diag.jpg"
     },
     {
-      "title": "Prototype Guided Backdoor Defense (PGBD)",
-      "status": "Under Review",
-      "venue": "CVIT, IIIT Hyderabad",
-      "year": "2024",
-      "summary": "First successful defense against semantic trigger-based backdoor attacks using prototype-based geometric configurations. Includes a new benchmark dataset of occluded celebrity faces.",
+      "title": "Prototype Guided Backdoor Defense via Activation Space Manipulation (PGBD)",
+      "status": "Published",
+      "venue": "ICCV",
+      "year": "2025",
+      "summary": "A robust post-hoc defense against backdoor attacks using activation space geometry, including semantic trigger settings with a new celebrity face benchmark.",
       "tags": ["Adversarial ML", "Backdoor Defense", "Security"],
-      "links": {}
+      "links": {
+        "project": "https://venkatadithya9.github.io/pgbd.github.io/",
+        "paper": "https://arxiv.org/abs/2503.20925"
+      },
+      "image": "https://venkatadithya9.github.io/pgbd.github.io/static/images/Batch_diag-Teaser.png"
     }
   ],
   "preprints": [

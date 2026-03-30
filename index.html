@@ -1,771 +1,1013 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sunayana Samavedam</title>
-  <meta name="description" content="Researcher in Interpretable Computer Vision and Neural Style Transfer at CVIT, IIIT Hyderabad." />
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
-  <style>
-    /* ── Reset & Base ──────────────────────────────── */
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --font-serif: 'Newsreader', 'Georgia', serif;
-      --font-sans: 'Source Sans 3', 'Helvetica Neue', sans-serif;
-      --c-bg: #fafaf9;
-      --c-text: #1c1c1c;
-      --c-text-secondary: #555;
-      --c-text-tertiary: #888;
-      --c-accent: #3d5a80;
-      --c-accent-light: #e8edf3;
-      --c-border: #e2e2e0;
-      --c-tag-bg: #f0efed;
-      --c-tag-text: #5a5a58;
-      --max-w: 780px;
-    }
-
-    html {
-      font-size: 17px;
-      scroll-behavior: smooth;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    body {
-      font-family: var(--font-sans);
-      color: var(--c-text);
-      background: var(--c-bg);
-      line-height: 1.7;
-      font-weight: 400;
-    }
-
-    ::selection {
-      background: var(--c-accent);
-      color: #fff;
-    }
-
-    /* ── Layout ────────────────────────────────────── */
-    .container {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    /* ── Nav ───────────────────────────────────────── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(250, 250, 249, 0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s;
-    }
-
-    nav.scrolled {
-      border-bottom-color: var(--c-border);
-    }
-
-    nav .container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 52px;
-    }
-
-    nav .nav-name {
-      font-family: var(--font-serif);
-      font-weight: 600;
-      font-size: 1rem;
-      color: var(--c-text);
-      text-decoration: none;
-      letter-spacing: -0.01em;
-    }
-
-    nav .nav-links {
-      display: flex;
-      gap: 1.8rem;
-      list-style: none;
-    }
-
-    nav .nav-links a {
-      font-size: 0.82rem;
-      font-weight: 500;
-      color: var(--c-text-secondary);
-      text-decoration: none;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      position: relative;
-      transition: color 0.2s;
-    }
-
-    nav .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 1.5px;
-      background: var(--c-accent);
-      transition: width 0.25s ease;
-    }
-
-    nav .nav-links a:hover {
-      color: var(--c-text);
-    }
-
-    nav .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    /* ── Mobile nav toggle ─────────────────────────── */
-    .nav-toggle {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px;
-    }
-
-    .nav-toggle span {
-      display: block;
-      width: 20px;
-      height: 2px;
-      background: var(--c-text);
-      margin: 4px 0;
-      transition: 0.2s;
-    }
-
-    /* ── Hero / Landing ────────────────────────────── */
-    .hero {
-      padding: 5rem 0 3.5rem;
-    }
-
-    .hero h1 {
-      font-family: var(--font-serif);
-      font-size: 2.8rem;
-      font-weight: 600;
-      line-height: 1.15;
-      letter-spacing: -0.03em;
-      color: var(--c-text);
-      margin-bottom: 0.6rem;
-    }
-
-    .hero .tagline {
-      font-family: var(--font-serif);
-      font-size: 1.15rem;
-      font-weight: 400;
-      font-style: italic;
-      color: var(--c-accent);
-      margin-bottom: 1.3rem;
-      line-height: 1.5;
-    }
-
-    .hero .intro {
-      font-size: 0.95rem;
-      color: var(--c-text-secondary);
-      max-width: 600px;
-      line-height: 1.75;
-      margin-bottom: 1.6rem;
-    }
-
-    .hero-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem 1.5rem;
-      align-items: center;
-    }
-
-    .hero-links a {
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--c-text);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      padding: 0.3rem 0;
-      border-bottom: 1.5px solid var(--c-border);
-      transition: border-color 0.2s, color 0.2s;
-    }
-
-    .hero-links a:hover {
-      border-color: var(--c-accent);
-      color: var(--c-accent);
-    }
-
-    .hero-links a svg {
-      width: 15px;
-      height: 15px;
-      flex-shrink: 0;
-    }
-
-    /* ── Section Base ──────────────────────────────── */
-    section {
-      padding: 3rem 0;
-    }
-
-    section + section {
-      border-top: 1px solid var(--c-border);
-    }
-
-    .section-heading {
-      font-family: var(--font-serif);
-      font-size: 1.5rem;
-      font-weight: 500;
-      margin-bottom: 1.8rem;
-      letter-spacing: -0.02em;
-      color: var(--c-text);
-    }
-
-    /* ── News ──────────────────────────────────────── */
-    .news-list {
-      list-style: none;
-    }
-
-    .news-item {
-      display: flex;
-      gap: 1.2rem;
-      padding: 0.5rem 0;
-      font-size: 0.9rem;
-      line-height: 1.6;
-    }
-
-    .news-date {
-      flex-shrink: 0;
-      width: 48px;
-      font-weight: 600;
-      color: var(--c-text-tertiary);
-      font-size: 0.82rem;
-      padding-top: 1px;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .news-text {
-      color: var(--c-text-secondary);
-    }
-
-    /* ── Research Entries ──────────────────────────── */
-    .research-group-label {
-      font-size: 0.78rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--c-text-tertiary);
-      margin-bottom: 1rem;
-      margin-top: 2rem;
-    }
-
-    .research-group-label:first-child {
-      margin-top: 0;
-    }
-
-    .research-entry {
-      margin-bottom: 1.6rem;
-      padding-left: 0;
-    }
-
-    .research-entry .entry-title {
-      font-family: var(--font-serif);
-      font-size: 1.05rem;
-      font-weight: 500;
-      color: var(--c-text);
-      margin-bottom: 0.15rem;
-      line-height: 1.4;
-    }
-
-    .research-entry .entry-meta {
-      font-size: 0.8rem;
-      color: var(--c-text-tertiary);
-      margin-bottom: 0.35rem;
-      font-style: italic;
-    }
-
-    .research-entry .entry-summary {
-      font-size: 0.88rem;
-      color: var(--c-text-secondary);
-      line-height: 1.65;
-      margin-bottom: 0.5rem;
-    }
-
-    .tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.35rem;
-    }
-
-    .tag {
-      font-size: 0.72rem;
-      font-weight: 500;
-      padding: 0.15rem 0.55rem;
-      background: var(--c-tag-bg);
-      color: var(--c-tag-text);
-      border-radius: 3px;
-      letter-spacing: 0.01em;
-    }
-
-    /* ── Experience ────────────────────────────────── */
-    .exp-entry {
-      margin-bottom: 1.5rem;
-    }
-
-    .exp-header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 0.5rem;
-      margin-bottom: 0.15rem;
-    }
-
-    .exp-role {
-      font-family: var(--font-serif);
-      font-weight: 500;
-      font-size: 1rem;
-      color: var(--c-text);
-    }
-
-    .exp-period {
-      font-size: 0.8rem;
-      color: var(--c-text-tertiary);
-      font-variant-numeric: tabular-nums;
-      flex-shrink: 0;
-    }
-
-    .exp-org {
-      font-size: 0.85rem;
-      color: var(--c-text-secondary);
-      margin-bottom: 0.3rem;
-    }
-
-    .exp-org .exp-context {
-      color: var(--c-text-tertiary);
-      font-style: italic;
-    }
-
-    .exp-bullet {
-      font-size: 0.87rem;
-      color: var(--c-text-secondary);
-      line-height: 1.65;
-      padding-left: 0;
-    }
-
-    /* ── Projects Grid ─────────────────────────────── */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.2rem;
-    }
-
-    .project-card {
-      padding: 1.1rem 1.2rem;
-      border: 1px solid var(--c-border);
-      border-radius: 4px;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
-    .project-card:hover {
-      border-color: #ccc;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-    }
-
-    .project-card .entry-title {
-      font-family: var(--font-serif);
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--c-text);
-      margin-bottom: 0.3rem;
-      line-height: 1.35;
-    }
-
-    .project-card .entry-summary {
-      font-size: 0.82rem;
-      color: var(--c-text-secondary);
-      line-height: 1.6;
-      margin-bottom: 0.5rem;
-    }
-
-    /* ── Education ─────────────────────────────────── */
-    .edu-entry {
-      margin-bottom: 1rem;
-    }
-
-    .edu-header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 0.5rem;
-    }
-
-    .edu-inst {
-      font-family: var(--font-serif);
-      font-weight: 500;
-      font-size: 1rem;
-    }
-
-    .edu-period {
-      font-size: 0.8rem;
-      color: var(--c-text-tertiary);
-    }
-
-    .edu-degree {
-      font-size: 0.87rem;
-      color: var(--c-text-secondary);
-    }
-
-    .edu-gpa {
-      font-size: 0.82rem;
-      color: var(--c-text-tertiary);
-    }
-
-    /* ── Contact ───────────────────────────────────── */
-    .contact-section p {
-      font-size: 0.92rem;
-      color: var(--c-text-secondary);
-      line-height: 1.7;
-    }
-
-    .contact-section a {
-      color: var(--c-accent);
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.2s;
-    }
-
-    .contact-section a:hover {
-      border-bottom-color: var(--c-accent);
-    }
-
-    /* ── Footer ────────────────────────────────────── */
-    footer {
-      padding: 2rem 0;
-      border-top: 1px solid var(--c-border);
-      margin-top: 1rem;
-    }
-
-    footer p {
-      font-size: 0.78rem;
-      color: var(--c-text-tertiary);
-    }
-
-    /* ── Responsive ────────────────────────────────── */
-    @media (max-width: 640px) {
-      html { font-size: 16px; }
-
-      .container { padding: 0 1.25rem; }
-
-      .hero { padding: 3.5rem 0 2.5rem; }
-
-      .hero h1 { font-size: 2rem; }
-
-      .hero .tagline { font-size: 1.05rem; }
-
-      .projects-grid {
-        grid-template-columns: 1fr;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sunayana Samavedam</title>
+    <meta
+      name="description"
+      content="Researcher in Interpretable Computer Vision and Neural Style Transfer at CVIT, IIIT Hyderabad."
+    />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Source+Sans+3:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ── Reset & Base ──────────────────────────────── */
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --font-serif: "Newsreader", "Georgia", serif;
+        --font-sans: "Source Sans 3", "Helvetica Neue", sans-serif;
+        --c-bg: #fafaf9;
+        --c-text: #1c1c1c;
+        --c-text-secondary: #555;
+        --c-text-tertiary: #888;
+        --c-accent: #3d5a80;
+        --c-accent-light: #e8edf3;
+        --c-border: #e2e2e0;
+        --c-tag-bg: #f0efed;
+        --c-tag-text: #5a5a58;
+        --max-w: 780px;
+      }
+
+      html {
+        font-size: 17px;
+        scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      body {
+        font-family: var(--font-sans);
+        color: var(--c-text);
+        background: var(--c-bg);
+        line-height: 1.7;
+        font-weight: 400;
+      }
+
+      ::selection {
+        background: var(--c-accent);
+        color: #fff;
+      }
+
+      /* ── Layout ────────────────────────────────────── */
+      .container {
+        max-width: var(--max-w);
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      /* ── Nav ───────────────────────────────────────── */
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(250, 250, 249, 0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.3s;
+      }
+
+      nav.scrolled {
+        border-bottom-color: var(--c-border);
+      }
+
+      nav .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 52px;
+      }
+
+      nav .nav-name {
+        font-family: var(--font-serif);
+        font-weight: 600;
+        font-size: 1rem;
+        color: var(--c-text);
+        text-decoration: none;
+        letter-spacing: -0.01em;
       }
 
       nav .nav-links {
-        display: none;
-        position: absolute;
-        top: 52px;
-        left: 0;
-        right: 0;
-        flex-direction: column;
-        background: var(--c-bg);
-        padding: 1rem 2rem 1.5rem;
-        gap: 1rem;
-        border-bottom: 1px solid var(--c-border);
-      }
-
-      nav .nav-links.open {
         display: flex;
+        gap: 1.8rem;
+        list-style: none;
       }
 
+      nav .nav-links a {
+        font-size: 0.82rem;
+        font-weight: 500;
+        color: var(--c-text-secondary);
+        text-decoration: none;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        position: relative;
+        transition: color 0.2s;
+      }
+
+      nav .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1.5px;
+        background: var(--c-accent);
+        transition: width 0.25s ease;
+      }
+
+      nav .nav-links a:hover {
+        color: var(--c-text);
+      }
+
+      nav .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      /* ── Mobile nav toggle ─────────────────────────── */
       .nav-toggle {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+      }
+
+      .nav-toggle span {
+        display: block;
+        width: 20px;
+        height: 2px;
+        background: var(--c-text);
+        margin: 4px 0;
+        transition: 0.2s;
+      }
+
+      /* ── Hero / Landing ────────────────────────────── */
+      .hero {
+        padding: 5rem 0 3.5rem;
+      }
+
+      .hero h1 {
+        font-family: var(--font-serif);
+        font-size: 2.8rem;
+        font-weight: 600;
+        line-height: 1.15;
+        letter-spacing: -0.03em;
+        color: var(--c-text);
+        margin-bottom: 0.6rem;
+      }
+
+      .hero .tagline {
+        font-family: var(--font-serif);
+        font-size: 1.15rem;
+        font-weight: 400;
+        font-style: italic;
+        color: var(--c-accent);
+        margin-bottom: 1.3rem;
+        line-height: 1.5;
+      }
+
+      .hero .intro {
+        font-size: 0.95rem;
+        color: var(--c-text-secondary);
+        max-width: 600px;
+        line-height: 1.75;
+        margin-bottom: 1.6rem;
+      }
+
+      .hero-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1.5rem;
+        align-items: center;
+      }
+
+      .hero-links a {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--c-text);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.3rem 0;
+        border-bottom: 1.5px solid var(--c-border);
+        transition:
+          border-color 0.2s,
+          color 0.2s;
+      }
+
+      .hero-links a:hover {
+        border-color: var(--c-accent);
+        color: var(--c-accent);
+      }
+
+      .hero-links a svg {
+        width: 15px;
+        height: 15px;
+        flex-shrink: 0;
+      }
+
+      /* ── Section Base ──────────────────────────────── */
+      section {
+        padding: 3rem 0;
+      }
+
+      section + section {
+        border-top: 1px solid var(--c-border);
+      }
+
+      .section-heading {
+        font-family: var(--font-serif);
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin-bottom: 1.8rem;
+        letter-spacing: -0.02em;
+        color: var(--c-text);
+      }
+
+      /* ── News ──────────────────────────────────────── */
+      .news-list {
+        list-style: none;
+      }
+
+      .news-item {
+        display: flex;
+        gap: 1.2rem;
+        padding: 0.5rem 0;
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+
+      .news-date {
+        flex-shrink: 0;
+        width: 48px;
+        font-weight: 600;
+        color: var(--c-text-tertiary);
+        font-size: 0.82rem;
+        padding-top: 1px;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .news-text {
+        color: var(--c-text-secondary);
+      }
+
+      /* ── Research Entries ──────────────────────────── */
+      .research-group-label {
+        font-size: 0.78rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--c-text-tertiary);
+        margin-bottom: 1rem;
+        margin-top: 2rem;
+      }
+
+      .research-group-label:first-child {
+        margin-top: 0;
+      }
+
+      .research-entry {
+        margin-bottom: 1.6rem;
+        padding-left: 0;
+      }
+
+      .research-entry .entry-title {
+        font-family: var(--font-serif);
+        font-size: 1.05rem;
+        font-weight: 500;
+        color: var(--c-text);
+        margin-bottom: 0.15rem;
+        line-height: 1.4;
+      }
+
+      .research-entry .entry-meta {
+        font-size: 0.8rem;
+        color: var(--c-text-tertiary);
+        margin-bottom: 0.35rem;
+        font-style: italic;
+      }
+
+      .research-entry .entry-summary {
+        font-size: 0.88rem;
+        color: var(--c-text-secondary);
+        line-height: 1.65;
+        margin-bottom: 0.5rem;
+      }
+
+      .research-entry .entry-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem 1rem;
+        margin-bottom: 0.55rem;
+      }
+
+      .research-entry .entry-links a {
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--c-accent);
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.2s;
+      }
+
+      .research-entry .entry-links a:hover {
+        border-bottom-color: var(--c-accent);
+      }
+
+      .research-entry .paper-image {
+        width: 100%;
+        max-width: 560px;
+        border: 1px solid var(--c-border);
+        border-radius: 4px;
+        margin-bottom: 0.6rem;
         display: block;
       }
 
-      .exp-header {
-        flex-direction: column;
-        gap: 0;
+      .tag-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
       }
-    }
-  </style>
-</head>
-<body>
 
-  <!-- ── Nav ──────────────────────────────────────── -->
-  <nav id="nav">
-    <div class="container">
-      <a href="#" class="nav-name">S. Samavedam</a>
-      <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#research">Research</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
+      .tag {
+        font-size: 0.72rem;
+        font-weight: 500;
+        padding: 0.15rem 0.55rem;
+        background: var(--c-tag-bg);
+        color: var(--c-tag-text);
+        border-radius: 3px;
+        letter-spacing: 0.01em;
+      }
 
-  <main class="container">
+      /* ── Experience ────────────────────────────────── */
+      .exp-entry {
+        margin-bottom: 1.5rem;
+      }
 
-    <!-- ── Hero ────────────────────────────────────── -->
-    <header class="hero">
-      <h1>Sunayana Samavedam</h1>
-      <p class="tagline">Interpretable Computer Vision &amp; Neural Style Transfer</p>
-      <p class="intro">
-        Research scholar at <strong>CVIT, IIIT Hyderabad</strong>, advised by Prof. P. J. Narayanan.
-        I study how to make neural style transfer controllable and interpretable — enabling
-        fine-grained manipulation of artistic style attributes. I also work on adversarial robustness
-        and backdoor defense mechanisms.
-      </p>
-      <div class="hero-links">
-        <a href="mailto:sunayana1233@gmail.com">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
-          Email
-        </a>
-        <a href="https://github.com/sunayana-981" target="_blank" rel="noopener">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"/></svg>
-          GitHub
-        </a>
-        <a href="#">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"/></svg>
-          Scholar
-        </a>
-        <a href="#">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
-          CV
-        </a>
+      .exp-header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 0.5rem;
+        margin-bottom: 0.15rem;
+      }
+
+      .exp-role {
+        font-family: var(--font-serif);
+        font-weight: 500;
+        font-size: 1rem;
+        color: var(--c-text);
+      }
+
+      .exp-period {
+        font-size: 0.8rem;
+        color: var(--c-text-tertiary);
+        font-variant-numeric: tabular-nums;
+        flex-shrink: 0;
+      }
+
+      .exp-org {
+        font-size: 0.85rem;
+        color: var(--c-text-secondary);
+        margin-bottom: 0.3rem;
+      }
+
+      .exp-org .exp-context {
+        color: var(--c-text-tertiary);
+        font-style: italic;
+      }
+
+      .exp-bullet {
+        font-size: 0.87rem;
+        color: var(--c-text-secondary);
+        line-height: 1.65;
+        padding-left: 0;
+      }
+
+      /* ── Projects Grid ─────────────────────────────── */
+      .projects-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.2rem;
+      }
+
+      .project-card {
+        padding: 1.1rem 1.2rem;
+        border: 1px solid var(--c-border);
+        border-radius: 4px;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .project-card:hover {
+        border-color: #ccc;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+      }
+
+      .project-card .entry-title {
+        font-family: var(--font-serif);
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--c-text);
+        margin-bottom: 0.3rem;
+        line-height: 1.35;
+      }
+
+      .project-card .entry-summary {
+        font-size: 0.82rem;
+        color: var(--c-text-secondary);
+        line-height: 1.6;
+        margin-bottom: 0.5rem;
+      }
+
+      /* ── Education ─────────────────────────────────── */
+      .edu-entry {
+        margin-bottom: 1rem;
+      }
+
+      .edu-header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 0.5rem;
+      }
+
+      .edu-inst {
+        font-family: var(--font-serif);
+        font-weight: 500;
+        font-size: 1rem;
+      }
+
+      .edu-period {
+        font-size: 0.8rem;
+        color: var(--c-text-tertiary);
+      }
+
+      .edu-degree {
+        font-size: 0.87rem;
+        color: var(--c-text-secondary);
+      }
+
+      .edu-gpa {
+        font-size: 0.82rem;
+        color: var(--c-text-tertiary);
+      }
+
+      /* ── Contact ───────────────────────────────────── */
+      .contact-section p {
+        font-size: 0.92rem;
+        color: var(--c-text-secondary);
+        line-height: 1.7;
+      }
+
+      .contact-section a {
+        color: var(--c-accent);
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.2s;
+      }
+
+      .contact-section a:hover {
+        border-bottom-color: var(--c-accent);
+      }
+
+      /* ── Footer ────────────────────────────────────── */
+      footer {
+        padding: 2rem 0;
+        border-top: 1px solid var(--c-border);
+        margin-top: 1rem;
+      }
+
+      footer p {
+        font-size: 0.78rem;
+        color: var(--c-text-tertiary);
+      }
+
+      /* ── Responsive ────────────────────────────────── */
+      @media (max-width: 640px) {
+        html {
+          font-size: 16px;
+        }
+
+        .container {
+          padding: 0 1.25rem;
+        }
+
+        .hero {
+          padding: 3.5rem 0 2.5rem;
+        }
+
+        .hero h1 {
+          font-size: 2rem;
+        }
+
+        .hero .tagline {
+          font-size: 1.05rem;
+        }
+
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+
+        nav .nav-links {
+          display: none;
+          position: absolute;
+          top: 52px;
+          left: 0;
+          right: 0;
+          flex-direction: column;
+          background: var(--c-bg);
+          padding: 1rem 2rem 1.5rem;
+          gap: 1rem;
+          border-bottom: 1px solid var(--c-border);
+        }
+
+        nav .nav-links.open {
+          display: flex;
+        }
+
+        .nav-toggle {
+          display: block;
+        }
+
+        .exp-header {
+          flex-direction: column;
+          gap: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ── Nav ──────────────────────────────────────── -->
+    <nav id="nav">
+      <div class="container">
+        <a href="#" class="nav-name">S. Samavedam</a>
+        <button
+          class="nav-toggle"
+          aria-label="Menu"
+          onclick="
+            document.querySelector('.nav-links').classList.toggle('open')
+          "
+        >
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
       </div>
-    </header>
+    </nav>
 
-    <!-- ── News ────────────────────────────────────── -->
-    <section id="about">
-      <h2 class="section-heading">Recent</h2>
-      <ul class="news-list">
-        <li class="news-item">
-          <span class="news-date">2025</span>
-          <span class="news-text">Appointed WiDS Ambassador — organizing the WiDS Hyderabad Conference.</span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">2025</span>
-          <span class="news-text">Attended CASML workshop on Physics-Informed Neural Networks and NVIDIA Modulus.</span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">2024</span>
-          <span class="news-text">Two papers under review at CVIT, IIIT Hyderabad.</span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">2024</span>
-          <span class="news-text">Served as Head TA for Digital Image Processing (170+ students).</span>
-        </li>
-      </ul>
-    </section>
-
-    <!-- ── Research ────────────────────────────────── -->
-    <section id="research">
-      <h2 class="section-heading">Research</h2>
-
-      <p class="research-group-label">Publications</p>
-
-      <div class="research-entry">
-        <div class="entry-title">Interpretable and Controllable Style Transfer</div>
-        <div class="entry-meta">Under Review · CVIT, IIIT Hyderabad · 2024</div>
-        <div class="entry-summary">A novel architecture enabling fine-grained, continuous control over individual style aspects (brushstrokes, colors, compositions) with an interpretable sliding mechanism.</div>
-        <div class="tag-row">
-          <span class="tag">Style Transfer</span>
-          <span class="tag">Interpretability</span>
-          <span class="tag">Controllability</span>
+    <main class="container">
+      <!-- ── Hero ────────────────────────────────────── -->
+      <header class="hero">
+        <h1>Sunayana Samavedam</h1>
+        <p class="tagline">
+          Interpretable Computer Vision &amp; Neural Style Transfer
+        </p>
+        <p class="intro">
+          Research scholar at <strong>CVIT, IIIT Hyderabad</strong>, advised by
+          Prof. P. J. Narayanan. I study how to make neural style transfer
+          controllable and interpretable — enabling fine-grained manipulation of
+          artistic style attributes. I also work on adversarial robustness and
+          backdoor defense mechanisms.
+        </p>
+        <div class="hero-links">
+          <a href="mailto:sunayana1233@gmail.com">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.8"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+              />
+            </svg>
+            Email
+          </a>
+          <a
+            href="https://github.com/sunayana-981"
+            target="_blank"
+            rel="noopener"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"
+              />
+            </svg>
+            GitHub
+          </a>
+          <a href="#">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.8"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"
+              />
+            </svg>
+            Scholar
+          </a>
+          <a href="#">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.8"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
+              />
+            </svg>
+            CV
+          </a>
         </div>
-      </div>
+      </header>
 
-      <div class="research-entry">
-        <div class="entry-title">Prototype Guided Backdoor Defense (PGBD)</div>
-        <div class="entry-meta">Under Review · CVIT, IIIT Hyderabad · 2024</div>
-        <div class="entry-summary">First successful defense against semantic trigger-based backdoor attacks using prototype-based geometric configurations. Includes a new benchmark dataset of occluded celebrity faces.</div>
-        <div class="tag-row">
-          <span class="tag">Adversarial ML</span>
-          <span class="tag">Backdoor Defense</span>
-          <span class="tag">Security</span>
-        </div>
-      </div>
+      <!-- ── News ────────────────────────────────────── -->
+      <section id="about">
+        <h2 class="section-heading">Recent</h2>
+        <ul class="news-list">
+          <li class="news-item">
+            <span class="news-date">2025</span>
+            <span class="news-text"
+              >Appointed WiDS Ambassador — organizing the WiDS Hyderabad
+              Conference.</span
+            >
+          </li>
+          <li class="news-item">
+            <span class="news-date">2025</span>
+            <span class="news-text"
+              >Attended CASML workshop on Physics-Informed Neural Networks and
+              NVIDIA Modulus.</span
+            >
+          </li>
+          <li class="news-item">
+            <span class="news-date">2024</span>
+            <span class="news-text"
+              >Two papers under review at CVIT, IIIT Hyderabad.</span
+            >
+          </li>
+          <li class="news-item">
+            <span class="news-date">2024</span>
+            <span class="news-text"
+              >Served as Head TA for Digital Image Processing (170+
+              students).</span
+            >
+          </li>
+        </ul>
+      </section>
 
-      <p class="research-group-label">Working Papers</p>
+      <!-- ── Research ────────────────────────────────── -->
+      <section id="research">
+        <h2 class="section-heading">Research</h2>
 
-      <div class="research-entry">
-        <div class="entry-title">Survey on Controllability in Style Transfer Concepts</div>
-        <div class="entry-meta">Coming Soon · CVIT, IIIT Hyderabad</div>
-        <div class="entry-summary">Comprehensive survey analyzing controllability mechanisms in neural style transfer — spatial control, color preservation, content adherence — compiled into a structured framework for future research.</div>
-        <div class="tag-row">
-          <span class="tag">Survey</span>
-          <span class="tag">Style Transfer</span>
-          <span class="tag">Controllability</span>
-        </div>
-      </div>
-    </section>
+        <p class="research-group-label">Publications</p>
 
-    <!-- ── Experience ──────────────────────────────── -->
-    <section id="experience">
-      <h2 class="section-heading">Experience</h2>
-
-      <div class="exp-entry">
-        <div class="exp-header">
-          <span class="exp-role">Head Teaching Assistant</span>
-          <span class="exp-period">Aug 2024 – Dec 2024</span>
-        </div>
-        <div class="exp-org">IIIT Hyderabad · <span class="exp-context">Digital Image Processing</span></div>
-        <div class="exp-bullet">Led TAs for a 170+ student course; designed assignments on image filtering, feature detection, and enhancement.</div>
-      </div>
-
-      <div class="exp-entry">
-        <div class="exp-header">
-          <span class="exp-role">Deep Learning Mentor</span>
-          <span class="exp-period">Jun 2024 – Present</span>
-        </div>
-        <div class="exp-org">TalentSprint</div>
-        <div class="exp-bullet">Mentoring working professionals in deep learning through hands-on workshops on neural networks, computer vision, and frameworks.</div>
-      </div>
-
-      <div class="exp-entry">
-        <div class="exp-header">
-          <span class="exp-role">Research Intern</span>
-          <span class="exp-period">Apr – May 2023</span>
-        </div>
-        <div class="exp-org">Dr. Kushal Shah · <span class="exp-context">NLP / Text Classification</span></div>
-        <div class="exp-bullet">Developed a POS-tagging based text classifier achieving 97% fiction/non-fiction accuracy; improved classification accuracy by 15%.</div>
-      </div>
-
-      <div class="exp-entry">
-        <div class="exp-header">
-          <span class="exp-role">Research Assistant</span>
-          <span class="exp-period">Nov 2022 – Jun 2023</span>
-        </div>
-        <div class="exp-org">Prof. Shital Thakkar · <span class="exp-context">Computer Vision</span></div>
-        <div class="exp-bullet">Built CNN models for image classification (92% accuracy); evaluated face anti-spoofing algorithms with zero-shot and one-shot learning.</div>
-      </div>
-
-      <div class="exp-entry">
-        <div class="exp-header">
-          <span class="exp-role">Technical Intern</span>
-          <span class="exp-period">Jul – Dec 2022</span>
-        </div>
-        <div class="exp-org">Implevista Pvt. Ltd. · <span class="exp-context">Deep Learning / Structural Inspection</span></div>
-        <div class="exp-bullet">Developed a CNN-based crack detection system for concrete structures achieving 96% accuracy under varied lighting.</div>
-      </div>
-    </section>
-
-    <!-- ── Projects ────────────────────────────────── -->
-    <section id="projects">
-      <h2 class="section-heading">Selected Projects</h2>
-
-      <div class="projects-grid">
-        <div class="project-card">
-          <div class="entry-title">CLIP-Based Domain Adaptation</div>
-          <div class="entry-summary">Supervised and unsupervised domain generalization pipelines using CLIP for domain-agnostic feature learning across PCAS and DomainNet.</div>
+        <div class="research-entry">
+          <div class="entry-title">
+            CAV Styler: Making Neural Style Transfer Interpretable and
+            Controllable
+          </div>
+          <div class="entry-meta">
+            Published at ICVGIP 2025 · CVIT, IIIT Hyderabad
+          </div>
+          <div class="entry-summary">
+            A concept-driven neural style transfer framework that maps
+            human-interpretable attributes like texture, blur, and detail into
+            explicit controllable directions for fine-grained stylization.
+          </div>
+          <div class="entry-links">
+            <a
+              href="https://sunayana-981.github.io/CAV_Styler/"
+              target="_blank"
+              rel="noopener"
+              >Project Website</a
+            >
+          </div>
+          <a
+            href="https://sunayana-981.github.io/CAV_Styler/"
+            target="_blank"
+            rel="noopener"
+            aria-label="Open CAV Styler project website"
+          >
+            <img
+              class="paper-image"
+              src="https://sunayana-981.github.io/CAV_Styler/static/images/block_diag.jpg"
+              alt="Teaser image from the CAV Styler ICVGIP 2025 paper"
+            />
+          </a>
           <div class="tag-row">
-            <span class="tag">CLIP</span>
-            <span class="tag">Domain Adaptation</span>
+            <span class="tag">Style Transfer</span>
+            <span class="tag">Interpretability</span>
+            <span class="tag">Controllability</span>
           </div>
         </div>
 
-        <div class="project-card">
-          <div class="entry-title">NIR Facial Recognition Spoofing</div>
-          <div class="entry-summary">Tested robustness of NIR-based 3D face recognition against high-fidelity 3D-printed spoofing attempts using ARTEC scanning and Blender.</div>
+        <div class="research-entry">
+          <div class="entry-title">
+            Prototype Guided Backdoor Defense via Activation Space Manipulation
+            (PGBD)
+          </div>
+          <div class="entry-meta">
+            Published at ICCV 2025 · CVIT, IIIT Hyderabad
+          </div>
+          <div class="entry-summary">
+            A robust post-hoc defense against backdoor attacks using activation
+            space geometry, including semantic trigger settings with a new
+            celebrity face benchmark.
+          </div>
+          <div class="entry-links">
+            <a
+              href="https://venkatadithya9.github.io/pgbd.github.io/"
+              target="_blank"
+              rel="noopener"
+              >Project Website</a
+            >
+          </div>
+          <a
+            href="https://venkatadithya9.github.io/pgbd.github.io/"
+            target="_blank"
+            rel="noopener"
+            aria-label="Open PGBD project website"
+          >
+            <img
+              class="paper-image"
+              src="https://venkatadithya9.github.io/pgbd.github.io/static/images/Batch_diag-Teaser.png"
+              alt="Teaser image from the PGBD ICCV 2025 paper"
+            />
+          </a>
           <div class="tag-row">
-            <span class="tag">Face Recognition</span>
+            <span class="tag">Adversarial ML</span>
+            <span class="tag">Backdoor Defense</span>
             <span class="tag">Security</span>
           </div>
         </div>
 
-        <div class="project-card">
-          <div class="entry-title">3D Reconstruction via ICP SLAM</div>
-          <div class="entry-summary">Arduino-controlled rotating platform for systematic object imaging, processed with COLMAP to generate precise 3D point-cloud models.</div>
+        <p class="research-group-label">Working Papers</p>
+
+        <div class="research-entry">
+          <div class="entry-title">
+            Survey on Controllability in Style Transfer Concepts
+          </div>
+          <div class="entry-meta">Coming Soon · CVIT, IIIT Hyderabad</div>
+          <div class="entry-summary">
+            Comprehensive survey analyzing controllability mechanisms in neural
+            style transfer — spatial control, color preservation, content
+            adherence — compiled into a structured framework for future
+            research.
+          </div>
           <div class="tag-row">
-            <span class="tag">3D Reconstruction</span>
-            <span class="tag">SLAM</span>
+            <span class="tag">Survey</span>
+            <span class="tag">Style Transfer</span>
+            <span class="tag">Controllability</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Experience ──────────────────────────────── -->
+      <section id="experience">
+        <h2 class="section-heading">Experience</h2>
+
+        <div class="exp-entry">
+          <div class="exp-header">
+            <span class="exp-role">Head Teaching Assistant</span>
+            <span class="exp-period">Aug 2024 – Dec 2024</span>
+          </div>
+          <div class="exp-org">
+            IIIT Hyderabad ·
+            <span class="exp-context">Digital Image Processing</span>
+          </div>
+          <div class="exp-bullet">
+            Led TAs for a 170+ student course; designed assignments on image
+            filtering, feature detection, and enhancement.
           </div>
         </div>
 
-        <div class="project-card">
-          <div class="entry-title">Sheet Music Reader</div>
-          <div class="entry-summary">Automated interpretation and playback of printed sheet music using template-matching in OpenCV, optimized for real-time detection.</div>
-          <div class="tag-row">
-            <span class="tag">OpenCV</span>
-            <span class="tag">Audio</span>
+        <div class="exp-entry">
+          <div class="exp-header">
+            <span class="exp-role">Deep Learning Mentor</span>
+            <span class="exp-period">Jun 2024 – Present</span>
+          </div>
+          <div class="exp-org">TalentSprint</div>
+          <div class="exp-bullet">
+            Mentoring working professionals in deep learning through hands-on
+            workshops on neural networks, computer vision, and frameworks.
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- ── Education ───────────────────────────────── -->
-    <section id="education">
-      <h2 class="section-heading">Education</h2>
-
-      <div class="edu-entry">
-        <div class="edu-header">
-          <span class="edu-inst">IIIT Hyderabad</span>
-          <span class="edu-period">2023 – Present</span>
+        <div class="exp-entry">
+          <div class="exp-header">
+            <span class="exp-role">Research Intern</span>
+            <span class="exp-period">Apr – May 2023</span>
+          </div>
+          <div class="exp-org">
+            Dr. Kushal Shah ·
+            <span class="exp-context">NLP / Text Classification</span>
+          </div>
+          <div class="exp-bullet">
+            Developed a POS-tagging based text classifier achieving 97%
+            fiction/non-fiction accuracy; improved classification accuracy by
+            15%.
+          </div>
         </div>
-        <div class="edu-degree">M.S. by Research, CVIT</div>
-        <div class="edu-gpa">GPA: 8.8 / 10.0 · Advised by Prof. P. J. Narayanan</div>
-      </div>
 
-      <div class="edu-entry">
-        <div class="edu-header">
-          <span class="edu-inst">Dharamsinh Desai University</span>
-          <span class="edu-period">2017 – 2021</span>
+        <div class="exp-entry">
+          <div class="exp-header">
+            <span class="exp-role">Research Assistant</span>
+            <span class="exp-period">Nov 2022 – Jun 2023</span>
+          </div>
+          <div class="exp-org">
+            Prof. Shital Thakkar ·
+            <span class="exp-context">Computer Vision</span>
+          </div>
+          <div class="exp-bullet">
+            Built CNN models for image classification (92% accuracy); evaluated
+            face anti-spoofing algorithms with zero-shot and one-shot learning.
+          </div>
         </div>
-        <div class="edu-degree">B.Tech, Electronics &amp; Communication</div>
-        <div class="edu-gpa">GPA: 7.87 / 10.0 · First Class with Distinction</div>
+
+        <div class="exp-entry">
+          <div class="exp-header">
+            <span class="exp-role">Technical Intern</span>
+            <span class="exp-period">Jul – Dec 2022</span>
+          </div>
+          <div class="exp-org">
+            Implevista Pvt. Ltd. ·
+            <span class="exp-context"
+              >Deep Learning / Structural Inspection</span
+            >
+          </div>
+          <div class="exp-bullet">
+            Developed a CNN-based crack detection system for concrete structures
+            achieving 96% accuracy under varied lighting.
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Projects ────────────────────────────────── -->
+      <section id="projects">
+        <h2 class="section-heading">Selected Projects</h2>
+
+        <div class="projects-grid">
+          <div class="project-card">
+            <div class="entry-title">CLIP-Based Domain Adaptation</div>
+            <div class="entry-summary">
+              Supervised and unsupervised domain generalization pipelines using
+              CLIP for domain-agnostic feature learning across PCAS and
+              DomainNet.
+            </div>
+            <div class="tag-row">
+              <span class="tag">CLIP</span>
+              <span class="tag">Domain Adaptation</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="entry-title">NIR Facial Recognition Spoofing</div>
+            <div class="entry-summary">
+              Tested robustness of NIR-based 3D face recognition against
+              high-fidelity 3D-printed spoofing attempts using ARTEC scanning
+              and Blender.
+            </div>
+            <div class="tag-row">
+              <span class="tag">Face Recognition</span>
+              <span class="tag">Security</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="entry-title">3D Reconstruction via ICP SLAM</div>
+            <div class="entry-summary">
+              Arduino-controlled rotating platform for systematic object
+              imaging, processed with COLMAP to generate precise 3D point-cloud
+              models.
+            </div>
+            <div class="tag-row">
+              <span class="tag">3D Reconstruction</span>
+              <span class="tag">SLAM</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="entry-title">Sheet Music Reader</div>
+            <div class="entry-summary">
+              Automated interpretation and playback of printed sheet music using
+              template-matching in OpenCV, optimized for real-time detection.
+            </div>
+            <div class="tag-row">
+              <span class="tag">OpenCV</span>
+              <span class="tag">Audio</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Education ───────────────────────────────── -->
+      <section id="education">
+        <h2 class="section-heading">Education</h2>
+
+        <div class="edu-entry">
+          <div class="edu-header">
+            <span class="edu-inst">IIIT Hyderabad</span>
+            <span class="edu-period">2023 – Present</span>
+          </div>
+          <div class="edu-degree">M.S. by Research, CVIT</div>
+          <div class="edu-gpa">
+            GPA: 8.8 / 10.0 · Advised by Prof. P. J. Narayanan
+          </div>
+        </div>
+
+        <div class="edu-entry">
+          <div class="edu-header">
+            <span class="edu-inst">Dharamsinh Desai University</span>
+            <span class="edu-period">2017 – 2021</span>
+          </div>
+          <div class="edu-degree">B.Tech, Electronics &amp; Communication</div>
+          <div class="edu-gpa">
+            GPA: 7.87 / 10.0 · First Class with Distinction
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Contact ─────────────────────────────────── -->
+      <section id="contact" class="contact-section">
+        <h2 class="section-heading">Contact</h2>
+        <p>
+          The best way to reach me is by email at
+          <a href="mailto:sunayana1233@gmail.com">sunayana1233@gmail.com</a>.
+          You can also find me on
+          <a
+            href="https://github.com/sunayana-981"
+            target="_blank"
+            rel="noopener"
+            >GitHub</a
+          >.
+        </p>
+      </section>
+    </main>
+
+    <!-- ── Footer ───────────────────────────────────── -->
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 Sunayana Samavedam</p>
       </div>
-    </section>
+    </footer>
 
-    <!-- ── Contact ─────────────────────────────────── -->
-    <section id="contact" class="contact-section">
-      <h2 class="section-heading">Contact</h2>
-      <p>
-        The best way to reach me is by email at
-        <a href="mailto:sunayana1233@gmail.com">sunayana1233@gmail.com</a>.
-        You can also find me on
-        <a href="https://github.com/sunayana-981" target="_blank" rel="noopener">GitHub</a>.
-      </p>
-    </section>
+    <script>
+      // Sticky nav border on scroll
+      const nav = document.getElementById("nav");
+      window.addEventListener(
+        "scroll",
+        () => {
+          nav.classList.toggle("scrolled", window.scrollY > 10);
+        },
+        { passive: true },
+      );
 
-  </main>
-
-  <!-- ── Footer ───────────────────────────────────── -->
-  <footer>
-    <div class="container">
-      <p>&copy; 2025 Sunayana Samavedam</p>
-    </div>
-  </footer>
-
-  <script>
-    // Sticky nav border on scroll
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 10);
-    }, { passive: true });
-
-    // Close mobile nav on link click
-    document.querySelectorAll('.nav-links a').forEach(a => {
-      a.addEventListener('click', () => {
-        document.querySelector('.nav-links').classList.remove('open');
+      // Close mobile nav on link click
+      document.querySelectorAll(".nav-links a").forEach((a) => {
+        a.addEventListener("click", () => {
+          document.querySelector(".nav-links").classList.remove("open");
+        });
       });
-    });
-  </script>
-
-</body>
+    </script>
+  </body>
 </html>

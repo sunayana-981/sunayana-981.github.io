@@ -11,7 +11,7 @@
     "Computer Vision",
     "Deep Learning"
   ],
-  "bio": "I am a research scholar at the Center for Visual Information Technology (CVIT), IIIT Hyderabad, advised by Prof. P. J. Narayanan. My research focuses on making neural style transfer interpretable and controllable — enabling fine-grained manipulation of artistic style attributes like brushstrokes, color palettes, and composition. I am also interested in adversarial robustness, particularly prototype-guided defenses against backdoor attacks in deep networks.",
+  "bio": "I am a research scholar at the Center for Visual Information Technology (CVIT), IIIT Hyderabad, advised by Prof. P. J. Narayanan. My research focuses on mechanistic interpretability and explainable computer vision across vision-language models, multimodal reasoning, and robust representation learning. I have published work at ICVGIP 2025 (CAV Styler) and ICCV 2025 (PGBD), and I am currently working on sparse autoencoders under distribution shift and taxonomy-driven evaluation of spatiotemporal reasoning in VLMs.",
   "links": {
     "email": "sunayana1233@gmail.com",
     "github": "https://github.com/sunayana-981",

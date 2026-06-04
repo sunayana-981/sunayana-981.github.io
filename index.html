@@ -30,14 +30,16 @@
       :root {
         --font-serif: "Newsreader", "Georgia", serif;
         --font-sans: "Source Sans 3", "Helvetica Neue", sans-serif;
-        --c-bg: #f7f5f1;
+        --c-bg: #e2dcd2;
+        --c-card: #faf8f5;
         --c-text: #1c1c1c;
         --c-text-secondary: #555;
         --c-text-tertiary: #888;
         --c-accent: #3d5a80;
         --c-accent-light: #dfe8f2;
-        --c-border: #dad6cf;
-        --c-tag-bg: #e8e3db;
+        --c-border: #ccc6bc;
+        --c-card-shadow: 0 1px 6px rgba(0,0,0,0.07);
+        --c-tag-bg: #e4ded5;
         --c-tag-text: #5a5248;
         --max-w: 780px;
       }
@@ -69,12 +71,19 @@
         padding: 0 2rem;
       }
 
+      main.container {
+        background: var(--c-card);
+        border-left: 1px solid var(--c-border);
+        border-right: 1px solid var(--c-border);
+        min-height: 100vh;
+      }
+
       /* ── Nav ───────────────────────────────────────── */
       nav {
         position: sticky;
         top: 0;
         z-index: 50;
-        background: rgba(247, 245, 241, 0.92);
+        background: rgba(226, 220, 210, 0.95);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
         border-bottom: 1px solid transparent;
@@ -296,8 +305,12 @@
       }
 
       .research-entry {
-        margin-bottom: 1.6rem;
-        padding-left: 0;
+        margin-bottom: 1.2rem;
+        padding: 1.2rem 1.4rem;
+        background: #fff;
+        border: 1px solid var(--c-border);
+        border-radius: 8px;
+        box-shadow: var(--c-card-shadow);
       }
 
       .research-entry .entry-title {
@@ -382,7 +395,12 @@
 
       /* ── Experience ────────────────────────────────── */
       .exp-entry {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
+        padding: 1rem 1.2rem;
+        background: #fff;
+        border: 1px solid var(--c-border);
+        border-radius: 8px;
+        box-shadow: var(--c-card-shadow);
       }
 
       .exp-header {
@@ -438,13 +456,16 @@
         display: flex;
         align-items: baseline;
         gap: 1rem;
-        padding: 0.5rem 0;
-        border-bottom: 1px solid var(--c-border);
+        padding: 0.75rem 1rem;
+        background: #fff;
+        border: 1px solid var(--c-border);
+        border-radius: 6px;
+        box-shadow: var(--c-card-shadow);
         font-size: 0.9rem;
       }
 
-      .review-item:last-child {
-        border-bottom: none;
+      .review-list {
+        gap: 0.6rem;
       }
 
       .review-venue {
@@ -469,16 +490,18 @@
 
       .project-card {
         padding: 1.1rem 1.2rem;
+        background: #fff;
         border: 1px solid var(--c-border);
-        border-radius: 4px;
+        border-radius: 8px;
+        box-shadow: var(--c-card-shadow);
         transition:
           border-color 0.2s,
           box-shadow 0.2s;
       }
 
       .project-card:hover {
-        border-color: #ccc;
-        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+        border-color: #bbb;
+        box-shadow: 0 3px 16px rgba(0, 0, 0, 0.09);
       }
 
       .project-card .entry-title {
@@ -500,6 +523,11 @@
       /* ── Education ─────────────────────────────────── */
       .edu-entry {
         margin-bottom: 1rem;
+        padding: 1rem 1.2rem;
+        background: #fff;
+        border: 1px solid var(--c-border);
+        border-radius: 8px;
+        box-shadow: var(--c-card-shadow);
       }
 
       .edu-header {
@@ -553,7 +581,13 @@
       footer {
         padding: 2rem 0;
         border-top: 1px solid var(--c-border);
-        margin-top: 1rem;
+        margin-top: 0;
+        background: var(--c-card);
+        border-left: 1px solid var(--c-border);
+        border-right: 1px solid var(--c-border);
+        max-width: var(--max-w);
+        margin-left: auto;
+        margin-right: auto;
       }
 
       footer p {

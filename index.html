@@ -30,15 +30,15 @@
       :root {
         --font-serif: "Newsreader", "Georgia", serif;
         --font-sans: "Source Sans 3", "Helvetica Neue", sans-serif;
-        --c-bg: #fafaf9;
+        --c-bg: #f7f5f1;
         --c-text: #1c1c1c;
         --c-text-secondary: #555;
         --c-text-tertiary: #888;
         --c-accent: #3d5a80;
-        --c-accent-light: #e8edf3;
-        --c-border: #e2e2e0;
-        --c-tag-bg: #f0efed;
-        --c-tag-text: #5a5a58;
+        --c-accent-light: #dfe8f2;
+        --c-border: #dad6cf;
+        --c-tag-bg: #e8e3db;
+        --c-tag-text: #5a5248;
         --max-w: 780px;
       }
 
@@ -74,7 +74,7 @@
         position: sticky;
         top: 0;
         z-index: 50;
-        background: rgba(250, 250, 249, 0.92);
+        background: rgba(247, 245, 241, 0.92);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
         border-bottom: 1px solid transparent;
@@ -245,6 +245,8 @@
         margin-bottom: 1.8rem;
         letter-spacing: -0.02em;
         color: var(--c-text);
+        border-left: 3px solid var(--c-accent);
+        padding-left: 0.65rem;
       }
 
       /* ── News ──────────────────────────────────────── */
@@ -276,11 +278,15 @@
 
       /* ── Research Entries ──────────────────────────── */
       .research-group-label {
-        font-size: 0.78rem;
+        font-size: 0.72rem;
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.08em;
-        color: var(--c-text-tertiary);
+        color: var(--c-accent);
+        background: var(--c-accent-light);
+        padding: 0.18rem 0.55rem;
+        border-radius: 3px;
+        display: inline-block;
         margin-bottom: 1rem;
         margin-top: 2rem;
       }

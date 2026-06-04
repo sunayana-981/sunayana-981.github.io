@@ -116,6 +116,7 @@
         text-transform: uppercase;
         position: relative;
         transition: color 0.2s;
+        cursor: pointer;
       }
 
       nav .nav-links a::after {
@@ -133,8 +134,13 @@
         color: var(--c-text);
       }
 
-      nav .nav-links a:hover::after {
+      nav .nav-links a:hover::after,
+      nav .nav-links a.active::after {
         width: 100%;
+      }
+
+      nav .nav-links a.active {
+        color: var(--c-text);
       }
 
       /* ── Mobile nav toggle ─────────────────────────── */
@@ -157,7 +163,8 @@
 
       /* ── Hero / Landing ────────────────────────────── */
       .hero {
-        padding: 5rem 0 3.5rem;
+        padding: 5rem 0 3rem;
+        border-bottom: 1px solid var(--c-border);
       }
 
       .hero h1 {
@@ -221,13 +228,14 @@
         flex-shrink: 0;
       }
 
-      /* ── Section Base ──────────────────────────────── */
-      section {
+      /* ── Tab sections ──────────────────────────────── */
+      .tab-content {
+        display: none;
         padding: 3rem 0;
       }
 
-      section + section {
-        border-top: 1px solid var(--c-border);
+      .tab-content.active {
+        display: block;
       }
 
       .section-heading {
@@ -412,6 +420,40 @@
         padding-left: 0;
       }
 
+      /* ── Reviewing ─────────────────────────────────── */
+      .review-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .review-item {
+        display: flex;
+        align-items: baseline;
+        gap: 1rem;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid var(--c-border);
+        font-size: 0.9rem;
+      }
+
+      .review-item:last-child {
+        border-bottom: none;
+      }
+
+      .review-venue {
+        font-family: var(--font-serif);
+        font-weight: 500;
+        color: var(--c-text);
+        font-size: 0.95rem;
+      }
+
+      .review-type {
+        font-size: 0.78rem;
+        color: var(--c-text-tertiary);
+        font-style: italic;
+      }
+
       /* ── Projects Grid ─────────────────────────────── */
       .projects-grid {
         display: grid;
@@ -571,7 +613,7 @@
     <!-- ── Nav ──────────────────────────────────────── -->
     <nav id="nav">
       <div class="container">
-        <a href="#" class="nav-name">S. Samavedam</a>
+        <a href="#" class="nav-name" onclick="switchTab('research'); return false;">S. Samavedam</a>
         <button
           class="nav-toggle"
           aria-label="Menu"
@@ -582,10 +624,12 @@
           <span></span><span></span><span></span>
         </button>
         <ul class="nav-links">
-          <li><a href="#research">Research</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#" data-tab="research">Research</a></li>
+          <li><a href="#" data-tab="experience">Experience</a></li>
+          <li><a href="#" data-tab="reviews">Reviews</a></li>
+          <li><a href="#" data-tab="projects">Projects</a></li>
+          <li><a href="#" data-tab="education">Education</a></li>
+          <li><a href="#" data-tab="contact">Contact</a></li>
         </ul>
       </div>
     </nav>
@@ -676,10 +720,10 @@
       </header>
 
       <!-- ── Research ────────────────────────────────── -->
-      <section id="research">
+      <section id="research" class="tab-content active">
         <h2 class="section-heading">Research</h2>
 
-        <p class="research-group-label">Publications</p>
+        <p class="research-group-label">Conference Papers</p>
 
         <div class="research-entry">
           <div class="entry-title">
@@ -769,6 +813,30 @@
           </div>
         </div>
 
+        <p class="research-group-label">Workshop Papers</p>
+
+        <div class="research-entry">
+          <div class="entry-title">
+            [Workshop Paper Title — update me]
+          </div>
+          <div class="entry-meta">
+            Workshop at [Conference Name, Year] · [Institution — update me]
+          </div>
+          <div class="entry-authors">
+            <strong>Authors:</strong> [Author list — update me]
+          </div>
+          <div class="entry-summary">
+            [Brief description of the work — update me]
+          </div>
+          <div class="entry-links">
+            <a href="#">Paper</a>
+          </div>
+          <div class="tag-row">
+            <span class="tag">[Topic]</span>
+            <span class="tag">[Topic]</span>
+          </div>
+        </div>
+
         <p class="research-group-label">Under Review</p>
 
         <div class="research-entry">
@@ -831,6 +899,26 @@
           </div>
         </div>
 
+        <div class="research-entry">
+          <div class="entry-title">
+            [arXiv Paper Title — update me]
+          </div>
+          <div class="entry-meta">Under Review · arXiv preprint [update me]</div>
+          <div class="entry-authors">
+            <strong>Authors:</strong> [Author list — update me]
+          </div>
+          <div class="entry-summary">
+            [Abstract / brief description — update me]
+          </div>
+          <div class="entry-links">
+            <a href="#">arXiv</a>
+          </div>
+          <div class="tag-row">
+            <span class="tag">[Topic]</span>
+            <span class="tag">[Topic]</span>
+          </div>
+        </div>
+
         <p class="research-group-label">Working Papers</p>
 
         <div class="research-entry">
@@ -853,7 +941,7 @@
       </section>
 
       <!-- ── Experience ──────────────────────────────── -->
-      <section id="experience">
+      <section id="experience" class="tab-content">
         <h2 class="section-heading">Experience</h2>
 
         <div class="exp-entry">
@@ -932,8 +1020,30 @@
         </div>
       </section>
 
+      <!-- ── Reviews ────────────────────────────────── -->
+      <section id="reviews" class="tab-content">
+        <h2 class="section-heading">Reviewing</h2>
+        <p style="font-size: 0.88rem; color: var(--c-text-secondary); margin-bottom: 1.8rem;">
+          Served as a reviewer for the following venues:
+        </p>
+        <ul class="review-list">
+          <li class="review-item">
+            <span class="review-venue">[Conference / Journal Name, Year]</span>
+            <span class="review-type">[e.g. Conference / Journal]</span>
+          </li>
+          <li class="review-item">
+            <span class="review-venue">[Conference / Journal Name, Year]</span>
+            <span class="review-type">[e.g. Conference / Journal]</span>
+          </li>
+          <li class="review-item">
+            <span class="review-venue">[Conference / Journal Name, Year]</span>
+            <span class="review-type">[e.g. Conference / Journal]</span>
+          </li>
+        </ul>
+      </section>
+
       <!-- ── Projects ────────────────────────────────── -->
-      <section id="projects">
+      <section id="projects" class="tab-content">
         <h2 class="section-heading">Selected Projects</h2>
 
         <div class="projects-grid">
@@ -979,7 +1089,7 @@
       </section>
 
       <!-- ── Education ───────────────────────────────── -->
-      <section id="education">
+      <section id="education" class="tab-content">
         <h2 class="section-heading">Education</h2>
 
         <div class="edu-entry">
@@ -1006,7 +1116,7 @@
       </section>
 
       <!-- ── Contact ─────────────────────────────────── -->
-      <section id="contact" class="contact-section">
+      <section id="contact" class="tab-content contact-section">
         <h2 class="section-heading">Contact</h2>
         <p>
           The best way to reach me is by email at
@@ -1030,22 +1140,36 @@
     </footer>
 
     <script>
+      const tabLinks = document.querySelectorAll('.nav-links a[data-tab]');
+
+      function switchTab(id) {
+        document.querySelectorAll('.tab-content').forEach(s => s.classList.remove('active'));
+        const target = document.getElementById(id);
+        if (target) target.classList.add('active');
+        tabLinks.forEach(a => a.classList.remove('active'));
+        const activeLink = document.querySelector(`.nav-links a[data-tab="${id}"]`);
+        if (activeLink) activeLink.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      tabLinks.forEach(a => {
+        a.addEventListener('click', e => {
+          e.preventDefault();
+          switchTab(a.dataset.tab);
+          document.querySelector('.nav-links').classList.remove('open');
+        });
+      });
+
+      // Activate Research tab on load
+      switchTab('research');
+
       // Sticky nav border on scroll
       const nav = document.getElementById("nav");
       window.addEventListener(
         "scroll",
-        () => {
-          nav.classList.toggle("scrolled", window.scrollY > 10);
-        },
+        () => { nav.classList.toggle("scrolled", window.scrollY > 10); },
         { passive: true },
       );
-
-      // Close mobile nav on link click
-      document.querySelectorAll(".nav-links a").forEach((a) => {
-        a.addEventListener("click", () => {
-          document.querySelector(".nav-links").classList.remove("open");
-        });
-      });
     </script>
   </body>
 </html>

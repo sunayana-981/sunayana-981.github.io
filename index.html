@@ -155,36 +155,55 @@
 
       /* ── Hero ──────────────────────────────────────── */
       .hero {
-        padding: 5rem 0 3rem;
+        padding: 4rem 0 3rem;
         border-bottom: 1px solid var(--c-border);
+      }
+
+      .hero-inner {
+        display: flex;
+        gap: 2.8rem;
+        align-items: flex-start;
+      }
+
+      .hero-text { flex: 1; min-width: 0; }
+
+      .hero-photo { flex-shrink: 0; padding-top: 0.4rem; }
+
+      .hero-photo img {
+        width: 148px;
+        height: 148px;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center top;
+        border: 3px solid var(--c-accent-light);
+        display: block;
       }
 
       .hero h1 {
         font-family: var(--font-serif);
-        font-size: 2.8rem;
+        font-size: 2.6rem;
         font-weight: 600;
         line-height: 1.15;
         letter-spacing: -0.03em;
         color: var(--c-text);
-        margin-bottom: 0.6rem;
+        margin-bottom: 0.5rem;
       }
 
       .hero .tagline {
         font-family: var(--font-serif);
-        font-size: 1.15rem;
+        font-size: 1.05rem;
         font-weight: 400;
         font-style: italic;
         color: var(--c-accent);
-        margin-bottom: 1.3rem;
+        margin-bottom: 1.1rem;
         line-height: 1.5;
       }
 
       .hero .intro {
-        font-size: 0.95rem;
+        font-size: 0.93rem;
         color: var(--c-text-secondary);
-        max-width: 600px;
         line-height: 1.75;
-        margin-bottom: 1.6rem;
+        margin-bottom: 1.4rem;
       }
 
       .hero-links {
@@ -192,6 +211,7 @@
         flex-wrap: wrap;
         gap: 0.5rem 0.6rem;
         align-items: center;
+        margin-bottom: 1.8rem;
       }
 
       .hero-links a {
@@ -219,6 +239,43 @@
         width: 14px;
         height: 14px;
         flex-shrink: 0;
+      }
+
+      .hero-news-label {
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--c-text-tertiary);
+        margin-bottom: 0.5rem;
+      }
+
+      .hero-news-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+      }
+
+      .hero-news-list li {
+        font-size: 0.84rem;
+        color: var(--c-text-secondary);
+        line-height: 1.5;
+        display: flex;
+        gap: 0.55rem;
+        align-items: baseline;
+      }
+
+      .hero-news-list li::before {
+        content: "·";
+        color: var(--c-accent);
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+
+      @media (max-width: 560px) {
+        .hero-inner { flex-direction: column-reverse; gap: 1.5rem; }
+        .hero-photo img { width: 100px; height: 100px; }
       }
 
       /* ── Tab sections ──────────────────────────────── */
@@ -615,17 +672,21 @@
     <main class="container">
       <!-- ── Hero ────────────────────────────────────── -->
       <header class="hero">
-        <h1>Sunayana Samavedam</h1>
-        <p class="tagline">
-          Mechanistic Interpretability and Explainable Computer Vision
-        </p>
-        <p class="intro">
-          Research scholar at <strong>CVIT, IIIT Hyderabad</strong>, advised by
-          Prof. P. J. Narayanan. My work focuses on mechanistic interpretability
-          and explainable computer vision across Vision Language Models,
-          multimodal reasoning, and robust representation learning.
-        </p>
-        <div class="hero-links">
+        <div class="hero-inner">
+          <div class="hero-text">
+            <h1>Sunayana Samavedam</h1>
+            <p class="tagline">
+              Mechanistic Interpretability &amp; Explainable Computer Vision
+            </p>
+            <p class="intro">
+              I'm a researcher at <strong>CVIT, IIIT Hyderabad</strong>, working
+              with Prof. P. J. Narayanan on a question I find genuinely
+              fascinating: how do neural networks actually see the world, and
+              can we make that legible? My work sits at the intersection of
+              mechanistic interpretability, explainable computer vision, and
+              vision-language models.
+            </p>
+            <div class="hero-links">
           <a href="mailto:sunayana1233@gmail.com">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -695,6 +756,21 @@
             CV
           </a>
         </div>
+
+        <div class="hero-news">
+          <p class="hero-news-label">Recent</p>
+          <ul class="hero-news-list">
+            <li>[Update — e.g. Paper accepted at X · Month Year]</li>
+            <li>[Update — e.g. Presented at Y workshop · Month Year]</li>
+            <li>[Update — e.g. Started reviewing for Z · Month Year]</li>
+          </ul>
+        </div>
+
+          </div><!-- /hero-text -->
+          <div class="hero-photo">
+            <img src="profile.jpeg" alt="Sunayana Samavedam" />
+          </div>
+        </div><!-- /hero-inner -->
       </header>
 
       <!-- ── Research ────────────────────────────────── -->

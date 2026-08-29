@@ -919,12 +919,11 @@
 
       /* ── Model console: navigation + live interpretability readout ──
          A real static column in the page flow (a flex child of
-         .page-layout, not a fixed/floating overlay), so it can never
-         crowd or overlap the content beside it and never needs an
-         internal scrollbar. Sticky just keeps it in view while reading. */
+         .page-layout, not a fixed/sticky/floating overlay), so it can
+         never crowd or overlap the content beside it, never needs an
+         internal scrollbar, and never visually detaches from the page
+         as you scroll — it's fused to sit exactly where it's placed. */
       .console {
-        position: sticky;
-        top: 20px;
         align-self: start;
         flex-shrink: 0;
         width: 300px;

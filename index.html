@@ -67,6 +67,7 @@
         --blk-6: #2fa89a;
         --blk-7: #3aab6d;
         --max-w: 800px;
+        --console-w: 300px;
       }
 
       :root[data-theme="dark"] {
@@ -106,6 +107,12 @@
         background-repeat: no-repeat;
         line-height: 1.65;
         font-weight: 400;
+      }
+
+      @media (min-width: 860px) {
+        body {
+          padding-left: var(--console-w);
+        }
       }
 
       ::selection {
@@ -918,42 +925,39 @@
       }
 
       /* ── Model console: navigation + live interpretability readout ──
-         A real static column in the page flow (a flex child of
-         .page-layout, not a fixed/sticky/floating overlay), so it can
-         never crowd or overlap the content beside it, never needs an
-         internal scrollbar, and never visually detaches from the page
-         as you scroll — it's fused to sit exactly where it's placed. */
+         Fixed to the left viewport edge while the page reserves its width.
+         The pane keeps one natural rule between navigation and content; the
+         only illumination is a narrow activation glow on that right edge. */
       .console {
-        align-self: start;
-        flex-shrink: 0;
-        width: 300px;
-        margin-bottom: 20px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: var(--console-w);
         /* the exact page background, not a distinct "card" color or a
            translucent glass overlay — it reads as cut from the same paper
            as the rest of the page, not a widget floating on top of it */
         background-color: var(--c-bg);
-        border: 1px solid var(--c-border);
-        border-radius: 20px;
-        box-shadow: 0 2px 10px var(--c-shadow);
+        border: none;
+        border-right: 1px solid var(--c-border);
         z-index: 60;
         overflow: hidden;
-        transition: box-shadow 0.4s ease-out;
       }
 
-      .console::before {
+      .console::after {
         content: "";
         position: absolute;
         top: 0;
-        left: 0;
         right: 0;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, var(--c-accent), var(--c-accent-2), transparent);
-        background-size: 200% 100%;
-        animation: consoleShimmer 3.5s linear infinite;
+        bottom: 0;
+        width: 18px;
+        pointer-events: none;
+        background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--c-accent-2) 34%, transparent));
+        opacity: 0.16;
       }
 
-      @keyframes consoleShimmer {
-        to { background-position: -200% 0; }
+      :root[data-theme="dark"] .console::after {
+        opacity: 0.24;
       }
 
       .console-summary {
@@ -1214,19 +1218,24 @@
         color: #fff;
       }
 
-      .console.pulse { animation: consolePulse 0.7s ease-out; }
+      .console.pulse::after { animation: consoleEdgePulse 0.7s ease-out; }
 
-      @keyframes consolePulse {
-        0% { box-shadow: 0 6px 20px var(--c-shadow); }
-        40% { box-shadow: 0 6px 20px var(--c-shadow), 0 0 0 1px var(--c-accent-2), 0 0 24px color-mix(in srgb, var(--c-accent-2) 35%, transparent); }
-        100% { box-shadow: 0 6px 20px var(--c-shadow); }
+      @keyframes consoleEdgePulse {
+        0%, 100% {
+          opacity: 0.16;
+          background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--c-accent-2) 34%, transparent));
+        }
+        40% {
+          opacity: 0.72;
+          background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--c-accent-2) 72%, transparent));
+        }
       }
 
 
       /* below this width the console reverts to a floating collapsible
          drawer (short viewports genuinely need it out of the static flow
          and capped, so it gets its scrollbar back only here) */
-      @media (max-width: 640px) {
+      @media (max-width: 859px) {
         .console {
           position: fixed;
           top: auto;
@@ -1236,7 +1245,11 @@
           width: auto;
           max-height: calc(100vh - 24px);
           margin-bottom: 0;
+          border: 1px solid var(--c-border);
+          border-radius: 16px;
+          box-shadow: 0 6px 24px var(--c-shadow);
         }
+        .console::after { display: none; }
         .console-body {
           max-height: calc(100vh - 140px);
           overflow-y: auto;
@@ -1275,9 +1288,8 @@
 
     <svg id="inductionSvg" aria-hidden="true"><path id="inductionPath" /></svg>
 
-    <div class="page-layout">
     <!-- ── Model console: navigation + live interpretability readout —
-         a real static column in the page flow, not a fixed overlay ── -->
+         a fixed left pane, with layout space reserved in CSS ── -->
     <details class="console" id="console" open>
       <summary class="console-summary">
         <span class="console-dot" aria-hidden="true"></span>
@@ -1334,6 +1346,8 @@
         </div>
       </div>
     </details>
+
+    <div class="page-layout">
     <main class="container">
       <!-- ── Hero (embedding) ────────────────────────── -->
       <header class="hero" data-layer="0">

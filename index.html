@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
     <title>Sunayana Samavedam</title>
     <meta
       name="description"
@@ -13,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Source+Sans+3:wght@300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
 
@@ -28,18 +29,66 @@
       }
 
       :root {
-        --font-serif: "Newsreader", "Georgia", serif;
-        --font-sans: "Source Sans 3", "Helvetica Neue", sans-serif;
-        --c-bg:           #f8f9f7;
-        --c-text:         #1a2118;
-        --c-text-secondary: #4a5647;
-        --c-text-tertiary:  #7a8f77;
-        --c-accent:       #3d6b45;
-        --c-accent-light: #e4efe5;
-        --c-border:       #d4dfd2;
-        --c-tag-bg:       #deeadc;
-        --c-tag-text:     #2e5535;
-        --max-w: 780px;
+        --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+        --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+        --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+        /* light "paper" theme (default) */
+        color-scheme: light;
+        --c-bg:           #faf7f0;
+        --c-bg-elev:      #ffffff;
+        --c-bg-elev-2:    #f2ecdc;
+        --c-text:         #201d16;
+        --c-text-secondary: #55503f;
+        --c-text-tertiary:  #8a8471;
+        --c-accent:       #1e4fa3;
+        --c-accent-hover: #2f63c0;
+        --c-accent-2:     #9a3324;
+        --c-accent-soft:  rgba(30, 79, 163, 0.08);
+        --c-border:       rgba(32, 29, 22, 0.13);
+        --c-border-bright: rgba(32, 29, 22, 0.24);
+        --c-shadow:       rgba(40, 34, 20, 0.16);
+        --c-glass:        rgba(255, 252, 244, 0.82);
+        --c-chip:         rgba(32, 29, 22, 0.055);
+        --c-hero-glow:    rgba(30, 79, 163, 0.05);
+        --c-diagram-line:  rgba(32, 29, 22, 0.4);
+        --c-diagram-node:  rgba(32, 29, 22, 0.55);
+
+        /* one hue per console block, echoing the classic transformer-figure
+           palette (pink embedding, orange attention, blue feed-forward,
+           olive add&norm, purple linear, green softmax) — mixed against
+           --c-bg-elev below, so light mode reads as soft pastel fills and
+           dark mode as tinted panels, from the same seven values */
+        --blk-1: #d9647e;
+        --blk-2: #dd8f35;
+        --blk-3: #3f93c9;
+        --blk-4: #a3ab3a;
+        --blk-5: #8267cf;
+        --blk-6: #2fa89a;
+        --blk-7: #3aab6d;
+        --max-w: 800px;
+      }
+
+      :root[data-theme="dark"] {
+        color-scheme: dark;
+        --c-bg:           #050507;
+        --c-bg-elev:      #0e0f13;
+        --c-bg-elev-2:    #17181e;
+        --c-text:         #f5f5f7;
+        --c-text-secondary: #a1a1a6;
+        --c-text-tertiary:  #6e6e73;
+        --c-accent:       #0a84ff;
+        --c-accent-hover: #2a94ff;
+        --c-accent-2:     #ff9f0a;
+        --c-accent-soft:  rgba(10, 132, 255, 0.14);
+        --c-border:       rgba(255, 255, 255, 0.09);
+        --c-border-bright: rgba(255, 255, 255, 0.18);
+        --c-shadow:       rgba(0, 0, 0, 0.5);
+        --c-glass:        rgba(9, 11, 15, 0.74);
+        --c-chip:         rgba(255, 255, 255, 0.06);
+        --c-hero-glow:    rgba(10, 132, 255, 0.09);
+        --c-diagram-line:  rgba(255, 255, 255, 0.22);
+        --c-diagram-node:  rgba(255, 255, 255, 0.32);
       }
 
       html {
@@ -52,14 +101,58 @@
       body {
         font-family: var(--font-sans);
         color: var(--c-text);
-        background: var(--c-bg);
-        line-height: 1.7;
+        background-color: var(--c-bg);
+        background-image: radial-gradient(ellipse 900px 500px at 50% -10%, var(--c-hero-glow), transparent 60%);
+        background-repeat: no-repeat;
+        line-height: 1.65;
         font-weight: 400;
       }
 
       ::selection {
         background: var(--c-accent);
         color: #fff;
+      }
+
+      ::-webkit-scrollbar { width: 10px; height: 10px; }
+      ::-webkit-scrollbar-track { background: var(--c-bg); }
+      ::-webkit-scrollbar-thumb { background: var(--c-border-bright); border-radius: 5px; }
+      ::-webkit-scrollbar-thumb:hover { background: var(--c-text-tertiary); }
+      html { scrollbar-color: var(--c-border-bright) var(--c-bg); scrollbar-width: thin; }
+
+      /* ── Scroll reveal ───────────────────────────────── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(34px) scale(0.96);
+        filter: blur(6px);
+        transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, transform, filter;
+      }
+
+      .reveal.in-view { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+
+      /* stagger repeated items so groups cascade in rather than pop together */
+      .research-entry.reveal:nth-of-type(1),
+      .exp-entry.reveal:nth-of-type(1),
+      .project-card.reveal:nth-of-type(1),
+      .edu-entry.reveal:nth-of-type(1) { transition-delay: 0s; }
+      .research-entry.reveal:nth-of-type(2),
+      .exp-entry.reveal:nth-of-type(2),
+      .project-card.reveal:nth-of-type(2),
+      .edu-entry.reveal:nth-of-type(2) { transition-delay: 0.08s; }
+      .research-entry.reveal:nth-of-type(3),
+      .exp-entry.reveal:nth-of-type(3),
+      .project-card.reveal:nth-of-type(3),
+      .edu-entry.reveal:nth-of-type(3) { transition-delay: 0.16s; }
+      .research-entry.reveal:nth-of-type(4),
+      .exp-entry.reveal:nth-of-type(4) { transition-delay: 0.24s; }
+      .research-entry.reveal:nth-of-type(5),
+      .exp-entry.reveal:nth-of-type(5) { transition-delay: 0.32s; }
+      .research-entry.reveal:nth-of-type(6) { transition-delay: 0.4s; }
+      .research-entry.reveal:nth-of-type(7) { transition-delay: 0.48s; }
+
+      @media (prefers-reduced-motion: reduce) {
+        /* keep a plain fade — only the positional slide/scale/blur is dropped */
+        .reveal { transform: none; filter: none; transition: opacity 0.5s ease; }
       }
 
       /* ── Layout ────────────────────────────────────── */
@@ -69,14 +162,28 @@
         padding: 0 2rem;
       }
 
+      /* The main content column and the network spine sit side by side as
+         real, static layout — not an overlay computed from pixel offsets,
+         so the spine can never crowd or overlap the content beside it. */
+      .page-layout {
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+        gap: 48px;
+      }
+
+      .page-layout > .container {
+        margin: 0;
+      }
+
       /* ── Nav ───────────────────────────────────────── */
       nav {
         position: sticky;
         top: 0;
         z-index: 50;
-        background: rgba(248, 249, 247, 0.93);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
+        background-color: var(--c-glass);
+        backdrop-filter: blur(20px) saturate(160%);
+        -webkit-backdrop-filter: blur(20px) saturate(160%);
         border-bottom: 1px solid transparent;
         transition: border-color 0.3s;
       }
@@ -89,73 +196,21 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: 52px;
+        height: 56px;
       }
 
       nav .nav-name {
-        font-family: var(--font-serif);
+        font-family: var(--font-sans);
         font-weight: 600;
-        font-size: 1rem;
+        font-size: 0.95rem;
         color: var(--c-text);
         text-decoration: none;
         letter-spacing: -0.01em;
       }
 
-      nav .nav-links {
-        display: flex;
-        gap: 1.8rem;
-        list-style: none;
-      }
-
-      nav .nav-links a {
-        font-size: 0.82rem;
-        font-weight: 500;
-        color: var(--c-text-secondary);
-        text-decoration: none;
-        letter-spacing: 0.03em;
-        text-transform: uppercase;
-        position: relative;
-        transition: color 0.2s;
-        cursor: pointer;
-      }
-
-      nav .nav-links a::after {
-        content: "";
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        width: 0;
-        height: 1.5px;
-        background: var(--c-accent);
-        transition: width 0.25s ease;
-      }
-
-      nav .nav-links a:hover { color: var(--c-text); }
-      nav .nav-links a:hover::after,
-      nav .nav-links a.active::after { width: 100%; }
-      nav .nav-links a.active { color: var(--c-accent); font-weight: 600; }
-
-      /* ── Mobile nav toggle ─────────────────────────── */
-      .nav-toggle {
-        display: none;
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 4px;
-      }
-
-      .nav-toggle span {
-        display: block;
-        width: 20px;
-        height: 2px;
-        background: var(--c-text);
-        margin: 4px 0;
-        transition: 0.2s;
-      }
-
       /* ── Hero ──────────────────────────────────────── */
       .hero {
-        padding: 4rem 0 3rem;
+        padding: 6.5rem 0 4.5rem;
         border-bottom: 1px solid var(--c-border);
       }
 
@@ -175,143 +230,212 @@
         border-radius: 50%;
         object-fit: cover;
         object-position: center top;
-        border: 3px solid var(--c-accent-light);
+        border: 1px solid var(--c-border-bright);
+        box-shadow: 0 20px 40px var(--c-shadow);
         display: block;
+        opacity: 0;
+        animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+      }
+
+      @keyframes fadeUp {
+        to { opacity: 1; transform: translateY(0); }
       }
 
       .hero h1 {
         font-family: var(--font-serif);
-        font-size: 2.6rem;
+        font-size: 3.2rem;
         font-weight: 600;
-        line-height: 1.15;
-        letter-spacing: -0.03em;
+        line-height: 1.1;
+        letter-spacing: -0.01em;
         color: var(--c-text);
-        margin-bottom: 0.5rem;
+        margin-bottom: 1rem;
+        opacity: 0;
+        transform: translateY(14px);
+        animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards;
       }
 
       .hero .tagline {
         font-family: var(--font-serif);
-        font-size: 1.05rem;
-        font-weight: 400;
         font-style: italic;
-        color: var(--c-accent);
-        margin-bottom: 1.1rem;
-        line-height: 1.5;
-      }
-
-      .hero .intro {
-        font-size: 0.93rem;
-        color: var(--c-text-secondary);
-        line-height: 1.75;
-        margin-bottom: 1.4rem;
-      }
-
-      .hero-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem 0.6rem;
-        align-items: center;
-        margin-bottom: 1.8rem;
-      }
-
-      .hero-links a {
-        font-size: 0.82rem;
+        font-size: 1.25rem;
         font-weight: 500;
         color: var(--c-text-secondary);
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.35rem;
-        padding: 0.35rem 0.75rem;
-        border: 1px solid var(--c-border);
-        border-radius: 20px;
-        background: var(--c-accent-light);
-        transition: background 0.2s, border-color 0.2s, color 0.2s;
+        margin-bottom: 1.4rem;
+        line-height: 1.5;
+        opacity: 0;
+        transform: translateY(14px);
+        animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.16s forwards;
       }
 
-      .hero-links a:hover {
-        background: #c9deca;
-        border-color: #b0cdb2;
-        color: var(--c-text);
+      .hero .tagline .hl { color: var(--c-text); }
+
+      .hero .intro {
+        font-family: var(--font-serif);
+        font-size: 1.08rem;
+        color: var(--c-text-secondary);
+        line-height: 1.75;
+        margin-bottom: 1.7rem;
+        opacity: 0;
+        transform: translateY(14px);
+        animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.27s forwards;
       }
 
-      .hero-links a svg {
-        width: 14px;
-        height: 14px;
-        flex-shrink: 0;
-      }
+      .hero .intro strong { color: var(--c-text); font-weight: 600; }
+
+      /* the hero entrance is a single small (14px) fade-up on load, not
+         looping/ambient motion, so it plays regardless of reduced-motion */
 
       .hero-news-label {
-        font-size: 0.72rem;
-        font-weight: 700;
+        font-family: var(--font-sans);
+        font-size: 0.78rem;
+        font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.06em;
         color: var(--c-text-tertiary);
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.6rem;
       }
 
       .hero-news-list {
         list-style: none;
         display: flex;
         flex-direction: column;
-        gap: 0.35rem;
+        gap: 0.4rem;
       }
 
       .hero-news-list li {
-        font-size: 0.84rem;
+        font-family: var(--font-serif);
+        font-size: 0.95rem;
         color: var(--c-text-secondary);
         line-height: 1.5;
         display: flex;
-        gap: 0.55rem;
+        gap: 0.6rem;
         align-items: baseline;
       }
 
       .hero-news-list li::before {
-        content: "·";
-        color: var(--c-accent);
-        font-weight: 700;
+        content: "";
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--c-accent);
         flex-shrink: 0;
+        align-self: center;
       }
 
       @media (max-width: 560px) {
         .hero-inner { flex-direction: column-reverse; gap: 1.5rem; }
-        .hero-photo img { width: 100px; height: 100px; }
+        .hero-photo img { width: 96px; height: 96px; }
       }
 
-      /* ── Tab sections ──────────────────────────────── */
-      .tab-content {
-        display: none;
-        padding: 3rem 0;
-      }
+      /* ── Hero: network diagram (3Blue1Brown-style forward pass) ── */
+      .nn-wrap { margin-top: 3rem; }
 
-      .tab-content.active {
+      .nn-diagram {
+        width: 100%;
+        height: auto;
         display: block;
+      }
+
+      .nn-diagram .edge {
+        stroke: var(--c-diagram-line);
+        stroke-width: 0.75;
+        opacity: 0.55;
+        stroke-dasharray: 2 11;
+        animation: edgeShimmer 3.4s linear infinite;
+      }
+
+      .nn-diagram .node {
+        fill: var(--c-bg-elev);
+        stroke: var(--c-diagram-node);
+        stroke-width: 1.5;
+      }
+
+      @keyframes edgeShimmer {
+        to { stroke-dashoffset: -26; }
+      }
+
+      .nn-caption {
+        font-family: var(--font-sans);
+        font-size: 0.82rem;
+        color: var(--c-text-tertiary);
+        margin-top: 1rem;
+        text-align: center;
+      }
+
+      @media (max-width: 640px) {
+        .nn-wrap { display: none; }
+      }
+
+      @keyframes nnNodePulse {
+        0%, 100% { opacity: 0.55; filter: drop-shadow(0 0 0 transparent); }
+        50% { opacity: 1; filter: drop-shadow(0 0 7px var(--pulse-color, var(--c-accent))); fill: var(--pulse-color, var(--c-accent)); }
+      }
+
+      @keyframes nnEdgePulse {
+        0%, 100% { opacity: 0.22; }
+        50% { opacity: 0.95; stroke: var(--c-accent); }
+      }
+
+      .nn-diagram .node {
+        animation: nnNodePulse 5.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        animation-delay: calc(var(--stage-delay, 0s) + var(--jitter, 0s));
+      }
+      .nn-diagram .layer-nodes.output .node { --pulse-color: var(--c-accent-2); }
+      .nn-diagram .edge-bundle { animation: nnEdgePulse 5.6s cubic-bezier(0.4, 0, 0.2, 1) infinite; animation-delay: var(--stage-delay, 0s); }
+
+      .nn-diagram .stage-0 { --stage-delay: -2.8s; }
+      .nn-diagram .stage-1 { --stage-delay: -2.0s; }
+      .nn-diagram .stage-2 { --stage-delay: -1.2s; }
+      .nn-diagram .stage-3 { --stage-delay: -0.4s; }
+      .nn-diagram .stage-4 { --stage-delay: 0.4s; }
+      .nn-diagram .stage-5 { --stage-delay: 1.2s; }
+      .nn-diagram .stage-6 { --stage-delay: 2.0s; }
+
+      /* the forward-pass pulse is a slow (3.4–5.6s) colour/glow crossfade
+         with no positional movement, so — unlike the scroll reveal — it
+         isn't the kind of motion prefers-reduced-motion targets, and it
+         stays on so the diagram actually shows its colours. */
+
+      /* ── Sections (single-scroll layout) ───────────── */
+      .page-section {
+        padding: 5rem 0;
+        border-bottom: 1px solid var(--c-border);
+        scroll-margin-top: 76px;
+      }
+
+      .page-section:last-of-type { border-bottom: none; }
+
+      .section-head { margin-bottom: 2.6rem; }
+
+      .eyebrow {
+        font-family: var(--font-sans);
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: var(--c-accent);
+        margin-bottom: 0.6rem;
       }
 
       .section-heading {
         font-family: var(--font-serif);
-        font-size: 1.45rem;
-        font-weight: 500;
-        margin-bottom: 1.8rem;
-        letter-spacing: -0.02em;
+        font-size: 2rem;
+        font-weight: 600;
+        letter-spacing: -0.005em;
         color: var(--c-text);
-        border-left: 3px solid var(--c-accent);
-        padding-left: 0.65rem;
       }
 
       /* ── Research ──────────────────────────────────── */
       .research-group-label {
-        font-size: 0.72rem;
+        font-family: var(--font-sans);
+        font-size: 0.78rem;
         font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: var(--c-accent);
-        background: var(--c-accent-light);
-        padding: 0.18rem 0.6rem;
-        border-radius: 20px;
-        display: inline-block;
-        margin-bottom: 1rem;
-        margin-top: 2rem;
+        letter-spacing: 0.07em;
+        color: var(--c-text-tertiary);
+        display: block;
+        margin-bottom: 1.2rem;
+        margin-top: 3rem;
       }
 
       .research-group-label:first-child {
@@ -319,8 +443,8 @@
       }
 
       .research-entry {
-        margin-bottom: 1.8rem;
-        padding-bottom: 1.8rem;
+        margin-bottom: 2.2rem;
+        padding-bottom: 2.2rem;
         border-bottom: 1px solid var(--c-border);
       }
 
@@ -332,52 +456,57 @@
 
       .research-entry .entry-title {
         font-family: var(--font-serif);
-        font-size: 1.05rem;
-        font-weight: 500;
+        font-size: 1.18rem;
+        font-weight: 600;
         color: var(--c-text);
-        margin-bottom: 0.2rem;
+        margin-bottom: 0.3rem;
         line-height: 1.4;
       }
 
       .research-entry .entry-meta {
-        font-size: 0.8rem;
+        font-family: var(--font-sans);
+        font-size: 0.85rem;
         color: var(--c-accent);
-        margin-bottom: 0.35rem;
+        margin-bottom: 0.4rem;
         font-weight: 500;
       }
 
       .research-entry .entry-authors {
-        font-size: 0.8rem;
+        font-family: var(--font-serif);
+        font-size: 0.9rem;
         color: var(--c-text-secondary);
-        margin-bottom: 0.45rem;
+        margin-bottom: 0.5rem;
         line-height: 1.55;
       }
 
       .research-entry .entry-authors strong {
+        font-family: var(--font-sans);
         color: var(--c-text-tertiary);
         font-weight: 600;
+        font-size: 0.82rem;
       }
 
       .research-entry .entry-summary {
-        font-size: 0.88rem;
+        font-family: var(--font-serif);
+        font-size: 0.98rem;
         color: var(--c-text-secondary);
-        line-height: 1.65;
-        margin-bottom: 0.5rem;
+        line-height: 1.7;
+        margin-bottom: 0.6rem;
       }
 
       .research-entry .entry-links {
         display: flex;
         flex-wrap: wrap;
         gap: 0.4rem 0.8rem;
-        margin-bottom: 0.55rem;
+        margin-bottom: 0.65rem;
       }
 
       .research-entry .entry-links a {
-        font-size: 0.78rem;
+        font-family: var(--font-sans);
+        font-size: 0.85rem;
         font-weight: 600;
         color: var(--c-accent);
         text-decoration: none;
-        letter-spacing: 0.01em;
         border-bottom: 1px solid transparent;
         transition: border-color 0.2s;
       }
@@ -388,33 +517,70 @@
 
       .research-entry .paper-image {
         width: 100%;
-        max-width: 540px;
+        max-width: 560px;
         border: 1px solid var(--c-border);
-        border-radius: 6px;
-        margin-bottom: 0.7rem;
+        border-radius: 14px;
+        margin-bottom: 0.8rem;
         display: block;
       }
 
       .tag-row {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.35rem;
+        gap: 0.4rem;
       }
 
       .tag {
-        font-size: 0.7rem;
-        font-weight: 600;
-        padding: 0.15rem 0.55rem;
-        background: var(--c-tag-bg);
-        color: var(--c-tag-text);
-        border-radius: 20px;
-        letter-spacing: 0.01em;
+        font-family: var(--font-sans);
+        font-size: 0.78rem;
+        font-weight: 500;
+        padding: 0.28rem 0.75rem;
+        background: var(--c-chip);
+        color: var(--c-text-secondary);
+        border-radius: 980px;
       }
+
+      /* ── Induction-head easter egg ──────────────────── */
+      .induction-copy {
+        border-bottom: 1px dashed var(--c-accent);
+        cursor: help;
+      }
+
+      .induction-active {
+        background: var(--c-accent-soft);
+        border-radius: 4px;
+      }
+
+      #inductionSvg {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 60;
+        opacity: 0;
+        transition: opacity 0.25s ease;
+      }
+
+      #inductionSvg.visible { opacity: 1; }
+
+      #inductionPath {
+        fill: none;
+        stroke: var(--c-accent);
+        stroke-width: 1.5;
+        stroke-dasharray: 4 4;
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        #inductionSvg.visible #inductionPath { animation: dashFlow 0.9s linear infinite; }
+      }
+
+      @keyframes dashFlow { to { stroke-dashoffset: -16; } }
 
       /* ── Experience ────────────────────────────────── */
       .exp-entry {
-        margin-bottom: 1.6rem;
-        padding-bottom: 1.6rem;
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
         border-bottom: 1px solid var(--c-border);
       }
 
@@ -430,40 +596,43 @@
         justify-content: space-between;
         align-items: baseline;
         gap: 0.5rem;
-        margin-bottom: 0.1rem;
+        margin-bottom: 0.15rem;
       }
 
       .exp-role {
         font-family: var(--font-serif);
-        font-weight: 500;
-        font-size: 1rem;
+        font-weight: 600;
+        font-size: 1.08rem;
         color: var(--c-text);
       }
 
       .exp-period {
-        font-size: 0.78rem;
+        font-family: var(--font-sans);
+        font-size: 0.85rem;
         color: var(--c-text-tertiary);
         font-variant-numeric: tabular-nums;
         flex-shrink: 0;
       }
 
       .exp-org {
-        font-size: 0.83rem;
+        font-family: var(--font-serif);
+        font-size: 0.95rem;
         color: var(--c-accent);
         font-weight: 500;
-        margin-bottom: 0.3rem;
+        margin-bottom: 0.4rem;
       }
 
       .exp-org .exp-context {
         color: var(--c-text-secondary);
-        font-style: italic;
         font-weight: 400;
+        font-style: italic;
       }
 
       .exp-bullet {
-        font-size: 0.87rem;
+        font-family: var(--font-serif);
+        font-size: 0.98rem;
         color: var(--c-text-secondary);
-        line-height: 1.65;
+        line-height: 1.7;
       }
 
       /* ── Reviewing ─────────────────────────────────── */
@@ -478,9 +647,9 @@
         display: flex;
         align-items: baseline;
         gap: 1rem;
-        padding: 0.65rem 0;
+        padding: 0.85rem 0;
         border-bottom: 1px solid var(--c-border);
-        font-size: 0.9rem;
+        font-size: 0.95rem;
       }
 
       .review-item:last-child {
@@ -489,57 +658,60 @@
 
       .review-venue {
         font-family: var(--font-serif);
-        font-weight: 500;
+        font-weight: 600;
         color: var(--c-text);
-        font-size: 0.95rem;
+        font-size: 1.05rem;
       }
 
       .review-type {
-        font-size: 0.78rem;
+        font-family: var(--font-sans);
+        font-size: 0.85rem;
         color: var(--c-text-tertiary);
-        font-style: italic;
       }
 
       /* ── Projects ──────────────────────────────────── */
       .projects-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 1rem;
+        gap: 1.1rem;
       }
 
       .project-card {
-        padding: 1.1rem 1.2rem;
+        padding: 1.5rem 1.6rem;
         border: 1px solid var(--c-border);
-        border-radius: 8px;
-        background: var(--c-accent-light);
-        transition: background 0.2s, border-color 0.2s;
+        border-radius: 20px;
+        background-color: var(--c-bg-elev);
+        transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
       }
 
       .project-card:hover {
-        background: #d3e8d4;
-        border-color: #b0cdb2;
+        background: var(--c-bg-elev-2);
+        border-color: var(--c-border-bright);
+        transform: translateY(-3px);
+        box-shadow: 0 16px 40px var(--c-shadow);
       }
 
       .project-card .entry-title {
         font-family: var(--font-serif);
-        font-size: 0.95rem;
-        font-weight: 500;
+        font-size: 1.08rem;
+        font-weight: 600;
         color: var(--c-text);
-        margin-bottom: 0.3rem;
+        margin-bottom: 0.4rem;
         line-height: 1.35;
       }
 
       .project-card .entry-summary {
-        font-size: 0.82rem;
+        font-family: var(--font-serif);
+        font-size: 0.92rem;
         color: var(--c-text-secondary);
-        line-height: 1.6;
-        margin-bottom: 0.5rem;
+        line-height: 1.65;
+        margin-bottom: 0.6rem;
       }
 
       /* ── Education ─────────────────────────────────── */
       .edu-entry {
-        margin-bottom: 1.4rem;
-        padding-bottom: 1.4rem;
+        margin-bottom: 1.8rem;
+        padding-bottom: 1.8rem;
         border-bottom: 1px solid var(--c-border);
       }
 
@@ -559,31 +731,35 @@
 
       .edu-inst {
         font-family: var(--font-serif);
-        font-weight: 500;
-        font-size: 1rem;
+        font-weight: 600;
+        font-size: 1.08rem;
         color: var(--c-text);
       }
 
       .edu-period {
-        font-size: 0.78rem;
+        font-family: var(--font-sans);
+        font-size: 0.85rem;
         color: var(--c-text-tertiary);
       }
 
       .edu-degree {
-        font-size: 0.87rem;
+        font-family: var(--font-serif);
+        font-size: 0.98rem;
         color: var(--c-text-secondary);
       }
 
       .edu-gpa {
-        font-size: 0.82rem;
+        font-family: var(--font-sans);
+        font-size: 0.85rem;
         color: var(--c-text-tertiary);
       }
 
-      /* ── Contact ───────────────────────────────────── */
+      /* ── Contact / unembed ─────────────────────────── */
       .contact-section p {
-        font-size: 0.92rem;
+        font-family: var(--font-serif);
+        font-size: 1.02rem;
         color: var(--c-text-secondary);
-        line-height: 1.7;
+        line-height: 1.75;
       }
 
       .contact-section a {
@@ -597,16 +773,456 @@
         border-bottom-color: var(--c-accent);
       }
 
+      .softmax-row {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        max-width: 380px;
+      }
+
+      .softmax-row .sm-item {
+        display: grid;
+        grid-template-columns: 92px 1fr 42px;
+        align-items: center;
+        gap: 0.7rem;
+        font-family: var(--font-sans);
+        font-size: 0.85rem;
+        color: var(--c-text-secondary);
+        font-variant-numeric: tabular-nums;
+      }
+
+      .softmax-row .sm-bar-track {
+        height: 6px;
+        border-radius: 4px;
+        background: var(--c-chip);
+        overflow: hidden;
+      }
+
+      .softmax-row .sm-bar {
+        height: 100%;
+        background: var(--c-accent);
+        border-radius: 4px;
+      }
+
+      .softmax-row .sm-item.sampled {
+        color: var(--c-text);
+        font-weight: 600;
+      }
+
+      .softmax-row .sm-item.sampled .sm-bar { background: var(--c-accent-2); }
+
+      .softmax-row .sm-label-btn {
+        justify-self: start;
+        font-family: var(--font-sans);
+        font-size: 0.78rem;
+        font-weight: 500;
+        color: var(--c-text);
+        text-decoration: none;
+        text-align: center;
+        padding: 0.32rem 0.7rem;
+        border: 1px solid var(--c-border-bright);
+        border-radius: 980px;
+        background: var(--c-bg);
+        transition: background 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s, color 0.25s, transform 0.25s;
+      }
+
+      .softmax-row .sm-label-btn:hover {
+        background: var(--c-bg-elev-2);
+        border-color: var(--c-text-secondary);
+        transform: translateY(-1px);
+      }
+
+      .softmax-row .sm-label-btn.primary {
+        background: var(--c-accent);
+        border-color: var(--c-accent);
+        color: #fff;
+      }
+
+      .softmax-row .sm-label-btn.primary:hover {
+        background: var(--c-accent-hover);
+        border-color: var(--c-accent-hover);
+      }
+
       /* ── Footer ────────────────────────────────────── */
       footer {
-        padding: 2rem 0;
+        padding: 2.5rem 0;
         border-top: 1px solid var(--c-border);
         margin-top: 1rem;
       }
 
       footer p {
-        font-size: 0.78rem;
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 0.88rem;
         color: var(--c-text-tertiary);
+      }
+
+      footer .footer-note {
+        margin-top: 0.4rem;
+      }
+
+      /* ── Network spine: the page's layer-to-layer throughline ── */
+      .nn-spine {
+        position: relative;
+        width: 24px;
+        flex-shrink: 0;
+        pointer-events: none;
+        z-index: 5;
+      }
+
+      .nn-spine-line,
+      .nn-spine-fill {
+        position: absolute;
+        left: 50%;
+        width: 1px;
+        transform: translateX(-50%);
+      }
+
+      .nn-spine-line { top: 0; bottom: 0; background: var(--c-border); }
+
+      .nn-spine-fill {
+        background: linear-gradient(var(--c-accent), var(--c-accent-2));
+        box-shadow: 0 0 8px color-mix(in srgb, var(--c-accent) 50%, transparent);
+        transition: height 0.15s linear;
+      }
+
+      .nn-spine-node {
+        position: absolute;
+        left: 50%;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: var(--c-bg-elev);
+        border: 1px solid var(--c-border-bright);
+        transform: translate(-50%, -50%);
+        transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+      }
+
+      .nn-spine-node.passed { background-color: var(--c-accent); border-color: var(--c-accent); box-shadow: 0 0 6px color-mix(in srgb, var(--c-accent) 55%, transparent); }
+      .nn-spine-node.current {
+        background-color: var(--c-accent-2);
+        border-color: var(--c-accent-2);
+        box-shadow: 0 0 0 3px var(--c-bg), 0 0 0 5px var(--c-accent-2), 0 0 14px color-mix(in srgb, var(--c-accent-2) 50%, transparent);
+      }
+      .nn-spine-node.firing { animation: nodeFire 0.9s ease-out; }
+
+      @keyframes nodeFire {
+        0% { box-shadow: 0 0 0 3px var(--c-bg), 0 0 0 5px var(--c-accent-2), 0 0 14px color-mix(in srgb, var(--c-accent-2) 50%, transparent); }
+        40% { box-shadow: 0 0 0 3px var(--c-bg), 0 0 0 14px color-mix(in srgb, var(--c-accent-2) 28%, transparent), 0 0 28px color-mix(in srgb, var(--c-accent-2) 60%, transparent); }
+        100% { box-shadow: 0 0 0 3px var(--c-bg), 0 0 0 5px var(--c-accent-2), 0 0 14px color-mix(in srgb, var(--c-accent-2) 50%, transparent); }
+      }
+
+      @media (max-width: 1300px) {
+        .nn-spine { display: none; }
+      }
+
+      /* ── Model console: navigation + live interpretability readout ── */
+      .console {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        width: 300px;
+        max-height: calc(100vh - 40px);
+        /* the exact page background, not a distinct "card" color or a
+           translucent glass overlay — it reads as cut from the same paper
+           as the rest of the page, not a widget floating on top of it */
+        background-color: var(--c-bg);
+        border: 1px solid var(--c-border);
+        border-radius: 20px;
+        box-shadow: 0 2px 10px var(--c-shadow);
+        z-index: 60;
+        overflow: hidden;
+        transition: box-shadow 0.4s ease-out;
+      }
+
+      .console::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--c-accent), var(--c-accent-2), transparent);
+        background-size: 200% 100%;
+        animation: consoleShimmer 3.5s linear infinite;
+      }
+
+      @keyframes consoleShimmer {
+        to { background-position: -200% 0; }
+      }
+
+      .console-summary {
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.95rem 1.1rem;
+        cursor: pointer;
+        list-style: none;
+        user-select: none;
+      }
+
+      .console-summary::-webkit-details-marker { display: none; }
+
+      .console-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--c-accent);
+        box-shadow: 0 0 8px color-mix(in srgb, var(--c-accent) 70%, transparent);
+        animation: dotBreathe 2.2s ease-in-out infinite;
+        flex-shrink: 0;
+      }
+
+      @keyframes dotBreathe {
+        0%, 100% { opacity: 0.4; transform: scale(0.85); }
+        50% { opacity: 1; transform: scale(1); }
+      }
+
+      .console-label {
+        font-family: var(--font-sans);
+        font-size: 0.68rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--c-text-tertiary);
+      }
+
+      .console-current {
+        margin-left: auto;
+        font-family: var(--font-sans);
+        font-size: 0.86rem;
+        font-weight: 600;
+        color: var(--c-text);
+      }
+
+      .console-chevron {
+        color: var(--c-text-tertiary);
+        font-size: 0.65rem;
+        transition: transform 0.25s ease;
+      }
+
+      details[open] > .console-summary .console-chevron { transform: rotate(180deg); }
+
+      @media (min-width: 860px) {
+        .console-summary { cursor: default; }
+        .console-chevron { display: none; }
+      }
+
+      .console-body {
+        padding: 0 1.1rem 1.1rem;
+        max-height: calc(100vh - 140px);
+        overflow-y: auto;
+      }
+
+      /* Shaped like a transformer block stack: boxed layers on the main
+         path, each with its own residual "skip connection" arc rejoining
+         at a (+) node — the repeating unit from the original paper figure. */
+      .console-nav {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+        border-top: 1px solid var(--c-border);
+        padding: 1.2rem 30px 0.4rem 0;
+        margin-bottom: 0.9rem;
+      }
+
+      .console-nav a {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 38px;
+        border: 1.5px solid var(--c-text-tertiary);
+        border-radius: 8px;
+        background: var(--c-bg-elev);
+        font-family: var(--font-sans);
+        font-size: 0.82rem;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        color: var(--c-text);
+        text-decoration: none;
+        text-align: center;
+        transition: border-color 0.25s, color 0.25s, box-shadow 0.25s, filter 0.25s;
+      }
+
+      /* one flat pastel fill per block, transformer-figure style */
+      .console-nav a:nth-child(1) { background: color-mix(in srgb, var(--blk-1) 34%, var(--c-bg-elev)); }
+      .console-nav a:nth-child(2) { background: color-mix(in srgb, var(--blk-2) 34%, var(--c-bg-elev)); }
+      .console-nav a:nth-child(3) { background: color-mix(in srgb, var(--blk-3) 34%, var(--c-bg-elev)); }
+      .console-nav a:nth-child(4) { background: color-mix(in srgb, var(--blk-4) 34%, var(--c-bg-elev)); }
+      .console-nav a:nth-child(5) { background: color-mix(in srgb, var(--blk-5) 34%, var(--c-bg-elev)); }
+      .console-nav a:nth-child(6) { background: color-mix(in srgb, var(--blk-6) 34%, var(--c-bg-elev)); }
+      .console-nav a:nth-child(7) { background: color-mix(in srgb, var(--blk-7) 34%, var(--c-bg-elev)); }
+
+      .console-nav a:hover { filter: brightness(1.08); border-color: var(--c-text); }
+
+      /* downward arrow to the next block, on the main path */
+      .console-nav a:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        bottom: -16px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-top: 7px solid var(--c-text-tertiary);
+        z-index: 1;
+      }
+
+      /* residual bypass arc, hugging the box, in the paper's own style */
+      .bypass-arc {
+        position: absolute;
+        top: -1px;
+        right: -27px;
+        width: 21px;
+        height: calc(100% + 2px);
+        overflow: visible;
+        pointer-events: none;
+      }
+
+      .bypass-arc path {
+        fill: none;
+        stroke: var(--c-text-tertiary);
+        stroke-width: 1.5;
+        transition: stroke 0.25s;
+      }
+
+      .console-nav a.active .bypass-arc path { stroke: var(--c-accent-2); }
+
+      .plus-node {
+        position: absolute;
+        right: -27px;
+        bottom: -7px;
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        border: 1.5px solid var(--c-text-tertiary);
+        background-color: var(--c-bg-elev);
+        color: var(--c-text-tertiary);
+        font-family: var(--font-sans);
+        font-size: 9px;
+        line-height: 11px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+        transition: background-color 0.25s, border-color 0.25s, color 0.25s, box-shadow 0.25s;
+      }
+
+      .console-nav a.active {
+        color: var(--c-text);
+        background: var(--c-accent-soft);
+        border-color: var(--c-accent-2);
+        box-shadow: 0 0 0 1px var(--c-accent-2), 0 0 18px color-mix(in srgb, var(--c-accent-2) 30%, transparent);
+      }
+
+      .console-nav a.active .plus-node {
+        border-color: var(--c-accent-2);
+        color: var(--c-accent-2);
+        background-color: var(--c-bg-elev);
+        box-shadow: 0 0 8px color-mix(in srgb, var(--c-accent-2) 60%, transparent);
+      }
+
+      .console-stats {
+        display: flex;
+        justify-content: space-between;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: var(--c-text-tertiary);
+        border-top: 1px solid var(--c-border);
+        padding-top: 0.7rem;
+        margin-bottom: 0.9rem;
+      }
+
+      .console-lens-label {
+        font-family: var(--font-sans);
+        font-size: 0.68rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--c-text-tertiary);
+        margin-bottom: 0.5rem;
+        display: block;
+      }
+
+      ol.console-lens {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        margin-bottom: 1.1rem;
+      }
+
+      .console-lens li {
+        position: relative;
+        display: flex;
+        align-items: baseline;
+        gap: 0.5rem;
+        padding: 0.32rem 0.5rem;
+        border-radius: 6px;
+        overflow: hidden;
+        font-family: var(--font-mono);
+        font-size: 0.84rem;
+        color: var(--c-text-secondary);
+      }
+
+      .console-lens li::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        width: var(--w, 20%);
+        background: var(--c-accent);
+        opacity: 0.14;
+      }
+
+      .console-lens li > * { position: relative; }
+
+      .lens-rank { color: var(--c-text-tertiary); font-size: 0.7rem; }
+
+      .console-lens li:first-child .lens-tok { color: var(--c-text); font-weight: 600; }
+
+      .console-actions {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .console-plain {
+        flex: 1;
+        font-family: var(--font-sans);
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--c-text-secondary);
+        background: transparent;
+        border: 1px solid var(--c-border-bright);
+        border-radius: 980px;
+        padding: 0.55rem 0.4rem;
+        cursor: pointer;
+        transition: background 0.25s, border-color 0.25s, color 0.25s;
+      }
+
+      .console-plain:hover { border-color: var(--c-text-secondary); color: var(--c-text); }
+
+      .console-plain[aria-pressed="true"] {
+        background: var(--c-accent);
+        border-color: var(--c-accent);
+        color: #fff;
+      }
+
+      .console.pulse { animation: consolePulse 0.7s ease-out; }
+
+      @keyframes consolePulse {
+        0% { box-shadow: 0 6px 20px var(--c-shadow); }
+        40% { box-shadow: 0 6px 20px var(--c-shadow), 0 0 0 1px var(--c-accent-2), 0 0 24px color-mix(in srgb, var(--c-accent-2) 35%, transparent); }
+        100% { box-shadow: 0 6px 20px var(--c-shadow); }
+      }
+
+
+      @media (max-width: 640px) {
+        .console { left: 12px; right: 12px; bottom: 12px; width: auto; }
       }
 
       /* ── Responsive ────────────────────────────────── */
@@ -615,68 +1231,99 @@
 
         .container { padding: 0 1.25rem; }
 
-        .hero { padding: 3.5rem 0 2.5rem; }
+        .hero { padding: 4.5rem 0 3rem; }
 
-        .hero h1 { font-size: 2rem; }
+        .hero h1 { font-size: 2.2rem; }
 
-        .hero .tagline { font-size: 1.05rem; }
+        .hero .tagline { font-size: 1.1rem; }
+
+        .page-section { padding: 3.5rem 0; }
+
+        .section-heading { font-size: 1.6rem; }
 
         .projects-grid { grid-template-columns: 1fr; }
-
-        nav .nav-links {
-          display: none;
-          position: absolute;
-          top: 52px;
-          left: 0;
-          right: 0;
-          flex-direction: column;
-          background: var(--c-bg);
-          padding: 1rem 2rem 1.5rem;
-          gap: 1rem;
-          border-bottom: 1px solid var(--c-border);
-        }
-
-        nav .nav-links.open { display: flex; }
-
-        .nav-toggle { display: block; }
 
         .exp-header { flex-direction: column; gap: 0; }
       }
     </style>
   </head>
-  <body>
+  <body id="top">
     <!-- ── Nav ──────────────────────────────────────── -->
     <nav id="nav">
       <div class="container">
-        <a href="#" class="nav-name" onclick="switchTab('research'); return false;">S. Samavedam</a>
-        <button
-          class="nav-toggle"
-          aria-label="Menu"
-          onclick="
-            document.querySelector('.nav-links').classList.toggle('open')
-          "
-        >
-          <span></span><span></span><span></span>
-        </button>
-        <ul class="nav-links">
-          <li><a href="#" data-tab="research">Research</a></li>
-          <li><a href="#" data-tab="experience">Experience</a></li>
-          <li><a href="#" data-tab="reviews">Reviews</a></li>
-          <li><a href="#" data-tab="projects">Projects</a></li>
-          <li><a href="#" data-tab="education">Education</a></li>
-          <li><a href="#" data-tab="contact">Contact</a></li>
-        </ul>
+        <a href="#top" class="nav-name">S. Samavedam</a>
       </div>
     </nav>
 
+    <!-- ── Model console: navigation + live interpretability readout ── -->
+    <details class="console" id="console" open>
+      <summary class="console-summary">
+        <span class="console-dot" aria-hidden="true"></span>
+        <span class="console-label">Model</span>
+        <span class="console-current" id="consoleCurrent">Embedding</span>
+        <span class="console-chevron" aria-hidden="true">&#9662;</span>
+      </summary>
+      <div class="console-body">
+        <nav class="console-nav">
+          <a href="#top">
+            <svg class="bypass-arc" viewBox="0 0 21 40" preserveAspectRatio="none" aria-hidden="true"><path d="M 4 1 C 19 1 19 39 4 39" /></svg>
+            <span class="plus-node" aria-hidden="true">+</span>
+            Embedding
+          </a>
+          <a href="#research">
+            <svg class="bypass-arc" viewBox="0 0 21 40" preserveAspectRatio="none" aria-hidden="true"><path d="M 4 1 C 19 1 19 39 4 39" /></svg>
+            <span class="plus-node" aria-hidden="true">+</span>
+            Research
+          </a>
+          <a href="#experience">
+            <svg class="bypass-arc" viewBox="0 0 21 40" preserveAspectRatio="none" aria-hidden="true"><path d="M 4 1 C 19 1 19 39 4 39" /></svg>
+            <span class="plus-node" aria-hidden="true">+</span>
+            Experience
+          </a>
+          <a href="#reviews">
+            <svg class="bypass-arc" viewBox="0 0 21 40" preserveAspectRatio="none" aria-hidden="true"><path d="M 4 1 C 19 1 19 39 4 39" /></svg>
+            <span class="plus-node" aria-hidden="true">+</span>
+            Reviewing
+          </a>
+          <a href="#projects">
+            <svg class="bypass-arc" viewBox="0 0 21 40" preserveAspectRatio="none" aria-hidden="true"><path d="M 4 1 C 19 1 19 39 4 39" /></svg>
+            <span class="plus-node" aria-hidden="true">+</span>
+            Projects
+          </a>
+          <a href="#education">
+            <svg class="bypass-arc" viewBox="0 0 21 40" preserveAspectRatio="none" aria-hidden="true"><path d="M 4 1 C 19 1 19 39 4 39" /></svg>
+            <span class="plus-node" aria-hidden="true">+</span>
+            Education
+          </a>
+          <a href="#contact">
+            <svg class="bypass-arc" viewBox="0 0 21 40" preserveAspectRatio="none" aria-hidden="true"><path d="M 4 1 C 19 1 19 39 4 39" /></svg>
+            <span class="plus-node" aria-hidden="true">+</span>
+            Contact
+          </a>
+        </nav>
+        <div class="console-stats">
+          <span id="statLayer">Layer 0 / 9</span>
+          <span id="statNorm">‖resid‖ ≈ 1.00</span>
+        </div>
+        <span class="console-lens-label">Logit lens (illustrative)</span>
+        <ol id="lensList" class="console-lens"></ol>
+        <div class="console-actions">
+          <button class="console-plain" id="themeBtn" type="button" aria-pressed="false" title="Toggle dark mode">Dark mode</button>
+        </div>
+      </div>
+    </details>
+
+    <svg id="inductionSvg" aria-hidden="true"><path id="inductionPath" /></svg>
+
+    <div class="page-layout">
     <main class="container">
-      <!-- ── Hero ────────────────────────────────────── -->
-      <header class="hero">
+      <!-- ── Hero (embedding) ────────────────────────── -->
+      <header class="hero" data-layer="0">
         <div class="hero-inner">
           <div class="hero-text">
             <h1>Sunayana Samavedam</h1>
             <p class="tagline">
-              Mechanistic Interpretability &amp; Explainable Computer Vision
+              <span class="hl induction-token" data-key="mi">Mechanistic Interpretability</span> &amp; Explainable Computer Vision
             </p>
             <p class="intro">
               I'm a researcher at <strong>CVIT, IIIT Hyderabad</strong>, working
@@ -686,77 +1333,6 @@
               mechanistic interpretability, explainable computer vision, and
               vision-language models.
             </p>
-            <div class="hero-links">
-          <a href="mailto:sunayana1233@gmail.com">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.8"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
-              />
-            </svg>
-            Email
-          </a>
-          <a
-            href="https://github.com/sunayana-981"
-            target="_blank"
-            rel="noopener"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              <path
-                d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"
-              />
-            </svg>
-            GitHub
-          </a>
-          <a
-            href="https://scholar.google.com/citations?hl=en&user=qY32y7oAAAAJ"
-            target="_blank"
-            rel="noopener"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.8"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"
-              />
-            </svg>
-            Scholar
-          </a>
-          <a href="#">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.8"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
-              />
-            </svg>
-            CV
-          </a>
-        </div>
-
         <div class="hero-news">
           <p class="hero-news-label">Recent</p>
           <ul class="hero-news-list">
@@ -771,15 +1347,122 @@
             <img src="profile.jpeg" alt="Sunayana Samavedam" />
           </div>
         </div><!-- /hero-inner -->
+
+        <div class="nn-wrap reveal">
+          <svg class="nn-diagram" viewBox="0 0 780 90" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+            <g class="layer-nodes stage-0">
+              <circle class="node" cx="60" cy="10.0" r="3.6" style="--jitter:0s"/>
+              <circle class="node" cx="60" cy="27.5" r="3.6" style="--jitter:.06s"/>
+              <circle class="node" cx="60" cy="45.0" r="3.6" style="--jitter:.12s"/>
+              <circle class="node" cx="60" cy="62.5" r="3.6" style="--jitter:.04s"/>
+              <circle class="node" cx="60" cy="80.0" r="3.6" style="--jitter:.16s"/>
+            </g>
+            <g class="edge-bundle stage-1">
+              <line class="edge" x1="60" y1="10.0" x2="280" y2="10.0"/>
+              <line class="edge" x1="60" y1="10.0" x2="280" y2="24.0"/>
+              <line class="edge" x1="60" y1="10.0" x2="280" y2="38.0"/>
+              <line class="edge" x1="60" y1="10.0" x2="280" y2="52.0"/>
+              <line class="edge" x1="60" y1="10.0" x2="280" y2="66.0"/>
+              <line class="edge" x1="60" y1="10.0" x2="280" y2="80.0"/>
+              <line class="edge" x1="60" y1="27.5" x2="280" y2="10.0"/>
+              <line class="edge" x1="60" y1="27.5" x2="280" y2="24.0"/>
+              <line class="edge" x1="60" y1="27.5" x2="280" y2="38.0"/>
+              <line class="edge" x1="60" y1="27.5" x2="280" y2="52.0"/>
+              <line class="edge" x1="60" y1="27.5" x2="280" y2="66.0"/>
+              <line class="edge" x1="60" y1="27.5" x2="280" y2="80.0"/>
+              <line class="edge" x1="60" y1="45.0" x2="280" y2="10.0"/>
+              <line class="edge" x1="60" y1="45.0" x2="280" y2="24.0"/>
+              <line class="edge" x1="60" y1="45.0" x2="280" y2="38.0"/>
+              <line class="edge" x1="60" y1="45.0" x2="280" y2="52.0"/>
+              <line class="edge" x1="60" y1="45.0" x2="280" y2="66.0"/>
+              <line class="edge" x1="60" y1="45.0" x2="280" y2="80.0"/>
+              <line class="edge" x1="60" y1="62.5" x2="280" y2="10.0"/>
+              <line class="edge" x1="60" y1="62.5" x2="280" y2="24.0"/>
+              <line class="edge" x1="60" y1="62.5" x2="280" y2="38.0"/>
+              <line class="edge" x1="60" y1="62.5" x2="280" y2="52.0"/>
+              <line class="edge" x1="60" y1="62.5" x2="280" y2="66.0"/>
+              <line class="edge" x1="60" y1="62.5" x2="280" y2="80.0"/>
+              <line class="edge" x1="60" y1="80.0" x2="280" y2="10.0"/>
+              <line class="edge" x1="60" y1="80.0" x2="280" y2="24.0"/>
+              <line class="edge" x1="60" y1="80.0" x2="280" y2="38.0"/>
+              <line class="edge" x1="60" y1="80.0" x2="280" y2="52.0"/>
+              <line class="edge" x1="60" y1="80.0" x2="280" y2="66.0"/>
+              <line class="edge" x1="60" y1="80.0" x2="280" y2="80.0"/>
+            </g>
+            <g class="layer-nodes stage-2">
+              <circle class="node" cx="280" cy="10.0" r="3.6" style="--jitter:.03s"/>
+              <circle class="node" cx="280" cy="24.0" r="3.6" style="--jitter:.14s"/>
+              <circle class="node" cx="280" cy="38.0" r="3.6" style="--jitter:0s"/>
+              <circle class="node" cx="280" cy="52.0" r="3.6" style="--jitter:.1s"/>
+              <circle class="node" cx="280" cy="66.0" r="3.6" style="--jitter:.05s"/>
+              <circle class="node" cx="280" cy="80.0" r="3.6" style="--jitter:.18s"/>
+            </g>
+            <g class="edge-bundle stage-3">
+              <line class="edge" x1="280" y1="10.0" x2="500" y2="10.0"/>
+              <line class="edge" x1="280" y1="10.0" x2="500" y2="33.3"/>
+              <line class="edge" x1="280" y1="10.0" x2="500" y2="56.7"/>
+              <line class="edge" x1="280" y1="10.0" x2="500" y2="80.0"/>
+              <line class="edge" x1="280" y1="24.0" x2="500" y2="10.0"/>
+              <line class="edge" x1="280" y1="24.0" x2="500" y2="33.3"/>
+              <line class="edge" x1="280" y1="24.0" x2="500" y2="56.7"/>
+              <line class="edge" x1="280" y1="24.0" x2="500" y2="80.0"/>
+              <line class="edge" x1="280" y1="38.0" x2="500" y2="10.0"/>
+              <line class="edge" x1="280" y1="38.0" x2="500" y2="33.3"/>
+              <line class="edge" x1="280" y1="38.0" x2="500" y2="56.7"/>
+              <line class="edge" x1="280" y1="38.0" x2="500" y2="80.0"/>
+              <line class="edge" x1="280" y1="52.0" x2="500" y2="10.0"/>
+              <line class="edge" x1="280" y1="52.0" x2="500" y2="33.3"/>
+              <line class="edge" x1="280" y1="52.0" x2="500" y2="56.7"/>
+              <line class="edge" x1="280" y1="52.0" x2="500" y2="80.0"/>
+              <line class="edge" x1="280" y1="66.0" x2="500" y2="10.0"/>
+              <line class="edge" x1="280" y1="66.0" x2="500" y2="33.3"/>
+              <line class="edge" x1="280" y1="66.0" x2="500" y2="56.7"/>
+              <line class="edge" x1="280" y1="66.0" x2="500" y2="80.0"/>
+              <line class="edge" x1="280" y1="80.0" x2="500" y2="10.0"/>
+              <line class="edge" x1="280" y1="80.0" x2="500" y2="33.3"/>
+              <line class="edge" x1="280" y1="80.0" x2="500" y2="56.7"/>
+              <line class="edge" x1="280" y1="80.0" x2="500" y2="80.0"/>
+            </g>
+            <g class="layer-nodes stage-4">
+              <circle class="node" cx="500" cy="10.0" r="3.6" style="--jitter:0s"/>
+              <circle class="node" cx="500" cy="33.3" r="3.6" style="--jitter:.09s"/>
+              <circle class="node" cx="500" cy="56.7" r="3.6" style="--jitter:.03s"/>
+              <circle class="node" cx="500" cy="80.0" r="3.6" style="--jitter:.13s"/>
+            </g>
+            <g class="edge-bundle stage-5">
+              <line class="edge" x1="500" y1="10.0" x2="720" y2="10.0"/>
+              <line class="edge" x1="500" y1="10.0" x2="720" y2="45.0"/>
+              <line class="edge" x1="500" y1="10.0" x2="720" y2="80.0"/>
+              <line class="edge" x1="500" y1="33.3" x2="720" y2="10.0"/>
+              <line class="edge" x1="500" y1="33.3" x2="720" y2="45.0"/>
+              <line class="edge" x1="500" y1="33.3" x2="720" y2="80.0"/>
+              <line class="edge" x1="500" y1="56.7" x2="720" y2="10.0"/>
+              <line class="edge" x1="500" y1="56.7" x2="720" y2="45.0"/>
+              <line class="edge" x1="500" y1="56.7" x2="720" y2="80.0"/>
+              <line class="edge" x1="500" y1="80.0" x2="720" y2="10.0"/>
+              <line class="edge" x1="500" y1="80.0" x2="720" y2="45.0"/>
+              <line class="edge" x1="500" y1="80.0" x2="720" y2="80.0"/>
+            </g>
+            <g class="layer-nodes output stage-6">
+              <circle class="node" cx="720" cy="10.0" r="3.6" style="--jitter:0s"/>
+              <circle class="node" cx="720" cy="45.0" r="3.6" style="--jitter:.08s"/>
+              <circle class="node" cx="720" cy="80.0" r="3.6" style="--jitter:.15s"/>
+            </g>
+          </svg>
+          <p class="nn-caption">a forward pass — signal propagating layer to layer, the way the rest of this page is laid out</p>
+        </div>
       </header>
 
       <!-- ── Research ────────────────────────────────── -->
-      <section id="research" class="tab-content active">
-        <h2 class="section-heading">Research</h2>
+      <section id="research" class="page-section" data-layer="1">
+        <div class="section-head reveal">
+          <p class="eyebrow">Layers 1–4</p>
+          <h2 class="section-heading">Research</h2>
+        </div>
 
-        <p class="research-group-label">Conference Papers</p>
+        <p class="research-group-label" data-layer="1">Conference Papers</p>
 
-        <div class="research-entry">
+        <div class="research-entry reveal">
           <div class="entry-title">
             CAV Styler: Making Neural Style Transfer Interpretable and
             Controllable
@@ -813,6 +1496,7 @@
             <img
               class="paper-image"
               src="https://sunayana-981.github.io/CAV_Styler/static/images/block_diag.jpg"
+              style="aspect-ratio: 881 / 831;"
               alt="Teaser image from the CAV Styler ICVGIP 2025 paper"
             />
           </a>
@@ -823,7 +1507,7 @@
           </div>
         </div>
 
-        <div class="research-entry">
+        <div class="research-entry reveal">
           <div class="entry-title">
             Prototype Guided Backdoor Defense via Activation Space Manipulation
             (PGBD)
@@ -857,6 +1541,7 @@
             <img
               class="paper-image"
               src="https://venkatadithya9.github.io/pgbd.github.io/static/images/Batch_diag-Teaser.png"
+              style="aspect-ratio: 1633 / 692;"
               alt="Teaser image from the PGBD ICCV 2025 paper"
             />
           </a>
@@ -867,9 +1552,9 @@
           </div>
         </div>
 
-        <p class="research-group-label">Workshop Papers</p>
+        <p class="research-group-label" data-layer="2">Workshop Papers</p>
 
-        <div class="research-entry">
+        <div class="research-entry reveal">
           <div class="entry-title">
             [Workshop Paper Title — update me]
           </div>
@@ -891,11 +1576,12 @@
           </div>
         </div>
 
-        <p class="research-group-label">Under Review</p>
+        <p class="research-group-label" data-layer="3">Under Review</p>
 
-        <div class="research-entry">
+        <div class="research-entry reveal">
           <div class="entry-title">
-            Evaluating Sparse Autoencoders for Mechanistic Interpretability
+            Evaluating Sparse Autoencoders for
+            <span class="induction-copy" data-key="mi" tabindex="0" title="Induction head: attends back to its earlier occurrence in the tagline above.">Mechanistic Interpretability</span>
             under Distribution Shift
           </div>
           <div class="entry-meta">Under Review · CVIT, IIIT Hyderabad</div>
@@ -922,7 +1608,7 @@
           </div>
         </div>
 
-        <div class="research-entry">
+        <div class="research-entry reveal">
           <div class="entry-title">
             Toward a Taxonomy of Spatiotemporal Reasoning in Vision-Language
             Models
@@ -953,7 +1639,7 @@
           </div>
         </div>
 
-        <div class="research-entry">
+        <div class="research-entry reveal">
           <div class="entry-title">
             [arXiv Paper Title — update me]
           </div>
@@ -973,9 +1659,9 @@
           </div>
         </div>
 
-        <p class="research-group-label">Working Papers</p>
+        <p class="research-group-label" data-layer="4">Working Papers</p>
 
-        <div class="research-entry">
+        <div class="research-entry reveal">
           <div class="entry-title">
             Survey on Controllability in Style Transfer Concepts
           </div>
@@ -995,10 +1681,13 @@
       </section>
 
       <!-- ── Experience ──────────────────────────────── -->
-      <section id="experience" class="tab-content">
-        <h2 class="section-heading">Experience</h2>
+      <section id="experience" class="page-section" data-layer="5">
+        <div class="section-head reveal">
+          <p class="eyebrow">Layer 5</p>
+          <h2 class="section-heading">Experience</h2>
+        </div>
 
-        <div class="exp-entry">
+        <div class="exp-entry reveal">
           <div class="exp-header">
             <span class="exp-role">Head Teaching Assistant</span>
             <span class="exp-period">Aug 2024 – Dec 2024</span>
@@ -1013,7 +1702,7 @@
           </div>
         </div>
 
-        <div class="exp-entry">
+        <div class="exp-entry reveal">
           <div class="exp-header">
             <span class="exp-role">Deep Learning Mentor</span>
             <span class="exp-period">Jun 2024 – Present</span>
@@ -1025,7 +1714,7 @@
           </div>
         </div>
 
-        <div class="exp-entry">
+        <div class="exp-entry reveal">
           <div class="exp-header">
             <span class="exp-role">Research Intern</span>
             <span class="exp-period">Apr – May 2023</span>
@@ -1041,7 +1730,7 @@
           </div>
         </div>
 
-        <div class="exp-entry">
+        <div class="exp-entry reveal">
           <div class="exp-header">
             <span class="exp-role">Research Assistant</span>
             <span class="exp-period">Nov 2022 – Jun 2023</span>
@@ -1056,7 +1745,7 @@
           </div>
         </div>
 
-        <div class="exp-entry">
+        <div class="exp-entry reveal">
           <div class="exp-header">
             <span class="exp-role">Technical Intern</span>
             <span class="exp-period">Jul – Dec 2022</span>
@@ -1075,12 +1764,15 @@
       </section>
 
       <!-- ── Reviews ────────────────────────────────── -->
-      <section id="reviews" class="tab-content">
-        <h2 class="section-heading">Reviewing</h2>
-        <p style="font-size: 0.88rem; color: var(--c-text-secondary); margin-bottom: 1.8rem;">
+      <section id="reviews" class="page-section" data-layer="6">
+        <div class="section-head reveal">
+          <p class="eyebrow">Layer 6</p>
+          <h2 class="section-heading">Reviewing</h2>
+        </div>
+        <p style="font-family: var(--font-serif); font-size: 0.98rem; color: var(--c-text-secondary); margin-bottom: 1.8rem;">
           Served as a reviewer for the following venues:
         </p>
-        <ul class="review-list">
+        <ul class="review-list reveal">
           <li class="review-item">
             <span class="review-venue">[Conference / Journal Name, Year]</span>
             <span class="review-type">[e.g. Conference / Journal]</span>
@@ -1097,11 +1789,14 @@
       </section>
 
       <!-- ── Projects ────────────────────────────────── -->
-      <section id="projects" class="tab-content">
-        <h2 class="section-heading">Selected Projects</h2>
+      <section id="projects" class="page-section" data-layer="7">
+        <div class="section-head reveal">
+          <p class="eyebrow">Layer 7</p>
+          <h2 class="section-heading">Selected Projects</h2>
+        </div>
 
         <div class="projects-grid">
-          <div class="project-card">
+          <div class="project-card reveal">
             <div class="entry-title">CLIP-Based Domain Adaptation</div>
             <div class="entry-summary">
               Supervised and unsupervised domain generalization pipelines using
@@ -1114,7 +1809,7 @@
             </div>
           </div>
 
-          <div class="project-card">
+          <div class="project-card reveal">
             <div class="entry-title">NIR Facial Recognition Spoofing</div>
             <div class="entry-summary">
               Tested robustness of NIR-based 3D face recognition against
@@ -1127,7 +1822,7 @@
             </div>
           </div>
 
-          <div class="project-card">
+          <div class="project-card reveal">
             <div class="entry-title">3D Reconstruction via ICP SLAM</div>
             <div class="entry-summary">
               Arduino-controlled rotating platform for systematic object
@@ -1143,10 +1838,13 @@
       </section>
 
       <!-- ── Education ───────────────────────────────── -->
-      <section id="education" class="tab-content">
-        <h2 class="section-heading">Education</h2>
+      <section id="education" class="page-section" data-layer="8">
+        <div class="section-head reveal">
+          <p class="eyebrow">Layer 8</p>
+          <h2 class="section-heading">Education</h2>
+        </div>
 
-        <div class="edu-entry">
+        <div class="edu-entry reveal">
           <div class="edu-header">
             <span class="edu-inst">IIIT Hyderabad</span>
             <span class="edu-period">2023 – Present</span>
@@ -1157,7 +1855,7 @@
           </div>
         </div>
 
-        <div class="edu-entry">
+        <div class="edu-entry reveal">
           <div class="edu-header">
             <span class="edu-inst">Dharamsinh Desai University</span>
             <span class="edu-period">2017 – 2021</span>
@@ -1169,61 +1867,367 @@
         </div>
       </section>
 
-      <!-- ── Contact ─────────────────────────────────── -->
-      <section id="contact" class="tab-content contact-section">
-        <h2 class="section-heading">Contact</h2>
-        <p>
-          The best way to reach me is by email at
-          <a href="mailto:sunayana1233@gmail.com">sunayana1233@gmail.com</a>.
-          You can also find me on
-          <a
-            href="https://github.com/sunayana-981"
-            target="_blank"
-            rel="noopener"
-            >GitHub</a
-          >.
-        </p>
+      <!-- ── Contact (unembedding) ────────────────────── -->
+      <section id="contact" class="page-section contact-section" data-layer="9">
+        <div class="section-head reveal">
+          <p class="eyebrow">Layer 9 · Unembed</p>
+          <h2 class="section-heading">Contact</h2>
+        </div>
+
+        <div class="softmax-row reveal">
+          <div class="sm-item sampled">
+            <a class="sm-label-btn primary" href="mailto:sunayana1233@gmail.com">Email</a>
+            <div class="sm-bar-track" aria-hidden="true"><div class="sm-bar" style="width:71%"></div></div>
+            <span aria-hidden="true">0.71</span>
+          </div>
+          <div class="sm-item">
+            <a class="sm-label-btn" href="https://github.com/sunayana-981" target="_blank" rel="noopener">GitHub</a>
+            <div class="sm-bar-track" aria-hidden="true"><div class="sm-bar" style="width:15%"></div></div>
+            <span aria-hidden="true">0.15</span>
+          </div>
+          <div class="sm-item">
+            <a class="sm-label-btn" href="https://scholar.google.com/citations?hl=en&user=qY32y7oAAAAJ" target="_blank" rel="noopener">Scholar</a>
+            <div class="sm-bar-track" aria-hidden="true"><div class="sm-bar" style="width:9%"></div></div>
+            <span aria-hidden="true">0.09</span>
+          </div>
+          <div class="sm-item">
+            <a class="sm-label-btn" href="#" target="_blank" rel="noopener">CV</a>
+            <div class="sm-bar-track" aria-hidden="true"><div class="sm-bar" style="width:5%"></div></div>
+            <span aria-hidden="true">0.05</span>
+          </div>
+        </div>
       </section>
     </main>
+
+    <!-- ── Network spine: the page's layer-to-layer throughline — a real
+         column beside the content, not a floating overlay ── -->
+    <div class="nn-spine" id="nnSpine" aria-hidden="true">
+      <div class="nn-spine-line" id="nnSpineLine"></div>
+      <div class="nn-spine-fill" id="nnSpineFill"></div>
+      <div class="nn-spine-node" data-node="0"></div>
+      <div class="nn-spine-node" data-node="1"></div>
+      <div class="nn-spine-node" data-node="2"></div>
+      <div class="nn-spine-node" data-node="3"></div>
+      <div class="nn-spine-node" data-node="4"></div>
+      <div class="nn-spine-node" data-node="5"></div>
+      <div class="nn-spine-node" data-node="6"></div>
+      <div class="nn-spine-node" data-node="7"></div>
+      <div class="nn-spine-node" data-node="8"></div>
+      <div class="nn-spine-node" data-node="9"></div>
+    </div>
+    </div><!-- /page-layout -->
 
     <!-- ── Footer ───────────────────────────────────── -->
     <footer>
       <div class="container">
         <p>&copy; 2025 Sunayana Samavedam</p>
+        <p class="footer-note">This page renders itself as a stylized forward pass. The publications above are the real output.</p>
       </div>
     </footer>
 
     <script>
-      const tabLinks = document.querySelectorAll('.nav-links a[data-tab]');
-
-      function switchTab(id) {
-        document.querySelectorAll('.tab-content').forEach(s => s.classList.remove('active'));
-        const target = document.getElementById(id);
-        if (target) target.classList.add('active');
-        tabLinks.forEach(a => a.classList.remove('active'));
-        const activeLink = document.querySelector(`.nav-links a[data-tab="${id}"]`);
-        if (activeLink) activeLink.classList.add('active');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-
-      tabLinks.forEach(a => {
-        a.addEventListener('click', e => {
-          e.preventDefault();
-          switchTab(a.dataset.tab);
-          document.querySelector('.nav-links').classList.remove('open');
+      /* ── Model console: frozen open on desktop, collapsible on mobile ── */
+      const consoleEl = document.getElementById('console');
+      const consoleSummary = consoleEl.querySelector('.console-summary');
+      if (window.innerWidth < 860) consoleEl.removeAttribute('open');
+      consoleSummary.addEventListener('click', (e) => {
+        if (window.innerWidth >= 860) e.preventDefault();
+      });
+      // Each nav link's target section starts several sub-layers before its
+      // first data-layer marker (e.g. clicking Research lands at the section
+      // top, ~300px above the "Conference Papers" marker for layer 1) — so
+      // scroll-position detection alone would leave the console showing the
+      // *previous* layer until the user scrolls further in. Map the click
+      // straight to its intended layer instead of waiting on scroll math.
+      //
+      // The browser's own jump-to-anchor fires a burst of scroll events
+      // while it's landing, each with its own in-flight scrollY — if the
+      // regular scroll listener reacts to those mid-flight, it can stomp
+      // the click's correct layer with a stale one a moment later. So a
+      // nav click also suppresses scroll-driven updates for a short grace
+      // window, and does the one resync itself once things have settled.
+      const LINK_LAYER = { '#top': 0, '#research': 1, '#experience': 5, '#reviews': 6, '#projects': 7, '#education': 8, '#contact': 9 };
+      let suppressScrollUntil = 0;
+      document.querySelectorAll('.console-nav a').forEach((a) => {
+        a.addEventListener('click', () => {
+          if (window.innerWidth < 860) {
+            window.setTimeout(() => consoleEl.removeAttribute('open'), 300);
+          }
+          const targetLayer = LINK_LAYER[a.getAttribute('href')];
+          if (targetLayer !== undefined) render(targetLayer);
+          suppressScrollUntil = Date.now() + 500;
+          window.setTimeout(() => {
+            computeOffsets();
+            render(currentLayerFor(window.scrollY));
+          }, 500);
         });
       });
 
-      // Activate Research tab on load
-      switchTab('research');
-
       // Sticky nav border on scroll
-      const nav = document.getElementById("nav");
+      const nav = document.getElementById('nav');
       window.addEventListener(
-        "scroll",
-        () => { nav.classList.toggle("scrolled", window.scrollY > 10); },
+        'scroll',
+        () => { nav.classList.toggle('scrolled', window.scrollY > 10); },
         { passive: true },
       );
+
+      /* ── Theme: light "paper" by default, dark on request ──────── */
+      const themeBtn = document.getElementById('themeBtn');
+      const rootEl = document.documentElement;
+      function applyTheme(theme) {
+        if (theme === 'dark') {
+          rootEl.setAttribute('data-theme', 'dark');
+          themeBtn.textContent = 'Light mode';
+          themeBtn.setAttribute('aria-pressed', 'true');
+        } else {
+          rootEl.removeAttribute('data-theme');
+          themeBtn.textContent = 'Dark mode';
+          themeBtn.setAttribute('aria-pressed', 'false');
+        }
+      }
+      let savedTheme = 'light';
+      try { savedTheme = localStorage.getItem('theme') || 'light'; } catch (e) {}
+      applyTheme(savedTheme);
+      themeBtn.addEventListener('click', () => {
+        const next = rootEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        applyTheme(next);
+        try { localStorage.setItem('theme', next); } catch (e) {}
+      });
+
+      /* ── Scroll reveal ───────────────────────────────── */
+      const revealIO = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+              revealIO.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
+      );
+      document.querySelectorAll('.reveal').forEach((el) => revealIO.observe(el));
+
+      /* ── Layer tracking: drives spine, logit lens, nav ── */
+      const TOTAL_LAYERS = 9;
+      const LAYER_TO_SECTION = [null, 'research', 'research', 'research', 'research', 'experience', 'reviews', 'projects', 'education', 'contact'];
+      const LOGIT_LENS = {
+        0: ['<bos>', 'the', 'a', 'of'],
+        1: ['a', 'model', 'network', 'the'],
+        2: ['vision', 'feature', 'neural', 'model'],
+        3: ['interpretability', 'sparse', 'feature', 'shift'],
+        4: ['style', 'control', 'survey', 'concept'],
+        5: ['taught', 'mentored', 'research', 'lab'],
+        6: ['review', 'reviewer', 'conference', 'venue'],
+        7: ['CLIP', 'domain', '3D', 'build'],
+        8: ['IIIT', 'advisor', 'M.S.', 'thesis'],
+        9: ['Sunayana', 'Samavedam', 'researcher', 'email'],
+      };
+
+      const layerEls = Array.from(document.querySelectorAll('[data-layer]'));
+      let layerOffsets = [];
+
+      const spineEl = document.getElementById('nnSpine');
+      const spineFill = document.getElementById('nnSpineFill');
+      const spineNodes = Array.from(document.querySelectorAll('.nn-spine-node'));
+
+      function computeOffsets() {
+        layerOffsets = layerEls
+          .map((el) => ({ layer: Number(el.dataset.layer), top: el.getBoundingClientRect().top + window.scrollY }))
+          .sort((a, b) => a.top - b.top);
+        layoutSpine();
+      }
+
+      // The spine is now a real flex column beside <main> (not a document-
+      // absolute overlay), so node positions are relative to the rail's own
+      // top rather than the whole document. The connecting line itself is
+      // just top:0/bottom:0 in CSS now — no JS needed for that part.
+      function railTop() {
+        return spineEl.getBoundingClientRect().top + window.scrollY;
+      }
+
+      function layoutSpine() {
+        if (!layerOffsets.length) return;
+        const base = railTop();
+        spineNodes.forEach((n) => {
+          const o = layerOffsets.find((x) => x.layer === Number(n.dataset.node));
+          if (o) n.style.top = `${o.top - base}px`;
+        });
+      }
+
+      computeOffsets();
+      window.addEventListener('resize', computeOffsets);
+      window.addEventListener('load', () => {
+        computeOffsets();
+        render(currentLayerFor(window.scrollY));
+      });
+      window.addEventListener('hashchange', () => {
+        // Covers hash navigation that didn't go through a nav click (e.g.
+        // browser back/forward). hashchange can fire before the browser has
+        // actually scrolled to the target, so wait — and use the same grace
+        // window as nav clicks so the two resyncs can't race each other.
+        suppressScrollUntil = Date.now() + 500;
+        window.setTimeout(() => {
+          computeOffsets();
+          render(currentLayerFor(window.scrollY));
+        }, 500);
+      });
+
+      function currentLayerFor(scrollY) {
+        // Near the bottom of the page there isn't always 140px of extra
+        // scroll room past the last layer's marker — the trigger point can
+        // exceed the maximum possible scrollY, making the final layer
+        // mathematically unreachable. Treat "scrolled to the bottom" as
+        // unambiguously the last layer instead.
+        const maxScroll = document.body.scrollHeight - window.innerHeight;
+        if (scrollY >= maxScroll - 2) return TOTAL_LAYERS;
+        const y = scrollY + 140;
+        let cur = 0;
+        for (const o of layerOffsets) {
+          if (o.top <= y) cur = o.layer;
+          else break;
+        }
+        return cur;
+      }
+
+      const SECTION_LABELS = {
+        research: 'Research',
+        experience: 'Experience',
+        reviews: 'Reviewing',
+        projects: 'Projects',
+        education: 'Education',
+        contact: 'Contact',
+      };
+
+      const lensListEl = document.getElementById('lensList');
+      const consoleCurrentEl = document.getElementById('consoleCurrent');
+      const statLayerEl = document.getElementById('statLayer');
+      const statNormEl = document.getElementById('statNorm');
+      const navLinkEls = Array.from(document.querySelectorAll('.console-nav a'));
+
+      let prevLayer = -1;
+
+      // The layer under the scroll trigger point can flip back and forth
+      // for a few animation frames when momentum/rubber-band scrolling
+      // passes right at a short section's boundary (e.g. the single-paper
+      // Workshop layer, or Education). render() only actually runs once
+      // the computed layer has held steady for a beat, so the console,
+      // spine, and logit lens settle on one value instead of flickering.
+      let pendingLayer = null;
+      let settleTimer = null;
+      function commitLayer(layer) {
+        if (layer === prevLayer) { pendingLayer = null; clearTimeout(settleTimer); return; }
+        if (pendingLayer === layer) return;
+        pendingLayer = layer;
+        clearTimeout(settleTimer);
+        settleTimer = setTimeout(() => {
+          pendingLayer = null;
+          render(layer);
+        }, 90);
+      }
+
+      function render(layer) {
+        spineNodes.forEach((n) => {
+          const i = Number(n.dataset.node);
+          n.classList.toggle('passed', i <= layer);
+          n.classList.toggle('current', i === layer);
+        });
+
+        const curOffset = layerOffsets.find((o) => o.layer === layer);
+        if (curOffset && layerOffsets.length) {
+          spineFill.style.top = '0px';
+          spineFill.style.height = `${Math.max(0, curOffset.top - railTop())}px`;
+        }
+
+        if (layer !== prevLayer) {
+          const curNode = spineNodes.find((n) => Number(n.dataset.node) === layer);
+          if (curNode) {
+            curNode.classList.remove('firing');
+            void curNode.offsetWidth;
+            curNode.classList.add('firing');
+          }
+          consoleEl.classList.remove('pulse');
+          void consoleEl.offsetWidth;
+          consoleEl.classList.add('pulse');
+          prevLayer = layer;
+        }
+
+        const secId = LAYER_TO_SECTION[layer];
+        const activeHref = secId ? `#${secId}` : '#top';
+        consoleCurrentEl.textContent = secId ? SECTION_LABELS[secId] : 'Embedding';
+        statLayerEl.textContent = `Layer ${layer} / ${TOTAL_LAYERS}`;
+        statNormEl.textContent = `‖resid‖ ≈ ${(1 + layer * 0.18).toFixed(2)}`;
+
+        const tokens = LOGIT_LENS[layer] || LOGIT_LENS[0];
+        const weights = [92, 64, 40, 22];
+        lensListEl.textContent = '';
+        tokens.forEach((t, i) => {
+          const li = document.createElement('li');
+          li.style.setProperty('--w', `${weights[i] || 15}%`);
+          const rank = document.createElement('span');
+          rank.className = 'lens-rank';
+          rank.textContent = String(i + 1);
+          const tok = document.createElement('span');
+          tok.className = 'lens-tok';
+          tok.textContent = t;
+          li.append(rank, tok);
+          lensListEl.append(li);
+        });
+
+        navLinkEls.forEach((a) => {
+          a.classList.toggle('active', a.getAttribute('href') === activeHref);
+        });
+      }
+
+      let ticking = false;
+      function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          if (Date.now() >= suppressScrollUntil) {
+            commitLayer(currentLayerFor(window.scrollY));
+          }
+          ticking = false;
+        });
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      render(currentLayerFor(window.scrollY));
+
+      /* ── Induction-head easter egg ──────────────────── */
+      const svg = document.getElementById('inductionSvg');
+      const path = document.getElementById('inductionPath');
+      document.querySelectorAll('.induction-copy').forEach((copyEl) => {
+        const key = copyEl.dataset.key;
+        const source = document.querySelector(`.induction-token[data-key="${key}"]`);
+
+        function show() {
+          if (!source) return;
+          const a = source.getBoundingClientRect();
+          const b = copyEl.getBoundingClientRect();
+          const x1 = a.left + a.width / 2, y1 = a.top + a.height / 2;
+          const x2 = b.left + b.width / 2, y2 = b.top + b.height / 2;
+          const midY = (y1 + y2) / 2 - 60;
+          path.setAttribute('d', `M ${x1} ${y1} Q ${(x1 + x2) / 2} ${midY} ${x2} ${y2}`);
+          svg.classList.add('visible');
+          source.classList.add('induction-active');
+          copyEl.classList.add('induction-active');
+        }
+        function hide() {
+          svg.classList.remove('visible');
+          source && source.classList.remove('induction-active');
+          copyEl.classList.remove('induction-active');
+        }
+
+        copyEl.addEventListener('mouseenter', show);
+        copyEl.addEventListener('mouseleave', hide);
+        copyEl.addEventListener('focus', show);
+        copyEl.addEventListener('blur', hide);
+        copyEl.addEventListener('click', (e) => {
+          e.preventDefault();
+          show();
+          setTimeout(hide, 1600);
+        });
+      });
     </script>
   </body>
 </html>

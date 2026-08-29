@@ -917,13 +917,18 @@
         .nn-spine { display: none; }
       }
 
-      /* ── Model console: navigation + live interpretability readout ── */
+      /* ── Model console: navigation + live interpretability readout ──
+         A real static column in the page flow (a flex child of
+         .page-layout, not a fixed/floating overlay), so it can never
+         crowd or overlap the content beside it and never needs an
+         internal scrollbar. Sticky just keeps it in view while reading. */
       .console {
-        position: fixed;
-        left: 20px;
-        bottom: 20px;
+        position: sticky;
+        top: 20px;
+        align-self: start;
+        flex-shrink: 0;
         width: 300px;
-        max-height: calc(100vh - 40px);
+        margin-bottom: 20px;
         /* the exact page background, not a distinct "card" color or a
            translucent glass overlay — it reads as cut from the same paper
            as the rest of the page, not a widget floating on top of it */
@@ -1011,8 +1016,6 @@
 
       .console-body {
         padding: 0 1.1rem 1.1rem;
-        max-height: calc(100vh - 140px);
-        overflow-y: auto;
       }
 
       /* Shaped like a transformer block stack: boxed layers on the main
@@ -1221,8 +1224,24 @@
       }
 
 
+      /* below this width the console reverts to a floating collapsible
+         drawer (short viewports genuinely need it out of the static flow
+         and capped, so it gets its scrollbar back only here) */
       @media (max-width: 640px) {
-        .console { left: 12px; right: 12px; bottom: 12px; width: auto; }
+        .console {
+          position: fixed;
+          top: auto;
+          left: 12px;
+          right: 12px;
+          bottom: 12px;
+          width: auto;
+          max-height: calc(100vh - 24px);
+          margin-bottom: 0;
+        }
+        .console-body {
+          max-height: calc(100vh - 140px);
+          overflow-y: auto;
+        }
       }
 
       /* ── Responsive ────────────────────────────────── */
@@ -1255,7 +1274,11 @@
       </div>
     </nav>
 
-    <!-- ── Model console: navigation + live interpretability readout ── -->
+    <svg id="inductionSvg" aria-hidden="true"><path id="inductionPath" /></svg>
+
+    <div class="page-layout">
+    <!-- ── Model console: navigation + live interpretability readout —
+         a real static column in the page flow, not a fixed overlay ── -->
     <details class="console" id="console" open>
       <summary class="console-summary">
         <span class="console-dot" aria-hidden="true"></span>
@@ -1312,10 +1335,6 @@
         </div>
       </div>
     </details>
-
-    <svg id="inductionSvg" aria-hidden="true"><path id="inductionPath" /></svg>
-
-    <div class="page-layout">
     <main class="container">
       <!-- ── Hero (embedding) ────────────────────────── -->
       <header class="hero" data-layer="0">

@@ -29,30 +29,33 @@
       }
 
       :root {
-        --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+        --font-sans:
+          "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display",
+          "Helvetica Neue", Arial, sans-serif;
         --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
-        --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        --font-mono:
+          "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
         /* light "paper" theme (default) */
         color-scheme: light;
-        --c-bg:           #faf7f0;
-        --c-bg-elev:      #ffffff;
-        --c-bg-elev-2:    #f2ecdc;
-        --c-text:         #201d16;
+        --c-bg: #faf7f0;
+        --c-bg-elev: #ffffff;
+        --c-bg-elev-2: #f2ecdc;
+        --c-text: #201d16;
         --c-text-secondary: #55503f;
-        --c-text-tertiary:  #8a8471;
-        --c-accent:       #1e4fa3;
+        --c-text-tertiary: #8a8471;
+        --c-accent: #1e4fa3;
         --c-accent-hover: #2f63c0;
-        --c-accent-2:     #9a3324;
-        --c-accent-soft:  rgba(30, 79, 163, 0.08);
-        --c-border:       rgba(32, 29, 22, 0.13);
+        --c-accent-2: #9a3324;
+        --c-accent-soft: rgba(30, 79, 163, 0.08);
+        --c-border: rgba(32, 29, 22, 0.13);
         --c-border-bright: rgba(32, 29, 22, 0.24);
-        --c-shadow:       rgba(40, 34, 20, 0.16);
-        --c-glass:        rgba(255, 252, 244, 0.82);
-        --c-chip:         rgba(32, 29, 22, 0.055);
-        --c-hero-glow:    rgba(30, 79, 163, 0.05);
-        --c-diagram-line:  rgba(32, 29, 22, 0.4);
-        --c-diagram-node:  rgba(32, 29, 22, 0.55);
+        --c-shadow: rgba(40, 34, 20, 0.16);
+        --c-glass: rgba(255, 252, 244, 0.82);
+        --c-chip: rgba(32, 29, 22, 0.055);
+        --c-hero-glow: rgba(30, 79, 163, 0.05);
+        --c-diagram-line: rgba(32, 29, 22, 0.4);
+        --c-diagram-node: rgba(32, 29, 22, 0.55);
 
         /* one hue per console block, echoing the classic transformer-figure
            palette (pink embedding, orange attention, blue feed-forward,
@@ -72,24 +75,24 @@
 
       :root[data-theme="dark"] {
         color-scheme: dark;
-        --c-bg:           #050507;
-        --c-bg-elev:      #0e0f13;
-        --c-bg-elev-2:    #17181e;
-        --c-text:         #f5f5f7;
+        --c-bg: #050507;
+        --c-bg-elev: #0e0f13;
+        --c-bg-elev-2: #17181e;
+        --c-text: #f5f5f7;
         --c-text-secondary: #a1a1a6;
-        --c-text-tertiary:  #6e6e73;
-        --c-accent:       #0a84ff;
+        --c-text-tertiary: #6e6e73;
+        --c-accent: #0a84ff;
         --c-accent-hover: #2a94ff;
-        --c-accent-2:     #ff9f0a;
-        --c-accent-soft:  rgba(10, 132, 255, 0.14);
-        --c-border:       rgba(255, 255, 255, 0.09);
+        --c-accent-2: #ff9f0a;
+        --c-accent-soft: rgba(10, 132, 255, 0.14);
+        --c-border: rgba(255, 255, 255, 0.09);
         --c-border-bright: rgba(255, 255, 255, 0.18);
-        --c-shadow:       rgba(0, 0, 0, 0.5);
-        --c-glass:        rgba(9, 11, 15, 0.74);
-        --c-chip:         rgba(255, 255, 255, 0.06);
-        --c-hero-glow:    rgba(10, 132, 255, 0.09);
-        --c-diagram-line:  rgba(255, 255, 255, 0.22);
-        --c-diagram-node:  rgba(255, 255, 255, 0.32);
+        --c-shadow: rgba(0, 0, 0, 0.5);
+        --c-glass: rgba(9, 11, 15, 0.74);
+        --c-chip: rgba(255, 255, 255, 0.06);
+        --c-hero-glow: rgba(10, 132, 255, 0.09);
+        --c-diagram-line: rgba(255, 255, 255, 0.22);
+        --c-diagram-node: rgba(255, 255, 255, 0.32);
       }
 
       html {
@@ -103,7 +106,11 @@
         font-family: var(--font-sans);
         color: var(--c-text);
         background-color: var(--c-bg);
-        background-image: radial-gradient(ellipse 900px 500px at 50% -10%, var(--c-hero-glow), transparent 60%);
+        background-image: radial-gradient(
+          ellipse 900px 500px at 50% -10%,
+          var(--c-hero-glow),
+          transparent 60%
+        );
         background-repeat: no-repeat;
         line-height: 1.65;
         font-weight: 400;
@@ -120,46 +127,84 @@
         color: #fff;
       }
 
-      ::-webkit-scrollbar { width: 10px; height: 10px; }
-      ::-webkit-scrollbar-track { background: var(--c-bg); }
-      ::-webkit-scrollbar-thumb { background: var(--c-border-bright); border-radius: 5px; }
-      ::-webkit-scrollbar-thumb:hover { background: var(--c-text-tertiary); }
-      html { scrollbar-color: var(--c-border-bright) var(--c-bg); scrollbar-width: thin; }
+      ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--c-bg);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--c-border-bright);
+        border-radius: 5px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--c-text-tertiary);
+      }
+      html {
+        scrollbar-color: var(--c-border-bright) var(--c-bg);
+        scrollbar-width: thin;
+      }
 
       /* ── Scroll reveal ───────────────────────────────── */
       .reveal {
         opacity: 0;
         transform: translateY(34px) scale(0.96);
         filter: blur(6px);
-        transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        transition:
+          opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+          filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
         will-change: opacity, transform, filter;
       }
 
-      .reveal.in-view { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+      .reveal.in-view {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
 
       /* stagger repeated items so groups cascade in rather than pop together */
       .research-entry.reveal:nth-of-type(1),
       .exp-entry.reveal:nth-of-type(1),
       .project-card.reveal:nth-of-type(1),
-      .edu-entry.reveal:nth-of-type(1) { transition-delay: 0s; }
+      .edu-entry.reveal:nth-of-type(1) {
+        transition-delay: 0s;
+      }
       .research-entry.reveal:nth-of-type(2),
       .exp-entry.reveal:nth-of-type(2),
       .project-card.reveal:nth-of-type(2),
-      .edu-entry.reveal:nth-of-type(2) { transition-delay: 0.08s; }
+      .edu-entry.reveal:nth-of-type(2) {
+        transition-delay: 0.08s;
+      }
       .research-entry.reveal:nth-of-type(3),
       .exp-entry.reveal:nth-of-type(3),
       .project-card.reveal:nth-of-type(3),
-      .edu-entry.reveal:nth-of-type(3) { transition-delay: 0.16s; }
+      .edu-entry.reveal:nth-of-type(3) {
+        transition-delay: 0.16s;
+      }
       .research-entry.reveal:nth-of-type(4),
-      .exp-entry.reveal:nth-of-type(4) { transition-delay: 0.24s; }
+      .exp-entry.reveal:nth-of-type(4) {
+        transition-delay: 0.24s;
+      }
       .research-entry.reveal:nth-of-type(5),
-      .exp-entry.reveal:nth-of-type(5) { transition-delay: 0.32s; }
-      .research-entry.reveal:nth-of-type(6) { transition-delay: 0.4s; }
-      .research-entry.reveal:nth-of-type(7) { transition-delay: 0.48s; }
+      .exp-entry.reveal:nth-of-type(5) {
+        transition-delay: 0.32s;
+      }
+      .research-entry.reveal:nth-of-type(6) {
+        transition-delay: 0.4s;
+      }
+      .research-entry.reveal:nth-of-type(7) {
+        transition-delay: 0.48s;
+      }
 
       @media (prefers-reduced-motion: reduce) {
         /* keep a plain fade — only the positional slide/scale/blur is dropped */
-        .reveal { transform: none; filter: none; transition: opacity 0.5s ease; }
+        .reveal {
+          transform: none;
+          filter: none;
+          transition: opacity 0.5s ease;
+        }
       }
 
       /* ── Layout ────────────────────────────────────── */
@@ -218,7 +263,6 @@
       /* ── Hero ──────────────────────────────────────── */
       .hero {
         padding: 6.5rem 0 4.5rem;
-        border-bottom: 1px solid var(--c-border);
       }
 
       .hero-inner {
@@ -227,9 +271,15 @@
         align-items: flex-start;
       }
 
-      .hero-text { flex: 1; min-width: 0; }
+      .hero-text {
+        flex: 1;
+        min-width: 0;
+      }
 
-      .hero-photo { flex-shrink: 0; padding-top: 0.4rem; }
+      .hero-photo {
+        flex-shrink: 0;
+        padding-top: 0.4rem;
+      }
 
       .hero-photo img {
         width: 148px;
@@ -245,7 +295,10 @@
       }
 
       @keyframes fadeUp {
-        to { opacity: 1; transform: translateY(0); }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       .hero h1 {
@@ -274,7 +327,9 @@
         animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.16s forwards;
       }
 
-      .hero .tagline .hl { color: var(--c-text); }
+      .hero .tagline .hl {
+        color: var(--c-text);
+      }
 
       .hero .intro {
         font-family: var(--font-serif);
@@ -287,7 +342,10 @@
         animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.27s forwards;
       }
 
-      .hero .intro strong { color: var(--c-text); font-weight: 600; }
+      .hero .intro strong {
+        color: var(--c-text);
+        font-weight: 600;
+      }
 
       /* the hero entrance is a single small (14px) fade-up on load, not
          looping/ambient motion, so it plays regardless of reduced-motion */
@@ -330,12 +388,20 @@
       }
 
       @media (max-width: 560px) {
-        .hero-inner { flex-direction: column-reverse; gap: 1.5rem; }
-        .hero-photo img { width: 96px; height: 96px; }
+        .hero-inner {
+          flex-direction: column-reverse;
+          gap: 1.5rem;
+        }
+        .hero-photo img {
+          width: 96px;
+          height: 96px;
+        }
       }
 
       /* ── Hero: network diagram (3Blue1Brown-style forward pass) ── */
-      .nn-wrap { margin-top: 3rem; }
+      .nn-wrap {
+        margin-top: 3rem;
+      }
 
       .nn-diagram {
         width: 100%;
@@ -358,7 +424,9 @@
       }
 
       @keyframes edgeShimmer {
-        to { stroke-dashoffset: -26; }
+        to {
+          stroke-dashoffset: -26;
+        }
       }
 
       .nn-caption {
@@ -370,33 +438,68 @@
       }
 
       @media (max-width: 640px) {
-        .nn-wrap { display: none; }
+        .nn-wrap {
+          display: none;
+        }
       }
 
       @keyframes nnNodePulse {
-        0%, 100% { opacity: 0.55; filter: drop-shadow(0 0 0 transparent); }
-        50% { opacity: 1; filter: drop-shadow(0 0 7px var(--pulse-color, var(--c-accent))); fill: var(--pulse-color, var(--c-accent)); }
+        0%,
+        100% {
+          opacity: 0.55;
+          filter: drop-shadow(0 0 0 transparent);
+        }
+        50% {
+          opacity: 1;
+          filter: drop-shadow(0 0 7px var(--pulse-color, var(--c-accent)));
+          fill: var(--pulse-color, var(--c-accent));
+        }
       }
 
       @keyframes nnEdgePulse {
-        0%, 100% { opacity: 0.22; }
-        50% { opacity: 0.95; stroke: var(--c-accent); }
+        0%,
+        100% {
+          opacity: 0.22;
+        }
+        50% {
+          opacity: 0.95;
+          stroke: var(--c-accent);
+        }
       }
 
       .nn-diagram .node {
         animation: nnNodePulse 5.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
         animation-delay: calc(var(--stage-delay, 0s) + var(--jitter, 0s));
       }
-      .nn-diagram .layer-nodes.output .node { --pulse-color: var(--c-accent-2); }
-      .nn-diagram .edge-bundle { animation: nnEdgePulse 5.6s cubic-bezier(0.4, 0, 0.2, 1) infinite; animation-delay: var(--stage-delay, 0s); }
+      .nn-diagram .layer-nodes.output .node {
+        --pulse-color: var(--c-accent-2);
+      }
+      .nn-diagram .edge-bundle {
+        animation: nnEdgePulse 5.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        animation-delay: var(--stage-delay, 0s);
+      }
 
-      .nn-diagram .stage-0 { --stage-delay: -2.8s; }
-      .nn-diagram .stage-1 { --stage-delay: -2.0s; }
-      .nn-diagram .stage-2 { --stage-delay: -1.2s; }
-      .nn-diagram .stage-3 { --stage-delay: -0.4s; }
-      .nn-diagram .stage-4 { --stage-delay: 0.4s; }
-      .nn-diagram .stage-5 { --stage-delay: 1.2s; }
-      .nn-diagram .stage-6 { --stage-delay: 2.0s; }
+      .nn-diagram .stage-0 {
+        --stage-delay: -2.8s;
+      }
+      .nn-diagram .stage-1 {
+        --stage-delay: -2s;
+      }
+      .nn-diagram .stage-2 {
+        --stage-delay: -1.2s;
+      }
+      .nn-diagram .stage-3 {
+        --stage-delay: -0.4s;
+      }
+      .nn-diagram .stage-4 {
+        --stage-delay: 0.4s;
+      }
+      .nn-diagram .stage-5 {
+        --stage-delay: 1.2s;
+      }
+      .nn-diagram .stage-6 {
+        --stage-delay: 2s;
+      }
 
       /* the forward-pass pulse is a slow (3.4–5.6s) colour/glow crossfade
          with no positional movement, so — unlike the scroll reveal — it
@@ -406,35 +509,63 @@
       /* ── Sections (single-scroll layout) ───────────── */
       .page-section {
         padding: 5rem 0;
-        border-bottom: 1px solid var(--c-border);
         scroll-margin-top: 76px;
       }
 
-      .page-section:last-of-type { border-bottom: none; }
-
       /* Each section wears its console-flow-chart hue: Embedding → hero,
          then Research…Contact map to blk-1…blk-7, the same order and
-         colours as the boxed blocks in the console nav. */
-      .hero       { --sec-color: var(--blk-1); }
-      #research   { --sec-color: var(--blk-2); }
-      #experience { --sec-color: var(--blk-3); }
-      #reviews    { --sec-color: var(--blk-4); }
-      #projects   { --sec-color: var(--blk-5); }
-      #education  { --sec-color: var(--blk-6); }
-      #contact    { --sec-color: var(--blk-7); }
+         colours as the boxed blocks in the console nav. Each section's
+         fill holds its own hue, then eases into the next section's hue
+         over its final stretch — the two sections meet on exactly the
+         same colour, so scrolling reads as one continuous gradient
+         rather than a stack of bands. */
+      .hero {
+        --sec-color: var(--blk-1);
+        --sec-next: var(--blk-2);
+      }
+      #research {
+        --sec-color: var(--blk-2);
+        --sec-next: var(--blk-3);
+      }
+      #experience {
+        --sec-color: var(--blk-3);
+        --sec-next: var(--blk-4);
+      }
+      #reviews {
+        --sec-color: var(--blk-4);
+        --sec-next: var(--blk-5);
+      }
+      #projects {
+        --sec-color: var(--blk-5);
+        --sec-next: var(--blk-6);
+      }
+      #education {
+        --sec-color: var(--blk-6);
+        --sec-next: var(--blk-7);
+      }
+      #contact {
+        --sec-color: var(--blk-7);
+        --sec-next: var(--blk-7);
+      }
 
       .hero,
       .page-section {
-        background: color-mix(in srgb, var(--sec-color) 15%, transparent);
-      }
-
-      .page-section {
-        border-top: 4px solid var(--sec-color);
+        background: linear-gradient(
+          to bottom,
+          color-mix(in srgb, var(--sec-color) 17%, transparent) 0%,
+          color-mix(in srgb, var(--sec-color) 17%, transparent) 66%,
+          color-mix(in srgb, var(--sec-next) 17%, transparent) 100%
+        );
       }
 
       :root[data-theme="dark"] .hero,
       :root[data-theme="dark"] .page-section {
-        background: color-mix(in srgb, var(--sec-color) 20%, transparent);
+        background: linear-gradient(
+          to bottom,
+          color-mix(in srgb, var(--sec-color) 24%, transparent) 0%,
+          color-mix(in srgb, var(--sec-color) 24%, transparent) 66%,
+          color-mix(in srgb, var(--sec-next) 24%, transparent) 100%
+        );
       }
 
       /* Section identity is carried visually by the per-section colour
@@ -591,7 +722,9 @@
         transition: opacity 0.25s ease;
       }
 
-      #inductionSvg.visible { opacity: 1; }
+      #inductionSvg.visible {
+        opacity: 1;
+      }
 
       #inductionPath {
         fill: none;
@@ -601,10 +734,16 @@
       }
 
       @media (prefers-reduced-motion: no-preference) {
-        #inductionSvg.visible #inductionPath { animation: dashFlow 0.9s linear infinite; }
+        #inductionSvg.visible #inductionPath {
+          animation: dashFlow 0.9s linear infinite;
+        }
       }
 
-      @keyframes dashFlow { to { stroke-dashoffset: -16; } }
+      @keyframes dashFlow {
+        to {
+          stroke-dashoffset: -16;
+        }
+      }
 
       /* ── Experience ────────────────────────────────── */
       .exp-entry {
@@ -710,7 +849,10 @@
         border: 1px solid var(--c-border);
         border-radius: 20px;
         background-color: var(--c-bg-elev);
-        transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        transition:
+          border-color 0.3s,
+          transform 0.3s,
+          box-shadow 0.3s;
       }
 
       .project-card:hover {
@@ -839,7 +981,9 @@
         font-weight: 600;
       }
 
-      .softmax-row .sm-item.sampled .sm-bar { background: var(--c-accent-2); }
+      .softmax-row .sm-item.sampled .sm-bar {
+        background: var(--c-accent-2);
+      }
 
       .softmax-row .sm-label-btn {
         justify-self: start;
@@ -853,7 +997,11 @@
         border: 1px solid var(--c-border-bright);
         border-radius: 980px;
         background: var(--c-bg);
-        transition: background 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s, color 0.25s, transform 0.25s;
+        transition:
+          background 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+          border-color 0.25s,
+          color 0.25s,
+          transform 0.25s;
       }
 
       .softmax-row .sm-label-btn:hover {
@@ -908,7 +1056,11 @@
         transform: translateX(-50%);
       }
 
-      .nn-spine-line { top: 0; bottom: 0; background: var(--c-border); }
+      .nn-spine-line {
+        top: 0;
+        bottom: 0;
+        background: var(--c-border);
+      }
 
       .nn-spine-fill {
         background: linear-gradient(var(--c-accent), var(--c-accent-2));
@@ -925,25 +1077,54 @@
         background-color: var(--c-bg-elev);
         border: 1px solid var(--c-border-bright);
         transform: translate(-50%, -50%);
-        transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+        transition:
+          background-color 0.4s ease,
+          border-color 0.4s ease,
+          box-shadow 0.4s ease;
       }
 
-      .nn-spine-node.passed { background-color: var(--c-accent); border-color: var(--c-accent); box-shadow: 0 0 6px color-mix(in srgb, var(--c-accent) 55%, transparent); }
+      .nn-spine-node.passed {
+        background-color: var(--c-accent);
+        border-color: var(--c-accent);
+        box-shadow: 0 0 6px color-mix(in srgb, var(--c-accent) 55%, transparent);
+      }
       .nn-spine-node.current {
         background-color: var(--c-accent-2);
         border-color: var(--c-accent-2);
-        box-shadow: 0 0 0 3px var(--c-bg), 0 0 0 5px var(--c-accent-2), 0 0 14px color-mix(in srgb, var(--c-accent-2) 50%, transparent);
+        box-shadow:
+          0 0 0 3px var(--c-bg),
+          0 0 0 5px var(--c-accent-2),
+          0 0 14px color-mix(in srgb, var(--c-accent-2) 50%, transparent);
       }
-      .nn-spine-node.firing { animation: nodeFire 0.9s ease-out; }
+      .nn-spine-node.firing {
+        animation: nodeFire 0.9s ease-out;
+      }
 
       @keyframes nodeFire {
-        0% { box-shadow: 0 0 0 3px var(--c-bg), 0 0 0 5px var(--c-accent-2), 0 0 14px color-mix(in srgb, var(--c-accent-2) 50%, transparent); }
-        40% { box-shadow: 0 0 0 3px var(--c-bg), 0 0 0 14px color-mix(in srgb, var(--c-accent-2) 28%, transparent), 0 0 28px color-mix(in srgb, var(--c-accent-2) 60%, transparent); }
-        100% { box-shadow: 0 0 0 3px var(--c-bg), 0 0 0 5px var(--c-accent-2), 0 0 14px color-mix(in srgb, var(--c-accent-2) 50%, transparent); }
+        0% {
+          box-shadow:
+            0 0 0 3px var(--c-bg),
+            0 0 0 5px var(--c-accent-2),
+            0 0 14px color-mix(in srgb, var(--c-accent-2) 50%, transparent);
+        }
+        40% {
+          box-shadow:
+            0 0 0 3px var(--c-bg),
+            0 0 0 14px color-mix(in srgb, var(--c-accent-2) 28%, transparent),
+            0 0 28px color-mix(in srgb, var(--c-accent-2) 60%, transparent);
+        }
+        100% {
+          box-shadow:
+            0 0 0 3px var(--c-bg),
+            0 0 0 5px var(--c-accent-2),
+            0 0 14px color-mix(in srgb, var(--c-accent-2) 50%, transparent);
+        }
       }
 
       @media (max-width: 1300px) {
-        .nn-spine { display: none; }
+        .nn-spine {
+          display: none;
+        }
       }
 
       /* ── Model console: navigation + live interpretability readout ──
@@ -956,12 +1137,11 @@
         left: 0;
         bottom: 0;
         width: var(--console-w);
-        /* the exact page background, not a distinct "card" color or a
-           translucent glass overlay — it reads as cut from the same paper
-           as the rest of the page, not a widget floating on top of it */
-        background-color: var(--c-bg);
+        /* a slightly deeper "paper" than the page, so the pane sits apart
+           from the content column without becoming a glassy floating widget */
+        background-color: var(--c-bg-elev-2);
         border: none;
-        border-right: 1px solid var(--c-border);
+        border-right: 1px solid var(--c-border-bright);
         z-index: 60;
         overflow: hidden;
       }
@@ -976,7 +1156,9 @@
         user-select: none;
       }
 
-      .console-summary::-webkit-details-marker { display: none; }
+      .console-summary::-webkit-details-marker {
+        display: none;
+      }
 
       .console-dot {
         width: 7px;
@@ -989,8 +1171,15 @@
       }
 
       @keyframes dotBreathe {
-        0%, 100% { opacity: 0.4; transform: scale(0.85); }
-        50% { opacity: 1; transform: scale(1); }
+        0%,
+        100% {
+          opacity: 0.4;
+          transform: scale(0.85);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1);
+        }
       }
 
       .console-label {
@@ -1016,11 +1205,17 @@
         transition: transform 0.25s ease;
       }
 
-      details[open] > .console-summary .console-chevron { transform: rotate(180deg); }
+      details[open] > .console-summary .console-chevron {
+        transform: rotate(180deg);
+      }
 
       @media (min-width: 860px) {
-        .console-summary { cursor: default; }
-        .console-chevron { display: none; }
+        .console-summary {
+          cursor: default;
+        }
+        .console-chevron {
+          display: none;
+        }
       }
 
       .console-body {
@@ -1056,19 +1251,40 @@
         color: var(--c-text);
         text-decoration: none;
         text-align: center;
-        transition: border-color 0.25s, color 0.25s, box-shadow 0.25s, filter 0.25s;
+        transition:
+          border-color 0.25s,
+          color 0.25s,
+          box-shadow 0.25s,
+          filter 0.25s;
       }
 
       /* one flat pastel fill per block, transformer-figure style */
-      .console-nav a:nth-child(1) { background: color-mix(in srgb, var(--blk-1) 34%, var(--c-bg-elev)); }
-      .console-nav a:nth-child(2) { background: color-mix(in srgb, var(--blk-2) 34%, var(--c-bg-elev)); }
-      .console-nav a:nth-child(3) { background: color-mix(in srgb, var(--blk-3) 34%, var(--c-bg-elev)); }
-      .console-nav a:nth-child(4) { background: color-mix(in srgb, var(--blk-4) 34%, var(--c-bg-elev)); }
-      .console-nav a:nth-child(5) { background: color-mix(in srgb, var(--blk-5) 34%, var(--c-bg-elev)); }
-      .console-nav a:nth-child(6) { background: color-mix(in srgb, var(--blk-6) 34%, var(--c-bg-elev)); }
-      .console-nav a:nth-child(7) { background: color-mix(in srgb, var(--blk-7) 34%, var(--c-bg-elev)); }
+      .console-nav a:nth-child(1) {
+        background: color-mix(in srgb, var(--blk-1) 34%, var(--c-bg-elev));
+      }
+      .console-nav a:nth-child(2) {
+        background: color-mix(in srgb, var(--blk-2) 34%, var(--c-bg-elev));
+      }
+      .console-nav a:nth-child(3) {
+        background: color-mix(in srgb, var(--blk-3) 34%, var(--c-bg-elev));
+      }
+      .console-nav a:nth-child(4) {
+        background: color-mix(in srgb, var(--blk-4) 34%, var(--c-bg-elev));
+      }
+      .console-nav a:nth-child(5) {
+        background: color-mix(in srgb, var(--blk-5) 34%, var(--c-bg-elev));
+      }
+      .console-nav a:nth-child(6) {
+        background: color-mix(in srgb, var(--blk-6) 34%, var(--c-bg-elev));
+      }
+      .console-nav a:nth-child(7) {
+        background: color-mix(in srgb, var(--blk-7) 34%, var(--c-bg-elev));
+      }
 
-      .console-nav a:hover { filter: brightness(1.08); border-color: var(--c-text); }
+      .console-nav a:hover {
+        filter: brightness(1.08);
+        border-color: var(--c-text);
+      }
 
       /* downward arrow to the next block, on the main path */
       .console-nav a:not(:last-child)::after {
@@ -1103,7 +1319,9 @@
         transition: stroke 0.25s;
       }
 
-      .console-nav a.active .bypass-arc path { stroke: var(--c-accent-2); }
+      .console-nav a.active .bypass-arc path {
+        stroke: var(--c-accent-2);
+      }
 
       .plus-node {
         position: absolute;
@@ -1122,21 +1340,28 @@
         align-items: center;
         justify-content: center;
         z-index: 2;
-        transition: background-color 0.25s, border-color 0.25s, color 0.25s, box-shadow 0.25s;
+        transition:
+          background-color 0.25s,
+          border-color 0.25s,
+          color 0.25s,
+          box-shadow 0.25s;
       }
 
       .console-nav a.active {
         color: var(--c-text);
         background: var(--c-accent-soft);
         border-color: var(--c-accent-2);
-        box-shadow: 0 0 0 1px var(--c-accent-2), 0 0 18px color-mix(in srgb, var(--c-accent-2) 30%, transparent);
+        box-shadow:
+          0 0 0 1px var(--c-accent-2),
+          0 0 18px color-mix(in srgb, var(--c-accent-2) 30%, transparent);
       }
 
       .console-nav a.active .plus-node {
         border-color: var(--c-accent-2);
         color: var(--c-accent-2);
         background-color: var(--c-bg-elev);
-        box-shadow: 0 0 8px color-mix(in srgb, var(--c-accent-2) 60%, transparent);
+        box-shadow: 0 0 8px
+          color-mix(in srgb, var(--c-accent-2) 60%, transparent);
       }
 
       .console-stats {
@@ -1191,11 +1416,19 @@
         opacity: 0.14;
       }
 
-      .console-lens li > * { position: relative; }
+      .console-lens li > * {
+        position: relative;
+      }
 
-      .lens-rank { color: var(--c-text-tertiary); font-size: 0.7rem; }
+      .lens-rank {
+        color: var(--c-text-tertiary);
+        font-size: 0.7rem;
+      }
 
-      .console-lens li:first-child .lens-tok { color: var(--c-text); font-weight: 600; }
+      .console-lens li:first-child .lens-tok {
+        color: var(--c-text);
+        font-weight: 600;
+      }
 
       .console-actions {
         display: flex;
@@ -1215,7 +1448,11 @@
         border-radius: 50%;
         padding: 0;
         cursor: pointer;
-        transition: background-color 0.25s, border-color 0.25s, color 0.25s, transform 0.25s;
+        transition:
+          background-color 0.25s,
+          border-color 0.25s,
+          color 0.25s,
+          transform 0.25s;
       }
 
       .console-icon-btn:hover {
@@ -1241,9 +1478,15 @@
         height: 18px;
       }
 
-      .theme-icon-sun { display: none; }
-      :root[data-theme="dark"] .theme-icon-moon { display: none; }
-      :root[data-theme="dark"] .theme-icon-sun { display: block; }
+      .theme-icon-sun {
+        display: none;
+      }
+      :root[data-theme="dark"] .theme-icon-moon {
+        display: none;
+      }
+      :root[data-theme="dark"] .theme-icon-sun {
+        display: block;
+      }
 
       /* below this width the console reverts to a floating collapsible
          drawer (short viewports genuinely need it out of the static flow
@@ -1270,21 +1513,38 @@
 
       /* ── Responsive ────────────────────────────────── */
       @media (max-width: 640px) {
-        html { font-size: 16px; }
+        html {
+          font-size: 16px;
+        }
 
-        .container { padding: 0 1.25rem; }
+        .container {
+          padding: 0 1.25rem;
+        }
 
-        .hero { padding: 4.5rem 0 3rem; }
+        .hero {
+          padding: 4.5rem 0 3rem;
+        }
 
-        .hero h1 { font-size: 2.2rem; }
+        .hero h1 {
+          font-size: 2.2rem;
+        }
 
-        .hero .tagline { font-size: 1.1rem; }
+        .hero .tagline {
+          font-size: 1.1rem;
+        }
 
-        .page-section { padding: 3.5rem 0; }
+        .page-section {
+          padding: 3.5rem 0;
+        }
 
-        .projects-grid { grid-template-columns: 1fr; }
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
 
-        .exp-header { flex-direction: column; gap: 0; }
+        .exp-header {
+          flex-direction: column;
+          gap: 0;
+        }
       }
     </style>
   </head>
@@ -1310,37 +1570,86 @@
       <div class="console-body">
         <nav class="console-nav">
           <a href="#top">
-            <svg class="bypass-arc" viewBox="0 0 21 40" preserveAspectRatio="none" aria-hidden="true"><path d="M 4 1 C 19 1 19 39 4 39" /></svg>
+            <svg
+              class="bypass-arc"
+              viewBox="0 0 21 40"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <path d="M 4 1 C 19 1 19 39 4 39" />
+            </svg>
             <span class="plus-node" aria-hidden="true">+</span>
             Embedding
           </a>
           <a href="#research">
-            <svg class="bypass-arc" viewBox="0 0 21 40" preserveAspectRatio="none" aria-hidden="true"><path d="M 4 1 C 19 1 19 39 4 39" /></svg>
+            <svg
+              class="bypass-arc"
+              viewBox="0 0 21 40"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <path d="M 4 1 C 19 1 19 39 4 39" />
+            </svg>
             <span class="plus-node" aria-hidden="true">+</span>
             Research
           </a>
           <a href="#experience">
-            <svg class="bypass-arc" viewBox="0 0 21 40" preserveAspectRatio="none" aria-hidden="true"><path d="M 4 1 C 19 1 19 39 4 39" /></svg>
+            <svg
+              class="bypass-arc"
+              viewBox="0 0 21 40"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <path d="M 4 1 C 19 1 19 39 4 39" />
+            </svg>
             <span class="plus-node" aria-hidden="true">+</span>
             Experience
           </a>
           <a href="#reviews">
-            <svg class="bypass-arc" viewBox="0 0 21 40" preserveAspectRatio="none" aria-hidden="true"><path d="M 4 1 C 19 1 19 39 4 39" /></svg>
+            <svg
+              class="bypass-arc"
+              viewBox="0 0 21 40"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <path d="M 4 1 C 19 1 19 39 4 39" />
+            </svg>
             <span class="plus-node" aria-hidden="true">+</span>
             Reviewing
           </a>
           <a href="#projects">
-            <svg class="bypass-arc" viewBox="0 0 21 40" preserveAspectRatio="none" aria-hidden="true"><path d="M 4 1 C 19 1 19 39 4 39" /></svg>
+            <svg
+              class="bypass-arc"
+              viewBox="0 0 21 40"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <path d="M 4 1 C 19 1 19 39 4 39" />
+            </svg>
             <span class="plus-node" aria-hidden="true">+</span>
             Projects
           </a>
           <a href="#education">
-            <svg class="bypass-arc" viewBox="0 0 21 40" preserveAspectRatio="none" aria-hidden="true"><path d="M 4 1 C 19 1 19 39 4 39" /></svg>
+            <svg
+              class="bypass-arc"
+              viewBox="0 0 21 40"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <path d="M 4 1 C 19 1 19 39 4 39" />
+            </svg>
             <span class="plus-node" aria-hidden="true">+</span>
             Education
           </a>
           <a href="#contact">
-            <svg class="bypass-arc" viewBox="0 0 21 40" preserveAspectRatio="none" aria-hidden="true"><path d="M 4 1 C 19 1 19 39 4 39" /></svg>
+            <svg
+              class="bypass-arc"
+              viewBox="0 0 21 40"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <path d="M 4 1 C 19 1 19 39 4 39" />
+            </svg>
             <span class="plus-node" aria-hidden="true">+</span>
             Contact
           </a>
@@ -1352,13 +1661,47 @@
         <span class="console-lens-label">Logit lens (illustrative)</span>
         <ol id="lensList" class="console-lens"></ol>
         <div class="console-actions">
-          <button class="console-icon-btn" id="themeBtn" type="button" aria-pressed="false" aria-label="Switch to dark mode" title="Switch to dark mode">
-            <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M20.4 14.5A8.4 8.4 0 0 1 9.5 3.6 8.4 8.4 0 1 0 20.4 14.5Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <button
+            class="console-icon-btn"
+            id="themeBtn"
+            type="button"
+            aria-pressed="false"
+            aria-label="Switch to dark mode"
+            title="Switch to dark mode"
+          >
+            <svg
+              class="theme-icon theme-icon-moon"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M20.4 14.5A8.4 8.4 0 0 1 9.5 3.6 8.4 8.4 0 1 0 20.4 14.5Z"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
             </svg>
-            <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/>
-              <path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <svg
+              class="theme-icon theme-icon-sun"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <circle
+                cx="12"
+                cy="12"
+                r="4"
+                stroke="currentColor"
+                stroke-width="1.8"
+              />
+              <path
+                d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+              />
             </svg>
           </button>
         </div>
@@ -1366,603 +1709,778 @@
     </details>
 
     <div class="page-layout">
-    <main class="container">
-      <!-- ── Hero (embedding) ────────────────────────── -->
-      <header class="hero" data-layer="0">
-        <div class="hero-inner">
-          <div class="hero-text">
-            <h1>Sunayana Samavedam</h1>
-            <p class="tagline">
-              <span class="hl induction-token" data-key="mi">Mechanistic Interpretability</span> &amp; Explainable Computer Vision
+      <main class="container">
+        <!-- ── Hero (embedding) ────────────────────────── -->
+        <header class="hero" data-layer="0">
+          <div class="hero-inner">
+            <div class="hero-text">
+              <h1>Sunayana Samavedam</h1>
+              <p class="tagline">
+                <span class="hl induction-token" data-key="mi"
+                  >Mechanistic Interpretability</span
+                >
+                &amp; Explainable Computer Vision
+              </p>
+              <p class="intro">
+                I'm a researcher at <strong>CVIT, IIIT Hyderabad</strong>,
+                working with Prof. P. J. Narayanan on a question I find
+                genuinely fascinating: how do neural networks actually see the
+                world, and can we make that legible? My work sits at the
+                intersection of mechanistic interpretability, explainable
+                computer vision, and vision-language models.
+              </p>
+              <div class="hero-news">
+                <p class="hero-news-label">Recent</p>
+                <ul class="hero-news-list">
+                  <li>[Update — e.g. Paper accepted at X · Month Year]</li>
+                  <li>[Update — e.g. Presented at Y workshop · Month Year]</li>
+                  <li>[Update — e.g. Started reviewing for Z · Month Year]</li>
+                </ul>
+              </div>
+            </div>
+            <!-- /hero-text -->
+            <div class="hero-photo">
+              <img src="profile.jpeg" alt="Sunayana Samavedam" />
+            </div>
+          </div>
+          <!-- /hero-inner -->
+
+          <div class="nn-wrap reveal">
+            <svg
+              class="nn-diagram"
+              viewBox="0 0 780 90"
+              aria-hidden="true"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <g class="layer-nodes stage-0">
+                <circle
+                  class="node"
+                  cx="60"
+                  cy="10.0"
+                  r="3.6"
+                  style="--jitter: 0s"
+                />
+                <circle
+                  class="node"
+                  cx="60"
+                  cy="27.5"
+                  r="3.6"
+                  style="--jitter: 0.06s"
+                />
+                <circle
+                  class="node"
+                  cx="60"
+                  cy="45.0"
+                  r="3.6"
+                  style="--jitter: 0.12s"
+                />
+                <circle
+                  class="node"
+                  cx="60"
+                  cy="62.5"
+                  r="3.6"
+                  style="--jitter: 0.04s"
+                />
+                <circle
+                  class="node"
+                  cx="60"
+                  cy="80.0"
+                  r="3.6"
+                  style="--jitter: 0.16s"
+                />
+              </g>
+              <g class="edge-bundle stage-1">
+                <line class="edge" x1="60" y1="10.0" x2="280" y2="10.0" />
+                <line class="edge" x1="60" y1="10.0" x2="280" y2="24.0" />
+                <line class="edge" x1="60" y1="10.0" x2="280" y2="38.0" />
+                <line class="edge" x1="60" y1="10.0" x2="280" y2="52.0" />
+                <line class="edge" x1="60" y1="10.0" x2="280" y2="66.0" />
+                <line class="edge" x1="60" y1="10.0" x2="280" y2="80.0" />
+                <line class="edge" x1="60" y1="27.5" x2="280" y2="10.0" />
+                <line class="edge" x1="60" y1="27.5" x2="280" y2="24.0" />
+                <line class="edge" x1="60" y1="27.5" x2="280" y2="38.0" />
+                <line class="edge" x1="60" y1="27.5" x2="280" y2="52.0" />
+                <line class="edge" x1="60" y1="27.5" x2="280" y2="66.0" />
+                <line class="edge" x1="60" y1="27.5" x2="280" y2="80.0" />
+                <line class="edge" x1="60" y1="45.0" x2="280" y2="10.0" />
+                <line class="edge" x1="60" y1="45.0" x2="280" y2="24.0" />
+                <line class="edge" x1="60" y1="45.0" x2="280" y2="38.0" />
+                <line class="edge" x1="60" y1="45.0" x2="280" y2="52.0" />
+                <line class="edge" x1="60" y1="45.0" x2="280" y2="66.0" />
+                <line class="edge" x1="60" y1="45.0" x2="280" y2="80.0" />
+                <line class="edge" x1="60" y1="62.5" x2="280" y2="10.0" />
+                <line class="edge" x1="60" y1="62.5" x2="280" y2="24.0" />
+                <line class="edge" x1="60" y1="62.5" x2="280" y2="38.0" />
+                <line class="edge" x1="60" y1="62.5" x2="280" y2="52.0" />
+                <line class="edge" x1="60" y1="62.5" x2="280" y2="66.0" />
+                <line class="edge" x1="60" y1="62.5" x2="280" y2="80.0" />
+                <line class="edge" x1="60" y1="80.0" x2="280" y2="10.0" />
+                <line class="edge" x1="60" y1="80.0" x2="280" y2="24.0" />
+                <line class="edge" x1="60" y1="80.0" x2="280" y2="38.0" />
+                <line class="edge" x1="60" y1="80.0" x2="280" y2="52.0" />
+                <line class="edge" x1="60" y1="80.0" x2="280" y2="66.0" />
+                <line class="edge" x1="60" y1="80.0" x2="280" y2="80.0" />
+              </g>
+              <g class="layer-nodes stage-2">
+                <circle
+                  class="node"
+                  cx="280"
+                  cy="10.0"
+                  r="3.6"
+                  style="--jitter: 0.03s"
+                />
+                <circle
+                  class="node"
+                  cx="280"
+                  cy="24.0"
+                  r="3.6"
+                  style="--jitter: 0.14s"
+                />
+                <circle
+                  class="node"
+                  cx="280"
+                  cy="38.0"
+                  r="3.6"
+                  style="--jitter: 0s"
+                />
+                <circle
+                  class="node"
+                  cx="280"
+                  cy="52.0"
+                  r="3.6"
+                  style="--jitter: 0.1s"
+                />
+                <circle
+                  class="node"
+                  cx="280"
+                  cy="66.0"
+                  r="3.6"
+                  style="--jitter: 0.05s"
+                />
+                <circle
+                  class="node"
+                  cx="280"
+                  cy="80.0"
+                  r="3.6"
+                  style="--jitter: 0.18s"
+                />
+              </g>
+              <g class="edge-bundle stage-3">
+                <line class="edge" x1="280" y1="10.0" x2="500" y2="10.0" />
+                <line class="edge" x1="280" y1="10.0" x2="500" y2="33.3" />
+                <line class="edge" x1="280" y1="10.0" x2="500" y2="56.7" />
+                <line class="edge" x1="280" y1="10.0" x2="500" y2="80.0" />
+                <line class="edge" x1="280" y1="24.0" x2="500" y2="10.0" />
+                <line class="edge" x1="280" y1="24.0" x2="500" y2="33.3" />
+                <line class="edge" x1="280" y1="24.0" x2="500" y2="56.7" />
+                <line class="edge" x1="280" y1="24.0" x2="500" y2="80.0" />
+                <line class="edge" x1="280" y1="38.0" x2="500" y2="10.0" />
+                <line class="edge" x1="280" y1="38.0" x2="500" y2="33.3" />
+                <line class="edge" x1="280" y1="38.0" x2="500" y2="56.7" />
+                <line class="edge" x1="280" y1="38.0" x2="500" y2="80.0" />
+                <line class="edge" x1="280" y1="52.0" x2="500" y2="10.0" />
+                <line class="edge" x1="280" y1="52.0" x2="500" y2="33.3" />
+                <line class="edge" x1="280" y1="52.0" x2="500" y2="56.7" />
+                <line class="edge" x1="280" y1="52.0" x2="500" y2="80.0" />
+                <line class="edge" x1="280" y1="66.0" x2="500" y2="10.0" />
+                <line class="edge" x1="280" y1="66.0" x2="500" y2="33.3" />
+                <line class="edge" x1="280" y1="66.0" x2="500" y2="56.7" />
+                <line class="edge" x1="280" y1="66.0" x2="500" y2="80.0" />
+                <line class="edge" x1="280" y1="80.0" x2="500" y2="10.0" />
+                <line class="edge" x1="280" y1="80.0" x2="500" y2="33.3" />
+                <line class="edge" x1="280" y1="80.0" x2="500" y2="56.7" />
+                <line class="edge" x1="280" y1="80.0" x2="500" y2="80.0" />
+              </g>
+              <g class="layer-nodes stage-4">
+                <circle
+                  class="node"
+                  cx="500"
+                  cy="10.0"
+                  r="3.6"
+                  style="--jitter: 0s"
+                />
+                <circle
+                  class="node"
+                  cx="500"
+                  cy="33.3"
+                  r="3.6"
+                  style="--jitter: 0.09s"
+                />
+                <circle
+                  class="node"
+                  cx="500"
+                  cy="56.7"
+                  r="3.6"
+                  style="--jitter: 0.03s"
+                />
+                <circle
+                  class="node"
+                  cx="500"
+                  cy="80.0"
+                  r="3.6"
+                  style="--jitter: 0.13s"
+                />
+              </g>
+              <g class="edge-bundle stage-5">
+                <line class="edge" x1="500" y1="10.0" x2="720" y2="10.0" />
+                <line class="edge" x1="500" y1="10.0" x2="720" y2="45.0" />
+                <line class="edge" x1="500" y1="10.0" x2="720" y2="80.0" />
+                <line class="edge" x1="500" y1="33.3" x2="720" y2="10.0" />
+                <line class="edge" x1="500" y1="33.3" x2="720" y2="45.0" />
+                <line class="edge" x1="500" y1="33.3" x2="720" y2="80.0" />
+                <line class="edge" x1="500" y1="56.7" x2="720" y2="10.0" />
+                <line class="edge" x1="500" y1="56.7" x2="720" y2="45.0" />
+                <line class="edge" x1="500" y1="56.7" x2="720" y2="80.0" />
+                <line class="edge" x1="500" y1="80.0" x2="720" y2="10.0" />
+                <line class="edge" x1="500" y1="80.0" x2="720" y2="45.0" />
+                <line class="edge" x1="500" y1="80.0" x2="720" y2="80.0" />
+              </g>
+              <g class="layer-nodes output stage-6">
+                <circle
+                  class="node"
+                  cx="720"
+                  cy="10.0"
+                  r="3.6"
+                  style="--jitter: 0s"
+                />
+                <circle
+                  class="node"
+                  cx="720"
+                  cy="45.0"
+                  r="3.6"
+                  style="--jitter: 0.08s"
+                />
+                <circle
+                  class="node"
+                  cx="720"
+                  cy="80.0"
+                  r="3.6"
+                  style="--jitter: 0.15s"
+                />
+              </g>
+            </svg>
+            <p class="nn-caption">
+              a forward pass — signal propagating layer to layer, the way the
+              rest of this page is laid out
             </p>
-            <p class="intro">
-              I'm a researcher at <strong>CVIT, IIIT Hyderabad</strong>, working
-              with Prof. P. J. Narayanan on a question I find genuinely
-              fascinating: how do neural networks actually see the world, and
-              can we make that legible? My work sits at the intersection of
-              mechanistic interpretability, explainable computer vision, and
-              vision-language models.
-            </p>
-        <div class="hero-news">
-          <p class="hero-news-label">Recent</p>
-          <ul class="hero-news-list">
-            <li>[Update — e.g. Paper accepted at X · Month Year]</li>
-            <li>[Update — e.g. Presented at Y workshop · Month Year]</li>
-            <li>[Update — e.g. Started reviewing for Z · Month Year]</li>
-          </ul>
-        </div>
-
-          </div><!-- /hero-text -->
-          <div class="hero-photo">
-            <img src="profile.jpeg" alt="Sunayana Samavedam" />
           </div>
-        </div><!-- /hero-inner -->
+        </header>
 
-        <div class="nn-wrap reveal">
-          <svg class="nn-diagram" viewBox="0 0 780 90" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
-            <g class="layer-nodes stage-0">
-              <circle class="node" cx="60" cy="10.0" r="3.6" style="--jitter:0s"/>
-              <circle class="node" cx="60" cy="27.5" r="3.6" style="--jitter:.06s"/>
-              <circle class="node" cx="60" cy="45.0" r="3.6" style="--jitter:.12s"/>
-              <circle class="node" cx="60" cy="62.5" r="3.6" style="--jitter:.04s"/>
-              <circle class="node" cx="60" cy="80.0" r="3.6" style="--jitter:.16s"/>
-            </g>
-            <g class="edge-bundle stage-1">
-              <line class="edge" x1="60" y1="10.0" x2="280" y2="10.0"/>
-              <line class="edge" x1="60" y1="10.0" x2="280" y2="24.0"/>
-              <line class="edge" x1="60" y1="10.0" x2="280" y2="38.0"/>
-              <line class="edge" x1="60" y1="10.0" x2="280" y2="52.0"/>
-              <line class="edge" x1="60" y1="10.0" x2="280" y2="66.0"/>
-              <line class="edge" x1="60" y1="10.0" x2="280" y2="80.0"/>
-              <line class="edge" x1="60" y1="27.5" x2="280" y2="10.0"/>
-              <line class="edge" x1="60" y1="27.5" x2="280" y2="24.0"/>
-              <line class="edge" x1="60" y1="27.5" x2="280" y2="38.0"/>
-              <line class="edge" x1="60" y1="27.5" x2="280" y2="52.0"/>
-              <line class="edge" x1="60" y1="27.5" x2="280" y2="66.0"/>
-              <line class="edge" x1="60" y1="27.5" x2="280" y2="80.0"/>
-              <line class="edge" x1="60" y1="45.0" x2="280" y2="10.0"/>
-              <line class="edge" x1="60" y1="45.0" x2="280" y2="24.0"/>
-              <line class="edge" x1="60" y1="45.0" x2="280" y2="38.0"/>
-              <line class="edge" x1="60" y1="45.0" x2="280" y2="52.0"/>
-              <line class="edge" x1="60" y1="45.0" x2="280" y2="66.0"/>
-              <line class="edge" x1="60" y1="45.0" x2="280" y2="80.0"/>
-              <line class="edge" x1="60" y1="62.5" x2="280" y2="10.0"/>
-              <line class="edge" x1="60" y1="62.5" x2="280" y2="24.0"/>
-              <line class="edge" x1="60" y1="62.5" x2="280" y2="38.0"/>
-              <line class="edge" x1="60" y1="62.5" x2="280" y2="52.0"/>
-              <line class="edge" x1="60" y1="62.5" x2="280" y2="66.0"/>
-              <line class="edge" x1="60" y1="62.5" x2="280" y2="80.0"/>
-              <line class="edge" x1="60" y1="80.0" x2="280" y2="10.0"/>
-              <line class="edge" x1="60" y1="80.0" x2="280" y2="24.0"/>
-              <line class="edge" x1="60" y1="80.0" x2="280" y2="38.0"/>
-              <line class="edge" x1="60" y1="80.0" x2="280" y2="52.0"/>
-              <line class="edge" x1="60" y1="80.0" x2="280" y2="66.0"/>
-              <line class="edge" x1="60" y1="80.0" x2="280" y2="80.0"/>
-            </g>
-            <g class="layer-nodes stage-2">
-              <circle class="node" cx="280" cy="10.0" r="3.6" style="--jitter:.03s"/>
-              <circle class="node" cx="280" cy="24.0" r="3.6" style="--jitter:.14s"/>
-              <circle class="node" cx="280" cy="38.0" r="3.6" style="--jitter:0s"/>
-              <circle class="node" cx="280" cy="52.0" r="3.6" style="--jitter:.1s"/>
-              <circle class="node" cx="280" cy="66.0" r="3.6" style="--jitter:.05s"/>
-              <circle class="node" cx="280" cy="80.0" r="3.6" style="--jitter:.18s"/>
-            </g>
-            <g class="edge-bundle stage-3">
-              <line class="edge" x1="280" y1="10.0" x2="500" y2="10.0"/>
-              <line class="edge" x1="280" y1="10.0" x2="500" y2="33.3"/>
-              <line class="edge" x1="280" y1="10.0" x2="500" y2="56.7"/>
-              <line class="edge" x1="280" y1="10.0" x2="500" y2="80.0"/>
-              <line class="edge" x1="280" y1="24.0" x2="500" y2="10.0"/>
-              <line class="edge" x1="280" y1="24.0" x2="500" y2="33.3"/>
-              <line class="edge" x1="280" y1="24.0" x2="500" y2="56.7"/>
-              <line class="edge" x1="280" y1="24.0" x2="500" y2="80.0"/>
-              <line class="edge" x1="280" y1="38.0" x2="500" y2="10.0"/>
-              <line class="edge" x1="280" y1="38.0" x2="500" y2="33.3"/>
-              <line class="edge" x1="280" y1="38.0" x2="500" y2="56.7"/>
-              <line class="edge" x1="280" y1="38.0" x2="500" y2="80.0"/>
-              <line class="edge" x1="280" y1="52.0" x2="500" y2="10.0"/>
-              <line class="edge" x1="280" y1="52.0" x2="500" y2="33.3"/>
-              <line class="edge" x1="280" y1="52.0" x2="500" y2="56.7"/>
-              <line class="edge" x1="280" y1="52.0" x2="500" y2="80.0"/>
-              <line class="edge" x1="280" y1="66.0" x2="500" y2="10.0"/>
-              <line class="edge" x1="280" y1="66.0" x2="500" y2="33.3"/>
-              <line class="edge" x1="280" y1="66.0" x2="500" y2="56.7"/>
-              <line class="edge" x1="280" y1="66.0" x2="500" y2="80.0"/>
-              <line class="edge" x1="280" y1="80.0" x2="500" y2="10.0"/>
-              <line class="edge" x1="280" y1="80.0" x2="500" y2="33.3"/>
-              <line class="edge" x1="280" y1="80.0" x2="500" y2="56.7"/>
-              <line class="edge" x1="280" y1="80.0" x2="500" y2="80.0"/>
-            </g>
-            <g class="layer-nodes stage-4">
-              <circle class="node" cx="500" cy="10.0" r="3.6" style="--jitter:0s"/>
-              <circle class="node" cx="500" cy="33.3" r="3.6" style="--jitter:.09s"/>
-              <circle class="node" cx="500" cy="56.7" r="3.6" style="--jitter:.03s"/>
-              <circle class="node" cx="500" cy="80.0" r="3.6" style="--jitter:.13s"/>
-            </g>
-            <g class="edge-bundle stage-5">
-              <line class="edge" x1="500" y1="10.0" x2="720" y2="10.0"/>
-              <line class="edge" x1="500" y1="10.0" x2="720" y2="45.0"/>
-              <line class="edge" x1="500" y1="10.0" x2="720" y2="80.0"/>
-              <line class="edge" x1="500" y1="33.3" x2="720" y2="10.0"/>
-              <line class="edge" x1="500" y1="33.3" x2="720" y2="45.0"/>
-              <line class="edge" x1="500" y1="33.3" x2="720" y2="80.0"/>
-              <line class="edge" x1="500" y1="56.7" x2="720" y2="10.0"/>
-              <line class="edge" x1="500" y1="56.7" x2="720" y2="45.0"/>
-              <line class="edge" x1="500" y1="56.7" x2="720" y2="80.0"/>
-              <line class="edge" x1="500" y1="80.0" x2="720" y2="10.0"/>
-              <line class="edge" x1="500" y1="80.0" x2="720" y2="45.0"/>
-              <line class="edge" x1="500" y1="80.0" x2="720" y2="80.0"/>
-            </g>
-            <g class="layer-nodes output stage-6">
-              <circle class="node" cx="720" cy="10.0" r="3.6" style="--jitter:0s"/>
-              <circle class="node" cx="720" cy="45.0" r="3.6" style="--jitter:.08s"/>
-              <circle class="node" cx="720" cy="80.0" r="3.6" style="--jitter:.15s"/>
-            </g>
-          </svg>
-          <p class="nn-caption">a forward pass — signal propagating layer to layer, the way the rest of this page is laid out</p>
-        </div>
-      </header>
+        <!-- ── Research ────────────────────────────────── -->
+        <section id="research" class="page-section" data-layer="1">
+          <h2 class="section-heading-sr">Research</h2>
 
-      <!-- ── Research ────────────────────────────────── -->
-      <section id="research" class="page-section" data-layer="1">
-        <h2 class="section-heading-sr">Research</h2>
+          <p class="research-group-label" data-layer="1">Conference Papers</p>
 
-        <p class="research-group-label" data-layer="1">Conference Papers</p>
-
-        <div class="research-entry reveal">
-          <div class="entry-title">
-            CAV Styler: Making Neural Style Transfer Interpretable and
-            Controllable
-          </div>
-          <div class="entry-meta">
-            Published at ICVGIP 2025 · CVIT, IIIT Hyderabad
-          </div>
-          <div class="entry-authors">
-            <strong>Authors:</strong> Sunayana Samavedam, Venkat Adithya Amula,
-            Saurabh Saini, Avani Gupta&dagger;, P. J. Narayanan
-          </div>
-          <div class="entry-summary">
-            A concept-driven neural style transfer framework that maps
-            human-interpretable attributes like texture, blur, and detail into
-            explicit controllable directions for fine-grained stylization.
-          </div>
-          <div class="entry-links">
+          <div class="research-entry reveal">
+            <div class="entry-title">
+              CAV Styler: Making Neural Style Transfer Interpretable and
+              Controllable
+            </div>
+            <div class="entry-meta">
+              Published at ICVGIP 2025 · CVIT, IIIT Hyderabad
+            </div>
+            <div class="entry-authors">
+              <strong>Authors:</strong> Sunayana Samavedam, Venkat Adithya
+              Amula, Saurabh Saini, Avani Gupta&dagger;, P. J. Narayanan
+            </div>
+            <div class="entry-summary">
+              A concept-driven neural style transfer framework that maps
+              human-interpretable attributes like texture, blur, and detail into
+              explicit controllable directions for fine-grained stylization.
+            </div>
+            <div class="entry-links">
+              <a
+                href="https://sunayana-981.github.io/CAV_Styler/"
+                target="_blank"
+                rel="noopener"
+                >Project Website</a
+              >
+            </div>
             <a
               href="https://sunayana-981.github.io/CAV_Styler/"
               target="_blank"
               rel="noopener"
-              >Project Website</a
+              aria-label="Open CAV Styler project website"
             >
+              <img
+                class="paper-image"
+                src="https://sunayana-981.github.io/CAV_Styler/static/images/block_diag.jpg"
+                style="aspect-ratio: 881 / 831"
+                alt="Teaser image from the CAV Styler ICVGIP 2025 paper"
+              />
+            </a>
+            <div class="tag-row">
+              <span class="tag">Style Transfer</span>
+              <span class="tag">Interpretability</span>
+              <span class="tag">Controllability</span>
+            </div>
           </div>
-          <a
-            href="https://sunayana-981.github.io/CAV_Styler/"
-            target="_blank"
-            rel="noopener"
-            aria-label="Open CAV Styler project website"
-          >
-            <img
-              class="paper-image"
-              src="https://sunayana-981.github.io/CAV_Styler/static/images/block_diag.jpg"
-              style="aspect-ratio: 881 / 831;"
-              alt="Teaser image from the CAV Styler ICVGIP 2025 paper"
-            />
-          </a>
-          <div class="tag-row">
-            <span class="tag">Style Transfer</span>
-            <span class="tag">Interpretability</span>
-            <span class="tag">Controllability</span>
-          </div>
-        </div>
 
-        <div class="research-entry reveal">
-          <div class="entry-title">
-            Prototype Guided Backdoor Defense via Activation Space Manipulation
-            (PGBD)
-          </div>
-          <div class="entry-meta">
-            Published at ICCV 2025 · CVIT, IIIT Hyderabad
-          </div>
-          <div class="entry-authors">
-            <strong>Authors:</strong> Venkat Adithya Amula, Sunayana Samavedam,
-            Saurabh Saini, Avani Gupta&dagger;, P. J. Narayanan
-          </div>
-          <div class="entry-summary">
-            A robust post-hoc defense against backdoor attacks using activation
-            space geometry, including semantic trigger settings with a new
-            celebrity face benchmark.
-          </div>
-          <div class="entry-links">
+          <div class="research-entry reveal">
+            <div class="entry-title">
+              Prototype Guided Backdoor Defense via Activation Space
+              Manipulation (PGBD)
+            </div>
+            <div class="entry-meta">
+              Published at ICCV 2025 · CVIT, IIIT Hyderabad
+            </div>
+            <div class="entry-authors">
+              <strong>Authors:</strong> Venkat Adithya Amula, Sunayana
+              Samavedam, Saurabh Saini, Avani Gupta&dagger;, P. J. Narayanan
+            </div>
+            <div class="entry-summary">
+              A robust post-hoc defense against backdoor attacks using
+              activation space geometry, including semantic trigger settings
+              with a new celebrity face benchmark.
+            </div>
+            <div class="entry-links">
+              <a
+                href="https://venkatadithya9.github.io/pgbd.github.io/"
+                target="_blank"
+                rel="noopener"
+                >Project Website</a
+              >
+            </div>
             <a
               href="https://venkatadithya9.github.io/pgbd.github.io/"
               target="_blank"
               rel="noopener"
-              >Project Website</a
+              aria-label="Open PGBD project website"
             >
-          </div>
-          <a
-            href="https://venkatadithya9.github.io/pgbd.github.io/"
-            target="_blank"
-            rel="noopener"
-            aria-label="Open PGBD project website"
-          >
-            <img
-              class="paper-image"
-              src="https://venkatadithya9.github.io/pgbd.github.io/static/images/Batch_diag-Teaser.png"
-              style="aspect-ratio: 1633 / 692;"
-              alt="Teaser image from the PGBD ICCV 2025 paper"
-            />
-          </a>
-          <div class="tag-row">
-            <span class="tag">Adversarial ML</span>
-            <span class="tag">Backdoor Defense</span>
-            <span class="tag">Security</span>
-          </div>
-        </div>
-
-        <p class="research-group-label" data-layer="2">Workshop Papers</p>
-
-        <div class="research-entry reveal">
-          <div class="entry-title">
-            [Workshop Paper Title — update me]
-          </div>
-          <div class="entry-meta">
-            Workshop at [Conference Name, Year] · [Institution — update me]
-          </div>
-          <div class="entry-authors">
-            <strong>Authors:</strong> [Author list — update me]
-          </div>
-          <div class="entry-summary">
-            [Brief description of the work — update me]
-          </div>
-          <div class="entry-links">
-            <a href="#">Paper</a>
-          </div>
-          <div class="tag-row">
-            <span class="tag">[Topic]</span>
-            <span class="tag">[Topic]</span>
-          </div>
-        </div>
-
-        <p class="research-group-label" data-layer="3">Under Review</p>
-
-        <div class="research-entry reveal">
-          <div class="entry-title">
-            Evaluating Sparse Autoencoders for
-            <span class="induction-copy" data-key="mi" tabindex="0" title="Induction head: attends back to its earlier occurrence in the tagline above.">Mechanistic Interpretability</span>
-            under Distribution Shift
-          </div>
-          <div class="entry-meta">Under Review · CVIT, IIIT Hyderabad</div>
-          <div class="entry-authors">
-            <strong>Authors:</strong> Sunayana Samavedam, Deepika Vemuri, Venkat
-            Adithya Amula, Shreyas Premkhede, P. J. Narayanan, and Vineeth
-            Balasubramanian
-          </div>
-          <div class="entry-summary">
-            We investigate how Sparse Autoencoder (SAE) feature quality degrades
-            when CLIP ViT models are adapted to out-of-distribution domains
-            (medical imaging, remote sensing) via parameter-efficient
-            fine-tuning. We introduce a novel metric, Distribution-Aware
-            Monosemanticity Score (DAMS), to characterize SAE feature quality
-            under shifts that standard metrics often conflate. Experiments
-            reveal a systematic tension between downstream classification
-            accuracy and feature-level interpretability under distribution
-            shift.
-          </div>
-          <div class="tag-row">
-            <span class="tag">Mechanistic Interpretability</span>
-            <span class="tag">Sparse Autoencoders</span>
-            <span class="tag">Distribution Shift</span>
-          </div>
-        </div>
-
-        <div class="research-entry reveal">
-          <div class="entry-title">
-            Toward a Taxonomy of Spatiotemporal Reasoning in Vision-Language
-            Models
-          </div>
-          <div class="entry-meta">Under Review · CVIT, IIIT Hyderabad</div>
-          <div class="entry-authors">
-            <strong>Authors:</strong> Sunayana Samavedam and Adrian DeWynter
-          </div>
-          <div class="entry-summary">
-            We survey and systematically organize the landscape of
-            spatiotemporal reasoning evaluation in vision-language models
-            (VLMs), identifying critical gaps across five reasoning categories:
-            perception, spatial relations, temporal, dynamic, and compositional.
-            Building on mechanistic evidence that VLMs encode object locations
-            via linearly bound spatial IDs, we argue that most benchmarks
-            measure accuracy without probing internal representations, and that
-            cognitively grounded tests from neuroscience (mental rotation,
-            multiple object tracking, perspective-taking) remain largely
-            unadapted for VLM evaluation. We propose a structured taxonomy
-            mapping evaluated versus unexplored capabilities, highlighting
-            compositional spatiotemporal reasoning and temporal causality as the
-            most undercharacterized failure modes.
-          </div>
-          <div class="tag-row">
-            <span class="tag">Mechanistic Interpretability</span>
-            <span class="tag">Spatio-Temporal Reasoning</span>
-            <span class="tag">Vision-Language Models</span>
-          </div>
-        </div>
-
-        <div class="research-entry reveal">
-          <div class="entry-title">
-            [arXiv Paper Title — update me]
-          </div>
-          <div class="entry-meta">Under Review · arXiv preprint [update me]</div>
-          <div class="entry-authors">
-            <strong>Authors:</strong> [Author list — update me]
-          </div>
-          <div class="entry-summary">
-            [Abstract / brief description — update me]
-          </div>
-          <div class="entry-links">
-            <a href="#">arXiv</a>
-          </div>
-          <div class="tag-row">
-            <span class="tag">[Topic]</span>
-            <span class="tag">[Topic]</span>
-          </div>
-        </div>
-
-        <p class="research-group-label" data-layer="4">Working Papers</p>
-
-        <div class="research-entry reveal">
-          <div class="entry-title">
-            Survey on Controllability in Style Transfer Concepts
-          </div>
-          <div class="entry-meta">Coming Soon · CVIT, IIIT Hyderabad</div>
-          <div class="entry-summary">
-            Comprehensive survey analyzing controllability mechanisms in neural
-            style transfer — spatial control, color preservation, content
-            adherence — compiled into a structured framework for future
-            research.
-          </div>
-          <div class="tag-row">
-            <span class="tag">Survey</span>
-            <span class="tag">Style Transfer</span>
-            <span class="tag">Controllability</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- ── Experience ──────────────────────────────── -->
-      <section id="experience" class="page-section" data-layer="5">
-        <h2 class="section-heading-sr">Experience</h2>
-
-        <div class="exp-entry reveal">
-          <div class="exp-header">
-            <span class="exp-role">Head Teaching Assistant</span>
-            <span class="exp-period">Aug 2024 – Dec 2024</span>
-          </div>
-          <div class="exp-org">
-            IIIT Hyderabad ·
-            <span class="exp-context">Digital Image Processing</span>
-          </div>
-          <div class="exp-bullet">
-            Led TAs for a 170+ student course; designed assignments on image
-            filtering, feature detection, and enhancement.
-          </div>
-        </div>
-
-        <div class="exp-entry reveal">
-          <div class="exp-header">
-            <span class="exp-role">Deep Learning Mentor</span>
-            <span class="exp-period">Jun 2024 – Present</span>
-          </div>
-          <div class="exp-org">TalentSprint</div>
-          <div class="exp-bullet">
-            Mentoring working professionals in deep learning through hands-on
-            workshops on neural networks, computer vision, and frameworks.
-          </div>
-        </div>
-
-        <div class="exp-entry reveal">
-          <div class="exp-header">
-            <span class="exp-role">Research Intern</span>
-            <span class="exp-period">Apr – May 2023</span>
-          </div>
-          <div class="exp-org">
-            Dr. Kushal Shah ·
-            <span class="exp-context">NLP / Text Classification</span>
-          </div>
-          <div class="exp-bullet">
-            Developed a POS-tagging based text classifier achieving 97%
-            fiction/non-fiction accuracy; improved classification accuracy by
-            15%.
-          </div>
-        </div>
-
-        <div class="exp-entry reveal">
-          <div class="exp-header">
-            <span class="exp-role">Research Assistant</span>
-            <span class="exp-period">Nov 2022 – Jun 2023</span>
-          </div>
-          <div class="exp-org">
-            Prof. Shital Thakkar ·
-            <span class="exp-context">Computer Vision</span>
-          </div>
-          <div class="exp-bullet">
-            Built CNN models for image classification (92% accuracy); evaluated
-            face anti-spoofing algorithms with zero-shot and one-shot learning.
-          </div>
-        </div>
-
-        <div class="exp-entry reveal">
-          <div class="exp-header">
-            <span class="exp-role">Technical Intern</span>
-            <span class="exp-period">Jul – Dec 2022</span>
-          </div>
-          <div class="exp-org">
-            Implevista Pvt. Ltd. ·
-            <span class="exp-context"
-              >Deep Learning / Structural Inspection</span
-            >
-          </div>
-          <div class="exp-bullet">
-            Developed a CNN-based crack detection system for concrete structures
-            achieving 96% accuracy under varied lighting.
-          </div>
-        </div>
-      </section>
-
-      <!-- ── Reviews ────────────────────────────────── -->
-      <section id="reviews" class="page-section" data-layer="6">
-        <h2 class="section-heading-sr">Reviewing</h2>
-        <p style="font-family: var(--font-serif); font-size: 0.98rem; color: var(--c-text-secondary); margin-bottom: 1.8rem;">
-          Served as a reviewer for the following venues:
-        </p>
-        <ul class="review-list reveal">
-          <li class="review-item">
-            <span class="review-venue">[Conference / Journal Name, Year]</span>
-            <span class="review-type">[e.g. Conference / Journal]</span>
-          </li>
-          <li class="review-item">
-            <span class="review-venue">[Conference / Journal Name, Year]</span>
-            <span class="review-type">[e.g. Conference / Journal]</span>
-          </li>
-          <li class="review-item">
-            <span class="review-venue">[Conference / Journal Name, Year]</span>
-            <span class="review-type">[e.g. Conference / Journal]</span>
-          </li>
-        </ul>
-      </section>
-
-      <!-- ── Projects ────────────────────────────────── -->
-      <section id="projects" class="page-section" data-layer="7">
-        <h2 class="section-heading-sr">Selected Projects</h2>
-
-        <div class="projects-grid">
-          <div class="project-card reveal">
-            <div class="entry-title">CLIP-Based Domain Adaptation</div>
-            <div class="entry-summary">
-              Supervised and unsupervised domain generalization pipelines using
-              CLIP for domain-agnostic feature learning across PCAS and
-              DomainNet.
-            </div>
+              <img
+                class="paper-image"
+                src="https://venkatadithya9.github.io/pgbd.github.io/static/images/Batch_diag-Teaser.png"
+                style="aspect-ratio: 1633 / 692"
+                alt="Teaser image from the PGBD ICCV 2025 paper"
+              />
+            </a>
             <div class="tag-row">
-              <span class="tag">CLIP</span>
-              <span class="tag">Domain Adaptation</span>
-            </div>
-          </div>
-
-          <div class="project-card reveal">
-            <div class="entry-title">NIR Facial Recognition Spoofing</div>
-            <div class="entry-summary">
-              Tested robustness of NIR-based 3D face recognition against
-              high-fidelity 3D-printed spoofing attempts using ARTEC scanning
-              and Blender.
-            </div>
-            <div class="tag-row">
-              <span class="tag">Face Recognition</span>
+              <span class="tag">Adversarial ML</span>
+              <span class="tag">Backdoor Defense</span>
               <span class="tag">Security</span>
             </div>
           </div>
 
-          <div class="project-card reveal">
-            <div class="entry-title">3D Reconstruction via ICP SLAM</div>
+          <p class="research-group-label" data-layer="2">Workshop Papers</p>
+
+          <div class="research-entry reveal">
+            <div class="entry-title">[Workshop Paper Title — update me]</div>
+            <div class="entry-meta">
+              Workshop at [Conference Name, Year] · [Institution — update me]
+            </div>
+            <div class="entry-authors">
+              <strong>Authors:</strong> [Author list — update me]
+            </div>
             <div class="entry-summary">
-              Arduino-controlled rotating platform for systematic object
-              imaging, processed with COLMAP to generate precise 3D point-cloud
-              models.
+              [Brief description of the work — update me]
+            </div>
+            <div class="entry-links">
+              <a href="#">Paper</a>
             </div>
             <div class="tag-row">
-              <span class="tag">3D Reconstruction</span>
-              <span class="tag">SLAM</span>
+              <span class="tag">[Topic]</span>
+              <span class="tag">[Topic]</span>
             </div>
           </div>
-        </div>
-      </section>
 
-      <!-- ── Education ───────────────────────────────── -->
-      <section id="education" class="page-section" data-layer="8">
-        <h2 class="section-heading-sr">Education</h2>
+          <p class="research-group-label" data-layer="3">Under Review</p>
 
-        <div class="edu-entry reveal">
-          <div class="edu-header">
-            <span class="edu-inst">IIIT Hyderabad</span>
-            <span class="edu-period">2023 – Present</span>
+          <div class="research-entry reveal">
+            <div class="entry-title">
+              Evaluating Sparse Autoencoders for
+              <span
+                class="induction-copy"
+                data-key="mi"
+                tabindex="0"
+                title="Induction head: attends back to its earlier occurrence in the tagline above."
+                >Mechanistic Interpretability</span
+              >
+              under Distribution Shift
+            </div>
+            <div class="entry-meta">Under Review · CVIT, IIIT Hyderabad</div>
+            <div class="entry-authors">
+              <strong>Authors:</strong> Sunayana Samavedam, Deepika Vemuri,
+              Venkat Adithya Amula, Shreyas Premkhede, P. J. Narayanan, and
+              Vineeth Balasubramanian
+            </div>
+            <div class="entry-summary">
+              We investigate how Sparse Autoencoder (SAE) feature quality
+              degrades when CLIP ViT models are adapted to out-of-distribution
+              domains (medical imaging, remote sensing) via parameter-efficient
+              fine-tuning. We introduce a novel metric, Distribution-Aware
+              Monosemanticity Score (DAMS), to characterize SAE feature quality
+              under shifts that standard metrics often conflate. Experiments
+              reveal a systematic tension between downstream classification
+              accuracy and feature-level interpretability under distribution
+              shift.
+            </div>
+            <div class="tag-row">
+              <span class="tag">Mechanistic Interpretability</span>
+              <span class="tag">Sparse Autoencoders</span>
+              <span class="tag">Distribution Shift</span>
+            </div>
           </div>
-          <div class="edu-degree">M.S. by Research, CVIT</div>
-          <div class="edu-gpa">
-            GPA: 8.8 / 10.0 · Advised by Prof. P. J. Narayanan
-          </div>
-        </div>
 
-        <div class="edu-entry reveal">
-          <div class="edu-header">
-            <span class="edu-inst">Dharamsinh Desai University</span>
-            <span class="edu-period">2017 – 2021</span>
+          <div class="research-entry reveal">
+            <div class="entry-title">
+              Toward a Taxonomy of Spatiotemporal Reasoning in Vision-Language
+              Models
+            </div>
+            <div class="entry-meta">Under Review · CVIT, IIIT Hyderabad</div>
+            <div class="entry-authors">
+              <strong>Authors:</strong> Sunayana Samavedam and Adrian DeWynter
+            </div>
+            <div class="entry-summary">
+              We survey and systematically organize the landscape of
+              spatiotemporal reasoning evaluation in vision-language models
+              (VLMs), identifying critical gaps across five reasoning
+              categories: perception, spatial relations, temporal, dynamic, and
+              compositional. Building on mechanistic evidence that VLMs encode
+              object locations via linearly bound spatial IDs, we argue that
+              most benchmarks measure accuracy without probing internal
+              representations, and that cognitively grounded tests from
+              neuroscience (mental rotation, multiple object tracking,
+              perspective-taking) remain largely unadapted for VLM evaluation.
+              We propose a structured taxonomy mapping evaluated versus
+              unexplored capabilities, highlighting compositional spatiotemporal
+              reasoning and temporal causality as the most undercharacterized
+              failure modes.
+            </div>
+            <div class="tag-row">
+              <span class="tag">Mechanistic Interpretability</span>
+              <span class="tag">Spatio-Temporal Reasoning</span>
+              <span class="tag">Vision-Language Models</span>
+            </div>
           </div>
-          <div class="edu-degree">B.Tech, Electronics &amp; Communication</div>
-          <div class="edu-gpa">
-            GPA: 7.87 / 10.0 · First Class with Distinction
-          </div>
-        </div>
-      </section>
 
-      <!-- ── Contact (unembedding) ────────────────────── -->
-      <section id="contact" class="page-section contact-section" data-layer="9">
-        <h2 class="section-heading-sr">Contact</h2>
+          <div class="research-entry reveal">
+            <div class="entry-title">[arXiv Paper Title — update me]</div>
+            <div class="entry-meta">
+              Under Review · arXiv preprint [update me]
+            </div>
+            <div class="entry-authors">
+              <strong>Authors:</strong> [Author list — update me]
+            </div>
+            <div class="entry-summary">
+              [Abstract / brief description — update me]
+            </div>
+            <div class="entry-links">
+              <a href="#">arXiv</a>
+            </div>
+            <div class="tag-row">
+              <span class="tag">[Topic]</span>
+              <span class="tag">[Topic]</span>
+            </div>
+          </div>
 
-        <div class="softmax-row reveal">
-          <div class="sm-item sampled">
-            <a class="sm-label-btn primary" href="mailto:sunayana1233@gmail.com">Email</a>
-            <div class="sm-bar-track" aria-hidden="true"><div class="sm-bar" style="width:71%"></div></div>
-            <span aria-hidden="true">0.71</span>
-          </div>
-          <div class="sm-item">
-            <a class="sm-label-btn" href="https://github.com/sunayana-981" target="_blank" rel="noopener">GitHub</a>
-            <div class="sm-bar-track" aria-hidden="true"><div class="sm-bar" style="width:15%"></div></div>
-            <span aria-hidden="true">0.15</span>
-          </div>
-          <div class="sm-item">
-            <a class="sm-label-btn" href="https://scholar.google.com/citations?hl=en&user=qY32y7oAAAAJ" target="_blank" rel="noopener">Scholar</a>
-            <div class="sm-bar-track" aria-hidden="true"><div class="sm-bar" style="width:9%"></div></div>
-            <span aria-hidden="true">0.09</span>
-          </div>
-          <div class="sm-item">
-            <a class="sm-label-btn" href="#" target="_blank" rel="noopener">CV</a>
-            <div class="sm-bar-track" aria-hidden="true"><div class="sm-bar" style="width:5%"></div></div>
-            <span aria-hidden="true">0.05</span>
-          </div>
-        </div>
-      </section>
-    </main>
+          <p class="research-group-label" data-layer="4">Working Papers</p>
 
-    <!-- ── Network spine: the page's layer-to-layer throughline — a real
+          <div class="research-entry reveal">
+            <div class="entry-title">
+              Survey on Controllability in Style Transfer Concepts
+            </div>
+            <div class="entry-meta">Coming Soon · CVIT, IIIT Hyderabad</div>
+            <div class="entry-summary">
+              Comprehensive survey analyzing controllability mechanisms in
+              neural style transfer — spatial control, color preservation,
+              content adherence — compiled into a structured framework for
+              future research.
+            </div>
+            <div class="tag-row">
+              <span class="tag">Survey</span>
+              <span class="tag">Style Transfer</span>
+              <span class="tag">Controllability</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Experience ──────────────────────────────── -->
+        <section id="experience" class="page-section" data-layer="5">
+          <h2 class="section-heading-sr">Experience</h2>
+
+          <div class="exp-entry reveal">
+            <div class="exp-header">
+              <span class="exp-role">Head Teaching Assistant</span>
+              <span class="exp-period">Aug 2024 – Dec 2024</span>
+            </div>
+            <div class="exp-org">
+              IIIT Hyderabad ·
+              <span class="exp-context">Digital Image Processing</span>
+            </div>
+            <div class="exp-bullet">
+              Led TAs for a 170+ student course; designed assignments on image
+              filtering, feature detection, and enhancement.
+            </div>
+          </div>
+
+          <div class="exp-entry reveal">
+            <div class="exp-header">
+              <span class="exp-role">Deep Learning Mentor</span>
+              <span class="exp-period">Jun 2024 – Present</span>
+            </div>
+            <div class="exp-org">TalentSprint</div>
+            <div class="exp-bullet">
+              Mentoring working professionals in deep learning through hands-on
+              workshops on neural networks, computer vision, and frameworks.
+            </div>
+          </div>
+
+          <div class="exp-entry reveal">
+            <div class="exp-header">
+              <span class="exp-role">Research Intern</span>
+              <span class="exp-period">Apr – May 2023</span>
+            </div>
+            <div class="exp-org">
+              Dr. Kushal Shah ·
+              <span class="exp-context">NLP / Text Classification</span>
+            </div>
+            <div class="exp-bullet">
+              Developed a POS-tagging based text classifier achieving 97%
+              fiction/non-fiction accuracy; improved classification accuracy by
+              15%.
+            </div>
+          </div>
+
+          <div class="exp-entry reveal">
+            <div class="exp-header">
+              <span class="exp-role">Research Assistant</span>
+              <span class="exp-period">Nov 2022 – Jun 2023</span>
+            </div>
+            <div class="exp-org">
+              Prof. Shital Thakkar ·
+              <span class="exp-context">Computer Vision</span>
+            </div>
+            <div class="exp-bullet">
+              Built CNN models for image classification (92% accuracy);
+              evaluated face anti-spoofing algorithms with zero-shot and
+              one-shot learning.
+            </div>
+          </div>
+
+          <div class="exp-entry reveal">
+            <div class="exp-header">
+              <span class="exp-role">Technical Intern</span>
+              <span class="exp-period">Jul – Dec 2022</span>
+            </div>
+            <div class="exp-org">
+              Implevista Pvt. Ltd. ·
+              <span class="exp-context"
+                >Deep Learning / Structural Inspection</span
+              >
+            </div>
+            <div class="exp-bullet">
+              Developed a CNN-based crack detection system for concrete
+              structures achieving 96% accuracy under varied lighting.
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Reviews ────────────────────────────────── -->
+        <section id="reviews" class="page-section" data-layer="6">
+          <h2 class="section-heading-sr">Reviewing</h2>
+          <p
+            style="
+              font-family: var(--font-serif);
+              font-size: 0.98rem;
+              color: var(--c-text-secondary);
+              margin-bottom: 1.8rem;
+            "
+          >
+            Served as a reviewer for the following venues:
+          </p>
+          <ul class="review-list reveal">
+            <li class="review-item">
+              <span class="review-venue"
+                >[Conference / Journal Name, Year]</span
+              >
+              <span class="review-type">[e.g. Conference / Journal]</span>
+            </li>
+            <li class="review-item">
+              <span class="review-venue"
+                >[Conference / Journal Name, Year]</span
+              >
+              <span class="review-type">[e.g. Conference / Journal]</span>
+            </li>
+            <li class="review-item">
+              <span class="review-venue"
+                >[Conference / Journal Name, Year]</span
+              >
+              <span class="review-type">[e.g. Conference / Journal]</span>
+            </li>
+          </ul>
+        </section>
+
+        <!-- ── Projects ────────────────────────────────── -->
+        <section id="projects" class="page-section" data-layer="7">
+          <h2 class="section-heading-sr">Selected Projects</h2>
+
+          <div class="projects-grid">
+            <div class="project-card reveal">
+              <div class="entry-title">CLIP-Based Domain Adaptation</div>
+              <div class="entry-summary">
+                Supervised and unsupervised domain generalization pipelines
+                using CLIP for domain-agnostic feature learning across PCAS and
+                DomainNet.
+              </div>
+              <div class="tag-row">
+                <span class="tag">CLIP</span>
+                <span class="tag">Domain Adaptation</span>
+              </div>
+            </div>
+
+            <div class="project-card reveal">
+              <div class="entry-title">NIR Facial Recognition Spoofing</div>
+              <div class="entry-summary">
+                Tested robustness of NIR-based 3D face recognition against
+                high-fidelity 3D-printed spoofing attempts using ARTEC scanning
+                and Blender.
+              </div>
+              <div class="tag-row">
+                <span class="tag">Face Recognition</span>
+                <span class="tag">Security</span>
+              </div>
+            </div>
+
+            <div class="project-card reveal">
+              <div class="entry-title">3D Reconstruction via ICP SLAM</div>
+              <div class="entry-summary">
+                Arduino-controlled rotating platform for systematic object
+                imaging, processed with COLMAP to generate precise 3D
+                point-cloud models.
+              </div>
+              <div class="tag-row">
+                <span class="tag">3D Reconstruction</span>
+                <span class="tag">SLAM</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Education ───────────────────────────────── -->
+        <section id="education" class="page-section" data-layer="8">
+          <h2 class="section-heading-sr">Education</h2>
+
+          <div class="edu-entry reveal">
+            <div class="edu-header">
+              <span class="edu-inst">IIIT Hyderabad</span>
+              <span class="edu-period">2023 – Present</span>
+            </div>
+            <div class="edu-degree">M.S. by Research, CVIT</div>
+            <div class="edu-gpa">
+              GPA: 8.8 / 10.0 · Advised by Prof. P. J. Narayanan
+            </div>
+          </div>
+
+          <div class="edu-entry reveal">
+            <div class="edu-header">
+              <span class="edu-inst">Dharamsinh Desai University</span>
+              <span class="edu-period">2017 – 2021</span>
+            </div>
+            <div class="edu-degree">
+              B.Tech, Electronics &amp; Communication
+            </div>
+            <div class="edu-gpa">
+              GPA: 7.87 / 10.0 · First Class with Distinction
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Contact (unembedding) ────────────────────── -->
+        <section
+          id="contact"
+          class="page-section contact-section"
+          data-layer="9"
+        >
+          <h2 class="section-heading-sr">Contact</h2>
+
+          <div class="softmax-row reveal">
+            <div class="sm-item sampled">
+              <a
+                class="sm-label-btn primary"
+                href="mailto:sunayana1233@gmail.com"
+                >Email</a
+              >
+              <div class="sm-bar-track" aria-hidden="true">
+                <div class="sm-bar" style="width: 71%"></div>
+              </div>
+              <span aria-hidden="true">0.71</span>
+            </div>
+            <div class="sm-item">
+              <a
+                class="sm-label-btn"
+                href="https://github.com/sunayana-981"
+                target="_blank"
+                rel="noopener"
+                >GitHub</a
+              >
+              <div class="sm-bar-track" aria-hidden="true">
+                <div class="sm-bar" style="width: 15%"></div>
+              </div>
+              <span aria-hidden="true">0.15</span>
+            </div>
+            <div class="sm-item">
+              <a
+                class="sm-label-btn"
+                href="https://scholar.google.com/citations?hl=en&user=qY32y7oAAAAJ"
+                target="_blank"
+                rel="noopener"
+                >Scholar</a
+              >
+              <div class="sm-bar-track" aria-hidden="true">
+                <div class="sm-bar" style="width: 9%"></div>
+              </div>
+              <span aria-hidden="true">0.09</span>
+            </div>
+            <div class="sm-item">
+              <a class="sm-label-btn" href="#" target="_blank" rel="noopener"
+                >CV</a
+              >
+              <div class="sm-bar-track" aria-hidden="true">
+                <div class="sm-bar" style="width: 5%"></div>
+              </div>
+              <span aria-hidden="true">0.05</span>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- ── Network spine: the page's layer-to-layer throughline — a real
          column beside the content, not a floating overlay ── -->
-    <div class="nn-spine" id="nnSpine" aria-hidden="true">
-      <div class="nn-spine-line" id="nnSpineLine"></div>
-      <div class="nn-spine-fill" id="nnSpineFill"></div>
-      <div class="nn-spine-node" data-node="0"></div>
-      <div class="nn-spine-node" data-node="1"></div>
-      <div class="nn-spine-node" data-node="2"></div>
-      <div class="nn-spine-node" data-node="3"></div>
-      <div class="nn-spine-node" data-node="4"></div>
-      <div class="nn-spine-node" data-node="5"></div>
-      <div class="nn-spine-node" data-node="6"></div>
-      <div class="nn-spine-node" data-node="7"></div>
-      <div class="nn-spine-node" data-node="8"></div>
-      <div class="nn-spine-node" data-node="9"></div>
+      <div class="nn-spine" id="nnSpine" aria-hidden="true">
+        <div class="nn-spine-line" id="nnSpineLine"></div>
+        <div class="nn-spine-fill" id="nnSpineFill"></div>
+        <div class="nn-spine-node" data-node="0"></div>
+        <div class="nn-spine-node" data-node="1"></div>
+        <div class="nn-spine-node" data-node="2"></div>
+        <div class="nn-spine-node" data-node="3"></div>
+        <div class="nn-spine-node" data-node="4"></div>
+        <div class="nn-spine-node" data-node="5"></div>
+        <div class="nn-spine-node" data-node="6"></div>
+        <div class="nn-spine-node" data-node="7"></div>
+        <div class="nn-spine-node" data-node="8"></div>
+        <div class="nn-spine-node" data-node="9"></div>
+      </div>
     </div>
-    </div><!-- /page-layout -->
+    <!-- /page-layout -->
 
     <!-- ── Footer ───────────────────────────────────── -->
     <footer>
       <div class="container">
         <p>&copy; 2025 Sunayana Samavedam</p>
-        <p class="footer-note">This page renders itself as a stylized forward pass. The publications above are the real output.</p>
+        <p class="footer-note">
+          This page renders itself as a stylized forward pass. The publications
+          above are the real output.
+        </p>
       </div>
     </footer>
 
     <script>
       /* ── Model console: frozen open on desktop, collapsible on mobile ── */
-      const consoleEl = document.getElementById('console');
-      const consoleSummary = consoleEl.querySelector('.console-summary');
-      if (window.innerWidth < 860) consoleEl.removeAttribute('open');
-      consoleSummary.addEventListener('click', (e) => {
+      const consoleEl = document.getElementById("console");
+      const consoleSummary = consoleEl.querySelector(".console-summary");
+      if (window.innerWidth < 860) consoleEl.removeAttribute("open");
+      consoleSummary.addEventListener("click", (e) => {
         if (window.innerWidth >= 860) e.preventDefault();
       });
       // Each nav link's target section starts several sub-layers before its
@@ -1978,14 +2496,22 @@
       // the click's correct layer with a stale one a moment later. So a
       // nav click also suppresses scroll-driven updates for a short grace
       // window, and does the one resync itself once things have settled.
-      const LINK_LAYER = { '#top': 0, '#research': 1, '#experience': 5, '#reviews': 6, '#projects': 7, '#education': 8, '#contact': 9 };
+      const LINK_LAYER = {
+        "#top": 0,
+        "#research": 1,
+        "#experience": 5,
+        "#reviews": 6,
+        "#projects": 7,
+        "#education": 8,
+        "#contact": 9,
+      };
       let suppressScrollUntil = 0;
-      document.querySelectorAll('.console-nav a').forEach((a) => {
-        a.addEventListener('click', () => {
+      document.querySelectorAll(".console-nav a").forEach((a) => {
+        a.addEventListener("click", () => {
           if (window.innerWidth < 860) {
-            window.setTimeout(() => consoleEl.removeAttribute('open'), 300);
+            window.setTimeout(() => consoleEl.removeAttribute("open"), 300);
           }
-          const targetLayer = LINK_LAYER[a.getAttribute('href')];
+          const targetLayer = LINK_LAYER[a.getAttribute("href")];
           if (targetLayer !== undefined) render(targetLayer);
           suppressScrollUntil = Date.now() + 500;
           window.setTimeout(() => {
@@ -1996,36 +2522,43 @@
       });
 
       // Sticky nav border on scroll
-      const nav = document.getElementById('nav');
+      const nav = document.getElementById("nav");
       window.addEventListener(
-        'scroll',
-        () => { nav.classList.toggle('scrolled', window.scrollY > 10); },
+        "scroll",
+        () => {
+          nav.classList.toggle("scrolled", window.scrollY > 10);
+        },
         { passive: true },
       );
 
       /* ── Theme: light "paper" by default, dark on request ──────── */
-      const themeBtn = document.getElementById('themeBtn');
+      const themeBtn = document.getElementById("themeBtn");
       const rootEl = document.documentElement;
       function applyTheme(theme) {
-        if (theme === 'dark') {
-          rootEl.setAttribute('data-theme', 'dark');
-          themeBtn.setAttribute('aria-pressed', 'true');
-          themeBtn.setAttribute('aria-label', 'Switch to light mode');
-          themeBtn.setAttribute('title', 'Switch to light mode');
+        if (theme === "dark") {
+          rootEl.setAttribute("data-theme", "dark");
+          themeBtn.setAttribute("aria-pressed", "true");
+          themeBtn.setAttribute("aria-label", "Switch to light mode");
+          themeBtn.setAttribute("title", "Switch to light mode");
         } else {
-          rootEl.removeAttribute('data-theme');
-          themeBtn.setAttribute('aria-pressed', 'false');
-          themeBtn.setAttribute('aria-label', 'Switch to dark mode');
-          themeBtn.setAttribute('title', 'Switch to dark mode');
+          rootEl.removeAttribute("data-theme");
+          themeBtn.setAttribute("aria-pressed", "false");
+          themeBtn.setAttribute("aria-label", "Switch to dark mode");
+          themeBtn.setAttribute("title", "Switch to dark mode");
         }
       }
-      let savedTheme = 'light';
-      try { savedTheme = localStorage.getItem('theme') || 'light'; } catch (e) {}
+      let savedTheme = "light";
+      try {
+        savedTheme = localStorage.getItem("theme") || "light";
+      } catch (e) {}
       applyTheme(savedTheme);
-      themeBtn.addEventListener('click', () => {
-        const next = rootEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      themeBtn.addEventListener("click", () => {
+        const next =
+          rootEl.getAttribute("data-theme") === "dark" ? "light" : "dark";
         applyTheme(next);
-        try { localStorage.setItem('theme', next); } catch (e) {}
+        try {
+          localStorage.setItem("theme", next);
+        } catch (e) {}
       });
 
       /* ── Scroll reveal ───────────────────────────────── */
@@ -2033,41 +2566,59 @@
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              entry.target.classList.add('in-view');
+              entry.target.classList.add("in-view");
               revealIO.unobserve(entry.target);
             }
           });
         },
-        { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
+        { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
       );
-      document.querySelectorAll('.reveal').forEach((el) => revealIO.observe(el));
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => revealIO.observe(el));
 
       /* ── Layer tracking: drives spine, logit lens, nav ── */
       const TOTAL_LAYERS = 9;
-      const LAYER_TO_SECTION = [null, 'research', 'research', 'research', 'research', 'experience', 'reviews', 'projects', 'education', 'contact'];
+      const LAYER_TO_SECTION = [
+        null,
+        "research",
+        "research",
+        "research",
+        "research",
+        "experience",
+        "reviews",
+        "projects",
+        "education",
+        "contact",
+      ];
       const LOGIT_LENS = {
-        0: ['<bos>', 'the', 'a', 'of'],
-        1: ['a', 'model', 'network', 'the'],
-        2: ['vision', 'feature', 'neural', 'model'],
-        3: ['interpretability', 'sparse', 'feature', 'shift'],
-        4: ['style', 'control', 'survey', 'concept'],
-        5: ['taught', 'mentored', 'research', 'lab'],
-        6: ['review', 'reviewer', 'conference', 'venue'],
-        7: ['CLIP', 'domain', '3D', 'build'],
-        8: ['IIIT', 'advisor', 'M.S.', 'thesis'],
-        9: ['Sunayana', 'Samavedam', 'researcher', 'email'],
+        0: ["<bos>", "the", "a", "of"],
+        1: ["a", "model", "network", "the"],
+        2: ["vision", "feature", "neural", "model"],
+        3: ["interpretability", "sparse", "feature", "shift"],
+        4: ["style", "control", "survey", "concept"],
+        5: ["taught", "mentored", "research", "lab"],
+        6: ["review", "reviewer", "conference", "venue"],
+        7: ["CLIP", "domain", "3D", "build"],
+        8: ["IIIT", "advisor", "M.S.", "thesis"],
+        9: ["Sunayana", "Samavedam", "researcher", "email"],
       };
 
-      const layerEls = Array.from(document.querySelectorAll('[data-layer]'));
+      const layerEls = Array.from(document.querySelectorAll("[data-layer]"));
       let layerOffsets = [];
 
-      const spineEl = document.getElementById('nnSpine');
-      const spineFill = document.getElementById('nnSpineFill');
-      const spineNodes = Array.from(document.querySelectorAll('.nn-spine-node'));
+      const spineEl = document.getElementById("nnSpine");
+      const spineFill = document.getElementById("nnSpineFill");
+      const spineNodes = Array.from(
+        document.querySelectorAll(".nn-spine-node"),
+      );
 
       function computeOffsets() {
         layerOffsets = layerEls
-          .map((el) => ({ layer: Number(el.dataset.layer), top: el.getBoundingClientRect().top + window.scrollY }))
+          .map((el) => ({
+            layer: Number(el.dataset.layer),
+            top: el.getBoundingClientRect().top + window.scrollY,
+          }))
           .sort((a, b) => a.top - b.top);
         layoutSpine();
       }
@@ -2084,18 +2635,20 @@
         if (!layerOffsets.length) return;
         const base = railTop();
         spineNodes.forEach((n) => {
-          const o = layerOffsets.find((x) => x.layer === Number(n.dataset.node));
+          const o = layerOffsets.find(
+            (x) => x.layer === Number(n.dataset.node),
+          );
           if (o) n.style.top = `${o.top - base}px`;
         });
       }
 
       computeOffsets();
-      window.addEventListener('resize', computeOffsets);
-      window.addEventListener('load', () => {
+      window.addEventListener("resize", computeOffsets);
+      window.addEventListener("load", () => {
         computeOffsets();
         render(currentLayerFor(window.scrollY));
       });
-      window.addEventListener('hashchange', () => {
+      window.addEventListener("hashchange", () => {
         // Covers hash navigation that didn't go through a nav click (e.g.
         // browser back/forward). hashchange can fire before the browser has
         // actually scrolled to the target, so wait — and use the same grace
@@ -2125,19 +2678,21 @@
       }
 
       const SECTION_LABELS = {
-        research: 'Research',
-        experience: 'Experience',
-        reviews: 'Reviewing',
-        projects: 'Projects',
-        education: 'Education',
-        contact: 'Contact',
+        research: "Research",
+        experience: "Experience",
+        reviews: "Reviewing",
+        projects: "Projects",
+        education: "Education",
+        contact: "Contact",
       };
 
-      const lensListEl = document.getElementById('lensList');
-      const consoleCurrentEl = document.getElementById('consoleCurrent');
-      const statLayerEl = document.getElementById('statLayer');
-      const statNormEl = document.getElementById('statNorm');
-      const navLinkEls = Array.from(document.querySelectorAll('.console-nav a'));
+      const lensListEl = document.getElementById("lensList");
+      const consoleCurrentEl = document.getElementById("consoleCurrent");
+      const statLayerEl = document.getElementById("statLayer");
+      const statNormEl = document.getElementById("statNorm");
+      const navLinkEls = Array.from(
+        document.querySelectorAll(".console-nav a"),
+      );
 
       let prevLayer = -1;
 
@@ -2150,7 +2705,11 @@
       let pendingLayer = null;
       let settleTimer = null;
       function commitLayer(layer) {
-        if (layer === prevLayer) { pendingLayer = null; clearTimeout(settleTimer); return; }
+        if (layer === prevLayer) {
+          pendingLayer = null;
+          clearTimeout(settleTimer);
+          return;
+        }
         if (pendingLayer === layer) return;
         pendingLayer = layer;
         clearTimeout(settleTimer);
@@ -2163,50 +2722,54 @@
       function render(layer) {
         spineNodes.forEach((n) => {
           const i = Number(n.dataset.node);
-          n.classList.toggle('passed', i <= layer);
-          n.classList.toggle('current', i === layer);
+          n.classList.toggle("passed", i <= layer);
+          n.classList.toggle("current", i === layer);
         });
 
         const curOffset = layerOffsets.find((o) => o.layer === layer);
         if (curOffset && layerOffsets.length) {
-          spineFill.style.top = '0px';
+          spineFill.style.top = "0px";
           spineFill.style.height = `${Math.max(0, curOffset.top - railTop())}px`;
         }
 
         if (layer !== prevLayer) {
-          const curNode = spineNodes.find((n) => Number(n.dataset.node) === layer);
+          const curNode = spineNodes.find(
+            (n) => Number(n.dataset.node) === layer,
+          );
           if (curNode) {
-            curNode.classList.remove('firing');
+            curNode.classList.remove("firing");
             void curNode.offsetWidth;
-            curNode.classList.add('firing');
+            curNode.classList.add("firing");
           }
           prevLayer = layer;
         }
 
         const secId = LAYER_TO_SECTION[layer];
-        const activeHref = secId ? `#${secId}` : '#top';
-        consoleCurrentEl.textContent = secId ? SECTION_LABELS[secId] : 'Embedding';
+        const activeHref = secId ? `#${secId}` : "#top";
+        consoleCurrentEl.textContent = secId
+          ? SECTION_LABELS[secId]
+          : "Embedding";
         statLayerEl.textContent = `Layer ${layer} / ${TOTAL_LAYERS}`;
         statNormEl.textContent = `‖resid‖ ≈ ${(1 + layer * 0.18).toFixed(2)}`;
 
         const tokens = LOGIT_LENS[layer] || LOGIT_LENS[0];
         const weights = [92, 64, 40, 22];
-        lensListEl.textContent = '';
+        lensListEl.textContent = "";
         tokens.forEach((t, i) => {
-          const li = document.createElement('li');
-          li.style.setProperty('--w', `${weights[i] || 15}%`);
-          const rank = document.createElement('span');
-          rank.className = 'lens-rank';
+          const li = document.createElement("li");
+          li.style.setProperty("--w", `${weights[i] || 15}%`);
+          const rank = document.createElement("span");
+          rank.className = "lens-rank";
           rank.textContent = String(i + 1);
-          const tok = document.createElement('span');
-          tok.className = 'lens-tok';
+          const tok = document.createElement("span");
+          tok.className = "lens-tok";
           tok.textContent = t;
           li.append(rank, tok);
           lensListEl.append(li);
         });
 
         navLinkEls.forEach((a) => {
-          a.classList.toggle('active', a.getAttribute('href') === activeHref);
+          a.classList.toggle("active", a.getAttribute("href") === activeHref);
         });
       }
 
@@ -2221,39 +2784,46 @@
           ticking = false;
         });
       }
-      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener("scroll", onScroll, { passive: true });
       render(currentLayerFor(window.scrollY));
 
       /* ── Induction-head easter egg ──────────────────── */
-      const svg = document.getElementById('inductionSvg');
-      const path = document.getElementById('inductionPath');
-      document.querySelectorAll('.induction-copy').forEach((copyEl) => {
+      const svg = document.getElementById("inductionSvg");
+      const path = document.getElementById("inductionPath");
+      document.querySelectorAll(".induction-copy").forEach((copyEl) => {
         const key = copyEl.dataset.key;
-        const source = document.querySelector(`.induction-token[data-key="${key}"]`);
+        const source = document.querySelector(
+          `.induction-token[data-key="${key}"]`,
+        );
 
         function show() {
           if (!source) return;
           const a = source.getBoundingClientRect();
           const b = copyEl.getBoundingClientRect();
-          const x1 = a.left + a.width / 2, y1 = a.top + a.height / 2;
-          const x2 = b.left + b.width / 2, y2 = b.top + b.height / 2;
+          const x1 = a.left + a.width / 2,
+            y1 = a.top + a.height / 2;
+          const x2 = b.left + b.width / 2,
+            y2 = b.top + b.height / 2;
           const midY = (y1 + y2) / 2 - 60;
-          path.setAttribute('d', `M ${x1} ${y1} Q ${(x1 + x2) / 2} ${midY} ${x2} ${y2}`);
-          svg.classList.add('visible');
-          source.classList.add('induction-active');
-          copyEl.classList.add('induction-active');
+          path.setAttribute(
+            "d",
+            `M ${x1} ${y1} Q ${(x1 + x2) / 2} ${midY} ${x2} ${y2}`,
+          );
+          svg.classList.add("visible");
+          source.classList.add("induction-active");
+          copyEl.classList.add("induction-active");
         }
         function hide() {
-          svg.classList.remove('visible');
-          source && source.classList.remove('induction-active');
-          copyEl.classList.remove('induction-active');
+          svg.classList.remove("visible");
+          source && source.classList.remove("induction-active");
+          copyEl.classList.remove("induction-active");
         }
 
-        copyEl.addEventListener('mouseenter', show);
-        copyEl.addEventListener('mouseleave', hide);
-        copyEl.addEventListener('focus', show);
-        copyEl.addEventListener('blur', hide);
-        copyEl.addEventListener('click', (e) => {
+        copyEl.addEventListener("mouseenter", show);
+        copyEl.addEventListener("mouseleave", hide);
+        copyEl.addEventListener("focus", show);
+        copyEl.addEventListener("blur", hide);
+        copyEl.addEventListener("click", (e) => {
           e.preventDefault();
           show();
           setTimeout(hide, 1600);

@@ -412,24 +412,46 @@
 
       .page-section:last-of-type { border-bottom: none; }
 
-      .section-head { margin-bottom: 2.6rem; }
+      /* Each section wears its console-flow-chart hue: Embedding → hero,
+         then Research…Contact map to blk-1…blk-7, the same order and
+         colours as the boxed blocks in the console nav. */
+      .hero       { --sec-color: var(--blk-1); }
+      #research   { --sec-color: var(--blk-2); }
+      #experience { --sec-color: var(--blk-3); }
+      #reviews    { --sec-color: var(--blk-4); }
+      #projects   { --sec-color: var(--blk-5); }
+      #education  { --sec-color: var(--blk-6); }
+      #contact    { --sec-color: var(--blk-7); }
 
-      .eyebrow {
-        font-family: var(--font-sans);
-        font-size: 0.8rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.07em;
-        color: var(--c-accent);
-        margin-bottom: 0.6rem;
+      .hero,
+      .page-section {
+        background: color-mix(in srgb, var(--sec-color) 15%, transparent);
       }
 
-      .section-heading {
-        font-family: var(--font-serif);
-        font-size: 2rem;
-        font-weight: 600;
-        letter-spacing: -0.005em;
-        color: var(--c-text);
+      .page-section {
+        border-top: 4px solid var(--sec-color);
+      }
+
+      :root[data-theme="dark"] .hero,
+      :root[data-theme="dark"] .page-section {
+        background: color-mix(in srgb, var(--sec-color) 20%, transparent);
+      }
+
+      /* Section identity is carried visually by the per-section colour
+         (mapped to that section's block in the console flow-chart). The
+         heading text stays in the DOM, visually hidden, so the document
+         outline and assistive tech still have it. */
+      .section-heading-sr {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        white-space: nowrap;
+        border: 0;
       }
 
       /* ── Research ──────────────────────────────────── */
@@ -944,22 +966,6 @@
         overflow: hidden;
       }
 
-      .console::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: 18px;
-        pointer-events: none;
-        background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--c-accent-2) 34%, transparent));
-        opacity: 0.16;
-      }
-
-      :root[data-theme="dark"] .console::after {
-        opacity: 0.24;
-      }
-
       .console-summary {
         display: flex;
         align-items: center;
@@ -1239,20 +1245,6 @@
       :root[data-theme="dark"] .theme-icon-moon { display: none; }
       :root[data-theme="dark"] .theme-icon-sun { display: block; }
 
-      .console.pulse::after { animation: consoleEdgePulse 0.7s ease-out; }
-
-      @keyframes consoleEdgePulse {
-        0%, 100% {
-          opacity: 0.16;
-          background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--c-accent-2) 34%, transparent));
-        }
-        40% {
-          opacity: 0.72;
-          background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--c-accent-2) 72%, transparent));
-        }
-      }
-
-
       /* below this width the console reverts to a floating collapsible
          drawer (short viewports genuinely need it out of the static flow
          and capped, so it gets its scrollbar back only here) */
@@ -1270,7 +1262,6 @@
           border-radius: 16px;
           box-shadow: 0 6px 24px var(--c-shadow);
         }
-        .console::after { display: none; }
         .console-body {
           max-height: calc(100vh - 140px);
           overflow-y: auto;
@@ -1290,8 +1281,6 @@
         .hero .tagline { font-size: 1.1rem; }
 
         .page-section { padding: 3.5rem 0; }
-
-        .section-heading { font-size: 1.6rem; }
 
         .projects-grid { grid-template-columns: 1fr; }
 
@@ -1516,10 +1505,7 @@
 
       <!-- ── Research ────────────────────────────────── -->
       <section id="research" class="page-section" data-layer="1">
-        <div class="section-head reveal">
-          <p class="eyebrow">Layers 1–4</p>
-          <h2 class="section-heading">Research</h2>
-        </div>
+        <h2 class="section-heading-sr">Research</h2>
 
         <p class="research-group-label" data-layer="1">Conference Papers</p>
 
@@ -1743,10 +1729,7 @@
 
       <!-- ── Experience ──────────────────────────────── -->
       <section id="experience" class="page-section" data-layer="5">
-        <div class="section-head reveal">
-          <p class="eyebrow">Layer 5</p>
-          <h2 class="section-heading">Experience</h2>
-        </div>
+        <h2 class="section-heading-sr">Experience</h2>
 
         <div class="exp-entry reveal">
           <div class="exp-header">
@@ -1826,10 +1809,7 @@
 
       <!-- ── Reviews ────────────────────────────────── -->
       <section id="reviews" class="page-section" data-layer="6">
-        <div class="section-head reveal">
-          <p class="eyebrow">Layer 6</p>
-          <h2 class="section-heading">Reviewing</h2>
-        </div>
+        <h2 class="section-heading-sr">Reviewing</h2>
         <p style="font-family: var(--font-serif); font-size: 0.98rem; color: var(--c-text-secondary); margin-bottom: 1.8rem;">
           Served as a reviewer for the following venues:
         </p>
@@ -1851,10 +1831,7 @@
 
       <!-- ── Projects ────────────────────────────────── -->
       <section id="projects" class="page-section" data-layer="7">
-        <div class="section-head reveal">
-          <p class="eyebrow">Layer 7</p>
-          <h2 class="section-heading">Selected Projects</h2>
-        </div>
+        <h2 class="section-heading-sr">Selected Projects</h2>
 
         <div class="projects-grid">
           <div class="project-card reveal">
@@ -1900,10 +1877,7 @@
 
       <!-- ── Education ───────────────────────────────── -->
       <section id="education" class="page-section" data-layer="8">
-        <div class="section-head reveal">
-          <p class="eyebrow">Layer 8</p>
-          <h2 class="section-heading">Education</h2>
-        </div>
+        <h2 class="section-heading-sr">Education</h2>
 
         <div class="edu-entry reveal">
           <div class="edu-header">
@@ -1930,10 +1904,7 @@
 
       <!-- ── Contact (unembedding) ────────────────────── -->
       <section id="contact" class="page-section contact-section" data-layer="9">
-        <div class="section-head reveal">
-          <p class="eyebrow">Layer 9 · Unembed</p>
-          <h2 class="section-heading">Contact</h2>
-        </div>
+        <h2 class="section-heading-sr">Contact</h2>
 
         <div class="softmax-row reveal">
           <div class="sm-item sampled">
@@ -2209,9 +2180,6 @@
             void curNode.offsetWidth;
             curNode.classList.add('firing');
           }
-          consoleEl.classList.remove('pulse');
-          void consoleEl.offsetWidth;
-          consoleEl.classList.add('pulse');
           prevLayer = layer;
         }
 

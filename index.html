@@ -214,14 +214,9 @@
         padding: 0 2rem;
       }
 
-      /* The main content column and the network spine sit side by side as
-         real, static layout — not an overlay computed from pixel offsets,
-         so the spine can never crowd or overlap the content beside it. */
       .page-layout {
         display: flex;
         justify-content: center;
-        align-items: stretch;
-        gap: 48px;
       }
 
       .page-layout > .container {
@@ -512,60 +507,18 @@
         scroll-margin-top: 76px;
       }
 
-      /* Each section wears its console-flow-chart hue: Embedding → hero,
-         then Research…Contact map to blk-1…blk-7, the same order and
-         colours as the boxed blocks in the console nav. Each section's
-         fill holds its own hue, then eases into the next section's hue
-         over its final stretch — the two sections meet on exactly the
-         same colour, so scrolling reads as one continuous gradient
-         rather than a stack of bands. */
-      .hero {
-        --sec-color: var(--blk-1);
-        --sec-next: var(--blk-2);
-      }
-      #research {
-        --sec-color: var(--blk-2);
-        --sec-next: var(--blk-3);
-      }
-      #experience {
-        --sec-color: var(--blk-3);
-        --sec-next: var(--blk-4);
-      }
-      #reviews {
-        --sec-color: var(--blk-4);
-        --sec-next: var(--blk-5);
-      }
-      #projects {
-        --sec-color: var(--blk-5);
-        --sec-next: var(--blk-6);
-      }
-      #education {
-        --sec-color: var(--blk-6);
-        --sec-next: var(--blk-7);
-      }
-      #contact {
-        --sec-color: var(--blk-7);
-        --sec-next: var(--blk-7);
-      }
-
-      .hero,
-      .page-section {
-        background: linear-gradient(
-          to bottom,
-          color-mix(in srgb, var(--sec-color) 17%, transparent) 0%,
-          color-mix(in srgb, var(--sec-color) 17%, transparent) 66%,
-          color-mix(in srgb, var(--sec-next) 17%, transparent) 100%
-        );
-      }
-
-      :root[data-theme="dark"] .hero,
-      :root[data-theme="dark"] .page-section {
-        background: linear-gradient(
-          to bottom,
-          color-mix(in srgb, var(--sec-color) 24%, transparent) 0%,
-          color-mix(in srgb, var(--sec-color) 24%, transparent) 66%,
-          color-mix(in srgb, var(--sec-next) 24%, transparent) 100%
-        );
+      /* The section colour is painted full-bleed by #bgwash — a single
+         fixed layer behind everything whose tint is interpolated on
+         scroll between the current section's console-flow-chart hue and
+         the next one's, so the whole page reads as one moving gradient
+         (Embedding → hero, then Research…Contact = blk-1…blk-7). */
+      #bgwash {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background-color: var(--c-bg);
+        transition: background-color 0.1s linear;
       }
 
       /* Section identity is carried visually by the per-section colour
@@ -1039,94 +992,6 @@
         margin-top: 0.4rem;
       }
 
-      /* ── Network spine: the page's layer-to-layer throughline ── */
-      .nn-spine {
-        position: relative;
-        width: 24px;
-        flex-shrink: 0;
-        pointer-events: none;
-        z-index: 5;
-      }
-
-      .nn-spine-line,
-      .nn-spine-fill {
-        position: absolute;
-        left: 50%;
-        width: 1px;
-        transform: translateX(-50%);
-      }
-
-      .nn-spine-line {
-        top: 0;
-        bottom: 0;
-        background: var(--c-border);
-      }
-
-      .nn-spine-fill {
-        background: linear-gradient(var(--c-accent), var(--c-accent-2));
-        box-shadow: 0 0 8px color-mix(in srgb, var(--c-accent) 50%, transparent);
-        transition: height 0.15s linear;
-      }
-
-      .nn-spine-node {
-        position: absolute;
-        left: 50%;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background-color: var(--c-bg-elev);
-        border: 1px solid var(--c-border-bright);
-        transform: translate(-50%, -50%);
-        transition:
-          background-color 0.4s ease,
-          border-color 0.4s ease,
-          box-shadow 0.4s ease;
-      }
-
-      .nn-spine-node.passed {
-        background-color: var(--c-accent);
-        border-color: var(--c-accent);
-        box-shadow: 0 0 6px color-mix(in srgb, var(--c-accent) 55%, transparent);
-      }
-      .nn-spine-node.current {
-        background-color: var(--c-accent-2);
-        border-color: var(--c-accent-2);
-        box-shadow:
-          0 0 0 3px var(--c-bg),
-          0 0 0 5px var(--c-accent-2),
-          0 0 14px color-mix(in srgb, var(--c-accent-2) 50%, transparent);
-      }
-      .nn-spine-node.firing {
-        animation: nodeFire 0.9s ease-out;
-      }
-
-      @keyframes nodeFire {
-        0% {
-          box-shadow:
-            0 0 0 3px var(--c-bg),
-            0 0 0 5px var(--c-accent-2),
-            0 0 14px color-mix(in srgb, var(--c-accent-2) 50%, transparent);
-        }
-        40% {
-          box-shadow:
-            0 0 0 3px var(--c-bg),
-            0 0 0 14px color-mix(in srgb, var(--c-accent-2) 28%, transparent),
-            0 0 28px color-mix(in srgb, var(--c-accent-2) 60%, transparent);
-        }
-        100% {
-          box-shadow:
-            0 0 0 3px var(--c-bg),
-            0 0 0 5px var(--c-accent-2),
-            0 0 14px color-mix(in srgb, var(--c-accent-2) 50%, transparent);
-        }
-      }
-
-      @media (max-width: 1300px) {
-        .nn-spine {
-          display: none;
-        }
-      }
-
       /* ── Model console: navigation + live interpretability readout ──
          Fixed to the left viewport edge while the page reserves its width.
          The pane keeps one natural rule between navigation and content; the
@@ -1549,6 +1414,9 @@
     </style>
   </head>
   <body id="top">
+    <!-- Full-bleed section colour, interpolated on scroll (see script). -->
+    <div id="bgwash" aria-hidden="true"></div>
+
     <!-- ── Nav ──────────────────────────────────────── -->
     <nav id="nav">
       <div class="container">
@@ -2444,23 +2312,6 @@
           </div>
         </section>
       </main>
-
-      <!-- ── Network spine: the page's layer-to-layer throughline — a real
-         column beside the content, not a floating overlay ── -->
-      <div class="nn-spine" id="nnSpine" aria-hidden="true">
-        <div class="nn-spine-line" id="nnSpineLine"></div>
-        <div class="nn-spine-fill" id="nnSpineFill"></div>
-        <div class="nn-spine-node" data-node="0"></div>
-        <div class="nn-spine-node" data-node="1"></div>
-        <div class="nn-spine-node" data-node="2"></div>
-        <div class="nn-spine-node" data-node="3"></div>
-        <div class="nn-spine-node" data-node="4"></div>
-        <div class="nn-spine-node" data-node="5"></div>
-        <div class="nn-spine-node" data-node="6"></div>
-        <div class="nn-spine-node" data-node="7"></div>
-        <div class="nn-spine-node" data-node="8"></div>
-        <div class="nn-spine-node" data-node="9"></div>
-      </div>
     </div>
     <!-- /page-layout -->
 
@@ -2559,6 +2410,7 @@
         try {
           localStorage.setItem("theme", next);
         } catch (e) {}
+        updateWash(window.scrollY);
       });
 
       /* ── Scroll reveal ───────────────────────────────── */
@@ -2577,7 +2429,7 @@
         .querySelectorAll(".reveal")
         .forEach((el) => revealIO.observe(el));
 
-      /* ── Layer tracking: drives spine, logit lens, nav ── */
+      /* ── Layer tracking: drives the console (logit lens, nav, stats) ── */
       const TOTAL_LAYERS = 9;
       const LAYER_TO_SECTION = [
         null,
@@ -2607,12 +2459,6 @@
       const layerEls = Array.from(document.querySelectorAll("[data-layer]"));
       let layerOffsets = [];
 
-      const spineEl = document.getElementById("nnSpine");
-      const spineFill = document.getElementById("nnSpineFill");
-      const spineNodes = Array.from(
-        document.querySelectorAll(".nn-spine-node"),
-      );
-
       function computeOffsets() {
         layerOffsets = layerEls
           .map((el) => ({
@@ -2620,32 +2466,73 @@
             top: el.getBoundingClientRect().top + window.scrollY,
           }))
           .sort((a, b) => a.top - b.top);
-        layoutSpine();
+        computeWashStops();
       }
 
-      // The spine is now a real flex column beside <main> (not a document-
-      // absolute overlay), so node positions are relative to the rail's own
-      // top rather than the whole document. The connecting line itself is
-      // just top:0/bottom:0 in CSS now — no JS needed for that part.
-      function railTop() {
-        return spineEl.getBoundingClientRect().top + window.scrollY;
+      /* ── Full-bleed section colour ────────────────────────────────
+         One fixed layer (#bgwash) behind the whole page. On scroll its
+         tint is interpolated between the section the viewport is in and
+         the next one — holding each section's console-flow-chart hue,
+         then easing into the next over the section's final stretch, so
+         the page reads as a single continuous gradient. */
+      const bgwashEl = document.getElementById("bgwash");
+      const rootStyle = getComputedStyle(document.documentElement);
+      const WASH_SECTIONS = [
+        [".hero", "--blk-1"],
+        ["#research", "--blk-2"],
+        ["#experience", "--blk-3"],
+        ["#reviews", "--blk-4"],
+        ["#projects", "--blk-5"],
+        ["#education", "--blk-6"],
+        ["#contact", "--blk-7"],
+      ].map(([sel, cssVar]) => {
+        const hex = rootStyle.getPropertyValue(cssVar).trim().replace("#", "");
+        return {
+          sel,
+          rgb: [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16)),
+        };
+      });
+      let washStops = [];
+      function computeWashStops() {
+        washStops = WASH_SECTIONS.map((s) => {
+          const el = document.querySelector(s.sel);
+          return {
+            rgb: s.rgb,
+            top: el ? el.getBoundingClientRect().top + window.scrollY : 0,
+          };
+        }).sort((a, b) => a.top - b.top);
       }
-
-      function layoutSpine() {
-        if (!layerOffsets.length) return;
-        const base = railTop();
-        spineNodes.forEach((n) => {
-          const o = layerOffsets.find(
-            (x) => x.layer === Number(n.dataset.node),
-          );
-          if (o) n.style.top = `${o.top - base}px`;
-        });
+      function updateWash(scrollY) {
+        if (!washStops.length) return;
+        const refY = scrollY + window.innerHeight * 0.5;
+        let i = 0;
+        for (let k = 0; k < washStops.length; k++) {
+          if (washStops[k].top <= refY) i = k;
+          else break;
+        }
+        const a = washStops[i];
+        const b = washStops[Math.min(i + 1, washStops.length - 1)];
+        const span = b.top - a.top;
+        let p = span > 0 ? (refY - a.top) / span : 0;
+        p = Math.max(0, Math.min(1, p));
+        const t = p < 0.6 ? 0 : (p - 0.6) / 0.4; // hold, then ease to next
+        const alpha =
+          document.documentElement.getAttribute("data-theme") === "dark"
+            ? 0.26
+            : 0.17;
+        const c = a.rgb.map((v, j) => Math.round(v + (b.rgb[j] - v) * t));
+        bgwashEl.style.backgroundColor = `rgba(${c[0]}, ${c[1]}, ${c[2]}, ${alpha})`;
       }
 
       computeOffsets();
-      window.addEventListener("resize", computeOffsets);
+      updateWash(window.scrollY);
+      window.addEventListener("resize", () => {
+        computeOffsets();
+        updateWash(window.scrollY);
+      });
       window.addEventListener("load", () => {
         computeOffsets();
+        updateWash(window.scrollY);
         render(currentLayerFor(window.scrollY));
       });
       window.addEventListener("hashchange", () => {
@@ -2656,6 +2543,7 @@
         suppressScrollUntil = Date.now() + 500;
         window.setTimeout(() => {
           computeOffsets();
+          updateWash(window.scrollY);
           render(currentLayerFor(window.scrollY));
         }, 500);
       });
@@ -2700,8 +2588,8 @@
       // for a few animation frames when momentum/rubber-band scrolling
       // passes right at a short section's boundary (e.g. the single-paper
       // Workshop layer, or Education). render() only actually runs once
-      // the computed layer has held steady for a beat, so the console,
-      // spine, and logit lens settle on one value instead of flickering.
+      // the computed layer has held steady for a beat, so the console
+      // and logit lens settle on one value instead of flickering.
       let pendingLayer = null;
       let settleTimer = null;
       function commitLayer(layer) {
@@ -2720,29 +2608,7 @@
       }
 
       function render(layer) {
-        spineNodes.forEach((n) => {
-          const i = Number(n.dataset.node);
-          n.classList.toggle("passed", i <= layer);
-          n.classList.toggle("current", i === layer);
-        });
-
-        const curOffset = layerOffsets.find((o) => o.layer === layer);
-        if (curOffset && layerOffsets.length) {
-          spineFill.style.top = "0px";
-          spineFill.style.height = `${Math.max(0, curOffset.top - railTop())}px`;
-        }
-
-        if (layer !== prevLayer) {
-          const curNode = spineNodes.find(
-            (n) => Number(n.dataset.node) === layer,
-          );
-          if (curNode) {
-            curNode.classList.remove("firing");
-            void curNode.offsetWidth;
-            curNode.classList.add("firing");
-          }
-          prevLayer = layer;
-        }
+        prevLayer = layer;
 
         const secId = LAYER_TO_SECTION[layer];
         const activeHref = secId ? `#${secId}` : "#top";
@@ -2778,6 +2644,7 @@
         if (ticking) return;
         ticking = true;
         requestAnimationFrame(() => {
+          updateWash(window.scrollY);
           if (Date.now() >= suppressScrollUntil) {
             commitLayer(currentLayerFor(window.scrollY));
           }

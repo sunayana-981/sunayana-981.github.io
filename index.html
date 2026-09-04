@@ -41,6 +41,8 @@
         --c-bg: #faf7f0;
         --c-bg-elev: #ffffff;
         --c-bg-elev-2: #f2ecdc;
+        --c-console-bg: #e7ddc6;
+        --c-console-border: rgba(32, 29, 22, 0.3);
         --c-text: #201d16;
         --c-text-secondary: #55503f;
         --c-text-tertiary: #8a8471;
@@ -78,6 +80,8 @@
         --c-bg: #050507;
         --c-bg-elev: #0e0f13;
         --c-bg-elev-2: #17181e;
+        --c-console-bg: #212530;
+        --c-console-border: rgba(255, 255, 255, 0.16);
         --c-text: #f5f5f7;
         --c-text-secondary: #a1a1a6;
         --c-text-tertiary: #6e6e73;
@@ -1002,11 +1006,11 @@
         left: 0;
         bottom: 0;
         width: var(--console-w);
-        /* a slightly deeper "paper" than the page, so the pane sits apart
-           from the content column without becoming a glassy floating widget */
-        background-color: var(--c-bg-elev-2);
+        /* a distinctly deeper "paper" than the page, so the pane reads as
+           its own panel against the content column, not a glassy overlay */
+        background-color: var(--c-console-bg);
         border: none;
-        border-right: 1px solid var(--c-border-bright);
+        border-right: 1px solid var(--c-console-border);
         z-index: 60;
         overflow: hidden;
       }

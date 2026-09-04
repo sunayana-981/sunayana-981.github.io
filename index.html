@@ -47,6 +47,7 @@
         --c-console-bg: #c2b69c;
         --c-console-tile: #c2b69c;
         --c-console-border: rgba(45, 38, 22, 0.34);
+        --c-nav-btn-border: #1b1b1b;
         --c-text: #201d16;
         --c-text-secondary: #55503f;
         --c-text-tertiary: #8a8471;
@@ -87,6 +88,7 @@
         --c-console-bg: #1a1c23;
         --c-console-tile: #1a1c23;
         --c-console-border: rgba(255, 255, 255, 0.16);
+        --c-nav-btn-border: #000000;
         --c-text: #f5f5f7;
         --c-text-secondary: #a1a1a6;
         --c-text-tertiary: #6e6e73;
@@ -1017,14 +1019,8 @@
         align-items: center;
         justify-content: center;
         height: 38px;
-        /* a soft border in the tile's own hue — no hard outline, so the
-           block sits on the panel rather than floating above it */
-        border: 1px solid
-          color-mix(
-            in srgb,
-            var(--tile-hue, var(--c-text-tertiary)) 55%,
-            transparent
-          );
+        /* crisp near-black outline, transformer-figure style */
+        border: 1.5px solid var(--c-nav-btn-border);
         border-radius: 8px;
         background: color-mix(
           in srgb,

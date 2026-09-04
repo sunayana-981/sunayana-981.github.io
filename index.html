@@ -310,26 +310,46 @@
       }
 
       .hero h1 {
+        position: relative;
         font-family: var(--font-serif);
-        font-size: 3.2rem;
+        font-size: 3.5rem;
         font-weight: 600;
-        line-height: 1.1;
-        letter-spacing: -0.01em;
+        line-height: 1.08;
+        letter-spacing: -0.025em;
+        font-feature-settings: "onum" 1, "liga" 1, "dlig" 1;
         color: var(--c-text);
-        margin-bottom: 1rem;
+        margin-bottom: 1.15rem;
         opacity: 0;
         transform: translateY(14px);
         animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards;
       }
 
+      /* a small accent flourish under the name */
+      .hero h1::after {
+        content: "";
+        display: block;
+        width: 2.6rem;
+        height: 3px;
+        margin-top: 0.85rem;
+        border-radius: 2px;
+        background: linear-gradient(
+          90deg,
+          var(--c-accent),
+          var(--c-accent-2)
+        );
+        opacity: 0;
+        animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+      }
+
       .hero .tagline {
         font-family: var(--font-serif);
         font-style: italic;
-        font-size: 1.25rem;
+        font-size: 1.28rem;
         font-weight: 500;
         color: var(--c-text-secondary);
         margin-bottom: 1.4rem;
         line-height: 1.5;
+        font-feature-settings: "onum" 1;
         opacity: 0;
         transform: translateY(14px);
         animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.16s forwards;
@@ -337,6 +357,10 @@
 
       .hero .tagline .hl {
         color: var(--c-text);
+        text-decoration: underline;
+        text-decoration-color: var(--c-accent);
+        text-decoration-thickness: 2px;
+        text-underline-offset: 4px;
       }
 
       .hero .intro {
@@ -345,6 +369,7 @@
         color: var(--c-text-secondary);
         line-height: 1.75;
         margin-bottom: 1.7rem;
+        font-feature-settings: "onum" 1, "liga" 1;
         opacity: 0;
         transform: translateY(14px);
         animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.27s forwards;

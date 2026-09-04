@@ -2474,9 +2474,18 @@
          tint is interpolated between the section the viewport is in and
          the next one — holding each section's console-flow-chart hue,
          then easing into the next over the section's final stretch, so
-         the page reads as a single continuous gradient. */
+         the page reads as a single continuous gradient. The overlay is
+         kept thin (low alpha) so it doesn't grey out the text; the hue
+         is pushed away from grey first so that thin tint still reads as
+         a definite colour rather than a wash. */
       const bgwashEl = document.getElementById("bgwash");
       const rootStyle = getComputedStyle(document.documentElement);
+      const saturate = (rgb, k) => {
+        const mean = (rgb[0] + rgb[1] + rgb[2]) / 3;
+        return rgb.map((v) =>
+          Math.max(0, Math.min(255, Math.round(mean + (v - mean) * k))),
+        );
+      };
       const WASH_SECTIONS = [
         [".hero", "--blk-1"],
         ["#research", "--blk-2"],
@@ -2487,10 +2496,8 @@
         ["#contact", "--blk-7"],
       ].map(([sel, cssVar]) => {
         const hex = rootStyle.getPropertyValue(cssVar).trim().replace("#", "");
-        return {
-          sel,
-          rgb: [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16)),
-        };
+        const rgb = [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16));
+        return { sel, rgb: saturate(rgb, 1.4) };
       });
       let washStops = [];
       function computeWashStops() {
@@ -2518,8 +2525,8 @@
         const t = p < 0.6 ? 0 : (p - 0.6) / 0.4; // hold, then ease to next
         const alpha =
           document.documentElement.getAttribute("data-theme") === "dark"
-            ? 0.26
-            : 0.17;
+            ? 0.16
+            : 0.1;
         const c = a.rgb.map((v, j) => Math.round(v + (b.rgb[j] - v) * t));
         bgwashEl.style.backgroundColor = `rgba(${c[0]}, ${c[1]}, ${c[2]}, ${alpha})`;
       }

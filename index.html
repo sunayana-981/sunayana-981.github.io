@@ -44,23 +44,23 @@
         /* one surface for the whole console: the tiles are hue-tints of
            this exact colour, and the space around them is this colour, so
            the diagram has no separate panel behind it */
-        --c-console-bg: #c2b69c;
-        --c-console-tile: #c2b69c;
-        --c-console-border: rgba(45, 38, 22, 0.34);
+        --c-console-bg: #e0d7c3;
+        --c-console-tile: #e0d7c3;
+        --c-console-border: rgba(45, 38, 22, 0.3);
         --c-nav-btn-border: #1b1b1b;
         --c-text: #201d16;
         --c-text-secondary: #55503f;
         --c-text-tertiary: #8a8471;
-        --c-accent: #1e4fa3;
-        --c-accent-hover: #2f63c0;
-        --c-accent-2: #9a3324;
-        --c-accent-soft: rgba(30, 79, 163, 0.08);
+        --c-accent: #2f6bd8;
+        --c-accent-hover: #4a82e8;
+        --c-accent-2: #c04a2f;
+        --c-accent-soft: rgba(47, 107, 216, 0.1);
         --c-border: rgba(32, 29, 22, 0.13);
         --c-border-bright: rgba(32, 29, 22, 0.24);
         --c-shadow: rgba(40, 34, 20, 0.16);
         --c-glass: rgba(255, 252, 244, 0.82);
         --c-chip: rgba(32, 29, 22, 0.055);
-        --c-hero-glow: rgba(30, 79, 163, 0.05);
+        --c-hero-glow: rgba(47, 107, 216, 0.06);
         --c-diagram-line: rgba(32, 29, 22, 0.4);
         --c-diagram-node: rgba(32, 29, 22, 0.55);
 
@@ -69,13 +69,13 @@
            olive add&norm, purple linear, green softmax) — mixed against
            --c-bg-elev below, so light mode reads as soft pastel fills and
            dark mode as tinted panels, from the same seven values */
-        --blk-1: #d9647e;
-        --blk-2: #dd8f35;
-        --blk-3: #3f93c9;
-        --blk-4: #a3ab3a;
-        --blk-5: #8267cf;
-        --blk-6: #2fa89a;
-        --blk-7: #3aab6d;
+        --blk-1: #ef6a91;
+        --blk-2: #f5a12e;
+        --blk-3: #37a6e6;
+        --blk-4: #bcc63f;
+        --blk-5: #9b7bee;
+        --blk-6: #26c4b1;
+        --blk-7: #33c07d;
         --max-w: 800px;
         --console-w: 300px;
       }
@@ -85,10 +85,10 @@
         --c-bg: #050507;
         --c-bg-elev: #0e0f13;
         --c-bg-elev-2: #17181e;
-        --c-console-bg: #1a1c23;
-        --c-console-tile: #1a1c23;
-        --c-console-border: rgba(255, 255, 255, 0.16);
-        --c-nav-btn-border: #000000;
+        --c-console-bg: #1f222c;
+        --c-console-tile: #1f222c;
+        --c-console-border: rgba(255, 255, 255, 0.18);
+        --c-nav-btn-border: #050505;
         --c-text: #f5f5f7;
         --c-text-secondary: #a1a1a6;
         --c-text-tertiary: #6e6e73;
@@ -1024,7 +1024,7 @@
         border-radius: 8px;
         background: color-mix(
           in srgb,
-          var(--tile-hue, var(--c-text-tertiary)) 46%,
+          var(--tile-hue, var(--c-text-tertiary)) 60%,
           var(--c-console-tile)
         );
         font-family: var(--font-sans);
@@ -2195,7 +2195,7 @@
       ].map(([sel, cssVar]) => {
         const hex = rootStyle.getPropertyValue(cssVar).trim().replace("#", "");
         const rgb = [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16));
-        return { sel, rgb: saturate(rgb, 1.4) };
+        return { sel, rgb: saturate(rgb, 1.5) };
       });
       let washStops = [];
       function computeWashStops() {
@@ -2223,8 +2223,8 @@
         const t = p < 0.6 ? 0 : (p - 0.6) / 0.4; // hold, then ease to next
         const alpha =
           document.documentElement.getAttribute("data-theme") === "dark"
-            ? 0.16
-            : 0.1;
+            ? 0.2
+            : 0.13;
         const c = a.rgb.map((v, j) => Math.round(v + (b.rgb[j] - v) * t));
         bgwashEl.style.backgroundColor = `rgba(${c[0]}, ${c[1]}, ${c[2]}, ${alpha})`;
       }

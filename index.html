@@ -41,8 +41,9 @@
         --c-bg: #faf7f0;
         --c-bg-elev: #ffffff;
         --c-bg-elev-2: #f2ecdc;
-        --c-console-bg: #a87f52;
-        --c-console-border: rgba(40, 26, 12, 0.42);
+        --c-console-bg: #c9bda3;
+        --c-console-tile: #f1ebde;
+        --c-console-border: rgba(45, 38, 22, 0.34);
         --c-text: #201d16;
         --c-text-secondary: #55503f;
         --c-text-tertiary: #8a8471;
@@ -80,8 +81,9 @@
         --c-bg: #050507;
         --c-bg-elev: #0e0f13;
         --c-bg-elev-2: #17181e;
-        --c-console-bg: #312619;
-        --c-console-border: rgba(255, 236, 214, 0.2);
+        --c-console-bg: #191b22;
+        --c-console-tile: #212430;
+        --c-console-border: rgba(255, 255, 255, 0.16);
         --c-text: #f5f5f7;
         --c-text-secondary: #a1a1a6;
         --c-text-tertiary: #6e6e73;
@@ -898,8 +900,8 @@
         left: 0;
         bottom: 0;
         width: var(--console-w);
-        /* its own brown panel against the tinted content column, not a
-           glassy overlay */
+        /* its own panel, in the same warm family as the diagram tiles it
+           holds, against the tinted content column */
         background-color: var(--c-console-bg);
         border: none;
         border-right: 1px solid var(--c-console-border);
@@ -907,15 +909,12 @@
         overflow: hidden;
       }
 
-      /* On the light-mode brown panel the page's grey text tones go muddy,
-         so darken them within the console only (dark mode keeps its own
-         light text on the dark-brown panel). */
+      /* keep the console's small print legible on the taupe panel */
       :root:not([data-theme="dark"]) .console {
-        --c-text: #211609;
-        --c-text-secondary: #33230f;
-        --c-text-tertiary: #543c22;
-        --c-border: rgba(40, 26, 12, 0.22);
-        --c-border-bright: rgba(40, 26, 12, 0.4);
+        --c-text-secondary: #413a27;
+        --c-text-tertiary: #6a5f48;
+        --c-border: rgba(45, 38, 22, 0.18);
+        --c-border-bright: rgba(45, 38, 22, 0.36);
       }
 
       .console-summary {
@@ -1015,7 +1014,11 @@
         height: 38px;
         border: 1.5px solid var(--c-text-tertiary);
         border-radius: 8px;
-        background: var(--c-bg-elev);
+        background: color-mix(
+          in srgb,
+          var(--tile-hue, var(--c-text-tertiary)) 34%,
+          var(--c-console-tile)
+        );
         font-family: var(--font-sans);
         font-size: 0.82rem;
         font-weight: 600;
@@ -1030,27 +1033,28 @@
           filter 0.25s;
       }
 
-      /* one flat pastel fill per block, transformer-figure style */
+      /* one hue per block, transformer-figure style — the fill is derived
+         from --tile-hue on the base rule so .active can keep it */
       .console-nav a:nth-child(1) {
-        background: color-mix(in srgb, var(--blk-1) 34%, var(--c-bg-elev));
+        --tile-hue: var(--blk-1);
       }
       .console-nav a:nth-child(2) {
-        background: color-mix(in srgb, var(--blk-2) 34%, var(--c-bg-elev));
+        --tile-hue: var(--blk-2);
       }
       .console-nav a:nth-child(3) {
-        background: color-mix(in srgb, var(--blk-3) 34%, var(--c-bg-elev));
+        --tile-hue: var(--blk-3);
       }
       .console-nav a:nth-child(4) {
-        background: color-mix(in srgb, var(--blk-4) 34%, var(--c-bg-elev));
+        --tile-hue: var(--blk-4);
       }
       .console-nav a:nth-child(5) {
-        background: color-mix(in srgb, var(--blk-5) 34%, var(--c-bg-elev));
+        --tile-hue: var(--blk-5);
       }
       .console-nav a:nth-child(6) {
-        background: color-mix(in srgb, var(--blk-6) 34%, var(--c-bg-elev));
+        --tile-hue: var(--blk-6);
       }
       .console-nav a:nth-child(7) {
-        background: color-mix(in srgb, var(--blk-7) 34%, var(--c-bg-elev));
+        --tile-hue: var(--blk-7);
       }
 
       .console-nav a:hover {
@@ -1092,7 +1096,7 @@
       }
 
       .console-nav a.active .bypass-arc path {
-        stroke: var(--c-accent-2);
+        stroke: var(--c-text);
       }
 
       .plus-node {
@@ -1103,7 +1107,7 @@
         height: 13px;
         border-radius: 50%;
         border: 1.5px solid var(--c-text-tertiary);
-        background-color: var(--c-bg-elev);
+        background-color: var(--c-console-tile);
         color: var(--c-text-tertiary);
         font-family: var(--font-sans);
         font-size: 9px;
@@ -1119,21 +1123,22 @@
           box-shadow 0.25s;
       }
 
+      /* selected: the block keeps its own fill — only a neutral ring and a
+         glow in that same hue mark it, so the colour never changes */
       .console-nav a.active {
         color: var(--c-text);
-        background: var(--c-accent-soft);
-        border-color: var(--c-accent-2);
+        border-color: var(--c-text);
+        filter: saturate(1.14) brightness(1.02);
         box-shadow:
-          0 0 0 1px var(--c-accent-2),
-          0 0 18px color-mix(in srgb, var(--c-accent-2) 30%, transparent);
+          0 0 0 1.5px var(--c-text),
+          0 0 16px color-mix(in srgb, var(--tile-hue) 42%, transparent);
       }
 
       .console-nav a.active .plus-node {
-        border-color: var(--c-accent-2);
-        color: var(--c-accent-2);
-        background-color: var(--c-bg-elev);
-        box-shadow: 0 0 8px
-          color-mix(in srgb, var(--c-accent-2) 60%, transparent);
+        border-color: var(--c-text);
+        color: var(--c-text);
+        background-color: var(--c-console-tile);
+        box-shadow: 0 0 8px color-mix(in srgb, var(--tile-hue) 50%, transparent);
       }
 
       .console-stats {

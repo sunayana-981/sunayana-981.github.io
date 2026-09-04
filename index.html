@@ -41,8 +41,8 @@
         --c-bg: #faf7f0;
         --c-bg-elev: #ffffff;
         --c-bg-elev-2: #f2ecdc;
-        --c-console-bg: #e7ddc6;
-        --c-console-border: rgba(32, 29, 22, 0.3);
+        --c-console-bg: #a87f52;
+        --c-console-border: rgba(40, 26, 12, 0.42);
         --c-text: #201d16;
         --c-text-secondary: #55503f;
         --c-text-tertiary: #8a8471;
@@ -80,8 +80,8 @@
         --c-bg: #050507;
         --c-bg-elev: #0e0f13;
         --c-bg-elev-2: #17181e;
-        --c-console-bg: #212530;
-        --c-console-border: rgba(255, 255, 255, 0.16);
+        --c-console-bg: #312619;
+        --c-console-border: rgba(255, 236, 214, 0.2);
         --c-text: #f5f5f7;
         --c-text-secondary: #a1a1a6;
         --c-text-tertiary: #6e6e73;
@@ -397,114 +397,6 @@
         }
       }
 
-      /* ── Hero: network diagram (3Blue1Brown-style forward pass) ── */
-      .nn-wrap {
-        margin-top: 3rem;
-      }
-
-      .nn-diagram {
-        width: 100%;
-        height: auto;
-        display: block;
-      }
-
-      .nn-diagram .edge {
-        stroke: var(--c-diagram-line);
-        stroke-width: 0.75;
-        opacity: 0.55;
-        stroke-dasharray: 2 11;
-        animation: edgeShimmer 3.4s linear infinite;
-      }
-
-      .nn-diagram .node {
-        fill: var(--c-bg-elev);
-        stroke: var(--c-diagram-node);
-        stroke-width: 1.5;
-      }
-
-      @keyframes edgeShimmer {
-        to {
-          stroke-dashoffset: -26;
-        }
-      }
-
-      .nn-caption {
-        font-family: var(--font-sans);
-        font-size: 0.82rem;
-        color: var(--c-text-tertiary);
-        margin-top: 1rem;
-        text-align: center;
-      }
-
-      @media (max-width: 640px) {
-        .nn-wrap {
-          display: none;
-        }
-      }
-
-      @keyframes nnNodePulse {
-        0%,
-        100% {
-          opacity: 0.55;
-          filter: drop-shadow(0 0 0 transparent);
-        }
-        50% {
-          opacity: 1;
-          filter: drop-shadow(0 0 7px var(--pulse-color, var(--c-accent)));
-          fill: var(--pulse-color, var(--c-accent));
-        }
-      }
-
-      @keyframes nnEdgePulse {
-        0%,
-        100% {
-          opacity: 0.22;
-        }
-        50% {
-          opacity: 0.95;
-          stroke: var(--c-accent);
-        }
-      }
-
-      .nn-diagram .node {
-        animation: nnNodePulse 5.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-        animation-delay: calc(var(--stage-delay, 0s) + var(--jitter, 0s));
-      }
-      .nn-diagram .layer-nodes.output .node {
-        --pulse-color: var(--c-accent-2);
-      }
-      .nn-diagram .edge-bundle {
-        animation: nnEdgePulse 5.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-        animation-delay: var(--stage-delay, 0s);
-      }
-
-      .nn-diagram .stage-0 {
-        --stage-delay: -2.8s;
-      }
-      .nn-diagram .stage-1 {
-        --stage-delay: -2s;
-      }
-      .nn-diagram .stage-2 {
-        --stage-delay: -1.2s;
-      }
-      .nn-diagram .stage-3 {
-        --stage-delay: -0.4s;
-      }
-      .nn-diagram .stage-4 {
-        --stage-delay: 0.4s;
-      }
-      .nn-diagram .stage-5 {
-        --stage-delay: 1.2s;
-      }
-      .nn-diagram .stage-6 {
-        --stage-delay: 2s;
-      }
-
-      /* the forward-pass pulse is a slow (3.4–5.6s) colour/glow crossfade
-         with no positional movement, so — unlike the scroll reveal — it
-         isn't the kind of motion prefers-reduced-motion targets, and it
-         stays on so the diagram actually shows its colours. */
-
       /* ── Sections (single-scroll layout) ───────────── */
       .page-section {
         padding: 5rem 0;
@@ -515,7 +407,7 @@
          fixed layer behind everything whose tint is interpolated on
          scroll between the current section's console-flow-chart hue and
          the next one's, so the whole page reads as one moving gradient
-         (Embedding → hero, then Research…Contact = blk-1…blk-7). */
+         (Introduction → hero, then Research…Contact = blk-1…blk-7). */
       #bgwash {
         position: fixed;
         inset: 0;
@@ -1006,13 +898,24 @@
         left: 0;
         bottom: 0;
         width: var(--console-w);
-        /* a distinctly deeper "paper" than the page, so the pane reads as
-           its own panel against the content column, not a glassy overlay */
+        /* its own brown panel against the tinted content column, not a
+           glassy overlay */
         background-color: var(--c-console-bg);
         border: none;
         border-right: 1px solid var(--c-console-border);
         z-index: 60;
         overflow: hidden;
+      }
+
+      /* On the light-mode brown panel the page's grey text tones go muddy,
+         so darken them within the console only (dark mode keeps its own
+         light text on the dark-brown panel). */
+      :root:not([data-theme="dark"]) .console {
+        --c-text: #211609;
+        --c-text-secondary: #33230f;
+        --c-text-tertiary: #543c22;
+        --c-border: rgba(40, 26, 12, 0.22);
+        --c-border-bright: rgba(40, 26, 12, 0.4);
       }
 
       .console-summary {
@@ -1436,7 +1339,7 @@
       <summary class="console-summary">
         <span class="console-dot" aria-hidden="true"></span>
         <span class="console-label">Model</span>
-        <span class="console-current" id="consoleCurrent">Embedding</span>
+        <span class="console-current" id="consoleCurrent">Introduction</span>
         <span class="console-chevron" aria-hidden="true">&#9662;</span>
       </summary>
       <div class="console-body">
@@ -1451,7 +1354,7 @@
               <path d="M 4 1 C 19 1 19 39 4 39" />
             </svg>
             <span class="plus-node" aria-hidden="true">+</span>
-            Embedding
+            Introduction
           </a>
           <a href="#research">
             <svg
@@ -1464,6 +1367,18 @@
             </svg>
             <span class="plus-node" aria-hidden="true">+</span>
             Research
+          </a>
+          <a href="#education">
+            <svg
+              class="bypass-arc"
+              viewBox="0 0 21 40"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <path d="M 4 1 C 19 1 19 39 4 39" />
+            </svg>
+            <span class="plus-node" aria-hidden="true">+</span>
+            Education
           </a>
           <a href="#experience">
             <svg
@@ -1500,18 +1415,6 @@
             </svg>
             <span class="plus-node" aria-hidden="true">+</span>
             Projects
-          </a>
-          <a href="#education">
-            <svg
-              class="bypass-arc"
-              viewBox="0 0 21 40"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-            >
-              <path d="M 4 1 C 19 1 19 39 4 39" />
-            </svg>
-            <span class="plus-node" aria-hidden="true">+</span>
-            Education
           </a>
           <a href="#contact">
             <svg
@@ -1582,7 +1485,7 @@
 
     <div class="page-layout">
       <main class="container">
-        <!-- ── Hero (embedding) ────────────────────────── -->
+        <!-- ── Hero (introduction) ─────────────────────── -->
         <header class="hero" data-layer="0">
           <div class="hero-inner">
             <div class="hero-text">
@@ -1616,226 +1519,6 @@
             </div>
           </div>
           <!-- /hero-inner -->
-
-          <div class="nn-wrap reveal">
-            <svg
-              class="nn-diagram"
-              viewBox="0 0 780 90"
-              aria-hidden="true"
-              preserveAspectRatio="xMidYMid meet"
-            >
-              <g class="layer-nodes stage-0">
-                <circle
-                  class="node"
-                  cx="60"
-                  cy="10.0"
-                  r="3.6"
-                  style="--jitter: 0s"
-                />
-                <circle
-                  class="node"
-                  cx="60"
-                  cy="27.5"
-                  r="3.6"
-                  style="--jitter: 0.06s"
-                />
-                <circle
-                  class="node"
-                  cx="60"
-                  cy="45.0"
-                  r="3.6"
-                  style="--jitter: 0.12s"
-                />
-                <circle
-                  class="node"
-                  cx="60"
-                  cy="62.5"
-                  r="3.6"
-                  style="--jitter: 0.04s"
-                />
-                <circle
-                  class="node"
-                  cx="60"
-                  cy="80.0"
-                  r="3.6"
-                  style="--jitter: 0.16s"
-                />
-              </g>
-              <g class="edge-bundle stage-1">
-                <line class="edge" x1="60" y1="10.0" x2="280" y2="10.0" />
-                <line class="edge" x1="60" y1="10.0" x2="280" y2="24.0" />
-                <line class="edge" x1="60" y1="10.0" x2="280" y2="38.0" />
-                <line class="edge" x1="60" y1="10.0" x2="280" y2="52.0" />
-                <line class="edge" x1="60" y1="10.0" x2="280" y2="66.0" />
-                <line class="edge" x1="60" y1="10.0" x2="280" y2="80.0" />
-                <line class="edge" x1="60" y1="27.5" x2="280" y2="10.0" />
-                <line class="edge" x1="60" y1="27.5" x2="280" y2="24.0" />
-                <line class="edge" x1="60" y1="27.5" x2="280" y2="38.0" />
-                <line class="edge" x1="60" y1="27.5" x2="280" y2="52.0" />
-                <line class="edge" x1="60" y1="27.5" x2="280" y2="66.0" />
-                <line class="edge" x1="60" y1="27.5" x2="280" y2="80.0" />
-                <line class="edge" x1="60" y1="45.0" x2="280" y2="10.0" />
-                <line class="edge" x1="60" y1="45.0" x2="280" y2="24.0" />
-                <line class="edge" x1="60" y1="45.0" x2="280" y2="38.0" />
-                <line class="edge" x1="60" y1="45.0" x2="280" y2="52.0" />
-                <line class="edge" x1="60" y1="45.0" x2="280" y2="66.0" />
-                <line class="edge" x1="60" y1="45.0" x2="280" y2="80.0" />
-                <line class="edge" x1="60" y1="62.5" x2="280" y2="10.0" />
-                <line class="edge" x1="60" y1="62.5" x2="280" y2="24.0" />
-                <line class="edge" x1="60" y1="62.5" x2="280" y2="38.0" />
-                <line class="edge" x1="60" y1="62.5" x2="280" y2="52.0" />
-                <line class="edge" x1="60" y1="62.5" x2="280" y2="66.0" />
-                <line class="edge" x1="60" y1="62.5" x2="280" y2="80.0" />
-                <line class="edge" x1="60" y1="80.0" x2="280" y2="10.0" />
-                <line class="edge" x1="60" y1="80.0" x2="280" y2="24.0" />
-                <line class="edge" x1="60" y1="80.0" x2="280" y2="38.0" />
-                <line class="edge" x1="60" y1="80.0" x2="280" y2="52.0" />
-                <line class="edge" x1="60" y1="80.0" x2="280" y2="66.0" />
-                <line class="edge" x1="60" y1="80.0" x2="280" y2="80.0" />
-              </g>
-              <g class="layer-nodes stage-2">
-                <circle
-                  class="node"
-                  cx="280"
-                  cy="10.0"
-                  r="3.6"
-                  style="--jitter: 0.03s"
-                />
-                <circle
-                  class="node"
-                  cx="280"
-                  cy="24.0"
-                  r="3.6"
-                  style="--jitter: 0.14s"
-                />
-                <circle
-                  class="node"
-                  cx="280"
-                  cy="38.0"
-                  r="3.6"
-                  style="--jitter: 0s"
-                />
-                <circle
-                  class="node"
-                  cx="280"
-                  cy="52.0"
-                  r="3.6"
-                  style="--jitter: 0.1s"
-                />
-                <circle
-                  class="node"
-                  cx="280"
-                  cy="66.0"
-                  r="3.6"
-                  style="--jitter: 0.05s"
-                />
-                <circle
-                  class="node"
-                  cx="280"
-                  cy="80.0"
-                  r="3.6"
-                  style="--jitter: 0.18s"
-                />
-              </g>
-              <g class="edge-bundle stage-3">
-                <line class="edge" x1="280" y1="10.0" x2="500" y2="10.0" />
-                <line class="edge" x1="280" y1="10.0" x2="500" y2="33.3" />
-                <line class="edge" x1="280" y1="10.0" x2="500" y2="56.7" />
-                <line class="edge" x1="280" y1="10.0" x2="500" y2="80.0" />
-                <line class="edge" x1="280" y1="24.0" x2="500" y2="10.0" />
-                <line class="edge" x1="280" y1="24.0" x2="500" y2="33.3" />
-                <line class="edge" x1="280" y1="24.0" x2="500" y2="56.7" />
-                <line class="edge" x1="280" y1="24.0" x2="500" y2="80.0" />
-                <line class="edge" x1="280" y1="38.0" x2="500" y2="10.0" />
-                <line class="edge" x1="280" y1="38.0" x2="500" y2="33.3" />
-                <line class="edge" x1="280" y1="38.0" x2="500" y2="56.7" />
-                <line class="edge" x1="280" y1="38.0" x2="500" y2="80.0" />
-                <line class="edge" x1="280" y1="52.0" x2="500" y2="10.0" />
-                <line class="edge" x1="280" y1="52.0" x2="500" y2="33.3" />
-                <line class="edge" x1="280" y1="52.0" x2="500" y2="56.7" />
-                <line class="edge" x1="280" y1="52.0" x2="500" y2="80.0" />
-                <line class="edge" x1="280" y1="66.0" x2="500" y2="10.0" />
-                <line class="edge" x1="280" y1="66.0" x2="500" y2="33.3" />
-                <line class="edge" x1="280" y1="66.0" x2="500" y2="56.7" />
-                <line class="edge" x1="280" y1="66.0" x2="500" y2="80.0" />
-                <line class="edge" x1="280" y1="80.0" x2="500" y2="10.0" />
-                <line class="edge" x1="280" y1="80.0" x2="500" y2="33.3" />
-                <line class="edge" x1="280" y1="80.0" x2="500" y2="56.7" />
-                <line class="edge" x1="280" y1="80.0" x2="500" y2="80.0" />
-              </g>
-              <g class="layer-nodes stage-4">
-                <circle
-                  class="node"
-                  cx="500"
-                  cy="10.0"
-                  r="3.6"
-                  style="--jitter: 0s"
-                />
-                <circle
-                  class="node"
-                  cx="500"
-                  cy="33.3"
-                  r="3.6"
-                  style="--jitter: 0.09s"
-                />
-                <circle
-                  class="node"
-                  cx="500"
-                  cy="56.7"
-                  r="3.6"
-                  style="--jitter: 0.03s"
-                />
-                <circle
-                  class="node"
-                  cx="500"
-                  cy="80.0"
-                  r="3.6"
-                  style="--jitter: 0.13s"
-                />
-              </g>
-              <g class="edge-bundle stage-5">
-                <line class="edge" x1="500" y1="10.0" x2="720" y2="10.0" />
-                <line class="edge" x1="500" y1="10.0" x2="720" y2="45.0" />
-                <line class="edge" x1="500" y1="10.0" x2="720" y2="80.0" />
-                <line class="edge" x1="500" y1="33.3" x2="720" y2="10.0" />
-                <line class="edge" x1="500" y1="33.3" x2="720" y2="45.0" />
-                <line class="edge" x1="500" y1="33.3" x2="720" y2="80.0" />
-                <line class="edge" x1="500" y1="56.7" x2="720" y2="10.0" />
-                <line class="edge" x1="500" y1="56.7" x2="720" y2="45.0" />
-                <line class="edge" x1="500" y1="56.7" x2="720" y2="80.0" />
-                <line class="edge" x1="500" y1="80.0" x2="720" y2="10.0" />
-                <line class="edge" x1="500" y1="80.0" x2="720" y2="45.0" />
-                <line class="edge" x1="500" y1="80.0" x2="720" y2="80.0" />
-              </g>
-              <g class="layer-nodes output stage-6">
-                <circle
-                  class="node"
-                  cx="720"
-                  cy="10.0"
-                  r="3.6"
-                  style="--jitter: 0s"
-                />
-                <circle
-                  class="node"
-                  cx="720"
-                  cy="45.0"
-                  r="3.6"
-                  style="--jitter: 0.08s"
-                />
-                <circle
-                  class="node"
-                  cx="720"
-                  cy="80.0"
-                  r="3.6"
-                  style="--jitter: 0.15s"
-                />
-              </g>
-            </svg>
-            <p class="nn-caption">
-              a forward pass — signal propagating layer to layer, the way the
-              rest of this page is laid out
-            </p>
-          </div>
         </header>
 
         <!-- ── Research ────────────────────────────────── -->
@@ -2067,8 +1750,37 @@
           </div>
         </section>
 
+        <!-- ── Education ───────────────────────────────── -->
+        <section id="education" class="page-section" data-layer="5">
+          <h2 class="section-heading-sr">Education</h2>
+
+          <div class="edu-entry reveal">
+            <div class="edu-header">
+              <span class="edu-inst">IIIT Hyderabad</span>
+              <span class="edu-period">2023 – Present</span>
+            </div>
+            <div class="edu-degree">M.S. by Research, CVIT</div>
+            <div class="edu-gpa">
+              GPA: 8.8 / 10.0 · Advised by Prof. P. J. Narayanan
+            </div>
+          </div>
+
+          <div class="edu-entry reveal">
+            <div class="edu-header">
+              <span class="edu-inst">Dharamsinh Desai University</span>
+              <span class="edu-period">2017 – 2021</span>
+            </div>
+            <div class="edu-degree">
+              B.Tech, Electronics &amp; Communication
+            </div>
+            <div class="edu-gpa">
+              GPA: 7.87 / 10.0 · First Class with Distinction
+            </div>
+          </div>
+        </section>
+
         <!-- ── Experience ──────────────────────────────── -->
-        <section id="experience" class="page-section" data-layer="5">
+        <section id="experience" class="page-section" data-layer="6">
           <h2 class="section-heading-sr">Experience</h2>
 
           <div class="exp-entry reveal">
@@ -2149,7 +1861,7 @@
         </section>
 
         <!-- ── Reviews ────────────────────────────────── -->
-        <section id="reviews" class="page-section" data-layer="6">
+        <section id="reviews" class="page-section" data-layer="7">
           <h2 class="section-heading-sr">Reviewing</h2>
           <p
             style="
@@ -2163,28 +1875,26 @@
           </p>
           <ul class="review-list reveal">
             <li class="review-item">
-              <span class="review-venue"
-                >[Conference / Journal Name, Year]</span
-              >
-              <span class="review-type">[e.g. Conference / Journal]</span>
+              <span class="review-venue">ICLR &rsquo;26</span>
+              <span class="review-type">Conference</span>
             </li>
             <li class="review-item">
-              <span class="review-venue"
-                >[Conference / Journal Name, Year]</span
-              >
-              <span class="review-type">[e.g. Conference / Journal]</span>
+              <span class="review-venue">CVPR &rsquo;26</span>
+              <span class="review-type">Conference</span>
             </li>
             <li class="review-item">
-              <span class="review-venue"
-                >[Conference / Journal Name, Year]</span
-              >
-              <span class="review-type">[e.g. Conference / Journal]</span>
+              <span class="review-venue">ICML &rsquo;26</span>
+              <span class="review-type">Conference</span>
+            </li>
+            <li class="review-item">
+              <span class="review-venue">ECCV &rsquo;26</span>
+              <span class="review-type">Conference</span>
             </li>
           </ul>
         </section>
 
         <!-- ── Projects ────────────────────────────────── -->
-        <section id="projects" class="page-section" data-layer="7">
+        <section id="projects" class="page-section" data-layer="8">
           <h2 class="section-heading-sr">Selected Projects</h2>
 
           <div class="projects-grid">
@@ -2225,35 +1935,6 @@
                 <span class="tag">3D Reconstruction</span>
                 <span class="tag">SLAM</span>
               </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ── Education ───────────────────────────────── -->
-        <section id="education" class="page-section" data-layer="8">
-          <h2 class="section-heading-sr">Education</h2>
-
-          <div class="edu-entry reveal">
-            <div class="edu-header">
-              <span class="edu-inst">IIIT Hyderabad</span>
-              <span class="edu-period">2023 – Present</span>
-            </div>
-            <div class="edu-degree">M.S. by Research, CVIT</div>
-            <div class="edu-gpa">
-              GPA: 8.8 / 10.0 · Advised by Prof. P. J. Narayanan
-            </div>
-          </div>
-
-          <div class="edu-entry reveal">
-            <div class="edu-header">
-              <span class="edu-inst">Dharamsinh Desai University</span>
-              <span class="edu-period">2017 – 2021</span>
-            </div>
-            <div class="edu-degree">
-              B.Tech, Electronics &amp; Communication
-            </div>
-            <div class="edu-gpa">
-              GPA: 7.87 / 10.0 · First Class with Distinction
             </div>
           </div>
         </section>
@@ -2354,10 +2035,10 @@
       const LINK_LAYER = {
         "#top": 0,
         "#research": 1,
-        "#experience": 5,
-        "#reviews": 6,
-        "#projects": 7,
-        "#education": 8,
+        "#education": 5,
+        "#experience": 6,
+        "#reviews": 7,
+        "#projects": 8,
         "#contact": 9,
       };
       let suppressScrollUntil = 0;
@@ -2441,10 +2122,10 @@
         "research",
         "research",
         "research",
+        "education",
         "experience",
         "reviews",
         "projects",
-        "education",
         "contact",
       ];
       const LOGIT_LENS = {
@@ -2453,10 +2134,10 @@
         2: ["vision", "feature", "neural", "model"],
         3: ["interpretability", "sparse", "feature", "shift"],
         4: ["style", "control", "survey", "concept"],
-        5: ["taught", "mentored", "research", "lab"],
-        6: ["review", "reviewer", "conference", "venue"],
-        7: ["CLIP", "domain", "3D", "build"],
-        8: ["IIIT", "advisor", "M.S.", "thesis"],
+        5: ["IIIT", "advisor", "M.S.", "thesis"],
+        6: ["taught", "mentored", "research", "lab"],
+        7: ["review", "reviewer", "conference", "venue"],
+        8: ["CLIP", "domain", "3D", "build"],
         9: ["Sunayana", "Samavedam", "researcher", "email"],
       };
 
@@ -2493,10 +2174,10 @@
       const WASH_SECTIONS = [
         [".hero", "--blk-1"],
         ["#research", "--blk-2"],
-        ["#experience", "--blk-3"],
-        ["#reviews", "--blk-4"],
-        ["#projects", "--blk-5"],
-        ["#education", "--blk-6"],
+        ["#education", "--blk-3"],
+        ["#experience", "--blk-4"],
+        ["#reviews", "--blk-5"],
+        ["#projects", "--blk-6"],
         ["#contact", "--blk-7"],
       ].map(([sel, cssVar]) => {
         const hex = rootStyle.getPropertyValue(cssVar).trim().replace("#", "");
@@ -2625,7 +2306,7 @@
         const activeHref = secId ? `#${secId}` : "#top";
         consoleCurrentEl.textContent = secId
           ? SECTION_LABELS[secId]
-          : "Embedding";
+          : "Introduction";
         statLayerEl.textContent = `Layer ${layer} / ${TOTAL_LAYERS}`;
         statNormEl.textContent = `‖resid‖ ≈ ${(1 + layer * 0.18).toFixed(2)}`;
 

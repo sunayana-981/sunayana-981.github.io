@@ -232,8 +232,10 @@
         margin: 0;
       }
 
-      /* ── Nav ───────────────────────────────────────── */
-      nav {
+      /* ── Nav ───────────────────────────────────────────
+         Scoped to #nav so it never reaches <nav class="console-nav">,
+         which is a plain flow-chart container, not a glass bar. */
+      #nav {
         position: sticky;
         top: 0;
         z-index: 50;
@@ -244,18 +246,18 @@
         transition: border-color 0.3s;
       }
 
-      nav.scrolled {
+      #nav.scrolled {
         border-bottom-color: var(--c-border);
       }
 
-      nav .container {
+      #nav .container {
         display: flex;
         align-items: center;
         justify-content: space-between;
         height: 56px;
       }
 
-      nav .nav-name {
+      #nav .nav-name {
         font-family: var(--font-sans);
         font-weight: 600;
         font-size: 0.95rem;

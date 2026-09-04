@@ -41,11 +41,12 @@
         --c-bg: #faf7f0;
         --c-bg-elev: #ffffff;
         --c-bg-elev-2: #f2ecdc;
-        /* the panel behind the diagram — deeper than the tiles so it does
-           not read as a pale wash under them */
-        --c-console-bg: #9c8d6e;
-        --c-console-tile: #c9bda3;
-        --c-console-border: rgba(45, 38, 22, 0.38);
+        /* one surface for the whole console: the tiles are hue-tints of
+           this exact colour, and the space around them is this colour, so
+           the diagram has no separate panel behind it */
+        --c-console-bg: #c2b69c;
+        --c-console-tile: #c2b69c;
+        --c-console-border: rgba(45, 38, 22, 0.34);
         --c-text: #201d16;
         --c-text-secondary: #55503f;
         --c-text-tertiary: #8a8471;
@@ -83,8 +84,8 @@
         --c-bg: #050507;
         --c-bg-elev: #0e0f13;
         --c-bg-elev-2: #17181e;
-        --c-console-bg: #131419;
-        --c-console-tile: #191b22;
+        --c-console-bg: #1a1c23;
+        --c-console-tile: #1a1c23;
         --c-console-border: rgba(255, 255, 255, 0.16);
         --c-text: #f5f5f7;
         --c-text-secondary: #a1a1a6;
@@ -911,12 +912,12 @@
         overflow: hidden;
       }
 
-      /* keep the console's small print legible on the deeper taupe panel */
+      /* keep the console's small print legible on the taupe panel */
       :root:not([data-theme="dark"]) .console {
-        --c-text-secondary: #372f1f;
-        --c-text-tertiary: #544a33;
+        --c-text-secondary: #3e3626;
+        --c-text-tertiary: #5f5540;
         --c-border: rgba(45, 38, 22, 0.2);
-        --c-border-bright: rgba(45, 38, 22, 0.38);
+        --c-border-bright: rgba(45, 38, 22, 0.36);
       }
 
       .console-summary {
@@ -1014,7 +1015,14 @@
         align-items: center;
         justify-content: center;
         height: 38px;
-        border: 1.5px solid var(--c-text-tertiary);
+        /* a soft border in the tile's own hue — no hard outline, so the
+           block sits on the panel rather than floating above it */
+        border: 1px solid
+          color-mix(
+            in srgb,
+            var(--tile-hue, var(--c-text-tertiary)) 55%,
+            transparent
+          );
         border-radius: 8px;
         background: color-mix(
           in srgb,

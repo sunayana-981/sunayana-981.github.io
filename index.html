@@ -41,8 +41,11 @@
         --c-bg: #faf7f0;
         --c-bg-elev: #ffffff;
         --c-bg-elev-2: #f2ecdc;
-        --c-console-bg: #c9bda3;
-        --c-console-border: rgba(45, 38, 22, 0.34);
+        /* the panel behind the diagram — deeper than the tiles so it does
+           not read as a pale wash under them */
+        --c-console-bg: #9c8d6e;
+        --c-console-tile: #c9bda3;
+        --c-console-border: rgba(45, 38, 22, 0.38);
         --c-text: #201d16;
         --c-text-secondary: #55503f;
         --c-text-tertiary: #8a8471;
@@ -80,7 +83,8 @@
         --c-bg: #050507;
         --c-bg-elev: #0e0f13;
         --c-bg-elev-2: #17181e;
-        --c-console-bg: #191b22;
+        --c-console-bg: #131419;
+        --c-console-tile: #191b22;
         --c-console-border: rgba(255, 255, 255, 0.16);
         --c-text: #f5f5f7;
         --c-text-secondary: #a1a1a6;
@@ -907,12 +911,12 @@
         overflow: hidden;
       }
 
-      /* keep the console's small print legible on the taupe panel */
+      /* keep the console's small print legible on the deeper taupe panel */
       :root:not([data-theme="dark"]) .console {
-        --c-text-secondary: #413a27;
-        --c-text-tertiary: #6a5f48;
-        --c-border: rgba(45, 38, 22, 0.18);
-        --c-border-bright: rgba(45, 38, 22, 0.36);
+        --c-text-secondary: #372f1f;
+        --c-text-tertiary: #544a33;
+        --c-border: rgba(45, 38, 22, 0.2);
+        --c-border-bright: rgba(45, 38, 22, 0.38);
       }
 
       .console-summary {
@@ -1010,12 +1014,13 @@
         align-items: center;
         justify-content: center;
         height: 38px;
-        /* the block shares the panel's exact background — its hue lives in
-           the outline only, so the flow-chart has no fill distinct from
-           the panel behind it */
-        border: 1.5px solid var(--tile-hue, var(--c-text-tertiary));
+        border: 1.5px solid var(--c-text-tertiary);
         border-radius: 8px;
-        background: var(--c-console-bg);
+        background: color-mix(
+          in srgb,
+          var(--tile-hue, var(--c-text-tertiary)) 46%,
+          var(--c-console-tile)
+        );
         font-family: var(--font-sans);
         font-size: 0.82rem;
         font-weight: 600;
@@ -1055,11 +1060,8 @@
       }
 
       .console-nav a:hover {
-        background: color-mix(
-          in srgb,
-          var(--tile-hue, var(--c-text-tertiary)) 12%,
-          var(--c-console-bg)
-        );
+        filter: brightness(1.08);
+        border-color: var(--c-text);
       }
 
       /* downward arrow to the next block, on the main path */
@@ -1107,7 +1109,7 @@
         height: 13px;
         border-radius: 50%;
         border: 1.5px solid var(--c-text-tertiary);
-        background-color: var(--c-console-bg);
+        background-color: var(--c-console-tile);
         color: var(--c-text-tertiary);
         font-family: var(--font-sans);
         font-size: 9px;
@@ -1123,20 +1125,21 @@
           box-shadow 0.25s;
       }
 
-      /* selected: same fill and hue as always — the block's own outline
-         just gets a doubled weight and a glow */
+      /* selected: the block keeps its own fill — only a neutral ring and a
+         glow in that same hue mark it, so the colour never changes */
       .console-nav a.active {
         color: var(--c-text);
-        border-color: var(--tile-hue);
+        border-color: var(--c-text);
+        filter: saturate(1.14) brightness(1.02);
         box-shadow:
-          inset 0 0 0 1px var(--tile-hue),
-          0 0 16px color-mix(in srgb, var(--tile-hue) 40%, transparent);
+          0 0 0 1.5px var(--c-text),
+          0 0 16px color-mix(in srgb, var(--tile-hue) 42%, transparent);
       }
 
       .console-nav a.active .plus-node {
-        border-color: var(--tile-hue);
-        color: var(--tile-hue);
-        background-color: var(--c-console-bg);
+        border-color: var(--c-text);
+        color: var(--c-text);
+        background-color: var(--c-console-tile);
         box-shadow: 0 0 8px color-mix(in srgb, var(--tile-hue) 50%, transparent);
       }
 

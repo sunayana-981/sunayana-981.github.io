@@ -1042,14 +1042,9 @@
         color: var(--c-text-tertiary);
       }
 
-      footer .footer-note {
-        margin-top: 0.4rem;
-      }
-
-      /* ── Model console: navigation + live interpretability readout ──
-         Fixed to the left viewport edge while the page reserves its width.
-         The pane keeps one natural rule between navigation and content; the
-         only illumination is a narrow activation glow on that right edge. */
+      /* ── Navigation diagram and persistent interpretability readout ──
+         Quiet surfaces, clear current-location styling, and separate regions
+         for navigation, the logit lens, and appearance controls. */
       .console {
         position: fixed;
         top: 0;
@@ -1090,15 +1085,6 @@
         display: none;
       }
 
-      .console-dot {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: var(--c-accent);
-        box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-accent) 10%, transparent);
-        flex-shrink: 0;
-      }
-
       .console-label {
         font-family: var(--font-sans);
         font-size: 0.68rem;
@@ -1128,7 +1114,7 @@
 
       @media (min-width: 860px) {
         .console-summary {
-          cursor: default;
+          display: none;
         }
         .console-chevron {
           display: none;
@@ -1147,7 +1133,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 18px 0;
+        padding: 16px 0;
       }
       .console-nav a {
         position: relative;
@@ -1192,7 +1178,6 @@
         border-radius: 50%;
       }
       .console-nav a:focus-visible,
-      .console-inspector summary:focus-visible,
       .console-summary:focus-visible {
         outline: 3px solid var(--c-accent);
         outline-offset: 4px;
@@ -1201,7 +1186,7 @@
         flex-direction: column;
         gap: 3px;
         width: calc(100% - 80px);
-        min-height: 52px;
+        min-height: 48px;
         border-radius: 9px;
       }
       .port-role {
@@ -1215,7 +1200,7 @@
       .flow-connector {
         position: relative;
         width: 1px;
-        height: 23px;
+        height: 16px;
         flex-shrink: 0;
         background: var(--wire);
       }
@@ -1231,7 +1216,7 @@
       .model-stack {
         position: relative;
         width: 100%;
-        padding: 24px 12px 12px;
+        padding: 16px 12px 8px;
         border: 1px solid var(--c-console-border);
         border-radius: 12px;
         background: var(--model-surface);
@@ -1249,7 +1234,6 @@
         letter-spacing: 0.09em;
         text-transform: uppercase;
       }
-      .model-stack-count { left: auto; right: 12px; }
       .model-stack::before,
       .model-stack::after {
         content: "";
@@ -1258,12 +1242,12 @@
         width: 1px;
         background: var(--wire);
       }
-      .model-stack::before { top: 0; height: 24px; }
-      .model-stack::after { bottom: 0; height: 12px; }
-      .model-layer { position: relative; height: 70px; }
+      .model-stack::before { top: 0; height: 16px; }
+      .model-stack::after { bottom: 0; height: 8px; }
+      .model-layer { position: relative; height: 64px; }
       .model-layer a {
         position: absolute;
-        top: 8px;
+        top: 4px;
         left: 32px;
         right: 32px;
         height: 44px;
@@ -1284,23 +1268,24 @@
       .model-wires .merge { fill: var(--model-surface); }
       .console-inspector {
         border-top: 1px solid var(--c-border);
-        border-bottom: 1px solid var(--c-border);
+        padding-top: 12px;
       }
-      .console-inspector summary {
-        padding: 10px 0;
-        cursor: pointer;
-        font-size: 0.66rem;
-        font-weight: 500;
+      .console-lens-heading {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        font-size: 0.68rem;
+        font-weight: 600;
+        line-height: 1.5;
         color: var(--c-text-secondary);
       }
-      .console-inspector summary span {
-        float: right;
+      .console-lens-heading span {
         font-family: var(--font-mono);
         font-size: 0.54rem;
+        font-weight: 400;
         color: var(--c-text-tertiary);
-        padding-top: 2px;
       }
-      .console-actions { margin-top: 12px; }
       @media (prefers-reduced-motion: reduce) {
         .console-nav a { transition: none; }
       }
@@ -1309,30 +1294,17 @@
         display: flex;
         justify-content: space-between;
         font-family: var(--font-mono);
-        font-size: 0.72rem;
+        font-size: 0.62rem;
         color: var(--c-text-tertiary);
-        border-top: 1px solid var(--c-border);
-        padding-top: 0.7rem;
-        margin-bottom: 0.9rem;
-      }
-
-      .console-lens-label {
-        font-family: var(--font-sans);
-        font-size: 0.68rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-        color: var(--c-text-tertiary);
-        margin-bottom: 0.5rem;
-        display: block;
+        margin-bottom: 8px;
       }
 
       ol.console-lens {
         list-style: none;
         display: flex;
         flex-direction: column;
-        gap: 0.3rem;
-        margin-bottom: 1.1rem;
+        gap: 4px;
+        margin-bottom: 12px;
       }
 
       .console-lens li {
@@ -1340,11 +1312,11 @@
         display: flex;
         align-items: baseline;
         gap: 0.5rem;
-        padding: 0.32rem 0.5rem;
-        border-radius: 6px;
+        padding: 3px 8px;
+        border-radius: 3px;
         overflow: hidden;
         font-family: var(--font-mono);
-        font-size: 0.84rem;
+        font-size: 0.74rem;
         color: var(--c-text-secondary);
       }
 
@@ -1353,8 +1325,8 @@
         position: absolute;
         inset: 0;
         width: var(--w, 20%);
-        background: var(--c-accent);
-        opacity: 0.14;
+        background: var(--c-text-tertiary);
+        opacity: 0.12;
       }
 
       .console-lens li > * {
@@ -1373,16 +1345,20 @@
 
       .console-actions {
         display: flex;
-        gap: 0.5rem;
-        justify-content: flex-end;
+        align-items: center;
+        justify-content: space-between;
+        border-top: 1px solid var(--c-border);
+        padding-top: 8px;
+        font-size: 0.65rem;
+        color: var(--c-text-tertiary);
       }
 
       .console-icon-btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 38px;
-        height: 38px;
+        width: 44px;
+        height: 44px;
         color: var(--c-text-secondary);
         background: transparent;
         border: 1px solid var(--c-border-bright);
@@ -1409,9 +1385,9 @@
       }
 
       .console-icon-btn[aria-pressed="true"] {
-        background: var(--c-accent);
-        border-color: var(--c-accent);
-        color: #fff;
+        background: var(--c-chip);
+        border-color: var(--c-border-bright);
+        color: var(--c-text-secondary);
       }
 
       .theme-icon {
@@ -1562,8 +1538,7 @@
          a fixed left pane, with layout space reserved in CSS ── -->
     <details class="console" id="console" open>
       <summary class="console-summary">
-        <span class="console-dot" aria-hidden="true"></span>
-        <span class="console-label">Model</span>
+        <span class="console-label">Navigate</span>
         <span class="console-current" id="consoleCurrent">Introduction</span>
         <span class="console-chevron" aria-hidden="true">&#9662;</span>
       </summary>
@@ -1576,49 +1551,48 @@
           <span class="flow-connector" aria-hidden="true"></span>
           <div class="model-stack" role="group" aria-label="Model sections">
             <span class="model-stack-label" aria-hidden="true">Model</span>
-            <span class="model-stack-label model-stack-count" aria-hidden="true">5 sections</span>
             <div class="model-layer">
-              <svg class="model-wires" viewBox="0 0 224 70" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1">
-                <path d="M112 0V8M112 52V56M112 66V70M112 0H16Q12 0 12 4V57Q12 61 16 61H107" />
-                <path d="M109 4l3 4 3-4M103 58l4 3-4 3" stroke-linejoin="round" />
-                <circle class="merge" cx="112" cy="61" r="5" />
-                <path d="M109.5 61h5M112 58.5v5" />
+              <svg class="model-wires" viewBox="0 0 224 64" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1">
+                <path d="M112 0V4M112 48V52M112 60V64M112 0H16Q12 0 12 4V52Q12 56 16 56H108" />
+                <path d="M109 0l3 4 3-4M104 53l4 3-4 3" stroke-linejoin="round" />
+                <circle class="merge" cx="112" cy="56" r="4" />
+                <path d="M109.5 56h5M112 53.5v5" />
               </svg>
               <a href="#research">Research</a>
             </div>
             <div class="model-layer">
-              <svg class="model-wires" viewBox="0 0 224 70" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1">
-                <path d="M112 0V8M112 52V56M112 66V70M112 0H16Q12 0 12 4V57Q12 61 16 61H107" />
-                <path d="M109 4l3 4 3-4M103 58l4 3-4 3" stroke-linejoin="round" />
-                <circle class="merge" cx="112" cy="61" r="5" />
-                <path d="M109.5 61h5M112 58.5v5" />
+              <svg class="model-wires" viewBox="0 0 224 64" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1">
+                <path d="M112 0V4M112 48V52M112 60V64M112 0H16Q12 0 12 4V52Q12 56 16 56H108" />
+                <path d="M109 0l3 4 3-4M104 53l4 3-4 3" stroke-linejoin="round" />
+                <circle class="merge" cx="112" cy="56" r="4" />
+                <path d="M109.5 56h5M112 53.5v5" />
               </svg>
               <a href="#education">Education</a>
             </div>
             <div class="model-layer">
-              <svg class="model-wires" viewBox="0 0 224 70" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1">
-                <path d="M112 0V8M112 52V56M112 66V70M112 0H16Q12 0 12 4V57Q12 61 16 61H107" />
-                <path d="M109 4l3 4 3-4M103 58l4 3-4 3" stroke-linejoin="round" />
-                <circle class="merge" cx="112" cy="61" r="5" />
-                <path d="M109.5 61h5M112 58.5v5" />
+              <svg class="model-wires" viewBox="0 0 224 64" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1">
+                <path d="M112 0V4M112 48V52M112 60V64M112 0H16Q12 0 12 4V52Q12 56 16 56H108" />
+                <path d="M109 0l3 4 3-4M104 53l4 3-4 3" stroke-linejoin="round" />
+                <circle class="merge" cx="112" cy="56" r="4" />
+                <path d="M109.5 56h5M112 53.5v5" />
               </svg>
               <a href="#experience">Experience</a>
             </div>
             <div class="model-layer">
-              <svg class="model-wires" viewBox="0 0 224 70" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1">
-                <path d="M112 0V8M112 52V56M112 66V70M112 0H16Q12 0 12 4V57Q12 61 16 61H107" />
-                <path d="M109 4l3 4 3-4M103 58l4 3-4 3" stroke-linejoin="round" />
-                <circle class="merge" cx="112" cy="61" r="5" />
-                <path d="M109.5 61h5M112 58.5v5" />
+              <svg class="model-wires" viewBox="0 0 224 64" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1">
+                <path d="M112 0V4M112 48V52M112 60V64M112 0H16Q12 0 12 4V52Q12 56 16 56H108" />
+                <path d="M109 0l3 4 3-4M104 53l4 3-4 3" stroke-linejoin="round" />
+                <circle class="merge" cx="112" cy="56" r="4" />
+                <path d="M109.5 56h5M112 53.5v5" />
               </svg>
               <a href="#reviews">Reviewing</a>
             </div>
             <div class="model-layer">
-              <svg class="model-wires" viewBox="0 0 224 70" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1">
-                <path d="M112 0V8M112 52V56M112 66V70M112 0H16Q12 0 12 4V57Q12 61 16 61H107" />
-                <path d="M109 4l3 4 3-4M103 58l4 3-4 3" stroke-linejoin="round" />
-                <circle class="merge" cx="112" cy="61" r="5" />
-                <path d="M109.5 61h5M112 58.5v5" />
+              <svg class="model-wires" viewBox="0 0 224 64" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1">
+                <path d="M112 0V4M112 48V52M112 60V64M112 0H16Q12 0 12 4V52Q12 56 16 56H108" />
+                <path d="M109 0l3 4 3-4M104 53l4 3-4 3" stroke-linejoin="round" />
+                <circle class="merge" cx="112" cy="56" r="4" />
+                <path d="M109.5 56h5M112 53.5v5" />
               </svg>
               <a href="#projects">Projects</a>
             </div>
@@ -1629,15 +1603,16 @@
             <span>Contact</span>
           </a>
         </nav>
-        <details class="console-inspector">
-          <summary>Logit lens <span>Illustrative</span></summary>
-        <div class="console-stats">
-          <span id="statLayer">Layer 0 / 7</span>
-          <span id="statNorm">‖resid‖ ≈ 1.00</span>
-        </div>
-        <ol id="lensList" class="console-lens"></ol>
-        </details>
+        <section class="console-inspector" aria-labelledby="logitLensHeading">
+          <h2 id="logitLensHeading" class="console-lens-heading">Logit lens <span>Illustrative</span></h2>
+          <div class="console-stats">
+            <span id="statLayer">Layer 0 / 7</span>
+            <span id="statNorm">‖resid‖ ≈ 1.00</span>
+          </div>
+          <ol id="lensList" class="console-lens"></ol>
+        </section>
         <div class="console-actions">
+          <span>Appearance</span>
           <button
             class="console-icon-btn"
             id="themeBtn"
@@ -2233,10 +2208,6 @@
     <footer>
       <div class="container">
         <p>&copy; 2025 Sunayana Samavedam</p>
-        <p class="footer-note">
-          This page renders itself as a stylized forward pass. The publications
-          above are the real output.
-        </p>
       </div>
     </footer>
 

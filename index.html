@@ -494,7 +494,12 @@
           box-shadow:
             0 0 0 1px var(--c-border),
             0 34px 70px -30px rgba(0, 0, 0, 0.6),
-            0 0 90px -14px var(--c-accent-soft);
+            0 0 90px -14px
+              color-mix(
+                in srgb,
+                var(--section-glow, var(--c-accent)) 45%,
+                transparent
+              );
           transition:
             background-color 0.6s ease,
             box-shadow 0.6s ease;
@@ -508,9 +513,13 @@
       /* A figure holding a magnifying glass, fixed over the page while
          you're inside any layer past the introduction. Idles with a
          small scanning wobble, gives a quick zoom-pulse on every layer
-         change (hooked from render() below), and casts a fan of
-         theme-coloured light rays down across the panels — the source
-         of the spotlight above. */
+         change, and casts one clean cone of light down across the
+         panels — the source of the spotlight above. Its color is kept
+         in sync with the active section's own console-flow-chart hue
+         (set as --section-glow from render() below), so the light
+         always matches whichever layer it's shining on.
+         --section-glow falls back to the theme accent before the first
+         layer computes (or if JS hasn't run). */
       .magnifier {
         position: fixed;
         top: 30%;
@@ -527,40 +536,41 @@
         opacity: 1;
       }
 
-      .magnifier-rays {
+      .magnifier-beam {
         position: absolute;
-        top: 18px;
-        right: 18px;
-        width: 0;
-        height: 0;
-      }
-
-      .magnifier-rays .ray {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 62vw;
-        max-width: 640px;
-        height: 3px;
-        background: linear-gradient(to left, var(--c-accent), transparent 82%);
-        transform-origin: right center;
-        transform: rotate(var(--ang));
-        opacity: 0.32;
+        top: 8px;
+        right: 10px;
+        width: min(58vw, 620px);
+        height: min(58vw, 620px);
+        background: conic-gradient(
+          from 0deg at 100% 0%,
+          transparent 0deg 192deg,
+          var(--section-glow, var(--c-accent)) 210deg,
+          var(--section-glow, var(--c-accent)) 232deg,
+          transparent 250deg 360deg
+        );
+        opacity: 0.28;
         mix-blend-mode: screen;
-        animation: magnifierFlicker 2.6s ease-in-out infinite;
+        pointer-events: none;
+        animation: magnifierFlicker 3.2s ease-in-out infinite;
       }
 
       .magnifier-glow {
         position: absolute;
-        top: -40px;
-        right: -30px;
-        width: 220px;
-        height: 220px;
-        background: radial-gradient(circle, var(--c-accent) 0%, transparent 68%);
-        opacity: 0.4;
-        filter: blur(4px);
+        top: -10px;
+        right: -6px;
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          var(--section-glow, var(--c-accent)) 0%,
+          transparent 70%
+        );
+        opacity: 0.5;
+        filter: blur(3px);
         mix-blend-mode: screen;
-        animation: magnifierFlicker 2.6s ease-in-out infinite;
+        animation: magnifierFlicker 3.2s ease-in-out infinite;
         pointer-events: none;
       }
 
@@ -570,10 +580,12 @@
         right: 0;
         width: 62px;
         height: 76px;
-        color: var(--c-accent);
+        color: var(--section-glow, var(--c-accent));
         filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
         animation: magnifierIdle 3.6s ease-in-out infinite;
-        transition: transform 0.2s ease;
+        transition:
+          transform 0.2s ease,
+          color 0.5s ease;
       }
 
       .magnifier:hover .magnifier-figure {
@@ -586,7 +598,7 @@
       }
 
       .magnifier.pulse .magnifier-glow,
-      .magnifier.pulse .ray {
+      .magnifier.pulse .magnifier-beam {
         animation: magnifierPulseGlow 0.6s ease-out;
       }
 
@@ -644,7 +656,7 @@
       @media (prefers-reduced-motion: reduce) {
         .magnifier-figure,
         .magnifier-glow,
-        .ray {
+        .magnifier-beam {
           animation: none;
         }
       }
@@ -1585,13 +1597,7 @@
     <!-- Magnifying glass: visible while inspecting any layer past the
          introduction, pulses on every layer change (see script). -->
     <div id="magnifier" class="magnifier" aria-hidden="true">
-      <div class="magnifier-rays">
-        <span class="ray" style="--ang: -16deg"></span>
-        <span class="ray" style="--ang: -7deg"></span>
-        <span class="ray" style="--ang: 2deg"></span>
-        <span class="ray" style="--ang: 11deg"></span>
-        <span class="ray" style="--ang: 20deg"></span>
-      </div>
+      <div class="magnifier-beam"></div>
       <div class="magnifier-glow"></div>
       <svg class="magnifier-figure" viewBox="0 0 60 76" fill="none">
         <!-- head -->
@@ -2593,6 +2599,18 @@
         contact: "Contact",
       };
 
+      // Matches WASH_SECTIONS above — keeps the spotlight's colour (the
+      // magnifier's beam/glow/figure, and each panel's glow) in sync with
+      // the same console-flow-chart hue that section already owns.
+      const SECTION_BLK = {
+        research: "--blk-2",
+        education: "--blk-3",
+        experience: "--blk-4",
+        reviews: "--blk-5",
+        projects: "--blk-6",
+        contact: "--blk-7",
+      };
+
       const lensListEl = document.getElementById("lensList");
       const magnifierEl = document.getElementById("magnifier");
       const consoleCurrentEl = document.getElementById("consoleCurrent");
@@ -2642,6 +2660,12 @@
         }
 
         const secId = LAYER_TO_SECTION[layer];
+        if (secId && SECTION_BLK[secId]) {
+          document.documentElement.style.setProperty(
+            "--section-glow",
+            `var(${SECTION_BLK[secId]})`,
+          );
+        }
         const activeHref = secId ? `#${secId}` : "#top";
         consoleCurrentEl.textContent = secId
           ? SECTION_LABELS[secId]

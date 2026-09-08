@@ -541,23 +541,50 @@
         .magnifier.pulse .lens-spark { animation: none; }
       }
 
-      /* Section identity is carried visually by the per-section colour
-         (mapped to that section's block in the console flow-chart). The
-         heading text stays in the DOM, visually hidden, so the document
-         outline and assistive tech still have it. */
-      .section-heading-sr {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0 0 0 0);
-        clip-path: inset(50%);
-        white-space: nowrap;
-        border: 0;
+      /* Each career layer declares the contribution it writes to the stream. */
+      .layer-annotation {
+        position: relative;
+        padding: 0 0 18px 32px;
+        margin-bottom: 26px;
+        border-bottom: 1px solid var(--c-border);
       }
-
+      .layer-annotation::before {
+        content: "+";
+        position: absolute;
+        left: 0;
+        top: 1px;
+        display: grid;
+        place-items: center;
+        width: 20px;
+        height: 20px;
+        border: 1px solid var(--c-text-secondary);
+        border-radius: 50%;
+        font: 14px var(--font-mono);
+        color: var(--c-text-secondary);
+      }
+      .output-annotation::before { content: "→"; border: 0; }
+      .layer-annotation h2 {
+        font: 600 0.85rem/1.5 var(--font-sans);
+        color: var(--c-text);
+      }
+      .layer-index, .write-label, .input-annotation span {
+        font-family: var(--font-mono);
+        font-size: 0.63rem;
+        font-weight: 400;
+        color: var(--c-text-secondary);
+        margin-right: 8px;
+      }
+      .layer-annotation p {
+        margin-top: 5px;
+        font: 0.76rem/1.6 var(--font-sans);
+        color: var(--c-text-secondary);
+      }
+      .write-label { text-transform: uppercase; letter-spacing: 0.05em; }
+      .input-annotation {
+        margin-bottom: 16px;
+        font: 0.7rem/1.6 var(--font-sans);
+        color: var(--c-text-secondary);
+      }
       /* ── Research ──────────────────────────────────── */
       .research-group-label {
         font-family: var(--font-sans);
@@ -1115,6 +1142,7 @@
       /* A top-to-bottom architecture diagram: terminals outside the model,
          one central signal path, and residual branches that actually rejoin. */
       .console-nav {
+        position: relative;
         --wire: color-mix(in srgb, var(--c-text-secondary) 70%, var(--c-console-bg));
         --model-surface: color-mix(in srgb, var(--c-console-bg) 70%, var(--c-console-tile));
         display: flex;
@@ -1185,21 +1213,42 @@
         text-transform: uppercase;
         color: var(--c-text-secondary);
       }
+      .residual-stream {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        pointer-events: none;
+        z-index: 2;
+        color: var(--stream-color, var(--blk-1));
+      }
+      .stream-track { fill: none; stroke: var(--wire); stroke-width: 1; }
+      .stream-progress { fill: none; stroke: currentColor; stroke-width: 2; }
+      .stream-pulse { fill: currentColor; opacity: 0; }
+      .stream-caption {
+        position: absolute;
+        left: -10px;
+        top: 44%;
+        z-index: 3;
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        font: 0.51rem var(--font-mono);
+        letter-spacing: 0.05em;
+        color: var(--c-text-tertiary);
+      }
+      .model-layer.is-current .merge {
+        stroke: var(--c-text);
+        stroke-width: 2;
+      }
+      .model-layer.is-past .merge { fill: var(--c-text-secondary); }
+      .model-layer.is-past .merge-plus { stroke: var(--model-surface); }
       .flow-connector {
         position: relative;
         width: 1px;
         height: 16px;
         flex-shrink: 0;
-        background: var(--wire);
-      }
-      .flow-connector::after {
-        content: "";
-        position: absolute;
-        left: -3px;
-        bottom: 0;
-        border-left: 3.5px solid transparent;
-        border-right: 3.5px solid transparent;
-        border-top: 5px solid var(--wire);
+        background: transparent;
       }
       .model-stack {
         position: relative;
@@ -1212,7 +1261,8 @@
       .model-stack-label {
         position: absolute;
         top: -8px;
-        left: 16px;
+        left: 50%;
+        transform: translateX(-50%);
         padding: 0 7px;
         background: var(--c-console-bg);
         color: var(--c-text-secondary);
@@ -1222,19 +1272,10 @@
         letter-spacing: 0.09em;
         text-transform: uppercase;
       }
-      .model-stack::before,
-      .model-stack::after {
-        content: "";
-        position: absolute;
-        left: 50%;
-        width: 1px;
-        background: var(--wire);
-      }
-      .model-stack::before { top: 0; height: 16px; }
-      .model-stack::after { bottom: 0; height: 8px; }
       .model-layer { position: relative; height: 64px; }
       .model-layer a {
         position: absolute;
+        z-index: 3;
         top: 4px;
         left: 32px;
         right: 32px;
@@ -1242,6 +1283,7 @@
       }
       .model-wires {
         position: absolute;
+        z-index: 3;
         inset: 0;
         width: 100%;
         height: 100%;
@@ -1287,20 +1329,30 @@
         margin-bottom: 8px;
       }
 
+      .lens-contribution {
+        margin-bottom: 8px;
+        font: 0.61rem/1.5 var(--font-sans);
+        color: var(--c-text-secondary);
+      }
       ol.console-lens {
+        position: relative;
+        height: 104px;
         list-style: none;
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
         margin-bottom: 12px;
       }
 
       .console-lens li {
-        position: relative;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 23px;
         display: flex;
-        align-items: baseline;
-        gap: 0.5rem;
-        padding: 3px 8px;
+        align-items: center;
+        gap: 8px;
+        padding: 2px 8px;
+        transform: translateY(calc(var(--rank) * 26px));
+        transition: transform 0.4s ease, opacity 0.25s ease;
         border-radius: 3px;
         overflow: hidden;
         font-family: var(--font-mono);
@@ -1313,8 +1365,9 @@
         position: absolute;
         inset: 0;
         width: var(--w, 20%);
-        background: var(--c-text-tertiary);
-        opacity: 0.12;
+        background: var(--stream-color, var(--blk-1));
+        opacity: 0.2;
+        transition: width 0.4s ease, background-color 0.4s ease;
       }
 
       .console-lens li > * {
@@ -1326,11 +1379,20 @@
         font-size: 0.7rem;
       }
 
-      .console-lens li:first-child .lens-tok {
+      .console-lens li[data-first="true"] .lens-tok {
         color: var(--c-text);
         font-weight: 600;
       }
 
+      .lens-trend {
+        margin-left: auto;
+        font-size: 0.58rem;
+        color: var(--c-text-secondary);
+      }
+      .lens-trend.is-new { font-weight: 600; }
+      @media (prefers-reduced-motion: reduce) {
+        .console-lens li, .console-lens li::before { transition: none; }
+      }
       .console-actions {
         display: flex;
         align-items: center;
@@ -1530,6 +1592,12 @@
       </summary>
       <div class="console-body">
         <nav class="console-nav" aria-label="Portfolio model navigation">
+          <svg class="residual-stream" aria-hidden="true">
+            <path id="streamTrack" class="stream-track" stroke-linejoin="round" />
+            <path id="streamProgress" class="stream-progress" stroke-linejoin="round" />
+            <circle id="streamPulse" class="stream-pulse" r="3.5" />
+          </svg>
+          <span class="stream-caption" aria-hidden="true">residual stream</span>
           <a class="model-port" href="#top">
             <span class="port-role">Input</span>
             <span>Introduction</span>
@@ -1539,46 +1607,46 @@
             <span class="model-stack-label" aria-hidden="true">Model</span>
             <div class="model-layer">
               <svg class="model-wires" viewBox="0 0 224 64" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1">
-                <path d="M112 0V4M112 48V52M112 60V64M112 0H16Q12 0 12 4V52Q12 56 16 56H108" />
-                <path d="M109 0l3 4 3-4M104 53l4 3-4 3" stroke-linejoin="round" />
-                <circle class="merge" cx="112" cy="56" r="4" />
-                <path d="M109.5 56h5M112 53.5v5" />
+                <path d="M12 0H112V4M112 48V56H16" />
+                <path d="M109 0l3 4 3-4M20 53l-4 3 4 3" stroke-linejoin="round" />
+                <circle class="merge" cx="12" cy="56" r="4" />
+                <path class="merge-plus" d="M9.5 56h5M12 53.5v5" />
               </svg>
               <a href="#research">Research</a>
             </div>
             <div class="model-layer">
               <svg class="model-wires" viewBox="0 0 224 64" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1">
-                <path d="M112 0V4M112 48V52M112 60V64M112 0H16Q12 0 12 4V52Q12 56 16 56H108" />
-                <path d="M109 0l3 4 3-4M104 53l4 3-4 3" stroke-linejoin="round" />
-                <circle class="merge" cx="112" cy="56" r="4" />
-                <path d="M109.5 56h5M112 53.5v5" />
+                <path d="M12 0H112V4M112 48V56H16" />
+                <path d="M109 0l3 4 3-4M20 53l-4 3 4 3" stroke-linejoin="round" />
+                <circle class="merge" cx="12" cy="56" r="4" />
+                <path class="merge-plus" d="M9.5 56h5M12 53.5v5" />
               </svg>
               <a href="#education">Education</a>
             </div>
             <div class="model-layer">
               <svg class="model-wires" viewBox="0 0 224 64" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1">
-                <path d="M112 0V4M112 48V52M112 60V64M112 0H16Q12 0 12 4V52Q12 56 16 56H108" />
-                <path d="M109 0l3 4 3-4M104 53l4 3-4 3" stroke-linejoin="round" />
-                <circle class="merge" cx="112" cy="56" r="4" />
-                <path d="M109.5 56h5M112 53.5v5" />
+                <path d="M12 0H112V4M112 48V56H16" />
+                <path d="M109 0l3 4 3-4M20 53l-4 3 4 3" stroke-linejoin="round" />
+                <circle class="merge" cx="12" cy="56" r="4" />
+                <path class="merge-plus" d="M9.5 56h5M12 53.5v5" />
               </svg>
               <a href="#experience">Experience</a>
             </div>
             <div class="model-layer">
               <svg class="model-wires" viewBox="0 0 224 64" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1">
-                <path d="M112 0V4M112 48V52M112 60V64M112 0H16Q12 0 12 4V52Q12 56 16 56H108" />
-                <path d="M109 0l3 4 3-4M104 53l4 3-4 3" stroke-linejoin="round" />
-                <circle class="merge" cx="112" cy="56" r="4" />
-                <path d="M109.5 56h5M112 53.5v5" />
+                <path d="M12 0H112V4M112 48V56H16" />
+                <path d="M109 0l3 4 3-4M20 53l-4 3 4 3" stroke-linejoin="round" />
+                <circle class="merge" cx="12" cy="56" r="4" />
+                <path class="merge-plus" d="M9.5 56h5M12 53.5v5" />
               </svg>
               <a href="#reviews">Peer review</a>
             </div>
             <div class="model-layer">
               <svg class="model-wires" viewBox="0 0 224 64" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1">
-                <path d="M112 0V4M112 48V52M112 60V64M112 0H16Q12 0 12 4V52Q12 56 16 56H108" />
-                <path d="M109 0l3 4 3-4M104 53l4 3-4 3" stroke-linejoin="round" />
-                <circle class="merge" cx="112" cy="56" r="4" />
-                <path d="M109.5 56h5M112 53.5v5" />
+                <path d="M12 0H112V4M112 48V56H16" />
+                <path d="M109 0l3 4 3-4M20 53l-4 3 4 3" stroke-linejoin="round" />
+                <circle class="merge" cx="12" cy="56" r="4" />
+                <path class="merge-plus" d="M9.5 56h5M12 53.5v5" />
               </svg>
               <a href="#projects">Projects</a>
             </div>
@@ -1592,10 +1660,11 @@
         <section class="console-inspector" aria-labelledby="logitLensHeading">
           <h2 id="logitLensHeading" class="console-lens-heading">Logit lens <span>Illustrative</span></h2>
           <div class="console-stats">
-            <span id="statLayer">Layer 0 / 7</span>
-            <span id="statNorm">‖resid‖ ≈ 1.00</span>
+            <span id="statLayer">L0 / 7 · input</span>
+            <span id="statNorm">‖h‖ ≈ 0.47</span>
           </div>
-          <ol id="lensList" class="console-lens"></ol>
+          <p id="lensContribution" class="lens-contribution"></p>
+          <ol id="lensList" class="console-lens" aria-label="Top accumulated concepts"></ol>
         </section>
         <div class="console-actions">
           <span>Theme</span>
@@ -1652,6 +1721,7 @@
         <header class="hero" data-layer="0">
           <div class="hero-inner">
             <div class="hero-text">
+              <p class="input-annotation"><span>L0 / Input</span> Vision · interpretability · curiosity</p>
               <h1>Sunayana Samavedam</h1>
               <p class="tagline">
                 <span class="hl induction-token" data-key="mi"
@@ -1688,7 +1758,10 @@
 
         <!-- ── Research ────────────────────────────────── -->
         <section id="research" class="page-section" data-layer="1">
-          <h2 class="section-heading-sr">Research</h2>
+          <header class="layer-annotation">
+            <h2><span class="layer-index">L1–2</span> Research</h2>
+            <p><span class="write-label">Writes</span> Interpretability · sparse representations</p>
+          </header>
 
           <p class="research-group-label" data-layer="1">Publications</p>
 
@@ -1942,7 +2015,10 @@
 
         <!-- ── Education ───────────────────────────────── -->
         <section id="education" class="page-section" data-layer="3">
-          <h2 class="section-heading-sr">Education</h2>
+          <header class="layer-annotation">
+            <h2><span class="layer-index">L3</span> Education</h2>
+            <p><span class="write-label">Writes</span> Computational foundations · research training</p>
+          </header>
 
           <div class="edu-entry reveal">
             <div class="edu-header">
@@ -1971,7 +2047,10 @@
 
         <!-- ── Experience ──────────────────────────────── -->
         <section id="experience" class="page-section" data-layer="4">
-          <h2 class="section-heading-sr">Experience</h2>
+          <header class="layer-annotation">
+            <h2><span class="layer-index">L4</span> Experience</h2>
+            <p><span class="write-label">Writes</span> Teaching · mentorship</p>
+          </header>
 
           <div class="exp-entry reveal">
             <div class="exp-header">
@@ -2052,7 +2131,10 @@
 
         <!-- ── Reviews ────────────────────────────────── -->
         <section id="reviews" class="page-section" data-layer="5">
-          <h2 class="section-heading-sr">Reviewing</h2>
+          <header class="layer-annotation">
+            <h2><span class="layer-index">L5</span> Peer review</h2>
+            <p><span class="write-label">Writes</span> Critical evaluation</p>
+          </header>
           <p
             style="
               font-family: var(--font-serif);
@@ -2085,7 +2167,10 @@
 
         <!-- ── Projects ────────────────────────────────── -->
         <section id="projects" class="page-section" data-layer="6">
-          <h2 class="section-heading-sr">Selected Projects</h2>
+          <header class="layer-annotation">
+            <h2><span class="layer-index">L6</span> Projects</h2>
+            <p><span class="write-label">Writes</span> Implementation · experimentation</p>
+          </header>
 
           <div class="projects-grid">
             <div class="project-card reveal">
@@ -2135,7 +2220,10 @@
           class="page-section contact-section"
           data-layer="7"
         >
-          <h2 class="section-heading-sr">Contact</h2>
+          <header class="layer-annotation output-annotation">
+            <h2><span class="layer-index">L7</span> Contact</h2>
+            <p><span class="write-label">Output</span> Research identity → get in touch</p>
+          </header>
 
           <div class="softmax-row reveal">
             <div class="sm-item sampled">
@@ -2312,16 +2400,29 @@
         "projects",
         "contact",
       ];
-      const LOGIT_LENS = {
-        0: ["<bos>", "the", "a", "of"],
-        1: ["vision", "style", "backdoor", "neural"],
-        2: ["style", "control", "survey", "concept"],
-        3: ["IIIT", "advisor", "M.S.", "thesis"],
-        4: ["taught", "mentored", "research", "lab"],
-        5: ["review", "reviewer", "conference", "venue"],
-        6: ["CLIP", "domain", "3D", "build"],
-        7: ["Sunayana", "Samavedam", "researcher", "email"],
-      };
+      // Authored concept contributions, grounded in the corresponding section.
+      // These are illustrative coordinates, not measured activations or logits.
+      // Every state is a prefix sum, so backtracking and deep links are deterministic.
+      const CAREER_STAGES = [
+        { label: "Introduction", write: "Seeds vision · interpretability", delta: { vision: 30, interpretability: 28, research: 20, curiosity: 12 } },
+        { label: "Research", write: "Adds sparse representations · robustness", delta: { interpretability: 28, "sparse features": 36, vision: 8, robustness: 14 } },
+        { label: "Working papers", write: "Adds controllability · synthesis", delta: { control: 32, interpretability: 12, research: 12, vision: 6 } },
+        { label: "Education", write: "Adds foundations · research training", delta: { foundations: 46, research: 12, curiosity: 22 } },
+        { label: "Experience", write: "Adds mentorship · teaching", delta: { mentorship: 60, teaching: 50, vision: 6 } },
+        { label: "Peer review", write: "Adds critical evaluation", delta: { evaluation: 65, research: 8, robustness: 12 } },
+        { label: "Projects", write: "Adds implementation · experimentation", delta: { building: 68, vision: 12, robustness: 18 } },
+        { label: "Contact", write: "Accumulated identity → contact", delta: {} },
+      ];
+      const CAREER_STATES = CAREER_STAGES.reduce((states, stage) => {
+        const vector = { ...(states.at(-1)?.vector || {}) };
+        Object.entries(stage.delta).forEach(([concept, value]) => {
+          vector[concept] = (vector[concept] || 0) + value;
+        });
+        const ranked = Object.entries(vector).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+        const norm = Math.hypot(...Object.values(vector)) / 100;
+        states.push({ vector, ranked, norm });
+        return states;
+      }, []);
 
       const layerEls = Array.from(document.querySelectorAll("[data-layer]"));
       let layerOffsets = [];
@@ -2404,9 +2505,14 @@
         computeOffsets();
         updateWash(window.scrollY);
         updateBeam();
+        updateResidualStream();
       });
       window.addEventListener("load", () => {
         computeOffsets();
+        // Resolve the initial fragment after layout settles; do not let a long
+        // smooth-scroll entrance leave a shared link on an earlier layer.
+        const initialTarget = document.getElementById(window.location.hash.slice(1));
+        if (initialTarget) initialTarget.scrollIntoView({ behavior: "instant", block: "start" });
         updateWash(window.scrollY);
         render(currentLayerFor(window.scrollY));
       });
@@ -2512,6 +2618,114 @@
       });
       sectionResizeObserver.observe(document.querySelector("main"));
 
+      const navigationEl = document.querySelector(".console-nav");
+      const modelLayers = Array.from(document.querySelectorAll(".model-layer"));
+      const streamTrack = document.getElementById("streamTrack");
+      const streamProgress = document.getElementById("streamProgress");
+      const streamPulse = document.getElementById("streamPulse");
+      const lensContribution = document.getElementById("lensContribution");
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      let streamFrame = null;
+      let streamPosition = 0;
+      const lensRows = new Map();
+
+      function updateResidualStream(animate = false) {
+        cancelAnimationFrame(streamFrame);
+        streamPulse.style.opacity = "0";
+        if (!consoleEl.open || prevLayer < 0) return;
+        const navRect = navigationEl.getBoundingClientRect();
+        const input = navLinkEls[0].getBoundingClientRect();
+        const output = navLinkEls.at(-1).getBoundingClientRect();
+        const branch = modelLayers[0].querySelector("svg").getBoundingClientRect();
+        if (!navRect.width || !branch.width) return;
+        const center = input.left + input.width / 2 - navRect.left;
+        const rail = branch.left + branch.width * 12 / 224 - navRect.left;
+        const start = input.bottom - navRect.top;
+        const end = output.top - navRect.top;
+        const path = `M ${center} ${start} V ${start + 8} H ${rail} V ${end - 8} H ${center} V ${end}`;
+        streamTrack.setAttribute("d", path);
+        streamProgress.setAttribute("d", path);
+        const total = streamTrack.getTotalLength();
+        const activeIndex = modelLayers.findIndex((el) => el.querySelector("a").hash === `#${LAYER_TO_SECTION[prevLayer]}`);
+        const merge = activeIndex >= 0 ? modelLayers[activeIndex].querySelector(".merge").getBoundingClientRect() : null;
+        const target = prevLayer === TOTAL_LAYERS ? total : merge
+          ? 8 + Math.abs(center - rail) + merge.top + merge.height / 2 - navRect.top - start - 8
+          : 0;
+        const from = Math.min(streamPosition, total);
+        const paint = (position) => {
+          streamProgress.style.strokeDasharray = `${position} ${total + 1}`;
+          const point = streamTrack.getPointAtLength(position);
+          streamPulse.setAttribute("cx", point.x);
+          streamPulse.setAttribute("cy", point.y);
+          streamPosition = position;
+        };
+        if (!animate || reducedMotion.matches || Math.abs(from - target) < 1) {
+          paint(target);
+          return;
+        }
+        const began = performance.now();
+        streamPulse.style.opacity = "1";
+        const tick = (now) => {
+          const progress = Math.min(1, (now - began) / 550);
+          paint(from + (target - from) * (1 - Math.pow(1 - progress, 3)));
+          if (progress < 1) streamFrame = requestAnimationFrame(tick);
+          else streamPulse.style.opacity = "0";
+        };
+        streamFrame = requestAnimationFrame(tick);
+      }
+      const navigationResizeObserver = new ResizeObserver(() => updateResidualStream());
+      navigationResizeObserver.observe(navigationEl);
+      consoleEl.addEventListener("toggle", () => updateResidualStream());
+      reducedMotion.addEventListener("change", () => updateResidualStream());
+
+      function renderLens(layer) {
+        const state = CAREER_STATES[layer];
+        const previous = CAREER_STATES[layer - 1];
+        const top = state.ranked.slice(0, 4);
+        const visible = new Set(top.map(([concept]) => concept));
+        lensRows.forEach((row, concept) => {
+          if (!visible.has(concept)) {
+            row.remove();
+            lensRows.delete(concept);
+          }
+        });
+        top.forEach(([concept, value], index) => {
+          let row = lensRows.get(concept);
+          const entering = !row;
+          if (!row) {
+            row = document.createElement("li");
+            row.dataset.concept = concept;
+            for (const className of ["lens-rank", "lens-tok", "lens-trend"]) {
+              const span = document.createElement("span");
+              span.className = className;
+              row.append(span);
+            }
+            lensRows.set(concept, row);
+          }
+          const priorIndex = previous?.ranked.findIndex(([name]) => name === concept) ?? -1;
+          const change = priorIndex - index;
+          const trend = !previous ? "seed" : priorIndex < 0 ? "new" : change > 0 ? `↑${change}` : change < 0 ? `↓${-change}` : "—";
+          row.querySelector(".lens-rank").textContent = index + 1;
+          row.querySelector(".lens-tok").textContent = concept;
+          const trendEl = row.querySelector(".lens-trend");
+          trendEl.textContent = trend;
+          trendEl.classList.toggle("is-new", trend === "new");
+          const comparison = !previous ? "Input concept" : priorIndex < 0 ? `New at layer ${layer}` : `Rank ${priorIndex + 1} at layer ${layer - 1}; rank ${index + 1} now`;
+          row.setAttribute("aria-label", `${index + 1}. ${concept}. ${comparison}.`);
+          row.title = comparison;
+          row.dataset.first = String(index === 0);
+          row.style.setProperty("--rank", index);
+          row.style.setProperty("--w", `${value}%`);
+          lensListEl.append(row); // DOM reading order follows visual rank.
+          if (entering && !reducedMotion.matches) row.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 350 });
+        });
+        lensContribution.textContent = CAREER_STAGES[layer].write;
+        lensListEl.setAttribute("aria-label", previous ? `Top accumulated concepts; rank changes versus layer ${layer - 1}` : "Input concepts");
+        statLayerEl.textContent = `L${layer} / ${TOTAL_LAYERS}${previous ? ` · vs L${layer - 1}` : " · input"}`;
+        statNormEl.textContent = `‖h‖ ≈ ${state.norm.toFixed(2)}`;
+        statNormEl.title = "Norm of the illustrative accumulated concept weights";
+      }
+
       let prevLayer = -1;
 
       // The layer under the scroll trigger point can flip back and forth
@@ -2564,24 +2778,15 @@
         consoleCurrentEl.textContent = secId
           ? SECTION_LABELS[secId]
           : "Introduction";
-        statLayerEl.textContent = `Layer ${layer} / ${TOTAL_LAYERS}`;
-        statNormEl.textContent = `‖resid‖ ≈ ${(1 + layer * 0.18).toFixed(2)}`;
-
-        const tokens = LOGIT_LENS[layer] || LOGIT_LENS[0];
-        const weights = [92, 64, 40, 22];
-        lensListEl.textContent = "";
-        tokens.forEach((t, i) => {
-          const li = document.createElement("li");
-          li.style.setProperty("--w", `${weights[i] || 15}%`);
-          const rank = document.createElement("span");
-          rank.className = "lens-rank";
-          rank.textContent = String(i + 1);
-          const tok = document.createElement("span");
-          tok.className = "lens-tok";
-          tok.textContent = t;
-          li.append(rank, tok);
-          lensListEl.append(li);
+        const streamColor = secId ? `var(${SECTION_BLK[secId]})` : "var(--blk-1)";
+        consoleEl.style.setProperty("--stream-color", streamColor);
+        renderLens(layer);
+        modelLayers.forEach((element) => {
+          const section = document.querySelector(element.querySelector("a").hash);
+          element.classList.toggle("is-current", section.id === secId);
+          element.classList.toggle("is-past", Number(section.dataset.layer) < layer && section.id !== secId);
         });
+        updateResidualStream(layer !== cameFrom && cameFrom >= 0);
 
         navLinkEls.forEach((a) => {
           const active = a.getAttribute("href") === activeHref;

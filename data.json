@@ -31,6 +31,7 @@
       "status": "Published",
       "venue": "ICVGIP",
       "year": "2025",
+      "additional_acceptance": "WiCV Workshop, ECCV 2026",
       "summary": "A concept-driven neural style transfer framework that maps human-interpretable attributes like texture, blur, and detail into explicit controllable directions for fine-grained stylization.",
       "tags": ["Style Transfer", "Interpretability", "Controllability"],
       "links": {
@@ -57,11 +58,9 @@
         "paper": "https://arxiv.org/abs/2503.20925"
       },
       "image": "https://venkatadithya9.github.io/pgbd.github.io/static/images/Batch_diag-Teaser.png"
-    }
-  ],
-  "under_review": [
+    },
     {
-      "title": "Evaluating Sparse Autoencoders for Mechanistic Interpretability under Distribution Shift",
+      "title": "Sparse Autoencoders for LoRA-Adapted CLIP Under Domain Shift",
       "authors": [
         "Sunayana Samavedam",
         "Deepika Vemuri",
@@ -70,16 +69,21 @@
         "P. J. Narayanan",
         "Vineeth Balasubramanian"
       ],
-      "status": "Under Review",
-      "venue": "CVIT, IIIT Hyderabad",
+      "status": "Accepted",
+      "venue": "ICML 2026 MechInterp Workshop & WiML Workshop",
+      "year": "2026",
       "summary": "We investigate how Sparse Autoencoder (SAE) feature quality degrades when CLIP ViT models are adapted to out-of-distribution domains (medical imaging, remote sensing) via parameter-efficient fine-tuning. We introduce a novel metric, Distribution-Aware Monosemanticity Score (DAMS), to characterize SAE feature quality under shifts that standard metrics often conflate. Experiments reveal a systematic tension between downstream classification accuracy and feature-level interpretability under distribution shift.",
       "tags": [
         "Mechanistic Interpretability",
         "Sparse Autoencoders",
         "Distribution Shift"
       ],
-      "links": {}
-    },
+      "links": {
+        "code": "https://github.com/sunayana-981/clip-lora-sae-domain-shift"
+      }
+    }
+  ],
+  "under_review": [
     {
       "title": "Toward a Taxonomy of Spatiotemporal Reasoning in Vision-Language Models",
       "authors": ["Sunayana Samavedam", "Adrian DeWynter"],
@@ -177,6 +181,14 @@
     }
   ],
   "news": [
+    {
+      "date": "2026",
+      "text": "CAV Styler accepted to WiCV Workshop, ECCV 2026."
+    },
+    {
+      "date": "2026",
+      "text": "\"Sparse Autoencoders for LoRA-Adapted CLIP Under Domain Shift\" accepted to the ICML 2026 MechInterp and WiML Workshops."
+    },
     {
       "date": "2025",
       "text": "Appointed WiDS Ambassador — organizing the WiDS Hyderabad Conference."

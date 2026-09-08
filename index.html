@@ -452,6 +452,86 @@
         transition: background-color 0.1s linear;
       }
 
+      /* A magnifying glass that hovers over the page while you're inside
+         any layer past the introduction — a little wink at "inspecting"
+         each layer as you scroll through it. It idles with a small
+         scanning wobble and gives a quick zoom-pulse on every layer
+         change (hooked from render() below), then fades out again over
+         the hero. */
+      .magnifier {
+        position: fixed;
+        top: 50%;
+        right: clamp(0.9rem, 3vw, 2.2rem);
+        transform: translateY(-50%);
+        width: 42px;
+        height: 42px;
+        color: var(--c-accent);
+        opacity: 0;
+        pointer-events: none;
+        z-index: 45;
+        filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.28));
+        transition: opacity 0.5s ease;
+      }
+
+      .magnifier.visible {
+        opacity: 0.82;
+      }
+
+      .magnifier svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+        animation: magnifierIdle 3.4s ease-in-out infinite;
+        transition: transform 0.2s ease;
+      }
+
+      .magnifier.visible:hover {
+        opacity: 1;
+      }
+
+      .magnifier.visible:hover svg {
+        animation-play-state: paused;
+        transform: scale(1.18) rotate(-8deg);
+      }
+
+      .magnifier.pulse svg {
+        animation: magnifierPulse 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+
+      @keyframes magnifierIdle {
+        0%,
+        100% {
+          transform: translate(0, 0) rotate(-4deg);
+        }
+        50% {
+          transform: translate(-4px, 5px) rotate(4deg);
+        }
+      }
+
+      @keyframes magnifierPulse {
+        0% {
+          transform: scale(1) rotate(0deg);
+        }
+        45% {
+          transform: scale(1.4) rotate(-12deg);
+        }
+        100% {
+          transform: scale(1) rotate(0deg);
+        }
+      }
+
+      @media (max-width: 860px) {
+        .magnifier {
+          display: none;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .magnifier svg {
+          animation: none;
+        }
+      }
+
       /* Section identity is carried visually by the per-section colour
          (mapped to that section's block in the console flow-chart). The
          heading text stays in the DOM, visually hidden, so the document
@@ -1380,6 +1460,23 @@
   <body id="top">
     <!-- Full-bleed section colour, interpolated on scroll (see script). -->
     <div id="bgwash" aria-hidden="true"></div>
+
+    <!-- Magnifying glass: visible while inspecting any layer past the
+         introduction, pulses on every layer change (see script). -->
+    <div id="magnifier" class="magnifier" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none">
+        <circle cx="10" cy="10" r="6.5" stroke="currentColor" stroke-width="2" />
+        <line
+          x1="14.7"
+          y1="14.7"
+          x2="20"
+          y2="20"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+      </svg>
+    </div>
 
     <!-- ── Nav ──────────────────────────────────────── -->
     <nav id="nav">
@@ -2347,6 +2444,7 @@
       };
 
       const lensListEl = document.getElementById("lensList");
+      const magnifierEl = document.getElementById("magnifier");
       const consoleCurrentEl = document.getElementById("consoleCurrent");
       const statLayerEl = document.getElementById("statLayer");
       const statNormEl = document.getElementById("statNorm");
@@ -2380,7 +2478,17 @@
       }
 
       function render(layer) {
+        const cameFrom = prevLayer;
         prevLayer = layer;
+
+        if (magnifierEl) {
+          magnifierEl.classList.toggle("visible", layer > 0);
+          if (layer > 0 && layer !== cameFrom) {
+            magnifierEl.classList.remove("pulse");
+            void magnifierEl.offsetWidth; // restart the pulse animation
+            magnifierEl.classList.add("pulse");
+          }
+        }
 
         const secId = LAYER_TO_SECTION[layer];
         const activeHref = secId ? `#${secId}` : "#top";

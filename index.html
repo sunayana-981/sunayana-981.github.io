@@ -316,7 +316,10 @@
         font-weight: 600;
         line-height: 1.08;
         letter-spacing: -0.025em;
-        font-feature-settings: "onum" 1, "liga" 1, "dlig" 1;
+        font-feature-settings:
+          "onum" 1,
+          "liga" 1,
+          "dlig" 1;
         color: var(--c-text);
         margin-bottom: 1.15rem;
         opacity: 0;
@@ -332,11 +335,7 @@
         height: 3px;
         margin-top: 0.85rem;
         border-radius: 2px;
-        background: linear-gradient(
-          90deg,
-          var(--c-accent),
-          var(--c-accent-2)
-        );
+        background: linear-gradient(90deg, var(--c-accent), var(--c-accent-2));
         opacity: 0;
         animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
       }
@@ -369,7 +368,9 @@
         color: var(--c-text-secondary);
         line-height: 1.75;
         margin-bottom: 1.7rem;
-        font-feature-settings: "onum" 1, "liga" 1;
+        font-feature-settings:
+          "onum" 1,
+          "liga" 1;
         opacity: 0;
         transform: translateY(14px);
         animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.27s forwards;
@@ -1558,15 +1559,10 @@
               <div class="hero-news">
                 <p class="hero-news-label">Recent</p>
                 <ul class="hero-news-list">
-                  <li>
-                    "Lost in Distribution: Sparse Autoencoders Under Domain
-                    Shift" submitted to NeurIPS 2026
-                  </li>
                   <li>CAV Styler accepted to WiCV @ ECCV 2026</li>
                   <li>
-                    Sparse Autoencoders for LoRA-Adapted CLIP Under Domain
-                    Shift accepted to the ICML 2026 MechInterp and WiML
-                    Workshops
+                    Sparse Autoencoders for LoRA-Adapted CLIP Under Domain Shift
+                    accepted to the ICML 2026 MechInterp and WiML Workshops
                   </li>
                 </ul>
               </div>
@@ -1602,11 +1598,10 @@
               <ul>
                 <li>
                   Analyzed how generic SAE interpretability degrades as the
-                  target domain moves from ImageNet-like benchmarks to far
-                  ones (PathMNIST, ChestMNIST, EuroSAT), across four encoders
-                  (CLIP, SigLIP, DINO, ALIGN), three adapter families (LoRA,
-                  MaPLe, TAP), and multiple SAE variants (Gated, Top-K,
-                  Matryoshka).
+                  target domain moves from ImageNet-like benchmarks to far ones
+                  (PathMNIST, ChestMNIST, EuroSAT), across four encoders (CLIP,
+                  SigLIP, DINO, ALIGN), three adapter families (LoRA, MaPLe,
+                  TAP), and multiple SAE variants (Gated, Top-K, Matryoshka).
                 </li>
                 <li>
                   Showed that finetuned SAEs built on adapted activations
@@ -1683,8 +1678,8 @@
               Sparse Autoencoders for LoRA-Adapted CLIP Under Domain Shift
             </div>
             <div class="entry-meta">
-              Accepted to ICML 2026 MechInterp Workshop · Accepted to ICML
-              2026 WiML Workshop · CVIT, IIIT Hyderabad
+              Accepted to ICML 2026 MechInterp Workshop · Accepted to ICML 2026
+              WiML Workshop · CVIT, IIIT Hyderabad
             </div>
             <div class="entry-authors">
               <strong>Authors:</strong> Sunayana Samavedam, Deepika Vemuri,
@@ -1762,8 +1757,6 @@
             </div>
           </div>
 
-          <p class="research-group-label" data-layer="2">Under Review</p>
-
           <div class="research-entry reveal">
             <div class="entry-title">
               Toward a Taxonomy of Spatiotemporal Reasoning in Vision-Language
@@ -1796,27 +1789,7 @@
             </div>
           </div>
 
-          <div class="research-entry reveal">
-            <div class="entry-title">[arXiv Paper Title — update me]</div>
-            <div class="entry-meta">
-              Under Review · arXiv preprint [update me]
-            </div>
-            <div class="entry-authors">
-              <strong>Authors:</strong> [Author list — update me]
-            </div>
-            <div class="entry-summary">
-              [Abstract / brief description — update me]
-            </div>
-            <div class="entry-links">
-              <a href="#">arXiv</a>
-            </div>
-            <div class="tag-row">
-              <span class="tag">[Topic]</span>
-              <span class="tag">[Topic]</span>
-            </div>
-          </div>
-
-          <p class="research-group-label" data-layer="3">Working Papers</p>
+          <p class="research-group-label" data-layer="2">Working Papers</p>
 
           <div class="research-entry reveal">
             <div class="entry-title">
@@ -1838,7 +1811,7 @@
         </section>
 
         <!-- ── Education ───────────────────────────────── -->
-        <section id="education" class="page-section" data-layer="4">
+        <section id="education" class="page-section" data-layer="3">
           <h2 class="section-heading-sr">Education</h2>
 
           <div class="edu-entry reveal">
@@ -1867,7 +1840,7 @@
         </section>
 
         <!-- ── Experience ──────────────────────────────── -->
-        <section id="experience" class="page-section" data-layer="5">
+        <section id="experience" class="page-section" data-layer="4">
           <h2 class="section-heading-sr">Experience</h2>
 
           <div class="exp-entry reveal">
@@ -1948,7 +1921,7 @@
         </section>
 
         <!-- ── Reviews ────────────────────────────────── -->
-        <section id="reviews" class="page-section" data-layer="6">
+        <section id="reviews" class="page-section" data-layer="5">
           <h2 class="section-heading-sr">Reviewing</h2>
           <p
             style="
@@ -1981,7 +1954,7 @@
         </section>
 
         <!-- ── Projects ────────────────────────────────── -->
-        <section id="projects" class="page-section" data-layer="7">
+        <section id="projects" class="page-section" data-layer="6">
           <h2 class="section-heading-sr">Selected Projects</h2>
 
           <div class="projects-grid">
@@ -2030,7 +2003,7 @@
         <section
           id="contact"
           class="page-section contact-section"
-          data-layer="8"
+          data-layer="7"
         >
           <h2 class="section-heading-sr">Contact</h2>
 
@@ -2202,10 +2175,9 @@
         .forEach((el) => revealIO.observe(el));
 
       /* ── Layer tracking: drives the console (logit lens, nav, stats) ── */
-      const TOTAL_LAYERS = 8;
+      const TOTAL_LAYERS = 7;
       const LAYER_TO_SECTION = [
         null,
-        "research",
         "research",
         "research",
         "education",
@@ -2217,13 +2189,12 @@
       const LOGIT_LENS = {
         0: ["<bos>", "the", "a", "of"],
         1: ["vision", "style", "backdoor", "neural"],
-        2: ["interpretability", "sparse", "feature", "shift"],
-        3: ["style", "control", "survey", "concept"],
-        4: ["IIIT", "advisor", "M.S.", "thesis"],
-        5: ["taught", "mentored", "research", "lab"],
-        6: ["review", "reviewer", "conference", "venue"],
-        7: ["CLIP", "domain", "3D", "build"],
-        8: ["Sunayana", "Samavedam", "researcher", "email"],
+        2: ["style", "control", "survey", "concept"],
+        3: ["IIIT", "advisor", "M.S.", "thesis"],
+        4: ["taught", "mentored", "research", "lab"],
+        5: ["review", "reviewer", "conference", "venue"],
+        6: ["CLIP", "domain", "3D", "build"],
+        7: ["Sunayana", "Samavedam", "researcher", "email"],
       };
 
       const layerEls = Array.from(document.querySelectorAll("[data-layer]"));

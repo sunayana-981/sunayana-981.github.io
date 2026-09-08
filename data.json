@@ -97,8 +97,10 @@
         "Distribution Shift"
       ],
       "links": {
+        "project": "https://sunayana-981.github.io/clip-lora-sae-domain-shift/",
         "code": "https://github.com/sunayana-981/clip-lora-sae-domain-shift"
-      }
+      },
+      "image": "https://sunayana-981.github.io/clip-lora-sae-domain-shift/assets/images/top-activating-neurons.png"
     }
   ],
   "under_review": [

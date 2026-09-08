@@ -234,38 +234,22 @@
         margin: 0;
       }
 
-      /* ── Nav ───────────────────────────────────────────
-         Scoped to #nav so it never reaches <nav class="console-nav">,
-         which is a plain flow-chart container, not a glass bar. */
-      #nav {
-        position: sticky;
-        top: 0;
-        z-index: 50;
-        background-color: var(--c-glass);
-        backdrop-filter: blur(20px) saturate(160%);
-        -webkit-backdrop-filter: blur(20px) saturate(160%);
-        border-bottom: 1px solid transparent;
-        transition: border-color 0.3s;
-      }
-
-      #nav.scrolled {
-        border-bottom-color: var(--c-border);
-      }
-
-      #nav .container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 56px;
-      }
-
-      #nav .nav-name {
-        font-family: var(--font-sans);
-        font-weight: 600;
-        font-size: 0.95rem;
+      .skip-link {
+        position: fixed;
+        top: 12px;
+        left: 20px;
+        z-index: 100;
+        padding: 10px 16px;
+        border: 2px solid var(--c-text);
+        border-radius: 6px;
+        background: var(--c-bg-elev);
         color: var(--c-text);
-        text-decoration: none;
-        letter-spacing: -0.01em;
+        font-size: 0.85rem;
+        transform: translateY(-160%);
+      }
+      .skip-link:focus { transform: translateY(0); }
+      @media (min-width: 860px) {
+        .skip-link { left: calc(var(--console-w) + 20px); }
       }
 
       /* ── Hero ──────────────────────────────────────── */
@@ -435,7 +419,7 @@
       /* ── Sections (single-scroll layout) ───────────── */
       .page-section {
         padding: 5rem 0;
-        scroll-margin-top: 76px;
+        scroll-margin-top: 24px;
       }
 
       /* The section colour is painted full-bleed by #bgwash — a single
@@ -519,7 +503,7 @@
          The lens stays still so the beam is always attached to its center. */
       .magnifier {
         position: fixed;
-        top: 72px;
+        top: 24px;
         right: 10px;
         width: 112px;
         height: 156px;
@@ -1046,6 +1030,7 @@
          Quiet surfaces, clear current-location styling, and separate regions
          for navigation, the logit lens, and appearance controls. */
       .console {
+        --c-text-tertiary: #a1a0aa;
         position: fixed;
         top: 0;
         left: 0;
@@ -1103,8 +1088,10 @@
       }
 
       .console-chevron {
-        color: var(--c-text-tertiary);
-        font-size: 0.65rem;
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+        color: var(--c-text-secondary);
         transition: transform 0.25s ease;
       }
 
@@ -1122,7 +1109,7 @@
       }
 
       .console-body {
-        padding: 0 1.1rem 1.1rem;
+        padding: 0 1.1rem 12px;
       }
 
       /* A top-to-bottom architecture diagram: terminals outside the model,
@@ -1146,8 +1133,8 @@
         border-radius: 5px;
         background: color-mix(in srgb, var(--tile-hue) 24%, var(--c-console-tile));
         color: var(--c-text);
-        font-size: 0.8rem;
-        font-weight: 550;
+        font-size: 0.82rem;
+        font-weight: 500;
         line-height: 1.25;
         text-decoration: none;
         text-align: center;
@@ -1164,6 +1151,7 @@
         background: color-mix(in srgb, var(--tile-hue) 40%, var(--c-console-tile));
       }
       .console-nav a.active {
+        font-weight: 650;
         background: color-mix(in srgb, var(--tile-hue) 38%, var(--c-console-tile));
         border-color: var(--c-text);
         box-shadow: 0 0 0 1px var(--c-text);
@@ -1172,10 +1160,10 @@
         content: "";
         position: absolute;
         left: 11px;
-        width: 4px;
-        height: 4px;
+        width: 3px;
+        height: 16px;
         background: currentColor;
-        border-radius: 50%;
+        border-radius: 2px;
       }
       .console-nav a:focus-visible,
       .console-summary:focus-visible {
@@ -1191,9 +1179,9 @@
       }
       .port-role {
         font-family: var(--font-mono);
-        font-size: 0.54rem;
+        font-size: 0.6rem;
         font-weight: 400;
-        letter-spacing: 0.12em;
+        letter-spacing: 0.09em;
         text-transform: uppercase;
         color: var(--c-text-secondary);
       }
@@ -1229,7 +1217,7 @@
         background: var(--c-console-bg);
         color: var(--c-text-secondary);
         font-family: var(--font-mono);
-        font-size: 0.56rem;
+        font-size: 0.6rem;
         line-height: 16px;
         letter-spacing: 0.09em;
         text-transform: uppercase;
@@ -1275,14 +1263,14 @@
         align-items: baseline;
         justify-content: space-between;
         margin-bottom: 8px;
-        font-size: 0.68rem;
+        font-size: 0.74rem;
         font-weight: 600;
         line-height: 1.5;
         color: var(--c-text-secondary);
       }
       .console-lens-heading span {
         font-family: var(--font-mono);
-        font-size: 0.54rem;
+        font-size: 0.6rem;
         font-weight: 400;
         color: var(--c-text-tertiary);
       }
@@ -1294,7 +1282,7 @@
         display: flex;
         justify-content: space-between;
         font-family: var(--font-mono);
-        font-size: 0.62rem;
+        font-size: 0.65rem;
         color: var(--c-text-tertiary);
         margin-bottom: 8px;
       }
@@ -1357,13 +1345,15 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 44px;
+        min-width: 112px;
         height: 44px;
+        gap: 8px;
+        font: inherit;
         color: var(--c-text-secondary);
         background: transparent;
         border: 1px solid var(--c-border-bright);
-        border-radius: 50%;
-        padding: 0;
+        border-radius: 6px;
+        padding: 0 12px;
         cursor: pointer;
         transition:
           background-color 0.25s,
@@ -1384,7 +1374,7 @@
         outline-offset: 3px;
       }
 
-      .console-icon-btn[aria-pressed="true"] {
+      :root[data-theme="dark"] .console-icon-btn {
         background: var(--c-chip);
         border-color: var(--c-border-bright);
         color: var(--c-text-secondary);
@@ -1466,6 +1456,7 @@
     </style>
   </head>
   <body id="top">
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <!-- Full-bleed section colour, interpolated on scroll (see script). -->
     <div id="bgwash" aria-hidden="true"></div>
 
@@ -1525,22 +1516,17 @@
       </svg>
     </div>
 
-    <!-- ── Nav ──────────────────────────────────────── -->
-    <nav id="nav">
-      <div class="container">
-        <a href="#top" class="nav-name">S. Samavedam</a>
-      </div>
-    </nav>
-
     <svg id="inductionSvg" aria-hidden="true"><path id="inductionPath" /></svg>
 
     <!-- ── Model console: navigation + live interpretability readout —
          a fixed left pane, with layout space reserved in CSS ── -->
     <details class="console" id="console" open>
       <summary class="console-summary">
-        <span class="console-label">Navigate</span>
+        <span class="console-label">Sections</span>
         <span class="console-current" id="consoleCurrent">Introduction</span>
-        <span class="console-chevron" aria-hidden="true">&#9662;</span>
+        <svg class="console-chevron" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
       </summary>
       <div class="console-body">
         <nav class="console-nav" aria-label="Portfolio model navigation">
@@ -1585,7 +1571,7 @@
                 <circle class="merge" cx="112" cy="56" r="4" />
                 <path d="M109.5 56h5M112 53.5v5" />
               </svg>
-              <a href="#reviews">Reviewing</a>
+              <a href="#reviews">Peer review</a>
             </div>
             <div class="model-layer">
               <svg class="model-wires" viewBox="0 0 224 64" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1">
@@ -1612,12 +1598,11 @@
           <ol id="lensList" class="console-lens"></ol>
         </section>
         <div class="console-actions">
-          <span>Appearance</span>
+          <span>Theme</span>
           <button
             class="console-icon-btn"
             id="themeBtn"
             type="button"
-            aria-pressed="false"
             aria-label="Switch to dark mode"
             title="Switch to dark mode"
           >
@@ -1655,13 +1640,14 @@
                 stroke-linecap="round"
               />
             </svg>
+            <span id="themeLabel">Dark mode</span>
           </button>
         </div>
       </div>
     </details>
 
     <div class="page-layout">
-      <main class="container">
+      <main class="container" id="main-content" tabindex="-1">
         <!-- ── Hero (introduction) ─────────────────────── -->
         <header class="hero" data-layer="0">
           <div class="hero-inner">
@@ -2215,7 +2201,16 @@
       /* ── Model console: frozen open on desktop, collapsible on mobile ── */
       const consoleEl = document.getElementById("console");
       const consoleSummary = consoleEl.querySelector(".console-summary");
-      if (window.innerWidth < 860) consoleEl.removeAttribute("open");
+      const desktopNavigation = window.matchMedia("(min-width: 860px)");
+      const syncNavigation = () => { consoleEl.open = desktopNavigation.matches; };
+      syncNavigation();
+      desktopNavigation.addEventListener("change", syncNavigation);
+      consoleEl.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !desktopNavigation.matches && consoleEl.open) {
+          consoleEl.open = false;
+          consoleSummary.focus();
+        }
+      });
       consoleSummary.addEventListener("click", (e) => {
         if (window.innerWidth >= 860) e.preventDefault();
       });
@@ -2257,28 +2252,19 @@
         });
       });
 
-      // Sticky nav border on scroll
-      const nav = document.getElementById("nav");
-      window.addEventListener(
-        "scroll",
-        () => {
-          nav.classList.toggle("scrolled", window.scrollY > 10);
-        },
-        { passive: true },
-      );
-
       /* ── Theme: light "paper" by default, dark on request ──────── */
       const themeBtn = document.getElementById("themeBtn");
+      const themeLabel = document.getElementById("themeLabel");
       const rootEl = document.documentElement;
       function applyTheme(theme) {
         if (theme === "dark") {
           rootEl.setAttribute("data-theme", "dark");
-          themeBtn.setAttribute("aria-pressed", "true");
+          themeLabel.textContent = "Light mode";
           themeBtn.setAttribute("aria-label", "Switch to light mode");
           themeBtn.setAttribute("title", "Switch to light mode");
         } else {
           rootEl.removeAttribute("data-theme");
-          themeBtn.setAttribute("aria-pressed", "false");
+          themeLabel.textContent = "Dark mode";
           themeBtn.setAttribute("aria-label", "Switch to dark mode");
           themeBtn.setAttribute("title", "Switch to dark mode");
         }
@@ -2457,7 +2443,7 @@
       const SECTION_LABELS = {
         research: "Research",
         experience: "Experience",
-        reviews: "Reviewing",
+        reviews: "Peer review",
         projects: "Projects",
         education: "Education",
         contact: "Contact",

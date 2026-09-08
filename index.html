@@ -452,59 +452,151 @@
         transition: background-color 0.1s linear;
       }
 
-      /* A magnifying glass that hovers over the page while you're inside
-         any layer past the introduction — a little wink at "inspecting"
-         each layer as you scroll through it. It idles with a small
-         scanning wobble and gives a quick zoom-pulse on every layer
-         change (hooked from render() below), then fades out again over
-         the hero. */
-      .magnifier {
+      /* Comic-panel spotlight mode: engaged once scrolled past the intro
+         (body.spotlight-mode, toggled from render() below). A flat dark
+         void replaces the per-section colour wash, and each research/
+         education/... section becomes its own lit "page" panel — fixed
+         paper/ink colours regardless of the light/dark toggle, so the
+         panel always reads as freshly lit against the dark gutter around
+         it, like a page under a flashlight. */
+      #spotlight-void {
         position: fixed;
-        top: 50%;
-        right: clamp(0.9rem, 3vw, 2.2rem);
-        transform: translateY(-50%);
-        width: 42px;
-        height: 42px;
-        color: var(--c-accent);
+        inset: 0;
+        z-index: -1;
+        background: #0a0a0d;
         opacity: 0;
         pointer-events: none;
-        z-index: 45;
-        filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.28));
-        transition: opacity 0.5s ease;
+        transition: opacity 0.7s ease;
       }
 
-      .magnifier.visible {
-        opacity: 0.82;
-      }
-
-      .magnifier svg {
-        display: block;
-        width: 100%;
-        height: 100%;
-        animation: magnifierIdle 3.4s ease-in-out infinite;
-        transition: transform 0.2s ease;
-      }
-
-      .magnifier.visible:hover {
+      body.spotlight-mode #spotlight-void {
         opacity: 1;
       }
 
-      .magnifier.visible:hover svg {
-        animation-play-state: paused;
-        transform: scale(1.18) rotate(-8deg);
+      /* Panel treatment only applies at the width the console/magnifier
+         are visible at — on narrow screens spotlight-mode still swaps in
+         the dark void backdrop, but sections keep their normal styling
+         rather than reflowing into cards. */
+      @media (min-width: 861px) {
+        body.spotlight-mode .page-section {
+          --c-bg-elev: #fdf9ef;
+          --c-text: #1d1a14;
+          --c-text-secondary: #4b4536;
+          --c-text-tertiary: #756b55;
+          --c-border: rgba(30, 26, 16, 0.14);
+          --c-border-bright: rgba(30, 26, 16, 0.26);
+          --c-chip: rgba(30, 26, 16, 0.07);
+          position: relative;
+          background: var(--c-bg-elev);
+          border-radius: 20px;
+          padding: 2.6rem clamp(1.1rem, 4vw, 3rem);
+          margin: 0 0 2.6rem;
+          box-shadow:
+            0 0 0 1px var(--c-border),
+            0 34px 70px -30px rgba(0, 0, 0, 0.6),
+            0 0 90px -14px var(--c-accent-soft);
+          transition:
+            background-color 0.6s ease,
+            box-shadow 0.6s ease;
+        }
+
+        body.spotlight-mode .page-section:last-of-type {
+          margin-bottom: 0;
+        }
       }
 
-      .magnifier.pulse svg {
+      /* A figure holding a magnifying glass, fixed over the page while
+         you're inside any layer past the introduction. Idles with a
+         small scanning wobble, gives a quick zoom-pulse on every layer
+         change (hooked from render() below), and casts a fan of
+         theme-coloured light rays down across the panels — the source
+         of the spotlight above. */
+      .magnifier {
+        position: fixed;
+        top: 30%;
+        right: clamp(0.6rem, 4vw, 3rem);
+        width: 140px;
+        height: 150px;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 3;
+        transition: opacity 0.6s ease;
+      }
+
+      .magnifier.visible {
+        opacity: 1;
+      }
+
+      .magnifier-rays {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        width: 0;
+        height: 0;
+      }
+
+      .magnifier-rays .ray {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 62vw;
+        max-width: 640px;
+        height: 3px;
+        background: linear-gradient(to left, var(--c-accent), transparent 82%);
+        transform-origin: right center;
+        transform: rotate(var(--ang));
+        opacity: 0.32;
+        mix-blend-mode: screen;
+        animation: magnifierFlicker 2.6s ease-in-out infinite;
+      }
+
+      .magnifier-glow {
+        position: absolute;
+        top: -40px;
+        right: -30px;
+        width: 220px;
+        height: 220px;
+        background: radial-gradient(circle, var(--c-accent) 0%, transparent 68%);
+        opacity: 0.4;
+        filter: blur(4px);
+        mix-blend-mode: screen;
+        animation: magnifierFlicker 2.6s ease-in-out infinite;
+        pointer-events: none;
+      }
+
+      .magnifier-figure {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 62px;
+        height: 76px;
+        color: var(--c-accent);
+        filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
+        animation: magnifierIdle 3.6s ease-in-out infinite;
+        transition: transform 0.2s ease;
+      }
+
+      .magnifier:hover .magnifier-figure {
+        animation-play-state: paused;
+        transform: scale(1.1) rotate(-4deg);
+      }
+
+      .magnifier.pulse .magnifier-figure {
         animation: magnifierPulse 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+
+      .magnifier.pulse .magnifier-glow,
+      .magnifier.pulse .ray {
+        animation: magnifierPulseGlow 0.6s ease-out;
       }
 
       @keyframes magnifierIdle {
         0%,
         100% {
-          transform: translate(0, 0) rotate(-4deg);
+          transform: translate(0, 0) rotate(-3deg);
         }
         50% {
-          transform: translate(-4px, 5px) rotate(4deg);
+          transform: translate(-3px, 5px) rotate(3deg);
         }
       }
 
@@ -513,21 +605,46 @@
           transform: scale(1) rotate(0deg);
         }
         45% {
-          transform: scale(1.4) rotate(-12deg);
+          transform: scale(1.32) rotate(-10deg);
         }
         100% {
           transform: scale(1) rotate(0deg);
         }
       }
 
+      @keyframes magnifierPulseGlow {
+        0% {
+          opacity: 0.35;
+        }
+        40% {
+          opacity: 0.85;
+        }
+        100% {
+          opacity: 0.35;
+        }
+      }
+
+      @keyframes magnifierFlicker {
+        0%,
+        100% {
+          opacity: 0.28;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+
       @media (max-width: 860px) {
-        .magnifier {
+        .magnifier,
+        #spotlight-void {
           display: none;
         }
       }
 
       @media (prefers-reduced-motion: reduce) {
-        .magnifier svg {
+        .magnifier-figure,
+        .magnifier-glow,
+        .ray {
           animation: none;
         }
       }
@@ -1461,18 +1578,51 @@
     <!-- Full-bleed section colour, interpolated on scroll (see script). -->
     <div id="bgwash" aria-hidden="true"></div>
 
+    <!-- Comic-panel spotlight void: fades in behind the page once past
+         the introduction (see script + spotlight CSS). -->
+    <div id="spotlight-void" aria-hidden="true"></div>
+
     <!-- Magnifying glass: visible while inspecting any layer past the
          introduction, pulses on every layer change (see script). -->
     <div id="magnifier" class="magnifier" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none">
-        <circle cx="10" cy="10" r="6.5" stroke="currentColor" stroke-width="2" />
-        <line
-          x1="14.7"
-          y1="14.7"
-          x2="20"
-          y2="20"
+      <div class="magnifier-rays">
+        <span class="ray" style="--ang: -16deg"></span>
+        <span class="ray" style="--ang: -7deg"></span>
+        <span class="ray" style="--ang: 2deg"></span>
+        <span class="ray" style="--ang: 11deg"></span>
+        <span class="ray" style="--ang: 20deg"></span>
+      </div>
+      <div class="magnifier-glow"></div>
+      <svg class="magnifier-figure" viewBox="0 0 60 76" fill="none">
+        <!-- head -->
+        <circle cx="19" cy="14" r="8" stroke="currentColor" stroke-width="2.5" />
+        <!-- body -->
+        <path
+          d="M8 66c0-22 2.5-35.5 11-38S30.5 42.5 30.5 66"
           stroke="currentColor"
-          stroke-width="2"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <!-- arm -->
+        <path
+          d="M23 33 40.5 18"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+        />
+        <!-- magnifying glass lens + handle -->
+        <circle
+          cx="45"
+          cy="14.5"
+          r="8.5"
+          stroke="currentColor"
+          stroke-width="2.5"
+        />
+        <path
+          d="M51 20.5 58 28"
+          stroke="currentColor"
+          stroke-width="2.5"
           stroke-linecap="round"
         />
       </svg>
@@ -2481,6 +2631,7 @@
         const cameFrom = prevLayer;
         prevLayer = layer;
 
+        document.body.classList.toggle("spotlight-mode", layer > 0);
         if (magnifierEl) {
           magnifierEl.classList.toggle("visible", layer > 0);
           if (layer > 0 && layer !== cameFrom) {

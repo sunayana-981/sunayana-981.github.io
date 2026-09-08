@@ -20,6 +20,24 @@
   },
   "publications": [
     {
+      "title": "Lost in Distribution: Sparse Autoencoders Under Domain Shift",
+      "authors": [
+        "Sunayana Samavedam",
+        "Deepika Vemuri",
+        "Venkat Adithya Amula",
+        "Shreyas Premkhede",
+        "P. J. Narayanan",
+        "Vineeth Balasubramanian"
+      ],
+      "status": "Under Review",
+      "venue": "NeurIPS",
+      "year": "2026",
+      "period": "Jun 2025 – Present",
+      "summary": "Analyzed how generic SAE interpretability degrades as the target domain moves from ImageNet-like benchmarks to far ones (PathMNIST, ChestMNIST, EuroSAT), across four encoders (CLIP, SigLIP, DINO, ALIGN), three adapter families (LoRA, MaPLe, TAP), and multiple SAE variants (Gated, Top-K, Matryoshka). Showed that finetuned SAEs built on adapted activations recover and surpass the interpretability profile, yielding sparser and more monosemantic features, and that adapter families differ mechanistically: prompt-based methods steer existing features while weight-space adaptation reshapes the dictionary. Generalized the DAMS metric to a distribution-aware, multi-component formulation (effective coverage, class separability, feature specificity, domain alignment) for determining when generic SAE reuse is justified versus when domain-matched SAEs are necessary.",
+      "tags": ["Mechanistic Interpretability", "Sparse Autoencoders", "Domain Shift"],
+      "links": {}
+    },
+    {
       "title": "CAV Styler: Making Neural Style Transfer Interpretable and Controllable",
       "authors": [
         "Sunayana Samavedam",
@@ -181,6 +199,10 @@
     }
   ],
   "news": [
+    {
+      "date": "2026",
+      "text": "\"Lost in Distribution: Sparse Autoencoders Under Domain Shift\" submitted to NeurIPS 2026."
+    },
     {
       "date": "2026",
       "text": "CAV Styler accepted to WiCV Workshop, ECCV 2026."

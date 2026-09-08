@@ -537,6 +537,19 @@
         margin-bottom: 0.6rem;
       }
 
+      .research-entry .entry-summary ul {
+        margin: 0;
+        padding-left: 1.15rem;
+      }
+
+      .research-entry .entry-summary li {
+        margin-bottom: 0.4rem;
+      }
+
+      .research-entry .entry-summary li:last-child {
+        margin-bottom: 0;
+      }
+
       .research-entry .entry-links {
         display: flex;
         flex-wrap: wrap;
@@ -1545,6 +1558,10 @@
               <div class="hero-news">
                 <p class="hero-news-label">Recent</p>
                 <ul class="hero-news-list">
+                  <li>
+                    "Lost in Distribution: Sparse Autoencoders Under Domain
+                    Shift" submitted to NeurIPS 2026
+                  </li>
                   <li>CAV Styler accepted to WiCV @ ECCV 2026</li>
                   <li>
                     Sparse Autoencoders for LoRA-Adapted CLIP Under Domain
@@ -1567,6 +1584,53 @@
           <h2 class="section-heading-sr">Research</h2>
 
           <p class="research-group-label" data-layer="1">Publications</p>
+
+          <div class="research-entry reveal">
+            <div class="entry-title">
+              Lost in Distribution: Sparse Autoencoders Under Domain Shift
+            </div>
+            <div class="entry-meta">
+              Under Review (NeurIPS 2026) · Jun 2025 &ndash; Present · CVIT,
+              IIIT Hyderabad
+            </div>
+            <div class="entry-authors">
+              <strong>Authors:</strong> Sunayana Samavedam, Deepika Vemuri,
+              Venkat Adithya Amula, Shreyas Premkhede, P. J. Narayanan, and
+              Vineeth Balasubramanian
+            </div>
+            <div class="entry-summary">
+              <ul>
+                <li>
+                  Analyzed how generic SAE interpretability degrades as the
+                  target domain moves from ImageNet-like benchmarks to far
+                  ones (PathMNIST, ChestMNIST, EuroSAT), across four encoders
+                  (CLIP, SigLIP, DINO, ALIGN), three adapter families (LoRA,
+                  MaPLe, TAP), and multiple SAE variants (Gated, Top-K,
+                  Matryoshka).
+                </li>
+                <li>
+                  Showed that finetuned SAEs built on adapted activations
+                  recover and surpass the interpretability profile, yielding
+                  sparser and more monosemantic features, and that adapter
+                  families differ mechanistically: prompt-based methods steer
+                  existing features while weight-space adaptation reshapes the
+                  dictionary.
+                </li>
+                <li>
+                  Generalized the DAMS metric to a distribution-aware,
+                  multi-component formulation (effective coverage, class
+                  separability, feature specificity, domain alignment) for
+                  determining when generic SAE reuse is justified versus when
+                  domain-matched SAEs are necessary.
+                </li>
+              </ul>
+            </div>
+            <div class="tag-row">
+              <span class="tag">Mechanistic Interpretability</span>
+              <span class="tag">Sparse Autoencoders</span>
+              <span class="tag">Domain Shift</span>
+            </div>
+          </div>
 
           <div class="research-entry reveal">
             <div class="entry-title">

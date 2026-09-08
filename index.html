@@ -44,8 +44,8 @@
         /* one surface for the whole console: the tiles are hue-tints of
            this exact colour, and the space around them is this colour, so
            the diagram has no separate panel behind it */
-        --c-console-bg: #e0d7c3;
-        --c-console-tile: #e0d7c3;
+        --c-console-bg: #f2efe7;
+        --c-console-tile: #fffdf7;
         --c-console-border: rgba(45, 38, 22, 0.3);
         --c-nav-btn-border: #1b1b1b;
         --c-text: #201d16;
@@ -1062,7 +1062,9 @@
         border: none;
         border-right: 1px solid var(--c-console-border);
         z-index: 60;
-        overflow: hidden;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        scrollbar-width: thin;
       }
 
       /* keep the console's small print legible on the taupe panel */
@@ -1077,7 +1079,8 @@
         display: flex;
         align-items: center;
         gap: 0.55rem;
-        padding: 0.95rem 1.1rem;
+        padding: 1rem 1.25rem;
+        border-bottom: 1px solid var(--c-border);
         cursor: pointer;
         list-style: none;
         user-select: none;
@@ -1092,21 +1095,8 @@
         height: 7px;
         border-radius: 50%;
         background: var(--c-accent);
-        box-shadow: 0 0 8px color-mix(in srgb, var(--c-accent) 70%, transparent);
-        animation: dotBreathe 2.2s ease-in-out infinite;
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-accent) 10%, transparent);
         flex-shrink: 0;
-      }
-
-      @keyframes dotBreathe {
-        0%,
-        100% {
-          opacity: 0.4;
-          transform: scale(0.85);
-        }
-        50% {
-          opacity: 1;
-          transform: scale(1);
-        }
       }
 
       .console-label {
@@ -1149,153 +1139,170 @@
         padding: 0 1.1rem 1.1rem;
       }
 
-      /* Shaped like a transformer block stack: boxed layers on the main
-         path, each with its own residual "skip connection" arc rejoining
-         at a (+) node — the repeating unit from the original paper figure. */
+      /* A top-to-bottom architecture diagram: terminals outside the model,
+         one central signal path, and residual branches that actually rejoin. */
       .console-nav {
-        position: relative;
+        --wire: color-mix(in srgb, var(--c-text-secondary) 70%, var(--c-console-bg));
+        --model-surface: color-mix(in srgb, var(--c-console-bg) 70%, var(--c-console-tile));
         display: flex;
         flex-direction: column;
-        gap: 22px;
-        border-top: 1px solid var(--c-border);
-        padding: 1.2rem 30px 0.4rem 0;
-        margin-bottom: 0.9rem;
+        align-items: center;
+        padding: 18px 0;
       }
-
       .console-nav a {
         position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 38px;
-        /* crisp near-black outline, transformer-figure style */
-        border: 1.5px solid var(--c-nav-btn-border);
-        border-radius: 8px;
-        background: color-mix(
-          in srgb,
-          var(--tile-hue, var(--c-text-tertiary)) 60%,
-          var(--c-console-tile)
-        );
-        font-family: var(--font-sans);
-        font-size: 0.82rem;
-        font-weight: 600;
-        letter-spacing: -0.01em;
+        gap: 7px;
+        min-height: 44px;
+        border: 1px solid color-mix(in srgb, var(--tile-hue) 30%, var(--wire));
+        border-radius: 5px;
+        background: color-mix(in srgb, var(--tile-hue) 24%, var(--c-console-tile));
         color: var(--c-text);
+        font-size: 0.8rem;
+        font-weight: 550;
+        line-height: 1.25;
         text-decoration: none;
         text-align: center;
-        transition:
-          border-color 0.25s,
-          color 0.25s,
-          box-shadow 0.25s,
-          filter 0.25s;
+        transition: background-color 0.2s ease, box-shadow 0.2s ease;
       }
-
-      /* one hue per block, transformer-figure style — the fill is derived
-         from --tile-hue on the base rule so .active can keep it */
-      .console-nav a:nth-child(1) {
-        --tile-hue: var(--blk-1);
-      }
-      .console-nav a:nth-child(2) {
-        --tile-hue: var(--blk-2);
-      }
-      .console-nav a:nth-child(3) {
-        --tile-hue: var(--blk-3);
-      }
-      .console-nav a:nth-child(4) {
-        --tile-hue: var(--blk-4);
-      }
-      .console-nav a:nth-child(5) {
-        --tile-hue: var(--blk-5);
-      }
-      .console-nav a:nth-child(6) {
-        --tile-hue: var(--blk-6);
-      }
-      .console-nav a:nth-child(7) {
-        --tile-hue: var(--blk-7);
-      }
-
+      .console-nav a[href="#top"] { --tile-hue: var(--blk-1); }
+      .console-nav a[href="#research"] { --tile-hue: var(--blk-2); }
+      .console-nav a[href="#education"] { --tile-hue: var(--blk-3); }
+      .console-nav a[href="#experience"] { --tile-hue: var(--blk-4); }
+      .console-nav a[href="#reviews"] { --tile-hue: var(--blk-5); }
+      .console-nav a[href="#projects"] { --tile-hue: var(--blk-6); }
+      .console-nav a[href="#contact"] { --tile-hue: var(--blk-7); }
       .console-nav a:hover {
-        filter: brightness(1.08);
-        border-color: var(--c-text);
+        background: color-mix(in srgb, var(--tile-hue) 40%, var(--c-console-tile));
       }
-
-      /* downward arrow to the next block, on the main path */
-      .console-nav a:not(:last-child)::after {
+      .console-nav a.active {
+        background: color-mix(in srgb, var(--tile-hue) 38%, var(--c-console-tile));
+        border-color: var(--c-text);
+        box-shadow: 0 0 0 1px var(--c-text);
+      }
+      .console-nav a.active::before {
         content: "";
         position: absolute;
-        bottom: -16px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 0;
-        height: 0;
-        border-left: 4px solid transparent;
-        border-right: 4px solid transparent;
-        border-top: 7px solid var(--c-text-tertiary);
-        z-index: 1;
+        left: 11px;
+        width: 4px;
+        height: 4px;
+        background: currentColor;
+        border-radius: 50%;
       }
-
-      /* residual bypass arc, hugging the box, in the paper's own style */
-      .bypass-arc {
+      .console-nav a:focus-visible,
+      .console-inspector summary:focus-visible,
+      .console-summary:focus-visible {
+        outline: 3px solid var(--c-accent);
+        outline-offset: 4px;
+      }
+      .console-nav .model-port {
+        flex-direction: column;
+        gap: 3px;
+        width: calc(100% - 80px);
+        min-height: 52px;
+        border-radius: 9px;
+      }
+      .port-role {
+        font-family: var(--font-mono);
+        font-size: 0.54rem;
+        font-weight: 400;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--c-text-secondary);
+      }
+      .flow-connector {
+        position: relative;
+        width: 1px;
+        height: 23px;
+        flex-shrink: 0;
+        background: var(--wire);
+      }
+      .flow-connector::after {
+        content: "";
         position: absolute;
-        top: -1px;
-        right: -27px;
-        width: 21px;
-        height: calc(100% + 2px);
+        left: -3px;
+        bottom: 0;
+        border-left: 3.5px solid transparent;
+        border-right: 3.5px solid transparent;
+        border-top: 5px solid var(--wire);
+      }
+      .model-stack {
+        position: relative;
+        width: 100%;
+        padding: 24px 12px 12px;
+        border: 1px solid var(--c-console-border);
+        border-radius: 12px;
+        background: var(--model-surface);
+      }
+      .model-stack-label {
+        position: absolute;
+        top: -8px;
+        left: 16px;
+        padding: 0 7px;
+        background: var(--c-console-bg);
+        color: var(--c-text-secondary);
+        font-family: var(--font-mono);
+        font-size: 0.56rem;
+        line-height: 16px;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+      .model-stack-count { left: auto; right: 12px; }
+      .model-stack::before,
+      .model-stack::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        width: 1px;
+        background: var(--wire);
+      }
+      .model-stack::before { top: 0; height: 24px; }
+      .model-stack::after { bottom: 0; height: 12px; }
+      .model-layer { position: relative; height: 70px; }
+      .model-layer a {
+        position: absolute;
+        top: 8px;
+        left: 32px;
+        right: 32px;
+        height: 44px;
+      }
+      .model-wires {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
         overflow: visible;
+        color: var(--wire);
         pointer-events: none;
       }
-
-      .bypass-arc path {
-        fill: none;
-        stroke: var(--c-text-tertiary);
-        stroke-width: 1.5;
-        transition: stroke 0.25s;
+      .model-wires path,
+      .model-wires circle {
+        vector-effect: non-scaling-stroke;
       }
-
-      .console-nav a.active .bypass-arc path {
-        stroke: var(--c-text);
+      .model-wires .merge { fill: var(--model-surface); }
+      .console-inspector {
+        border-top: 1px solid var(--c-border);
+        border-bottom: 1px solid var(--c-border);
       }
-
-      .plus-node {
-        position: absolute;
-        right: -27px;
-        bottom: -7px;
-        width: 13px;
-        height: 13px;
-        border-radius: 50%;
-        border: 1.5px solid var(--c-text-tertiary);
-        background-color: var(--c-console-tile);
+      .console-inspector summary {
+        padding: 10px 0;
+        cursor: pointer;
+        font-size: 0.66rem;
+        font-weight: 500;
+        color: var(--c-text-secondary);
+      }
+      .console-inspector summary span {
+        float: right;
+        font-family: var(--font-mono);
+        font-size: 0.54rem;
         color: var(--c-text-tertiary);
-        font-family: var(--font-sans);
-        font-size: 9px;
-        line-height: 11px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 2;
-        transition:
-          background-color 0.25s,
-          border-color 0.25s,
-          color 0.25s,
-          box-shadow 0.25s;
+        padding-top: 2px;
       }
-
-      /* selected: the block keeps its own fill — only a neutral ring and a
-         glow in that same hue mark it, so the colour never changes */
-      .console-nav a.active {
-        color: var(--c-text);
-        border-color: var(--c-text);
-        filter: saturate(1.14) brightness(1.02);
-        box-shadow:
-          0 0 0 1.5px var(--c-text),
-          0 0 16px color-mix(in srgb, var(--tile-hue) 42%, transparent);
-      }
-
-      .console-nav a.active .plus-node {
-        border-color: var(--c-text);
-        color: var(--c-text);
-        background-color: var(--c-console-tile);
-        box-shadow: 0 0 8px color-mix(in srgb, var(--tile-hue) 50%, transparent);
+      .console-actions { margin-top: 12px; }
+      @media (prefers-reduced-motion: reduce) {
+        .console-nav a { transition: none; }
       }
 
       .console-stats {
@@ -1561,98 +1568,75 @@
         <span class="console-chevron" aria-hidden="true">&#9662;</span>
       </summary>
       <div class="console-body">
-        <nav class="console-nav">
-          <a href="#top">
-            <svg
-              class="bypass-arc"
-              viewBox="0 0 21 40"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-            >
-              <path d="M 4 1 C 19 1 19 39 4 39" />
-            </svg>
-            <span class="plus-node" aria-hidden="true">+</span>
-            Introduction
+        <nav class="console-nav" aria-label="Portfolio model navigation">
+          <a class="model-port" href="#top">
+            <span class="port-role">Input</span>
+            <span>Introduction</span>
           </a>
-          <a href="#research">
-            <svg
-              class="bypass-arc"
-              viewBox="0 0 21 40"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-            >
-              <path d="M 4 1 C 19 1 19 39 4 39" />
-            </svg>
-            <span class="plus-node" aria-hidden="true">+</span>
-            Research
-          </a>
-          <a href="#education">
-            <svg
-              class="bypass-arc"
-              viewBox="0 0 21 40"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-            >
-              <path d="M 4 1 C 19 1 19 39 4 39" />
-            </svg>
-            <span class="plus-node" aria-hidden="true">+</span>
-            Education
-          </a>
-          <a href="#experience">
-            <svg
-              class="bypass-arc"
-              viewBox="0 0 21 40"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-            >
-              <path d="M 4 1 C 19 1 19 39 4 39" />
-            </svg>
-            <span class="plus-node" aria-hidden="true">+</span>
-            Experience
-          </a>
-          <a href="#reviews">
-            <svg
-              class="bypass-arc"
-              viewBox="0 0 21 40"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-            >
-              <path d="M 4 1 C 19 1 19 39 4 39" />
-            </svg>
-            <span class="plus-node" aria-hidden="true">+</span>
-            Reviewing
-          </a>
-          <a href="#projects">
-            <svg
-              class="bypass-arc"
-              viewBox="0 0 21 40"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-            >
-              <path d="M 4 1 C 19 1 19 39 4 39" />
-            </svg>
-            <span class="plus-node" aria-hidden="true">+</span>
-            Projects
-          </a>
-          <a href="#contact">
-            <svg
-              class="bypass-arc"
-              viewBox="0 0 21 40"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-            >
-              <path d="M 4 1 C 19 1 19 39 4 39" />
-            </svg>
-            <span class="plus-node" aria-hidden="true">+</span>
-            Contact
+          <span class="flow-connector" aria-hidden="true"></span>
+          <div class="model-stack" role="group" aria-label="Model sections">
+            <span class="model-stack-label" aria-hidden="true">Model</span>
+            <span class="model-stack-label model-stack-count" aria-hidden="true">5 sections</span>
+            <div class="model-layer">
+              <svg class="model-wires" viewBox="0 0 224 70" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1">
+                <path d="M112 0V8M112 52V56M112 66V70M112 0H16Q12 0 12 4V57Q12 61 16 61H107" />
+                <path d="M109 4l3 4 3-4M103 58l4 3-4 3" stroke-linejoin="round" />
+                <circle class="merge" cx="112" cy="61" r="5" />
+                <path d="M109.5 61h5M112 58.5v5" />
+              </svg>
+              <a href="#research">Research</a>
+            </div>
+            <div class="model-layer">
+              <svg class="model-wires" viewBox="0 0 224 70" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1">
+                <path d="M112 0V8M112 52V56M112 66V70M112 0H16Q12 0 12 4V57Q12 61 16 61H107" />
+                <path d="M109 4l3 4 3-4M103 58l4 3-4 3" stroke-linejoin="round" />
+                <circle class="merge" cx="112" cy="61" r="5" />
+                <path d="M109.5 61h5M112 58.5v5" />
+              </svg>
+              <a href="#education">Education</a>
+            </div>
+            <div class="model-layer">
+              <svg class="model-wires" viewBox="0 0 224 70" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1">
+                <path d="M112 0V8M112 52V56M112 66V70M112 0H16Q12 0 12 4V57Q12 61 16 61H107" />
+                <path d="M109 4l3 4 3-4M103 58l4 3-4 3" stroke-linejoin="round" />
+                <circle class="merge" cx="112" cy="61" r="5" />
+                <path d="M109.5 61h5M112 58.5v5" />
+              </svg>
+              <a href="#experience">Experience</a>
+            </div>
+            <div class="model-layer">
+              <svg class="model-wires" viewBox="0 0 224 70" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1">
+                <path d="M112 0V8M112 52V56M112 66V70M112 0H16Q12 0 12 4V57Q12 61 16 61H107" />
+                <path d="M109 4l3 4 3-4M103 58l4 3-4 3" stroke-linejoin="round" />
+                <circle class="merge" cx="112" cy="61" r="5" />
+                <path d="M109.5 61h5M112 58.5v5" />
+              </svg>
+              <a href="#reviews">Reviewing</a>
+            </div>
+            <div class="model-layer">
+              <svg class="model-wires" viewBox="0 0 224 70" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1">
+                <path d="M112 0V8M112 52V56M112 66V70M112 0H16Q12 0 12 4V57Q12 61 16 61H107" />
+                <path d="M109 4l3 4 3-4M103 58l4 3-4 3" stroke-linejoin="round" />
+                <circle class="merge" cx="112" cy="61" r="5" />
+                <path d="M109.5 61h5M112 58.5v5" />
+              </svg>
+              <a href="#projects">Projects</a>
+            </div>
+          </div>
+          <span class="flow-connector" aria-hidden="true"></span>
+          <a class="model-port" href="#contact">
+            <span class="port-role">Output</span>
+            <span>Contact</span>
           </a>
         </nav>
+        <details class="console-inspector">
+          <summary>Logit lens <span>Illustrative</span></summary>
         <div class="console-stats">
-          <span id="statLayer">Layer 0 / 9</span>
+          <span id="statLayer">Layer 0 / 7</span>
           <span id="statNorm">‖resid‖ ≈ 1.00</span>
         </div>
-        <span class="console-lens-label">Logit lens (illustrative)</span>
         <ol id="lensList" class="console-lens"></ol>
+        </details>
         <div class="console-actions">
           <button
             class="console-icon-btn"
@@ -2280,11 +2264,11 @@
       const LINK_LAYER = {
         "#top": 0,
         "#research": 1,
-        "#education": 5,
-        "#experience": 6,
-        "#reviews": 7,
-        "#projects": 8,
-        "#contact": 9,
+        "#education": 3,
+        "#experience": 4,
+        "#reviews": 5,
+        "#projects": 6,
+        "#contact": 7,
       };
       let suppressScrollUntil = 0;
       document.querySelectorAll(".console-nav a").forEach((a) => {
@@ -2643,7 +2627,10 @@
         });
 
         navLinkEls.forEach((a) => {
-          a.classList.toggle("active", a.getAttribute("href") === activeHref);
+          const active = a.getAttribute("href") === activeHref;
+          a.classList.toggle("active", active);
+          if (active) a.setAttribute("aria-current", "location");
+          else a.removeAttribute("aria-current");
         });
       }
 

@@ -452,223 +452,109 @@
         transition: background-color 0.1s linear;
       }
 
-      /* Comic-panel spotlight mode: engaged once scrolled past the intro
-         (body.spotlight-mode, toggled from render() below). A flat dark
-         void replaces the per-section colour wash, and each research/
-         education/... section becomes its own lit "page" panel — fixed
-         paper/ink colours regardless of the light/dark toggle, so the
-         panel always reads as freshly lit against the dark gutter around
-         it, like a page under a flashlight. */
+      /* A flat backdrop and a section-sized pool of colored light. */
       #spotlight-void {
         position: fixed;
         inset: 0;
         z-index: -1;
-        background: #0a0a0d;
+        background: #17191e;
         opacity: 0;
         pointer-events: none;
-        transition: opacity 0.7s ease;
+        transition: opacity 0.4s ease;
       }
 
-      body.spotlight-mode #spotlight-void {
-        opacity: 1;
+      body.spotlight-mode #spotlight-void { opacity: 1; }
+
+      .magnifier-beam {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
+        opacity: 0;
+        color: var(--section-glow, var(--c-accent));
+        transition: opacity 0.4s ease, color 0.4s ease;
       }
 
-      /* Panel treatment only applies at the width the console/magnifier
-         are visible at — on narrow screens spotlight-mode still swaps in
-         the dark void backdrop, but sections keep their normal styling
-         rather than reflowing into cards. */
+      body.spotlight-mode .magnifier-beam { opacity: 1; }
+      .beam-fill { fill: currentColor; opacity: 0.3; }
+      .beam-edge {
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.5;
+        opacity: 0.65;
+      }
+
       @media (min-width: 861px) {
-        body.spotlight-mode .page-section {
-          --c-bg-elev: #fdf9ef;
-          --c-text: #1d1a14;
-          --c-text-secondary: #4b4536;
-          --c-text-tertiary: #756b55;
-          --c-border: rgba(30, 26, 16, 0.14);
-          --c-border-bright: rgba(30, 26, 16, 0.26);
-          --c-chip: rgba(30, 26, 16, 0.07);
-          position: relative;
-          background-color: var(--c-bg-elev);
-          background-image: radial-gradient(
-            135% 150% at 100% 0%,
-            color-mix(
-              in srgb,
-              var(--section-glow, var(--c-accent)) 30%,
-              var(--c-bg-elev)
-            )
-              0%,
-            var(--c-bg-elev) 62%
-          );
-          border-radius: 20px;
-          padding: 2.6rem clamp(1.1rem, 4vw, 3rem);
-          margin: 0 0 2.6rem;
-          box-shadow:
-            0 0 0 1px var(--c-border),
-            0 34px 70px -30px rgba(0, 0, 0, 0.6),
-            0 0 90px -14px
-              color-mix(
-                in srgb,
-                var(--section-glow, var(--c-accent)) 45%,
-                transparent
-              );
-          transition:
-            background-color 0.6s ease,
-            box-shadow 0.6s ease;
-        }
+        .page-layout { padding-right: 112px; }
 
-        body.spotlight-mode .page-section:last-of-type {
-          margin-bottom: 0;
+        /* Keep geometry stable when entering or leaving spotlight mode. */
+        .page-section {
+          position: relative;
+          border-radius: 6px;
+          padding: 2.6rem clamp(1.1rem, 3vw, 2.4rem);
+          margin-bottom: 2.6rem;
+        }
+        .page-section:last-of-type { margin-bottom: 0; }
+
+        body.spotlight-mode .page-section {
+          --c-bg-elev: color-mix(in srgb, var(--section-glow) 28%, #fff9e9);
+          --c-bg-elev-2: color-mix(in srgb, var(--section-glow) 38%, #fff9e9);
+          --c-text: #211d18;
+          --c-text-secondary: #484034;
+          --c-text-tertiary: #665943;
+          --c-accent: #244f91;
+          --c-border: rgba(30, 26, 16, 0.18);
+          --c-border-bright: rgba(30, 26, 16, 0.3);
+          --c-chip: rgba(30, 26, 16, 0.07);
+          color: var(--c-text);
+          background: var(--c-bg-elev);
+          box-shadow: 0 0 0 1px var(--c-border), 5px 6px 0 #090b10;
+          transition: background-color 0.4s ease;
         }
       }
 
-      /* A figure holding a magnifying glass, fixed over the page while
-         you're inside any layer past the introduction. Idles with a
-         small scanning wobble, gives a quick zoom-pulse on every layer
-         change, and casts one clean cone of light down across the
-         panels — the source of the spotlight above. Its color is kept
-         in sync with the active section's own console-flow-chart hue
-         (set as --section-glow from render() below), so the light
-         always matches whichever layer it's shining on.
-         --section-glow falls back to the theme accent before the first
-         layer computes (or if JS hasn't run). */
+      /* An ink-outlined researcher holds the lens in the right gutter.
+         The lens stays still so the beam is always attached to its center. */
       .magnifier {
         position: fixed;
-        top: calc(56px + 0.6rem);
-        right: clamp(0.6rem, 4vw, 2.4rem);
-        width: 140px;
-        height: 150px;
+        top: 72px;
+        right: 10px;
+        width: 112px;
+        height: 156px;
         opacity: 0;
         pointer-events: none;
         z-index: 3;
-        transition: opacity 0.6s ease;
-      }
-
-      .magnifier.visible {
-        opacity: 1;
-      }
-
-      .magnifier-beam {
-        position: absolute;
-        top: 8px;
-        right: 10px;
-        width: min(58vw, 620px);
-        height: min(58vw, 620px);
-        background: conic-gradient(
-          from 0deg at 100% 0%,
-          transparent 0deg 192deg,
-          var(--section-glow, var(--c-accent)) 210deg,
-          var(--section-glow, var(--c-accent)) 232deg,
-          transparent 250deg 360deg
-        );
-        opacity: 0.28;
-        mix-blend-mode: screen;
-        pointer-events: none;
-        animation: magnifierFlicker 3.2s ease-in-out infinite;
-      }
-
-      .magnifier-glow {
-        position: absolute;
-        top: -10px;
-        right: -6px;
-        width: 90px;
-        height: 90px;
-        border-radius: 50%;
-        background: radial-gradient(
-          circle,
-          var(--section-glow, var(--c-accent)) 0%,
-          transparent 70%
-        );
-        opacity: 0.5;
-        filter: blur(3px);
-        mix-blend-mode: screen;
-        animation: magnifierFlicker 3.2s ease-in-out infinite;
-        pointer-events: none;
-      }
-
-      .magnifier-figure {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 62px;
-        height: 76px;
         color: var(--section-glow, var(--c-accent));
-        filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
-        animation: magnifierIdle 3.6s ease-in-out infinite;
-        transition:
-          transform 0.2s ease,
-          color 0.5s ease;
+        transition: opacity 0.4s ease, color 0.4s ease;
       }
-
-      .magnifier:hover .magnifier-figure {
-        animation-play-state: paused;
-        transform: scale(1.1) rotate(-4deg);
+      .magnifier.visible { opacity: 1; }
+      .magnifier-figure {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        filter: drop-shadow(3px 4px 0 rgba(0, 0, 0, 0.35));
       }
-
-      .magnifier.pulse .magnifier-figure {
-        animation: magnifierPulse 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-      }
-
-      .magnifier.pulse .magnifier-glow,
-      .magnifier.pulse .magnifier-beam {
-        animation: magnifierPulseGlow 0.6s ease-out;
-      }
-
-      @keyframes magnifierIdle {
-        0%,
-        100% {
-          transform: translate(0, 0) rotate(-3deg);
-        }
-        50% {
-          transform: translate(-3px, 5px) rotate(3deg);
-        }
-      }
-
-      @keyframes magnifierPulse {
-        0% {
-          transform: scale(1) rotate(0deg);
-        }
-        45% {
-          transform: scale(1.32) rotate(-10deg);
-        }
-        100% {
-          transform: scale(1) rotate(0deg);
-        }
-      }
-
-      @keyframes magnifierPulseGlow {
-        0% {
-          opacity: 0.35;
-        }
-        40% {
-          opacity: 0.85;
-        }
-        100% {
-          opacity: 0.35;
-        }
-      }
-
-      @keyframes magnifierFlicker {
-        0%,
-        100% {
-          opacity: 0.28;
-        }
-        50% {
-          opacity: 0.5;
-        }
+      .lens-spark { transform-origin: 27px 47px; }
+      .magnifier.pulse .lens-spark { animation: lensFlash 0.6s ease-out; }
+      @keyframes lensFlash {
+        0%, 100% { opacity: 0.7; }
+        45% { opacity: 1; }
       }
 
       @media (max-width: 860px) {
-        .magnifier,
-        #spotlight-void {
-          display: none;
+        .magnifier, .magnifier-beam, #spotlight-void { display: none; }
+        body.spotlight-mode #bgwash { background: var(--c-bg) !important; }
+        body.spotlight-mode .page-section {
+          background: color-mix(in srgb, var(--section-glow) 15%, var(--c-bg));
+          box-shadow: 0 0 0 16px color-mix(in srgb, var(--section-glow) 15%, var(--c-bg));
         }
       }
-
       @media (prefers-reduced-motion: reduce) {
-        .magnifier-figure,
-        .magnifier-glow,
-        .magnifier-beam {
-          animation: none;
-        }
+        .magnifier, .magnifier-beam, #spotlight-void,
+        body.spotlight-mode .page-section { transition: none; }
+        .magnifier.pulse .lens-spark { animation: none; }
       }
 
       /* Section identity is carried visually by the per-section colour
@@ -1604,43 +1490,38 @@
          the introduction (see script + spotlight CSS). -->
     <div id="spotlight-void" aria-hidden="true"></div>
 
-    <!-- Magnifying glass: visible while inspecting any layer past the
-         introduction, pulses on every layer change (see script). -->
+    <!-- The beam sits behind the text and spans the full active section. -->
+    <svg class="magnifier-beam" aria-hidden="true">
+      <polygon id="beamFill" class="beam-fill" />
+      <path id="beamEdges" class="beam-edge" />
+    </svg>
     <div id="magnifier" class="magnifier" aria-hidden="true">
-      <div class="magnifier-beam"></div>
-      <div class="magnifier-glow"></div>
-      <svg class="magnifier-figure" viewBox="0 0 60 76" fill="none">
-        <!-- head -->
-        <circle cx="19" cy="14" r="8" stroke="currentColor" stroke-width="2.5" />
-        <!-- body -->
-        <path
-          d="M8 66c0-22 2.5-35.5 11-38S30.5 42.5 30.5 66"
-          stroke="currentColor"
-          stroke-width="2.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-        <!-- arm -->
-        <path
-          d="M23 33 40.5 18"
-          stroke="currentColor"
-          stroke-width="2.5"
-          stroke-linecap="round"
-        />
-        <!-- magnifying glass lens + handle -->
-        <circle
-          cx="45"
-          cy="14.5"
-          r="8.5"
-          stroke="currentColor"
-          stroke-width="2.5"
-        />
-        <path
-          d="M51 20.5 58 28"
-          stroke="currentColor"
-          stroke-width="2.5"
-          stroke-linecap="round"
-        />
+      <svg class="magnifier-figure" viewBox="0 0 112 156" fill="none"
+           stroke="#211d28" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Hair, face, and a curious eye looking toward the lens. -->
+        <path d="M61 43C49 25 56 6 74 7c22-1 29 22 20 41l-8 10-27-3Z" fill="#34303d" />
+        <path d="M61 24c0 0 11 4 20-4l6 10-2 17-10 9-13-8-5-11 5-3Z" fill="#e8ad83" />
+        <path d="m64 31 5-1m-6 8 4 1m5 7 5-1" />
+        <circle cx="66" cy="34" r="1.5" fill="#211d28" stroke="none" />
+        <path d="m73 52-2 12 15 2-5-17" fill="#e8ad83" />
+        <!-- Jacket and trousers, with a bent arm wrapped around the handle. -->
+        <path d="m67 60-12 9 7 43 34-1-3-35-10-15-6 10Z" fill="currentColor" />
+        <path d="m63 111-1 33 10 1 7-26 5 26 12-1-1-33Z" fill="#454152" />
+        <path d="m62 142-7 9q0 4 18 2l-1-10m12 0-2 10h19q2-5-7-10" fill="#fff5dd" />
+        <path d="m61 69-10 15-14-16-8 7 19 25q5 4 10-1l12-17" fill="currentColor" />
+        <path d="m86 76 8 19-11 13-7-6 8-11-5-12" fill="currentColor" />
+        <path d="m83 106-5 7-7-2 2-10 5-1Z" fill="#e8ad83" />
+        <path d="m73 75 3 24m-12 7 7 1" opacity=".5" />
+        <!-- Handle passes through the hand, visibly connecting it to the lens. -->
+        <path d="m36 59 12 20" stroke="#211d28" stroke-width="9" />
+        <path d="m36 59 12 20" stroke="#c5b49a" stroke-width="4" />
+        <path d="m34 68 5-3q4-1 5 3l-1 5-6 4-6-4Z" fill="#e8ad83" />
+        <circle cx="27" cy="47" r="19" fill="#fff5dd" />
+        <circle id="magnifierLens" cx="27" cy="47" r="14.5" fill="currentColor" />
+        <path d="m20 42 7-6m-8 13 15-13" stroke="#fff9e9" stroke-width="3" />
+        <g class="lens-spark" stroke="currentColor" stroke-width="2">
+          <path d="m3 30-5-4m15-6-2-6m-7 42-7 2" />
+        </g>
       </svg>
     </div>
 
@@ -2564,6 +2445,7 @@
       window.addEventListener("resize", () => {
         computeOffsets();
         updateWash(window.scrollY);
+        updateBeam();
       });
       window.addEventListener("load", () => {
         computeOffsets();
@@ -2630,6 +2512,48 @@
         document.querySelectorAll(".console-nav a"),
       );
 
+      const beamFill = document.getElementById("beamFill");
+      const beamEdges = document.getElementById("beamEdges");
+      const magnifierLens = document.getElementById("magnifierLens");
+      let illuminatedSection = null;
+      document.querySelectorAll(".page-section").forEach((section) => {
+        section.style.setProperty("--section-glow", `var(${SECTION_BLK[section.id]})`);
+      });
+
+      function updateBeam() {
+        if (!illuminatedSection || window.innerWidth <= 860) return;
+        const rect = illuminatedSection.getBoundingClientRect();
+        const lens = magnifierLens.getBoundingClientRect();
+        const x = lens.left + lens.width / 2;
+        const y = lens.top + lens.height / 2;
+        // The convex outline includes every corner, even for sections taller
+        // than the viewport. There is no fixed beam length or fading end.
+        const points = [
+          [x, y], [rect.left, rect.top], [rect.right, rect.top],
+          [rect.left, rect.bottom], [rect.right, rect.bottom],
+        ].sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+        const cross = (a, b, c) =>
+          (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0]);
+        const outlineHalf = (vertices) => {
+          const half = [];
+          for (const point of vertices) {
+            while (half.length > 1 && cross(half.at(-2), half.at(-1), point) <= 0) {
+              half.pop();
+            }
+            half.push(point);
+          }
+          return half.slice(0, -1);
+        };
+        const outline = [...outlineHalf(points), ...outlineHalf([...points].reverse())];
+        beamFill.setAttribute("points", outline.map((point) => point.join(",")).join(" "));
+        beamEdges.setAttribute("d", `M ${outline.map((point) => point.join(" ")).join(" L ")} Z`);
+      }
+      const sectionResizeObserver = new ResizeObserver(() => {
+        computeOffsets();
+        updateBeam();
+      });
+      sectionResizeObserver.observe(document.querySelector("main"));
+
       let prevLayer = -1;
 
       // The layer under the scroll trigger point can flip back and forth
@@ -2676,6 +2600,8 @@
             `var(${SECTION_BLK[secId]})`,
           );
         }
+        illuminatedSection = secId ? document.getElementById(secId) : null;
+        updateBeam();
         const activeHref = secId ? `#${secId}` : "#top";
         consoleCurrentEl.textContent = secId
           ? SECTION_LABELS[secId]
@@ -2710,6 +2636,7 @@
         ticking = true;
         requestAnimationFrame(() => {
           updateWash(window.scrollY);
+          updateBeam();
           if (Date.now() >= suppressScrollUntil) {
             commitLayer(currentLayerFor(window.scrollY));
           }

@@ -58,6 +58,21 @@
       "image": "https://sunayana-981.github.io/CAV_Styler/static/images/block_diag.jpg"
     },
     {
+      "title": "CAV Styler++: Locating Interpretable Control in Photorealistic Style Transfer",
+      "authors": [
+        "Sunayana Samavedam",
+        "Saurabh Saini",
+        "P. J. Narayanan"
+      ],
+      "status": "Accepted",
+      "venue": "NeurIPS 2026 WiML Workshop & Global South in AI Workshop",
+      "year": "2026",
+      "summary": "Extends CAV Styler's interpretable concept directions to photorealistic stylization with WCT2, showing that where a concept is injected determines whether it controls the output. A lightweight perturbation diagnostic locates a shallow stage with 36× the response of the next encoder level, where a day↔night CAV learned from extreme grades correctly orders held-out intermediate grades and transfers across 12 content images without relearning the direction.",
+      "tags": ["Photorealistic Style Transfer", "Interpretability", "Controllability"],
+      "links": {},
+      "image": "images/cav-styler-pp-teaser.jpg"
+    },
+    {
       "title": "Prototype Guided Backdoor Defense via Activation Space Manipulation (PGBD)",
       "authors": [
         "Venkat Adithya Amula",
@@ -201,6 +216,10 @@
     }
   ],
   "news": [
+    {
+      "date": "2026",
+      "text": "\"CAV Styler++: Locating Interpretable Control in Photorealistic Style Transfer\" accepted to the NeurIPS 2026 WiML and Global South in AI Workshops."
+    },
     {
       "date": "2026",
       "text": "\"Lost in Distribution: Sparse Autoencoders Under Domain Shift\" submitted to NeurIPS 2026."

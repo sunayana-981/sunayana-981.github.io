@@ -9,6 +9,60 @@
       name="description"
       content="Researcher in Mechanistic Interpretability and Explainable Computer Vision at CVIT, IIIT Hyderabad."
     />
+    <meta name="author" content="Sunayana Samavedam" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://sunayana-981.github.io/" />
+    <!-- Google Search Console: paste your verification token below -->
+    <!-- <meta name="google-site-verification" content="YOUR_TOKEN" /> -->
+
+    <!-- Social / link previews -->
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content="Sunayana Samavedam" />
+    <meta
+      property="og:description"
+      content="Researcher in Mechanistic Interpretability and Explainable Computer Vision at CVIT, IIIT Hyderabad."
+    />
+    <meta property="og:url" content="https://sunayana-981.github.io/" />
+    <meta property="og:image" content="https://sunayana-981.github.io/profile.jpeg" />
+    <meta property="profile:first_name" content="Sunayana" />
+    <meta property="profile:last_name" content="Samavedam" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Sunayana Samavedam" />
+    <meta name="twitter:image" content="https://sunayana-981.github.io/profile.jpeg" />
+
+    <!-- Structured data: tells search engines this page is about this person -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Sunayana Samavedam",
+        "url": "https://sunayana-981.github.io/",
+        "image": "https://sunayana-981.github.io/profile.jpeg",
+        "jobTitle": "Researcher in Mechanistic Interpretability and Explainable Computer Vision",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Center for Visual Information Technology (CVIT), IIIT Hyderabad"
+        },
+        "knowsAbout": [
+          "Mechanistic Interpretability",
+          "Explainable Computer Vision",
+          "Sparse Autoencoders",
+          "Neural Style Transfer",
+          "Vision-Language Models"
+        ],
+        "sameAs": [
+          "https://github.com/sunayana-981",
+          "https://scholar.google.com/citations?user=qY32y7oAAAAJ"
+        ]
+      }
+    </script>
+
+    <!-- Visitor analytics (GoatCounter): dashboard at https://sunayana.goatcounter.com -->
+    <script
+      data-goatcounter="https://sunayana.goatcounter.com/count"
+      async
+      src="//gc.zgo.at/count.js"
+    ></script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -1396,7 +1450,6 @@
         font-size: 0.58rem;
         color: var(--c-text-secondary);
       }
-      .lens-trend.is-new { font-weight: 600; }
       @media (prefers-reduced-motion: reduce) {
         .console-lens li, .console-lens li::before { transition: none; }
       }
@@ -1771,7 +1824,7 @@
         <section id="research" class="page-section" data-layer="1">
           <header class="layer-annotation">
             <h2><span class="layer-index">L1–2</span> Research</h2>
-            <p><span class="write-label">Writes</span> SAE features · concept vectors · domain shift</p>
+            <p><span class="write-label">Writes</span> Sparse autoencoders · concept-based control</p>
           </header>
 
           <p class="research-group-label" data-layer="1">Publications</p>
@@ -2064,7 +2117,7 @@
         <section id="education" class="page-section" data-layer="3">
           <header class="layer-annotation">
             <h2><span class="layer-index">L3</span> Education</h2>
-            <p><span class="write-label">Writes</span> Research training · signal processing</p>
+            <p><span class="write-label">Writes</span> Graduate research · engineering foundations</p>
           </header>
 
           <div class="edu-entry reveal">
@@ -2096,7 +2149,7 @@
         <section id="experience" class="page-section" data-layer="4">
           <header class="layer-annotation">
             <h2><span class="layer-index">L4</span> Experience</h2>
-            <p><span class="write-label">Writes</span> Teaching · mentorship · applied CNNs</p>
+            <p><span class="write-label">Writes</span> Teaching · mentoring · applied deep learning</p>
           </header>
 
           <div class="exp-entry reveal">
@@ -2180,7 +2233,7 @@
         <section id="reviews" class="page-section" data-layer="5">
           <header class="layer-annotation">
             <h2><span class="layer-index">L5</span> Peer review</h2>
-            <p><span class="write-label">Writes</span> Peer review · critical reading</p>
+            <p><span class="write-label">Writes</span> Reviewing for ICLR, CVPR, ICML and ECCV</p>
           </header>
           <p
             style="
@@ -2216,7 +2269,7 @@
         <section id="projects" class="page-section" data-layer="6">
           <header class="layer-annotation">
             <h2><span class="layer-index">L6</span> Projects</h2>
-            <p><span class="write-label">Writes</span> 3D reconstruction · domain adaptation</p>
+            <p><span class="write-label">Writes</span> Hands-on builds in 3D vision and robustness</p>
           </header>
 
           <div class="projects-grid">
@@ -2269,7 +2322,7 @@
         >
           <header class="layer-annotation output-annotation">
             <h2><span class="layer-index">L7</span> Contact</h2>
-            <p><span class="write-label">Output</span> Interpretability → collaboration</p>
+            <p><span class="write-label">Output</span> Research identity → get in touch</p>
           </header>
 
           <div class="softmax-row reveal">
@@ -2456,14 +2509,14 @@
       // deterministic.
       const CARRY = 0.35;
       const CAREER_STAGES = [
-        { label: "Introduction", write: "Seeds interpretability · vision models · VLMs", delta: { interpretability: 40, "vision models": 34, VLMs: 26, curiosity: 18 } },
-        { label: "Research", write: "Writes SAE features · concept vectors · domain shift", delta: { "SAE features": 64, "concept vectors": 56, "domain shift": 46, "backdoor defense": 34, interpretability: 16 } },
-        { label: "Working papers", write: "Writes controllability · style transfer survey", delta: { controllability: 62, "style transfer": 50, "survey synthesis": 38, "concept vectors": 12 } },
-        { label: "Education", write: "Writes research training · signal processing", delta: { "research training": 58, "signal processing": 46, "computer vision": 36 } },
-        { label: "Experience", write: "Writes teaching · mentorship · applied CNNs", delta: { teaching: 64, mentorship: 56, "applied CNNs": 42, "computer vision": 10 } },
-        { label: "Peer review", write: "Writes peer review · critical reading", delta: { "peer review": 68, "critical reading": 52, "method rigor": 42 } },
-        { label: "Projects", write: "Writes 3D reconstruction · domain adaptation", delta: { "3D reconstruction": 56, "domain adaptation": 50, "spoof robustness": 46, "hardware builds": 30 } },
-        { label: "Contact", write: "Decodes interpretability → collaboration", delta: { interpretability: 66, collaboration: 54, "SAE features": 44, "concept vectors": 40 } },
+        { label: "Introduction", write: "Starts from interpretability and vision", delta: { interpretability: 40, "computer vision": 34, "vision-language": 26, curiosity: 18 } },
+        { label: "Research", write: "Adds sparse autoencoders and concept control", delta: { "sparse autoencoders": 64, "concept control": 56, "domain shift": 46, "backdoor defense": 34, interpretability: 16 } },
+        { label: "Working papers", write: "Adds a survey of style transfer control", delta: { controllability: 62, "style transfer": 50, "literature survey": 38, "concept control": 12 } },
+        { label: "Education", write: "Adds graduate research and engineering roots", delta: { "graduate research": 58, "signal processing": 46, "computer vision": 36 } },
+        { label: "Experience", write: "Adds teaching and mentoring", delta: { teaching: 64, mentoring: 56, "applied deep learning": 42, "computer vision": 10 } },
+        { label: "Peer review", write: "Adds reviewing for top venues", delta: { reviewing: 68, "critical reading": 52, "experimental rigor": 42 } },
+        { label: "Projects", write: "Adds hands-on builds in 3D and robustness", delta: { "3D reconstruction": 56, "domain adaptation": 50, "face anti-spoofing": 46, "hardware prototyping": 30 } },
+        { label: "Contact", write: "Reads out the full picture", delta: { interpretability: 66, collaboration: 54, "sparse autoencoders": 44, "concept control": 40 } },
       ];
       const CAREER_STATES = CAREER_STAGES.reduce((states, stage) => {
         const vector = Object.fromEntries(
@@ -2758,12 +2811,11 @@
           }
           const priorIndex = previous?.ranked.findIndex(([name]) => name === concept) ?? -1;
           const change = priorIndex - index;
-          const trend = !previous ? "seed" : priorIndex < 0 ? "new" : change > 0 ? `↑${change}` : change < 0 ? `↓${-change}` : "—";
+          const trend = priorIndex < 0 ? "" : change > 0 ? `↑${change}` : change < 0 ? `↓${-change}` : "—";
           row.querySelector(".lens-rank").textContent = index + 1;
           row.querySelector(".lens-tok").textContent = concept;
           const trendEl = row.querySelector(".lens-trend");
           trendEl.textContent = trend;
-          trendEl.classList.toggle("is-new", trend === "new");
           const comparison = !previous ? "Input concept" : priorIndex < 0 ? `New at layer ${layer}` : `Rank ${priorIndex + 1} at layer ${layer - 1}; rank ${index + 1} now`;
           row.setAttribute("aria-label", `${index + 1}. ${concept}. ${comparison}.`);
           row.title = comparison;

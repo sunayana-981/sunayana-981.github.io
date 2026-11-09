@@ -20,7 +20,7 @@
   },
   "publications": [
     {
-      "title": "Lost in Distribution: Sparse Autoencoders Under Domain Shift",
+      "title": "CoSAL: Co-training Sparse Autoencoders and Low-Rank Adapters for Visual Adaptation",
       "authors": [
         "Sunayana Samavedam",
         "Deepika Vemuri",
@@ -30,11 +30,11 @@
         "Vineeth Balasubramanian"
       ],
       "status": "Under Review",
-      "venue": "NeurIPS",
-      "year": "2026",
+      "venue": "CVPR",
+      "year": "2027",
       "period": "Jun 2025 – Present",
-      "summary": "Analyzed how generic SAE interpretability degrades as the target domain moves from ImageNet-like benchmarks to far ones (PathMNIST, ChestMNIST, EuroSAT), across four encoders (CLIP, SigLIP, DINO, ALIGN), three adapter families (LoRA, MaPLe, TAP), and multiple SAE variants (Gated, Top-K, Matryoshka). Showed that finetuned SAEs built on adapted activations recover and surpass the interpretability profile, yielding sparser and more monosemantic features, and that adapter families differ mechanistically: prompt-based methods steer existing features while weight-space adaptation reshapes the dictionary. Generalized the DAMS metric to a distribution-aware, multi-component formulation (effective coverage, class separability, feature specificity, domain alignment) for determining when generic SAE reuse is justified versus when domain-matched SAEs are necessary.",
-      "tags": ["Mechanistic Interpretability", "Sparse Autoencoders", "Domain Shift"],
+      "summary": "Trains sparse autoencoders jointly with low-rank adapters, so that a vision model adapted to a new domain keeps an interpretable feature dictionary instead of needing an SAE retrained after the fact.",
+      "tags": ["Sparse Autoencoders", "Low-Rank Adaptation", "Interpretability"],
       "links": {}
     },
     {
@@ -65,7 +65,7 @@
       "status": "Published",
       "venue": "ICVGIP",
       "year": "2025",
-      "additional_acceptance": "WiCV Workshop, ECCV 2026",
+      "additional_acceptance": "WiCV Workshop, ECCV 2026 (Oral)",
       "summary": "A concept-driven neural style transfer framework that maps human-interpretable attributes like texture, blur, and detail into explicit controllable directions for fine-grained stylization.",
       "tags": ["Style Transfer", "Interpretability", "Controllability"],
       "links": {
@@ -242,11 +242,11 @@
     },
     {
       "date": "2026",
-      "text": "\"Lost in Distribution: Sparse Autoencoders Under Domain Shift\" submitted to NeurIPS 2026."
+      "text": "\"CoSAL: Co-training Sparse Autoencoders and Low-Rank Adapters for Visual Adaptation\" submitted to CVPR 2027."
     },
     {
       "date": "2026",
-      "text": "CAV Styler accepted to WiCV Workshop, ECCV 2026."
+      "text": "CAV Styler accepted as an oral at the WiCV Workshop, ECCV 2026."
     },
     {
       "date": "2026",

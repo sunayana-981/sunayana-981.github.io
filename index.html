@@ -1885,7 +1885,7 @@
                       </p>
                     </div>
                   </li>
-                  <li>CAV Styler accepted to WiCV @ ECCV 2026</li>
+                  <li>CAV Styler accepted as an oral at WiCV @ ECCV 2026</li>
                   <li>
                     Sparse Autoencoders for LoRA-Adapted CLIP Under Domain Shift
                     accepted to the ICML 2026 MechInterp and WiML Workshops
@@ -1912,11 +1912,12 @@
 
           <div class="research-entry reveal">
             <div class="entry-title">
-              Lost in Distribution: Sparse Autoencoders Under Domain Shift
+              CoSAL: Co-training Sparse Autoencoders and Low-Rank Adapters for
+              Visual Adaptation
             </div>
             <div class="entry-meta">
-              Under Review (NeurIPS 2026) · Jun 2025 &ndash; Present · CVIT,
-              IIIT Hyderabad
+              Under Review (CVPR 2027) · Jun 2025 &ndash; Present · CVIT, IIIT
+              Hyderabad
             </div>
             <div class="entry-authors">
               <strong>Authors:</strong> Sunayana Samavedam, Deepika Vemuri,
@@ -1924,35 +1925,15 @@
               Vineeth Balasubramanian
             </div>
             <div class="entry-summary">
-              <ul>
-                <li>
-                  Analyzed how generic SAE interpretability degrades as the
-                  target domain moves from ImageNet-like benchmarks to far ones
-                  (PathMNIST, ChestMNIST, EuroSAT), across four encoders (CLIP,
-                  SigLIP, DINO, ALIGN), three adapter families (LoRA, MaPLe,
-                  TAP), and multiple SAE variants (Gated, Top-K, Matryoshka).
-                </li>
-                <li>
-                  Showed that finetuned SAEs built on adapted activations
-                  recover and surpass the interpretability profile, yielding
-                  sparser and more monosemantic features, and that adapter
-                  families differ mechanistically: prompt-based methods steer
-                  existing features while weight-space adaptation reshapes the
-                  dictionary.
-                </li>
-                <li>
-                  Generalized the DAMS metric to a distribution-aware,
-                  multi-component formulation (effective coverage, class
-                  separability, feature specificity, domain alignment) for
-                  determining when generic SAE reuse is justified versus when
-                  domain-matched SAEs are necessary.
-                </li>
-              </ul>
+              Trains sparse autoencoders jointly with low-rank adapters, so
+              that a vision model adapted to a new domain keeps an
+              interpretable feature dictionary instead of needing an SAE
+              retrained after the fact.
             </div>
             <div class="tag-row">
-              <span class="tag">Mechanistic Interpretability</span>
               <span class="tag">Sparse Autoencoders</span>
-              <span class="tag">Domain Shift</span>
+              <span class="tag">Low-Rank Adaptation</span>
+              <span class="tag">Interpretability</span>
             </div>
           </div>
 
@@ -1987,7 +1968,7 @@
               Controllable
             </div>
             <div class="entry-meta">
-              Published at ICVGIP 2025 · Accepted to WiCV @ ECCV 2026 · CVIT,
+              Published at ICVGIP 2025 · Oral at WiCV @ ECCV 2026 · CVIT,
               IIIT Hyderabad
             </div>
             <div class="entry-authors">

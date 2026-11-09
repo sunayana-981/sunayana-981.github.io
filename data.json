@@ -38,6 +38,22 @@
       "links": {}
     },
     {
+      "title": "When Do Sparse Autoencoders Transfer Across Adapted Vision Models?",
+      "authors": [
+        "Sunayana Samavedam",
+        "Deepika S. N. Vemuri",
+        "Venkat Adithya Amula",
+        "P. J. Narayanan",
+        "Vineeth N. Balasubramanian"
+      ],
+      "status": "Accepted",
+      "venue": "NeurIPS 2026 UniReps Workshop",
+      "year": "2026",
+      "summary": "Studies when sparse autoencoders trained on a base vision encoder remain faithful and interpretable after the model is adapted to a new domain, and when domain-matched SAEs are needed instead.",
+      "tags": ["Sparse Autoencoders", "Representation Learning", "Model Adaptation"],
+      "links": {}
+    },
+    {
       "title": "CAV Styler: Making Neural Style Transfer Interpretable and Controllable",
       "authors": [
         "Sunayana Samavedam",
@@ -216,6 +232,10 @@
     }
   ],
   "news": [
+    {
+      "date": "2026",
+      "text": "\"When Do Sparse Autoencoders Transfer Across Adapted Vision Models?\" accepted to the NeurIPS 2026 UniReps Workshop."
+    },
     {
       "date": "2026",
       "text": "\"CAV Styler++: Locating Interpretable Control in Photorealistic Style Transfer\" accepted to the NeurIPS 2026 WiML and Global South in AI Workshops."

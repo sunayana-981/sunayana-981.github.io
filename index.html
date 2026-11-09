@@ -459,6 +459,57 @@
         align-self: center;
       }
 
+      .hero-news-list li.news-post::before {
+        align-self: flex-start;
+        margin-top: 0.65em;
+      }
+
+      .news-post > div {
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+      }
+
+      .news-post-lead {
+        color: var(--c-text);
+        font-weight: 600;
+      }
+
+      .hero-news-list .news-post-papers {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        padding-left: 0.75rem;
+        border-left: 2px solid var(--c-accent);
+      }
+
+      .hero-news-list .news-post-papers li {
+        display: block;
+      }
+
+      .hero-news-list .news-post-papers li::before {
+        content: none;
+      }
+
+      .news-post-papers strong {
+        color: var(--c-text);
+        font-weight: 600;
+      }
+
+      .news-post-venue {
+        display: block;
+        font-family: var(--font-sans);
+        font-size: 0.8rem;
+        color: var(--c-text-tertiary);
+      }
+
+      .news-post-tags {
+        font-family: var(--font-sans);
+        font-size: 0.8rem;
+        color: var(--c-accent);
+      }
+
       @media (max-width: 560px) {
         .hero-inner {
           flex-direction: column-reverse;
@@ -1800,9 +1851,39 @@
               <div class="hero-news">
                 <p class="hero-news-label">Recent</p>
                 <ul class="hero-news-list">
-                  <li>
-                    CAV Styler++ accepted to the NeurIPS 2026 WiML and Global
-                    South in AI Workshops
+                  <li class="news-post">
+                    <div>
+                      <p class="news-post-lead">
+                        Excited to share that 3/3 of my submissions have been
+                        accepted to NeurIPS 2026 workshops! 🎉
+                      </p>
+                      <p>
+                        A lot of these directions took shape in discussions at
+                        conferences, and I'm happy to see these projects find a
+                        place at NeurIPS this year.
+                      </p>
+                      <ul class="news-post-papers">
+                        <li>
+                          📄 <strong>CAV Styler++</strong>: Extending
+                          Interpretable and Controllable Style Transfer to
+                          Photorealistic Style Transfer
+                          <span class="news-post-venue">WiML 2026 &amp; Global South in AI 2026 · with Saurabh Saini and P. J. Narayanan</span>
+                        </li>
+                        <li>
+                          📄 <strong>When Do Sparse Autoencoders Transfer Across
+                          Adapted Vision Models?</strong>
+                          <span class="news-post-venue">UniReps 2026 · with Deepika S. N. Vemuri, Venkat Adithya Amula, P. J. Narayanan and Vineeth N. Balasubramanian</span>
+                        </li>
+                      </ul>
+                      <p>
+                        Grateful to my collaborators and everyone who
+                        contributed to these projects.
+                      </p>
+                      <p class="news-post-tags">
+                        #NeurIPS2026 #WiML #GlobalSouthAI #UniReps
+                        #Interpretability #RepresentationLearning
+                      </p>
+                    </div>
                   </li>
                   <li>CAV Styler accepted to WiCV @ ECCV 2026</li>
                   <li>
@@ -1872,6 +1953,31 @@
               <span class="tag">Mechanistic Interpretability</span>
               <span class="tag">Sparse Autoencoders</span>
               <span class="tag">Domain Shift</span>
+            </div>
+          </div>
+
+          <div class="research-entry reveal">
+            <div class="entry-title">
+              When Do Sparse Autoencoders Transfer Across Adapted Vision
+              Models?
+            </div>
+            <div class="entry-meta">
+              Accepted to NeurIPS 2026 UniReps Workshop · CVIT, IIIT Hyderabad
+            </div>
+            <div class="entry-authors">
+              <strong>Authors:</strong> Sunayana Samavedam, Deepika S. N.
+              Vemuri, Venkat Adithya Amula, P. J. Narayanan, and Vineeth N.
+              Balasubramanian
+            </div>
+            <div class="entry-summary">
+              Studies when sparse autoencoders trained on a base vision encoder
+              remain faithful and interpretable after the model is adapted to a
+              new domain, and when domain-matched SAEs are needed instead.
+            </div>
+            <div class="tag-row">
+              <span class="tag">Sparse Autoencoders</span>
+              <span class="tag">Representation Learning</span>
+              <span class="tag">Model Adaptation</span>
             </div>
           </div>
 
